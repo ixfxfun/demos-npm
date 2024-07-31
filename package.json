@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "npm run clean && npm run ixfx && concurrently npm:watch:* npm:serve:http",
+    "start": "npm run clean && npm run ixfx && concurrently npm:watch:*",
     "ws": "npm run ixfx && concurrently npm:watch:* npm:serve:ws",
     "build": "npm run clean && npm run static && npm run ixfx && tsc",
     "static": "cpx \"src/**/*.{html,css,js}\" docs",
