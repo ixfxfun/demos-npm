@@ -9,7 +9,8 @@ tasks:
     command: npm run start
 
 ports:
-  - port: 5500
-    onOpen: open-preview
+  - port: 5555
+    name: ixfx demos
+    onOpen: open-browser
     visibility: public
-    protocol: https
+    protocol: http
