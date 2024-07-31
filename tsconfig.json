@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "sourceMap": true,
+    "moduleResolution": "classic",
+    "target": "ES2022",
+    "allowImportingTsExtensions": false,
+    "isolatedModules": true,
+    "allowJs": true,
+    "strict": true,
+    "outDir": "./docs",
+    "skipLibCheck": true,
+    "rootDirs": [
+      "docs",
+      "src"
+    ]
+  },
+  // "include": [
+  //   "**/*.ts"
+  // ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*",
+    "docs/*"
+  ]
+}
