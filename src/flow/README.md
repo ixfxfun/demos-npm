@@ -1,10 +1,10 @@
 # flow
 
-[View demos online](https://clinth.github.io/ixfx-demos/flow/)
+[View demos online](https://demos.ixfx.fun/flow/)
 
 Documentation
-* [State machine](https://clinth.github.io/ixfx-docs/flow/stateMachine/)
-* [Loops and intervals](https://clinth.github.io/ixfx-docs/flow/loops/)
-* [Delay](https://clinth.github.io/ixfx-docs/flow/delay/)
+* [State machine](https://ixfx.fun/flow/stateMachine/)
+* [Loops and intervals](https://ixfx.fun/flow/loops/)
+* [Delay](https://ixfx.fun/flow/delay/)
 
-[API documentation](https://clinth.github.io/ixfx/modules/Flow.html)
+[API documentation](https://api.ixfx.fun/modules/Flow.html)

@@ -4,7 +4,7 @@ Controls a DRV2605 haptic driver. This demo only works in Chrome.
 
 - [More about the DRV2605 module](http://www.espruino.com/DRV2605)
 - [DRV2605 playground](https://clinth.github.io/ixfx-play/io/espruino-drv2605/index.html)
-- [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
+- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 
 This demo (and the [playground](https://clinth.github.io/ixfx-play/io/espruino-repl/index.html)) expect the provided [`espruino.js`](https://raw.githubusercontent.com/ClintH/ixfx-demos/main/io/espruino/drv2605/espruino.js) to be flashed on to the Pico beforehand using the Espruino IDE. In doing this, an [additional code module](http://www.espruino.com/DRV2605) is automatically pulled in. This module is a 'driver' that does the low-level communication over I2C to the DRV2605. The DRV2605 in turn is a 'driver' for the motor.
 
@@ -90,7 +90,7 @@ start(); // Initiate
 
 It's necessary to connect to the Espruino via user interaction, in this case
 clicking a button. Using
-[ixfx's Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html),
+[ixfx's Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html),
 we invoke functions declared by `espruino.js`.
 
 For example, invoke `trigger` on the Espruino, giving it the argument `2` to play effect #2.

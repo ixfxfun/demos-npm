@@ -79,7 +79,7 @@ const setup = () => {
     // TODO: It would be better if the speed value
     // was blended into the current speed, and for
     // speed to slowly reduce when there is no movement.
-    // movingAverageLight (discussed here: https://clinth.github.io/ixfx-docs/data/averaging/) would be useful.
+    // movingAverageLight (discussed here: https://ixfx.fun/data/averaging/) would be useful.
 
     saveState({
       lastSliderValue: v,

@@ -3,7 +3,7 @@
 Sends button press (or release) events from the [Puck.js](https://www.espruino.com/Puck.js).
 
 Read more:
-* [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
+* [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 * [Puck.js button](https://www.espruino.com/Puck.js#button)
 * [Espruino setWatch function](https://www.espruino.com/Reference#l__global_setWatch)
 

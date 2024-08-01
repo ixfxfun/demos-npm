@@ -1,7 +1,7 @@
 /**
  * Demonstrates fetching JSON data from a URL at a fixed rate using 
  * continuously.
- * https://clinth.github.io/ixfx/modules/Flow.html#continuously
+ * https://api.ixfx.fun/modules/Flow.html#continuously
  * 
  * One problem with polling is that perhaps we're fetching more often
  * than we actually need to use the newer data. An alternative is 
@@ -62,7 +62,7 @@ const status = (m) => {
  * Save state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

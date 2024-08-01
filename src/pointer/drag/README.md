@@ -2,7 +2,7 @@
 
 Demonstrates draggable things. Each thing has an associated HTML element, by default a DIV.
 
-[Try it online](https://clinth.github.io/ixfx-demos/pointer/drag/)
+[Try it online](https://demos.ixfx.fun/pointer/drag/)
 
 When a _pointerdown_ happens on the thing's element, this initiates the drag. The thing's `dragging` property is set to true, and we record the cursor position where drag has started. As _pointermove_ happens (anywhere), we calculate the x,y offset from the current cursor to where drag started. This offset is added to the thing's starting position to calculate its current position.
 

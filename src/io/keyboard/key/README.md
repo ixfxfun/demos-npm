@@ -31,4 +31,4 @@ A loop runs, calling `use()` to update the visual status based on the current st
 ## Things to try
 * Can you make the box a toggle instead? One press turns it on, another turns it off?
 * Can the length of press be used in the expression of the box?
-* Can the interval between presses be used? (for example with an [interval tracker](https://clinth.github.io/ixfx-docs/data/trackers/#intervals))
+* Can the interval between presses be used? (for example with an [interval tracker](https://ixfx.fun/data/trackers/#intervals))

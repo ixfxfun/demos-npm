@@ -1,6 +1,6 @@
 # gamepad / button
 
-[Try online](https://clinth.github.io/ixfx-demos/io/gamepad/button/)
+[Try online](https://demos.ixfx.fun/io/gamepad/button/)
 
 If you're not sure if your hardware is working or set up, try a [third party gamepad tester](https://hardwaretester.com/gamepad).
 

@@ -3,7 +3,7 @@
 Read temperature every one second.
 
 Read more:
-* [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
+* [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 * [Puck.js temperature sensor](https://www.espruino.com/Puck.js#temperature)
 
 The `scripts.poll` script is sent dynamically sent to the Puck when connected.
@@ -28,7 +28,7 @@ NRF.on('disconnect', () => reset());
 
 # Things to try
 
-* [Normalise](https://clinth.github.io/ixfx-docs/data/normalising/) data to relative values
+* [Normalise](https://ixfx.fun/data/normalising/) data to relative values
 * Can you use the temperature sensor with motion sensors to detect whether the Puck is being held or not?
 * Send back gyro information along with temperature to steer the visual effect instead of the pointer
 

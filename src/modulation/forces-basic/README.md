@@ -2,7 +2,7 @@
 
 Based on a demo by Daniel Shiffman in _The Nature of Code_.
 
-[Try demo online](https://clinth.github.io/ixfx-demos/modulation/forces-basic/)
+[Try demo online](https://demos.ixfx.fun/modulation/forces-basic/)
 
 Overview:
 * `update()` runs in a loop at animation speed. It:
@@ -15,7 +15,7 @@ Overview:
 * `setup()` connects events and initialises. 
 
 See also:
-* [ixfx forces](https://clinth.github.io/ixfx-docs/modulation/forces/)
+* [ixfx forces](https://ixfx.fun/modulation/forces/)
 
 ## Settings
 

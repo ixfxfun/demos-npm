@@ -1,6 +1,6 @@
 # forces-accel-particles
 
-[Try demo online](https://clinth.github.io/ixfx-demos/modulation/forces-accel-particles/)
+[Try demo online](https://demos.ixfx.fun/modulation/forces-accel-particles/)
 
 This sketch derives acceleration from pointer movement, which in turn is applied
 to the velocity of a bunch of particles.
@@ -10,9 +10,9 @@ Particles here are rendered as HTML elements rather than using the canvas.
 For a simpler version, see `forces-accel`.
 
 See also:
-* [`pointTracker`](https://clinth.github.io/ixfx/functions/Trackers.points.html)
-* [ixfx trackers](https://clinth.github.io/ixfx-docs/data/trackers/)
-* [ixfx forces](https://clinth.github.io/ixfx-docs/modulation/forces/)
+* [`pointTracker`](https://api.ixfx.fun/funcs/Trackers.points.html)
+* [ixfx trackers](https://ixfx.fun/data/trackers/)
+* [ixfx forces](https://ixfx.fun/modulation/forces/)
 
 ## Tracking pointer movement
 

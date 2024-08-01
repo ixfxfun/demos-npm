@@ -3,12 +3,12 @@
 Sends back a stream of analog input from a 
 [Pico](http://www.espruino.com/Pico).
 
-- [Try demos online](https://clinth.github.io/ixfx-demos/io/)
-- [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
+- [Try demos online](https://demos.ixfx.fun/io/)
+- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 
 Read more:
 
-- [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
+- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 
 
 `scripts.poll` & `scripts.stream` as given as two examples for either polling
@@ -54,7 +54,7 @@ An even smarter approach would be to track values on the Espruino and only send 
 
 # Things to try
 
-- [Normalise](https://clinth.github.io/ixfx-docs/data/normalising/) data to
+- [Normalise](https://ixfx.fun/data/normalising/) data to
   relative values
-- [Average](https://clinth.github.io/ixfx-docs/data/averaging/) data to smooth
+- [Average](https://ixfx.fun/data/averaging/) data to smooth
   out jitter

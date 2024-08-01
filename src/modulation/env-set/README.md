@@ -2,9 +2,9 @@
 
 This demo uses an envelope to ease to a value.
 
-[View online](https://clinth.github.io/ixfx-demos/modulation/env-set/)
+[View online](https://demos.ixfx.fun/modulation/env-set/)
 
 
 Read more:
-* [ixfx Envelopes guide](https://clinth.github.io/ixfx-docs/modulation/envelope/)
-* API Docs [adsr](https://clinth.github.io/ixfx/interfaces/Modulation.Adsr.html)
+* [ixfx Envelopes guide](https://ixfx.fun/modulation/envelope/)
+* API Docs [adsr](https://api.ixfx.fun/interfaces/Modulation.Adsr.html)

@@ -1,8 +1,8 @@
 # espruino
 
-- [Try demos online](https://clinth.github.io/ixfx-demos/io/)
-- [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
-- [ixfx Espruino guide](https://clinth.github.io/ixfx-docs/io/espruino/)
+- [Try demos online](https://demos.ixfx.fun/io/)
+- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
+- [ixfx Espruino guide](https://ixfx.fun/io/espruino/)
 
 Espruino guides
 

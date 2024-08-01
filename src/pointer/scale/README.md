@@ -1,9 +1,9 @@
 # scale
 
-[See demo online](https://clinth.github.io/ixfx-demos/pointer/scale/)
+[See demo online](https://demos.ixfx.fun/pointer/scale/)
 
 Demonstrates:
-* [`Trackers.number`](https://clinth.github.io/ixfx/functions/Trackers.number.html)
-* [`Trackers.points`](https://clinth.github.io/ixfx/functions/Trackers.points.html)
+* [`Trackers.number`](https://api.ixfx.fun/funcs/Trackers.number.html)
+* [`Trackers.points`](https://api.ixfx.fun/funcs/Trackers.points.html)
 
-[Read more about ixfx trackers](https://clinth.github.io/ixfx-docs/data/trackers/)
+[Read more about ixfx trackers](https://ixfx.fun/data/trackers/)

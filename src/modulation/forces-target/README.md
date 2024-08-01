@@ -1,12 +1,12 @@
 # forces-target
 
-[Try demo online](https://clinth.github.io/ixfx-demos/modulation/forces-target/)
+[Try demo online](https://demos.ixfx.fun/modulation/forces-target/)
 
 This sketch uses ixfx's `Forces` module to move an element to a target point (in
 this case, where someone has clicked).
 
 See also:
-* [ixfx forces](https://clinth.github.io/ixfx-docs/modulation/forces/)
+* [ixfx forces](https://ixfx.fun/modulation/forces/)
 
 ## Targeting
 

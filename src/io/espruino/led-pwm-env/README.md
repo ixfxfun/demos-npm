@@ -1,11 +1,11 @@
 # espruino / led-pwm-env
 
-Demonstrates using pulse width modulation to fade an LED on the [Puck.js](https://www.espruino.com/Puck.js) using an [envelope](https://clinth.github.io/ixfx-docs/modulation/envelope/).
+Demonstrates using pulse width modulation to fade an LED on the [Puck.js](https://www.espruino.com/Puck.js) using an [envelope](https://ixfx.fun/modulation/envelope/).
 
-[Run this demo online](https://clinth.github.io/ixfx-demos/io/espruino/led-pwm-env/)
+[Run this demo online](https://demos.ixfx.fun/io/espruino/led-pwm-env/)
 
 Read more:
-* [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
+* [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 * [Puck.js LED](https://www.espruino.com/Puck.js#leds)
 
 
@@ -29,8 +29,8 @@ Because LEDs are so intense, using the silicon cover of the Puck.js, a piece of 
 
 ## Things to try
 
-* Modulate PWM over time. Rather than the [envelope](https://clinth.github.io/ixfx-docs/modulation/envelope/), try an [oscillators](https://clinth.github.io/ixfx-docs/modulation/oscillator/) or [easing function](https://clinth.github.io/ixfx-docs/modulation/easing/)
-* Experiment mixing colours between the three LEDs. ixfx's [colour module](https://clinth.github.io/ixfx-docs/types/colour/#parsing) can help you parse and interpolate colours to get red, green and blue values.
+* Modulate PWM over time. Rather than the [envelope](https://ixfx.fun/modulation/envelope/), try an [oscillators](https://ixfx.fun/modulation/oscillator/) or [easing function](https://ixfx.fun/modulation/easing/)
+* Experiment mixing colours between the three LEDs. ixfx's [colour module](https://ixfx.fun/types/colour/#parsing) can help you parse and interpolate colours to get red, green and blue values.
 
 ## Read more
 

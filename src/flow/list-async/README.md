@@ -1,6 +1,6 @@
 # list-async
 
-Demonstrates using the [TaskQueue](https://clinth.github.io/ixfx/classes/Flow.TaskQueue.html) to process tasks
+Demonstrates using the [TaskQueue](https://api.ixfx.fun/classes/Flow.TaskQueue.html) to process tasks
 
 Read more:
-* [TaskQueue](https://clinth.github.io/ixfx/classes/Flow.TaskQueue.html)
+* [TaskQueue](https://api.ixfx.fun/classes/Flow.TaskQueue.html)

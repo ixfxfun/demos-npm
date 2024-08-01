@@ -3,7 +3,7 @@
 Demonstrates toggling LEDs, blinking LEDs and using pulse width modulation to fade LEDs on the [Puck.js](https://www.espruino.com/Puck.js).
 
 Read more:
-* [ixfx Espruino module](https://clinth.github.io/ixfx/modules/Io.Espruino.html)
+* [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 * [Puck.js LED](https://www.espruino.com/Puck.js#leds)
 
 
@@ -86,8 +86,8 @@ Because LEDs are so intense, using the silicon cover of the Puck.js, a piece of 
 
 ### With the browser too
 
-* Modulate PWM over time. Ixfx's [envelopes](https://clinth.github.io/ixfx-docs/modulation/envelope/) and [oscillators](https://clinth.github.io/ixfx-docs/modulation/oscillator/) would be useful
-* Experiment mixing colours between the three LEDs. ixfx's [colour module](https://clinth.github.io/ixfx-docs/types/colour/#parsing) can help you parse and interpolate colours to get red, green and blue values.
+* Modulate PWM over time. Ixfx's [envelopes](https://ixfx.fun/modulation/envelope/) and [oscillators](https://ixfx.fun/modulation/oscillator/) would be useful
+* Experiment mixing colours between the three LEDs. ixfx's [colour module](https://ixfx.fun/types/colour/#parsing) can help you parse and interpolate colours to get red, green and blue values.
 
 ## Read more
 

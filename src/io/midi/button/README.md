@@ -1,6 +1,6 @@
 # MIDI
 
-[Try online](https://clinth.github.io/ixfx-demos/io/midi/button/)
+[Try online](https://demos.ixfx.fun/io/midi/button/)
 
 Square lights up when C2 is played on a MIDI input. Parsed MIDI messages are printed to the console.
 

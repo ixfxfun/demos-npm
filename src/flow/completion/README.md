@@ -1,7 +1,7 @@
 # completion
 
 Demonstrates
-[completionMs](https://clinth.github.io/ixfx/functions/Flow.completionMs.html).
+[completionMs](https://api.ixfx.fun/funcs/Flow.completionMs.html).
 
 In this case, we start tracking elapsed time when there is a `pointerdown`
 event. The tracker is deleted on `pointerup`.
