@@ -6,7 +6,7 @@ Controls a DRV2605 haptic driver. This demo only works in Chrome.
 - [DRV2605 playground](https://clinth.github.io/ixfx-play/io/espruino-drv2605/index.html)
 - [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
 
-This demo (and the [playground](https://clinth.github.io/ixfx-play/io/espruino-repl/index.html)) expect the provided [`espruino.js`](https://raw.githubusercontent.com/ClintH/ixfx-demos/main/io/espruino/drv2605/espruino.js) to be flashed on to the Pico beforehand using the Espruino IDE. In doing this, an [additional code module](http://www.espruino.com/DRV2605) is automatically pulled in. This module is a 'driver' that does the low-level communication over I2C to the DRV2605. The DRV2605 in turn is a 'driver' for the motor.
+This demo (and the [playground](https://clinth.github.io/ixfx-play/io/espruino-repl/index.html)) expect the provided [`espruino.js`](https://raw.githubusercontent.com/ixfxfun/demos/main/io/espruino/drv2605/espruino.js) to be flashed on to the Pico beforehand using the Espruino IDE. In doing this, an [additional code module](http://www.espruino.com/DRV2605) is automatically pulled in. This module is a 'driver' that does the low-level communication over I2C to the DRV2605. The DRV2605 in turn is a 'driver' for the motor.
 
 Remember that the haptic motors are not designed to run for long periods of time. They are meant for periodic bursts.
 
@@ -46,7 +46,7 @@ hap.trigger(6);
 hap.trigger('sharp click 30%');
 ```
 
-6. Now that you know it works, we want to flash the provided [`espruino.js`](https://raw.githubusercontent.com/ClintH/ixfx-demos/main/io/espruino/drv2605/espruino.js) sketch. Copy and paste this into the IDE. Make sure you select 'Flash', not 'RAM'. This sketch will make it easier to steer the controller from the browser. If it worked, you should see the message "Hello from the DRV2605 script!".
+1. Now that you know it works, we want to flash the provided [`espruino.js`](https://raw.githubusercontent.com/ixfxfun/demos/main/io/espruino/drv2605/espruino.js) sketch. Copy and paste this into the IDE. Make sure you select 'Flash', not 'RAM'. This sketch will make it easier to steer the controller from the browser. If it worked, you should see the message "Hello from the DRV2605 script!".
 
 
 ## Manual control

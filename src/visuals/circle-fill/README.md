@@ -7,7 +7,6 @@ Function examples from [Guido Schmidt's sketch](https://editor.p5js.org/guidosch
 Try the [playground version](https://clinth.github.io/ixfx-play/visuals/circle-fill-animated/index.html) to try out different functions interactively.
 
 See also:
-* [ixfx Random](https://ixfx.fun/gen/random/)
-* [ixfx Point](https://ixfx.fun/types/geometry/point/)
-* [ixfx Easing](https://ixfx.fun/modulation/easing/)
-* [ixfx Ping Pong generator](https://ixfx.fun/gen/generator/#ping-pong)
+* [ixfx Numbers](https://ixfx.fun/data/numbers/)
+* [ixfx Point](https://ixfx.fun/geometry/shapes/point/)
+* [ixfx Easing](https://ixfx.fun/modulation/easings/introduction/)

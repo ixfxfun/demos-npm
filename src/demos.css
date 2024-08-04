@@ -2,19 +2,51 @@
   --black: hsl(60, 0%, 10%);
   --gray-dark: hsl(60, 0%, 10%);
   --gray: rgb(190, 190, 190);
-  --gray-light: hsl(60, 0%, 70%);
+  --gray-light: hsl(60, 0%, 90%);
   --padding: 0.3em;
   --padding-box: 1em;
   --accent-hue: 341;
   --accent-dim: hsl(var(--accent-hue), 80%, 34%);
   --fg: var(--black);
-  --bg: var(--gray-light);
+  --bg: var(--sl-color-black);
   --shade-bg: var(--fg);
   --shade-fg: var(--bg);
   --fade-bg: var(--gray);
   --fade-fg: var(--gray-light);
   --accent: hsl(var(--accent-hue), 80%, 46%);
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* Dark mode colors. */
+:root {
+	--sl-color-accent-low: #420a26;
+	--sl-color-accent: #be0070;
+	--sl-color-accent-high: #f8b1cb;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #f6eaee;
+	--sl-color-gray-2: #ccbdc3;
+	--sl-color-gray-3: #9e838d;
+	--sl-color-gray-4: #695059;
+	--sl-color-gray-5: #473039;
+	--sl-color-gray-6: #351f28;
+	--sl-color-black: #1f1519;
+}
+/* Light mode colors. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --sl-color-accent-low: #fcc5d9;
+    --sl-color-accent: #c10072;
+    --sl-color-accent-high: #5f0036;
+    --sl-color-white: #1f1519;
+    --sl-color-gray-1: #351f28;
+    --sl-color-gray-2: #473039;
+    --sl-color-gray-3: #695059;
+    --sl-color-gray-4: #9e838d;
+    --sl-color-gray-5: #ccbdc3;
+    --sl-color-gray-6: #f6eaee;
+    --sl-color-gray-7: #fbf4f6;
+    --sl-color-black: #ffffff;
+  }
 }
 
 html {
@@ -94,7 +126,10 @@ body {
 .pill:hover {
   color: var(--bg);
 }
-
+.pill:visited {
+  color: var(--shade-fg);
+  opacity: 0.8;
+}
 .demos .source,
 .demos .readme,
 .pill {
@@ -205,10 +240,14 @@ h2 {
 }
 
 a {
-  color: var(--accent-dim);
+  color: var(--sl-color-accent);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--accent);
+  text-decoration: underline;
+}
+a:visited {
+  color: var(--sl-color-accent);
+  opacity:0.8;
 }

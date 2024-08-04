@@ -3,7 +3,7 @@
 Demonstates controlling audio filtering with a few techniques:
 * Random filter frequency value
 * Filter frequency based on relative pointer position
-* Filter frequency based on an [oscillator](https://ixfx.fun/modulation/oscillator/) value (aka auto-filter)
+* Filter frequency based on an [oscillator](https://ixfx.fun/modulation/oscillators/usage/) value (aka auto-filter)
 
 Keep in mind that audio can only be started from within a user interaction event handler (eg from clicking somewhere). This is a browser restriction.
 
@@ -16,5 +16,5 @@ Read more
 * [BiquadFilterNode.Q](https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode/Q)
 * [BiquadFilterNode.type](https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode/type)
 * [BiquadFilterNode](https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode) (MDN)
-* [ixfx Oscillator module](https://ixfx.fun/modulation/oscillator/)
+* [ixfx Oscillator module](https://ixfx.fun/modulation/oscillators/usage/)
 

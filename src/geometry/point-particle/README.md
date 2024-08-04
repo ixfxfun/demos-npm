@@ -48,3 +48,7 @@ Steps 1-3 draw on values in the settings object, determining how quickly particl
 When moving particles on the x-axis, we use ixfx's `jitter` function with a gaussian distribution. This tapers off positive/negative jitter so it is less likely.
 
 Canvas composite operations are used to make for some more interesting effects when particles are drawn and when the background is cleared. There's a purposeful trail left behind.
+
+Read more:
+* [ixfx Point guide](https://ixfx.fun/geometry/shapes/point/)
+* [Points API](https://api.ixfx.fun/modules/Geometry.Points)

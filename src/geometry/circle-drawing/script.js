@@ -1,4 +1,4 @@
-import { Modulation, Numbers, Flow } from '../../ixfx/bundle.js';
+import { Modulation, Numbers, Iterables } from '../../ixfx/bundle.js';
 import { CanvasHelper } from '../../ixfx/dom.js';
 
 const settings = Object.freeze({
@@ -73,7 +73,7 @@ const draw = () => {
   let radiusAbs = radius * canvas.dimensionMin;
 
   // Uses ixfx's forEach and count to run the body 10 times
-  Flow.forEach(Numbers.count(10), () => {
+  Iterables.forEach(Numbers.count(10), () => {
     // Draw a circle with given radius  
     drawGradientCircle(radiusAbs);
 
