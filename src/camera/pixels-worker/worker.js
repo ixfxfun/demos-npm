@@ -6,17 +6,18 @@
  * Please see README.md in the parent folder.
  */
 
-/**
- * Define settings
- */
 const settings = Object.freeze({
   // Difference in grayscale value to count as a changed pixel
   threshold: 30,
 });
 
 /**
- * Define state
+ * @typedef {Readonly<{
+ *  lastFrame: Uint8ClampedArray
+ * }>} State
  */
+
+/** @type State */
 let state = Object.freeze({
   lastFrame: new Uint8ClampedArray()
 });
@@ -75,24 +76,6 @@ const processFrame = (frame) => {
   });
 };
 
-// Returns pixel indexes for rgba values at x,y
-const rgbaIndexes = (width, x, y) => {
-  const p = y * (width * 4) + x * 4;
-  return [ p, p + 1, p + 2, p + 3 ];
-};
-
-// Get the pixel values for a set of indexes
-const rgbaValues = (frame, indexes) => [
-  frame[indexes[0]],
-  frame[indexes[1]],
-  frame[indexes[2]],
-  frame[indexes[3]]
-];
-
-//const rgbaString = (values) => `rgba(${values[0]}, ${values[1]}, ${values[2]}, ${values[3]})`;
-
-// Returns a simple average of RGB (ignoring alpha)
-const grayscale = (values) => (values[0] + values[1] + values[2]) / 3;
 
 const setup = () => {
   // Process message from script.js
@@ -110,11 +93,45 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
+
+/**
+ * Get array indexes for pixel at x,y. This is four indexes,
+ * for R, G, B and A.
+ * @param {number} width Width of frame
+ * @param {number} x X position
+ * @param {number} y Y position
+ * @returns number[]
+ */
+const rgbaIndexes = (width, x, y) => {
+  const p = y * (width * 4) + x * 4;
+  return [p, p + 1, p + 2, p + 3];
+};
+
+/**
+ * Get the pixel values for a set of indexes
+ * @param {Uint8ClampedArray} frame 
+ * @param {number[]} indexes 
+ * @returns number[]
+ */
+const rgbaValues = (frame, indexes) => [
+  frame[indexes[0]],
+  frame[indexes[1]],
+  frame[indexes[2]],
+  frame[indexes[3]]
+];
+
+/**
+ * Calculates grayscale value of a pixel (ignoring alpha)
+ * @param {number[]} values 
+ * @returns number
+ */
+const grayscale = (values) => (values[0] + values[1] + values[2]) / 3;

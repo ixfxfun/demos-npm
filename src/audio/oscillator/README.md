@@ -1,6 +1,6 @@
 # oscillator
 
-Demonstates starting and controlling an oscillator.
+Demonstrates starting and controlling an oscillator.
 
 Pointer x/y are mapped to relative values and saved into state. In `use`, these values are used to calculate frequency and gain values. 
 
@@ -13,3 +13,6 @@ Please see [Basic Audio Oscillator-based](../Basic-Audio-Osc.md) for more info.
 Read more
 * [OscillatorNode](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode) (MDN)
 
+Things to try
+* Use ixfx's [Numbers.quantiseEvery](https://api.ixfx.fun/funcs/Numbers.quantiseEvery) to quantise frequency values to a scale
+* Add an extra strip for a different oscillator that you could play with two fingers

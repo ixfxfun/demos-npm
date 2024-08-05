@@ -91,7 +91,7 @@
       const host = window.location.host;
 
       // If we're online, hide #local
-      if (host.endsWith(`github.io`) || host.endsWith(`glitch.io`)) {
+      if (host.endsWith(`github.io`) || host.endsWith(`glitch.io`) || host.endsWith('.fun')) {
         const el = document.getElementById(`local`);
         document
           .querySelectorAll(`.local`)

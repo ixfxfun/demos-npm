@@ -1,13 +1,8 @@
-/**
- * pixels-process: pixel-level manipulation of frames from a camera, 
- * drawing them to a canvas
- * 
- * Please see README.md in parent folder.
- */
 import { Camera } from '../../ixfx/io.js';
 import { Video } from '../../ixfx/visual.js';
 import * as Trackers from '../../ixfx/trackers.js';
 import { defaultErrorHandler } from '../../ixfx/dom.js';
+import * as Util from './util.js';
 
 const settings = Object.freeze({
   // Difference in grayscale value to count as a changed pixel
@@ -25,12 +20,20 @@ const settings = Object.freeze({
   lblDifferences: document.querySelector(`#lblDifferences`)
 });
 
+/**
+ * @typedef {Readonly<{
+ *  fps: number
+ *  lastFrame: Uint8ClampedArray
+ *  visFrame: ImageData
+ *  differences: number
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
-  /** @type {number} */
   fps: 0,
   lastFrame: new Uint8ClampedArray(), // Empty array
   visFrame: new ImageData(1, 1), // Dummy image data
-  /** @type {number} */
   differences: 0
 });
 
@@ -64,9 +67,8 @@ const use = () => {
  * @param {ImageData} frame 
  */
 const update = (frame) => {
-  const { data } = frame;
   const { lastFrame } = state;
-  const { threshold, frameIntervalTracker, visualise } = settings;
+  const { frameIntervalTracker } = settings;
 
   // Counter for how many pixels have changed
   let differences = 0;
@@ -78,46 +80,7 @@ const update = (frame) => {
     // No previous frame
   } else {
     // Compare to previous frame
-    differences = 0;
-    const w = frame.width;
-    const h = frame.height;
-
-    // Proceed left-to-right
-    for (let x = 0; x < w; x++) {
-      // ...top-to-bottom
-      for (let y = 0; y < h; y++) {
-        // Get array indexes of pixel
-        const indexes = rgbaIndexes(w, x, y);
-
-        // Get RGBA values and then compute grayscale value
-        const pixel = rgbaValues(data, indexes);
-        const pixelGray = grayscale(pixel);
-
-        // Get the grayscale value of the same pixel in last frame
-        const lastFramePixelGray = grayscale(rgbaValues(lastFrame, indexes));
-
-        // Calculate absolute difference (don't care if it's higher or lower)
-        const diff = Math.abs(pixelGray - lastFramePixelGray);
-
-        // If difference is greater than the threshold, count it
-        if (diff > threshold) {
-          differences++;
-        } else {
-          if (visualise) {
-            // Pixel is the same as before, set it to
-            // a translucent grayscale
-            data[indexes[0]] = pixelGray; // R
-            data[indexes[1]] = pixelGray; // G
-            data[indexes[2]] = pixelGray; // B
-            data[indexes[3]] = 10;        // A
-          }
-        }
-      }
-    }
-
-
-    // Get a proportional difference, dividing by total number of pixels
-    differences /= (w * h);
+    differences = compareFrame(frame, lastFrame);
   }
 
   // Keep track of how long it takes us to process frames
@@ -132,43 +95,56 @@ const update = (frame) => {
 };
 
 /**
- * Get array indexes for pixel at x,y. This is four indexes,
- * for R, G, B and A.
- * @param {number} width Width of frame
- * @param {number} x X position
- * @param {number} y Y position
- * @returns number[]
+ * 
+ * @param {ImageData} frame 
+ * @param {Uint8ClampedArray} lastFrame
+ * @returns 
  */
-const rgbaIndexes = (width, x, y) => {
-  const p = y * (width * 4) + x * 4;
-  return [p, p + 1, p + 2, p + 3];
+const compareFrame = (frame, lastFrame) => {
+  const { data } = frame;
+  const { threshold, visualise } = settings;
+
+  let differences = 0;
+  const w = frame.width;
+  const h = frame.height;
+
+  // Proceed left-to-right
+  for (let x = 0; x < w; x++) {
+    // ...top-to-bottom
+    for (let y = 0; y < h; y++) {
+      // Get array indexes of pixel
+      const indexes = Util.rgbaIndexes(w, x, y);
+
+      // Get RGBA values and then compute grayscale value
+      const pixel = Util.rgbaValues(data, indexes);
+      const pixelGray = Util.grayscale(pixel);
+
+      // Get the grayscale value of the same pixel in last frame
+      const lastFramePixelGray = Util.grayscale(Util.rgbaValues(lastFrame, indexes));
+
+      // Calculate absolute difference (don't care if it's higher or lower)
+      const diff = Math.abs(pixelGray - lastFramePixelGray);
+
+      // If difference is greater than the threshold, count it
+      if (diff > threshold) {
+        differences++;
+      } else {
+        if (visualise) {
+          // Pixel is the same as before, set it to
+          // a translucent grayscale
+          data[indexes[0]] = pixelGray; // R
+          data[indexes[1]] = pixelGray; // G
+          data[indexes[2]] = pixelGray; // B
+          data[indexes[3]] = 10;        // A
+        }
+      }
+    }
+  }
+
+  // Get a proportional difference, dividing by total number of pixels
+  differences /= (w * h);
+  return differences;
 };
-
-/**
- * Get the pixel values for a set of indexes
- * @param {Uint8ClampedArray} frame 
- * @param {number[]} indexes 
- * @returns number[]
- */
-const rgbaValues = (frame, indexes) => [
-  frame[indexes[0]],
-  frame[indexes[1]],
-  frame[indexes[2]],
-  frame[indexes[3]]
-];
-
-/**
-const rgbaString = (values) => `rgba(${values[0]}, 
-  ${values[1]}, ${values[2]}, ${values[3]})`;
-*/
-
-/**
- * Calculates grayscale value of a pixel (ignoring alpha)
- * @param {number[]} values 
- * @returns number
- */
-const grayscale = (values) => (values[0] + values[1] + values[2]) / 3;
-
 const startVideo = async () => {
   const { canvasEl, visualise } = settings;
 
@@ -211,11 +187,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

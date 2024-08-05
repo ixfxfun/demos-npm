@@ -1,66 +1,71 @@
+import { Audio } from '../audio.js';
 
-// #region Settings & state
-const samples = Object.freeze({
-  rainstorm: `../rainstorm.mp3`
+const settings = Object.freeze({
+  audio: new Audio(),
+  sampleId: `rainstorm`
 });
 
-/** @type Map<string,HTMLAudioElement> */
-const loadedSounds = new Map();
-
-
-const settings = Object.freeze({});
-
 let state = Object.freeze({});
-// #endregion
 
 const use = () => {};
 
-function initAudio() {
-  // Load all the samples
-  for (const [key,url] of Object.entries(samples)) {
-    const audio = new Audio(url);
-    loadedSounds.set(key, audio);
+/**
+ * Plays a sample by id.
+ * The id should correspond to the HTML AUDIO element.
+ * @param {string} id 
+ * @returns 
+ */
+function playSample(id) {
+  const { audio } = settings;
+  const a = audio.get(id);
+  if (!a) {
+    console.log(`Could not find sample: ${id}`);
+    return;
   }
+  console.log(`Playing: ${id}`);
+  a.el.play();
 }
 
-function play() {
-  console.log(`play`);
-  const a = loadedSounds.get(`rainstorm`);
-  a?.play();
-}
-
-function stop() {
-  console.log(`stop`);
-
-  const a = loadedSounds.get(`rainstorm`);
-  a?.pause();
+/**
+ * Stops a sample by id.
+ * The id should correspond to the HTML AUDIO element
+ * @param {string} id 
+ */
+function stopSample(id) {
+  const { audio } = settings;
+  const a = audio.get(id);
+  if (!a) {
+    console.log(`Could not find sample: ${id}`);
+    return;
+  }
+  console.log(`Stopped: ${id}`);
+  a.el.pause();
 }
 
 function setup() {
+  const { sampleId } = settings;
+
   // Call every half a second
   setInterval(use, 500);
 
   document.querySelector(`#btnPlay`)?.addEventListener(`click`, () => {
-    play();
+    playSample(sampleId);
   });
   document.querySelector(`#btnStop`)?.addEventListener(`click`, () => {
-    stop();
+    stopSample(sampleId);
   });
 
-  initAudio();
-  
 };
 
-// #region Toolbox
 /**
  * Save state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
 setup();
-// #endregion

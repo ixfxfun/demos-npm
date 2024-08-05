@@ -3,7 +3,7 @@ import { Pool } from '../../ixfx/data.js';
 
 const settings = Object.freeze({
   pool: Pool.create({
-    capacity: 10,
+    capacity: 5,
     userExpireAfterMs: 1 * 1000,
     resourcesWithoutUserExpireAfterMs: 5 * 1000,
     fullPolicy: `evictOldestUser`,
@@ -24,10 +24,16 @@ const settings = Object.freeze({
   })
 });
 
-let state = Object.freeze({
-  /** @type {readonly string[]} */
+/**
+ * @typedef {Readonly<{
+ *  keysDown: readonly string[]
+ * }>} State
+ */
+
+/** @type State */
+let state = {
   keysDown: []
-});
+};
 
 const use = () => {
   const { pool } = settings;
@@ -74,18 +80,16 @@ const setup = () => {
   document.addEventListener(`keyup`, onKeyUp);
 };
 
-
-// #region Toolbox
 /**
  * Saves state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
 
 setup();
-// #endregion

@@ -3,8 +3,10 @@
 Uses a moving average to smooth out audio levels from the microphone.
 
 It uses:
-* `movingAverage` from the Temporal module
+* `movingAverage` from the Numbers module
 * `Analysers.peakLevel` from the Audio module
+
+We have some utility functions stashed away in `util.js` to not clutter up the main script.
 
 ## Sensitivity vs. smoothness
 

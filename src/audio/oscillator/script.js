@@ -1,23 +1,43 @@
 import { scaleClamped, scalePercent } from '../../ixfx/numbers.js';
+import * as Osc from './oscillator.js';
 
 const settings = Object.freeze({
-  /** @type OscillatorOpts */
+  /**
+   * HTML Element for setting pitch with pointer movement
+   */
+  freqAreaElement: /** @type HTMLElement */(document.querySelector(`#freqArea`)),
+  /** 
+   * Settings for oscillator
+   * @type Osc.Options
+   */
   oscillator: {
     type: `sawtooth`,
     frequency: 440
   },
+  // Min/max of frequency range
   freqRange: [120, 1000]
 });
 
-let state = Object.freeze({
-  /** @type BasicAudio|undefined */
-  audio: undefined,
-  /** @type number */
-  x: 0.5,
-  /** @type number */
-  y: 0.5
-});
+/** 
+ * @typedef {Readonly<{
+ *  audio:Osc.BasicAudio|undefined
+ *  x: number
+ *  y: number
+ * }>} State  
+ */
 
+/** @type State */
+let state = {
+  audio: undefined,
+  x: 0.5,
+  y: 0.5
+};
+
+/**
+ * Use the current state.
+ * In this sketch that's setting oscillator frequency and audio gain according to scaled state values.
+ * @returns 
+ */
 const use = () => {
   const { freqRange } = settings;
   const { x, y } = state;
@@ -27,7 +47,8 @@ const use = () => {
 
   // Scale 0..1 to desired frequency range from settings
   const freq = scalePercent(x, freqRange[0], freqRange[1]);
-  // Gain can use 0..1 range
+
+  // Gain can use 0..1 range, no need to scale
   const level = y;
 
   const { ctx, gain, osc } = audio;
@@ -51,116 +72,70 @@ const muteOscillator = () => {
   gain.gain.setValueAtTime(0, ctx.currentTime);
 };
 
-function setup() {
-  const freqAreaElement = /** @type HTMLElement */document.querySelector(`#freqArea`);
-  if (!freqAreaElement) return;
+/**
+ * Pointer has moved in '#freqArea'
+ * @param {Event} event 
+ * @returns 
+ */
+const pointermove = (event) => {
+  const { freqAreaElement } = settings;
+  const pointerEvent = /** @type PointerEvent */(event);
 
+  // No button press
+  if (!pointerEvent.buttons) return;
+
+  // Size of DOM element
+  const bounds = freqAreaElement.getBoundingClientRect();
+
+  // Calculate relative x,y
+  const x = scaleClamped(pointerEvent.offsetX, 0, bounds.width);
+  const y = scaleClamped(pointerEvent.offsetY, 0, bounds.height);
+
+  // Set to state and use state
+  saveState({ x, y });
+  use();
+};
+
+/**
+ * Initialise audio
+ * @returns BasicAudio
+ */
+function initAudio() {
+  const { oscillator } = settings;
+  let { audio } = state;
+
+  // Already initialised
+  if (audio) return audio;
+
+  // Create audio context (see oscillator.js)
+  audio = Osc.create(oscillator);
+
+  // Mute oscillator
+  audio.gain.gain.setValueAtTime(0, audio.ctx.currentTime);
+
+  // Start oscillator
+  audio.osc.start();
+
+  saveState({ audio });
+  return audio;
+}
+
+function setup() {
+  const { freqAreaElement } = settings;
   freqAreaElement.addEventListener(`pointerup`, muteOscillator);
   freqAreaElement.addEventListener(`pointerleave`, muteOscillator);
-  freqAreaElement.addEventListener(`pointermove`, event => {
-    const pointerEvent = /** @type PointerEvent */(event);
-    // No button press
-    if (!pointerEvent.buttons) return;
-
-    // Size of DOM element
-    const bounds = freqAreaElement.getBoundingClientRect();
-
-    // Calculate relative x,y
-    const x = scaleClamped(pointerEvent.offsetX, 0, bounds.width);
-    const y = scaleClamped(pointerEvent.offsetY, 0, bounds.height);
-
-    // Set to state and use state
-    saveState({ x, y });
-    use();
-  });
+  freqAreaElement.addEventListener(`pointermove`, pointermove);
 };
 setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
-
-/**
- * Initialise all audio elements on the page
- * @returns BasicAudio
- */
-function initAudio() {
-  const { oscillator } = settings;
-
-  // Already initialised
-  if (state.audio) return state.audio;
-
-  const ac = initBasicAudio(oscillator);
-
-  // Mute oscillator
-  ac.gain.gain.setValueAtTime(0, ac.ctx.currentTime);
-
-  // Start oscillator
-  ac.osc.start();
-
-  saveState({
-    audio: ac
-  });
-  return ac;
-}
-
-/**
- * Initialise audio with an oscillator source
- * @param {OscillatorOpts} [oscillatorOptions] 
- * @returns {BasicAudio}
- */
-function initBasicAudio(oscillatorOptions = {}) {
-
-  const context = new AudioContext();
-  const oscType = oscillatorOptions.type ?? `sawtooth`;
-  const oscFreq = oscillatorOptions.frequency ?? 440;
-
-  // Source oscillator
-  const source = context.createOscillator();
-  source.type = oscType;
-  source.frequency.setValueAtTime(oscFreq, context.currentTime);
-
-  // Create stereo panner
-  const pan = context.createStereoPanner();
-
-  // Create gain node
-  const gain = context.createGain();
-
-  // Create filter
-  const filter = context.createBiquadFilter();
-
-  // Patch in
-  // Oscillator -> gain -> panner -> speakers
-  source.connect(gain);
-  gain.connect(pan);
-  pan.connect(filter);
-  filter.connect(context.destination);
-
-  return {
-    pan, gain, filter,
-    ctx: context,
-    osc: source
-  };
-}
-
-/**
- * @typedef OscillatorOpts
- * @property {OscillatorType} [type]
- * @property {number} [frequency]
- */
-
-/**
- * @typedef BasicAudio
- * @property {AudioContext} ctx
- * @property {StereoPannerNode} pan
- * @property {GainNode} gain
- * @property {BiquadFilterNode} filter
- * @property {OscillatorNode} osc
- */

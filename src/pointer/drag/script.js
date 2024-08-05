@@ -3,8 +3,6 @@ import * as Things from './thing.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
-  // How often to update Things
-  thingUpdateSpeedMs: 10,
   // How many things to spawn
   spawnThings: 10,
   hueChange: 0.1
@@ -26,18 +24,41 @@ let state = Object.freeze({
 
 /**
  * Makes use of the data contained in `state`
+ * @param {State} state
  */
-const use = () => {};
+const use = (state) => {
+  const { things } = state;
+  // Visually update based on new state
+  for (const thing of things) {
+    Things.use(thing);
+  }
+};
 
 const update = () => {
-  // 1. Recalcuate state
-  // 2. Save state
-  // saveState({ ... });
-  // 3. Use it
-  use();
+  let { things } = state;
+
+  // Update things
+  things = updateThings(things);
+
+  // TODO: other state changes
+
+  // Save the properties we've changed
+  const newState = saveState({ things });
+
+  use(newState);
 
   // Loop!
   setTimeout(update, 10);
+};
+
+/**
+ * Updates 'things', returning mutated copies
+ * @param {Things.Thing[]} things 
+ * @returns 
+ */
+const updateThings = (things) => {
+  things = things.map(t => Things.update(t, state));
+  return things;
 };
 
 /**
@@ -49,16 +70,16 @@ const onDragStart = (thing, event) => {
   const { el, id } = thing;
 
   // Track the id of thing being dragged
-  saveState({draggingId: id });
+  saveState({ draggingId: id });
 
   el.classList.add(`dragging`);
-  
+
   // Relative point at which drag was started
   const startedAt = Util.relativePoint(event.clientX, event.clientY);
 
   // Current position of thing
   const thingStartPosition = { ...thing.position };
-  
+
   // When a pointer move happens
   const pointerMove = (event) => {
     const pointerPosition = Util.relativePoint(event.clientX, event.clientY);
@@ -82,11 +103,11 @@ const onDragStart = (thing, event) => {
   document.addEventListener(`pointermove`, pointerMove);
 
   // Dragging done
-  document.addEventListener(`pointerup`, event => {  
+  document.addEventListener(`pointerup`, event => {
     el.classList.remove(`dragging`);
     document.removeEventListener(`pointermove`, pointerMove);
     if (state.draggingId === id) {
-      saveState({draggingId: 0});
+      saveState({ draggingId: 0 });
     }
   }, { once: true });
 };
@@ -94,7 +115,7 @@ const onDragStart = (thing, event) => {
 const onPointerDown = (event) => {
   const { things } = state;
   const target = event.target;
- 
+
   // Find thing with pointer down
   const matching = things.find(thing => thing.el === target);
 
@@ -108,7 +129,7 @@ const onPointerDown = (event) => {
 function setup() {
   // Create a bunch of things
   const things = [];
-  for (let index=1;index<=settings.spawnThings;index++) {
+  for (let index = 1; index <= settings.spawnThings; index++) {
     things.push(Things.create(index));
   }
 
@@ -117,39 +138,13 @@ function setup() {
 
   document.addEventListener(`pointerdown`, onPointerDown);
 
-  // Update things at a fixed rate
-  setInterval(() => {
-    let { things } = state;
-
-    // Update all the things
-    things = things.map(t => Things.update(t, state));
-
-    // Save updated things into state
-    saveState({ things });
-
-    // Visually update based on new state
-    for (const thing of things) {
-      Things.use(thing);
-    }
-  }, settings.thingUpdateSpeedMs);
-
-  // Update state of sketch and use state
-  // at full speed
+  // Kick off update loop
   update();
 };
 
 setup();
 
-/**
- * Save state
- * @param {Partial<State>} s 
- */
-function saveState (s) {
-  state = Object.freeze({
-    ...state,
-    ...s
-  });
-}
+
 
 /**
  * Update a given thing by its id. The
@@ -174,6 +169,18 @@ function updateThingInState(thingId, updatedThing) {
   });
 
   // Save changed things
-  saveState({things});
+  saveState({ things });
   return completedThing;
+}
+
+/**
+ * Save state
+ * @param {Partial<State>} s 
+ */
+function saveState(s) {
+  state = Object.freeze({
+    ...state,
+    ...s
+  });
+  return state;
 }

@@ -96,4 +96,5 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }

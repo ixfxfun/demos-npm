@@ -1,33 +1,28 @@
-/**
- * pixels-worker: process image frames in a separate worker thread.
- * The image processing happens in `worker.js`.
- * 
- * Please see README.md in parent folder.
- */
 import { Camera } from '../../ixfx/io.js';
 import { Video } from '../../ixfx/visual.js';
 import * as Trackers from '../../ixfx/trackers.js';
 import { defaultErrorHandler } from '../../ixfx/dom.js';
+import * as Util from './util.js';
 
-/**
- * Define settings
- */
 const settings = Object.freeze({
   worker: new Worker(`worker.js`),
   diffTracker: Trackers.number({ id: `difference`, resetAfterSamples: 200 }),
   frameIntervalTracker: Trackers.interval({ id: `fps`, resetAfterSamples: 100 }),
   // HTML elements for status
-  /** @type {HTMLElement|null} */
-  lblFps: document.querySelector(`#lblFps`),
-  /** @type {HTMLElement|null} */
-  lblDifferences: document.querySelector(`#lblDifferences`),
-  /** @type {HTMLElement|null} */
-  lblDiffVu: document.querySelector(`#lblDiffVu`)
+  lblFps: /** @type HTMLElement */(document.querySelector(`#lblFps`)),
+  lblDifferences: /** @type HTMLElement */(document.querySelector(`#lblDifferences`)),
+  lblDiffVu: /** @type HTMLElement */(document.querySelector(`#lblDiffVu`))
 });
 
 /**
- * Define state
+ * @typedef {Readonly<{
+ *  fps:number
+ *  differences: number
+ *  diffVu: string
+ * }>} State
  */
+
+/** @type State */
 let state = Object.freeze({
   /** @type {number} */
   fps: 0,
@@ -43,7 +38,7 @@ const use = () => {
   // Update HTML labels
   if (lblFps) lblFps.textContent = `FPS: ${fps}`;
   if (lblDifferences)
-    lblDifferences.textContent = `Differences: ${percentage(differences)}`;
+    lblDifferences.textContent = `Differences: ${Util.percentage(differences)}`;
   if (lblDiffVu) lblDiffVu.innerHTML = diffVu;
 };
 
@@ -79,12 +74,6 @@ const startVideo = async () => {
   }
 };
 
-/**
- * Returns a human-friendly percentage string
- * @param {number} v 
- * @returns 
- */
-const percentage = (v) => Math.round(v * 100) + `%`;
 
 function setup() {
   const { worker } = settings;
@@ -107,9 +96,9 @@ function setup() {
     saveState({
       ...d,
       diffVu: `
-       max: ${percentage(mma.max)}<br />
-       avg: ${percentage(mma.avg)}<br />
-       min: ${percentage(mma.min)}`
+       max: ${Util.percentage(mma.max)}<br />
+       avg: ${Util.percentage(mma.avg)}<br />
+       min: ${Util.percentage(mma.min)}`
     });
 
     use();
@@ -119,11 +108,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

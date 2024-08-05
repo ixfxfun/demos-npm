@@ -1,16 +1,10 @@
-/**
- * pixels-overlay: draws on top of a camera feed
- * 
- * Please see README.md in parent folder.
- */
 import { Camera } from '../../ixfx/io.js';
 import { Video } from '../../ixfx/visual.js';
 import * as Trackers from '../../ixfx/trackers.js';
 import { defaultErrorHandler } from '../../ixfx/dom.js';
+import * as Util from './util.js';
+import { movingAverage } from '../../ixfx/numbers.js';
 
-/**
- * Define settings
- */
 const settings = Object.freeze({
   // Difference in grayscale value to count as a changed pixel
   threshold: 30,
@@ -20,27 +14,35 @@ const settings = Object.freeze({
   frameIntervalTracker: Trackers.interval({
     id: `fps`, resetAfterSamples: 100
   }),
+  // Smooth the differences value over 50 samples
+  smoother: movingAverage(50),
   // HTML Elements
-  /** @type {HTMLCanvasElement|null} */
-  canvasEl: document.querySelector(`#canvas`),
-  /** @type {HTMLElement|null} */
-  lblFps: document.querySelector(`#lblFps`),
-  /** @type {HTMLElement|null} */
-  lblDifferences: document.querySelector(`#lblDifferences`),
-  lblError: document.querySelector(`#error`),
-  lblErrorMsg: document.querySelector(`#errorMsg`)
+  canvasEl: /** @type HTMLCanvasElement */(document.querySelector(`#canvas`)),
+  lblFps: /** @type HTMLElement */(document.querySelector(`#lblFps`)),
+  lblDifferences: /** @type HTMLElement */(document.querySelector(`#lblDifferences`)),
+  lblError: /** @type HTMLElement */(document.querySelector(`#error`)),
+  lblErrorMsg: /** @type HTMLElement */(document.querySelector(`#errorMsg`))
 });
 
 /**
- * Define state
+ * @typedef {Readonly<{
+ *  fps:number
+ *  lastFrame: Uint8ClampedArray,
+ *  differences: number
+ *  running: boolean
+ * }>} State
  */
-let state = Object.freeze({
-  /** @type {number} */
+
+/**
+ * Initial state
+ * @type State
+ */
+let state = {
   fps: 0,
+  running: false,
   lastFrame: new Uint8ClampedArray(),
-  /** @type {number} */
   differences: 0
-});
+};
 
 /**
  * Uses calculated state to update labels
@@ -63,99 +65,84 @@ const use = () => {
  * @param {CanvasRenderingContext2D} context
  */
 const update = (frame, context) => {
+  const { frameIntervalTracker, smoother } = settings;
   const { data } = frame;
   const { lastFrame } = state;
-  const { threshold, frameIntervalTracker, visualise } = settings;
   let differences = 0;
 
   if (lastFrame.length === 0) {
     // No previous frame
   } else {
     // Compare to previous frame
-
-    // Count of pixels which are deemed different
-    differences = 0;
-
-    const w = frame.width;
-    const h = frame.height;
-    context.fillStyle = `magenta`;
-
-    // Loop left to right of frame
-    for (let x = 0; x < w; x++) {
-      // ...and top-to-bottom
-      for (let y = 0; y < h; y++) {
-        const indexes = rgbaIndexes(w, x, y);
-        const pixel = rgbaValues(data, indexes);
-        const pixelGray = grayscale(pixel);
-
-        // Get the grayscale value of the same pixel in last frame
-        const lastFramePixelGray = grayscale(rgbaValues(lastFrame, indexes));
-
-        // Calculate absolute difference (ignore if it is above/below)
-        const diff = Math.abs(pixelGray - lastFramePixelGray);
-
-        // If the difference meets our threshold, count it
-        if (diff > threshold) {
-          differences++;
-          // ...and if we should, colour that pixel
-          if (visualise) context.fillRect(x, y, 1, 1);
-        }
-      }
-    }
-
-    // Get a proportional difference, dividing by total number of pixels
-    differences /= (w * h);
+    differences = compareFrames(frame, lastFrame, context);
   }
 
   // Keep track of how long it takes us to process frames
   frameIntervalTracker.mark();
 
+  const smoothedDifferences = smoother(differences);
+
   // Update state with latest calculations
   saveState({
     fps: Math.round(1000 / frameIntervalTracker.avg),
     lastFrame: data,
-    differences
+    differences: smoothedDifferences
   });
 };
 
 /**
- * Get array indexes for pixel at x,y. This is four indexes,
- * for R, G, B and A.
- * @param {number} width Width of frame
- * @param {number} x X position
- * @param {number} y Y position
- * @returns number[]
+ * Compares `frame` with `lastFrame`.
+ * @param {ImageData} frame 
+ * @param {Uint8ClampedArray} lastFrame
+ * @param {CanvasRenderingContext2D} context
  */
-const rgbaIndexes = (width, x, y) => {
-  const p = y * (width * 4) + x * 4;
-  return [p, p + 1, p + 2, p + 3];
+const compareFrames = (frame, lastFrame, context) => {
+  const { threshold, visualise } = settings;
+
+  // Count of pixels which are deemed different
+  let differences = 0;
+
+  // Dimensions of frame
+  const w = frame.width;
+  const h = frame.height;
+  context.fillStyle = `magenta`;
+
+  // Loop left to right of frame
+  const current = frame.data;
+  for (let x = 0; x < w; x++) {
+    // ...and top-to-bottom
+    for (let y = 0; y < h; y++) {
+      const indexes = Util.rgbaIndexes(w, x, y);          // Get array location for pixel based on x,y
+      const pixel = Util.rgbaValues(current, indexes);  // Get pixel data
+      const pixelGray = Util.grayscale(pixel);           // Convert to greyscale
+
+      // Get the grayscale value of the same pixel in last frame
+      const lastFramePixelGray = Util.grayscale(Util.rgbaValues(lastFrame, indexes));
+
+      // Calculate absolute difference (ie. we don't care if it's darker or lighter)
+      const diff = Math.abs(pixelGray - lastFramePixelGray);
+
+      // If the difference meets our threshold, count it
+      if (diff > threshold) {
+        differences++;
+
+        // ...and if we should, colour that pixel
+        if (visualise) context.fillRect(x, y, 1, 1);
+      }
+    }
+  }
+
+  // Get a proportional difference, dividing by total number of pixels
+  differences /= (w * h);
+  return differences;
 };
-
-/**
- * Get the pixel values for a set of indexes.
- * @param {Uint8ClampedArray} frame 
- * @param {number[]} indexes 
- * @returns number[]
- */
-const rgbaValues = (frame, indexes) => [
-  frame[indexes[0]],
-  frame[indexes[1]],
-  frame[indexes[2]],
-  frame[indexes[3]]
-];
-
-/**
- * Calculates grayscale value of a pixel (ignoring alpha)
- * @param {number[]} values 
- * @returns number
- */
-const grayscale = (values) => (values[0] + values[1] + values[2]) / 3;
 
 /**
  * Starts video stream
  */
 const startVideo = async () => {
   const { canvasEl, visualise } = settings;
+  if (state.running) return;
 
   // Init camera
   const { videoEl, dispose } = await Camera.start(
@@ -165,8 +152,8 @@ const startVideo = async () => {
   );
 
   // Get drawing context if possible
-  const context = canvasEl?.getContext(`2d`);
-  if (canvasEl === null || context === null || context === undefined) return;
+  const context = canvasEl.getContext(`2d`);
+  if (!context) return;
 
   canvasEl.width = videoEl.videoWidth;
   canvasEl.height = videoEl.videoHeight;
@@ -178,6 +165,7 @@ const startVideo = async () => {
     // Video.frames generator loops forever, 
     // returning ImageData from video stream
     const frames = Video.frames(videoEl, { canvasEl });
+    saveState({ running: true });
     for await (const frame of frames) {
       // Update calculations
       update(frame, context);
@@ -207,11 +195,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
