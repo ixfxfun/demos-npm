@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>espruino accel/gyro</title>
+  <title>espruino / mag</title>
 </head>
 <style>
   :root {
@@ -13,6 +13,7 @@
     --hue: 333;
     --bg: hsl(var(--hue) 100% 5%);
     --fg: hsl(var(--hue) 100% 90%);
+    --legend-fg: hsl(var(--hue) 100% 90%);
   }
 
   html,
@@ -30,22 +31,43 @@
     overflow: hidden;
   }
 
-
-  #data {
+  .data {
     font-family: var(--mono-font);
+    min-width:10rem;
+  }
+
+  h2 {
+    font-size: 0.8em;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  iframe {
+    bottom:0;
+    right:0;
+    z-index: 1000;
+    width:35em;
+    position:absolute;
+    border: 1px solid var(--bg);
   }
 </style>
 
 <body>
   <section>
-    <div id="preamble">
-      <h1>espruino accel/gyro</h1>
-      <button id="btnConnect">Connect</button>
+    <h1>espruino / mag</h1>
+    <div class="hide-when-connected">
+      <button id="btnConnect">Connect to Puck</button>
     </div>
-    <div id="data">
-      <div id="lblAcc">acc: ...</div>
-      <div id="lblGyro">gyro: ...</div>
+    <div class="show-when-connected">
+      <div>x: <span id="x">?</span></div>
+      <div>y: <span id="y">?</span></div>
+      <div> z: <span id="z">?</span></div>
     </div>
+    <iframe class="show-when-connected" src="../mag-plot/plotter.html"></iframe>
     <script type="module" src="script.js"></script>
   </section>
 </body>

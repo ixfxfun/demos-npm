@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<!--
+--------------------------
+No need to edit this file!
+--------------------------
+-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>plot</title>
+</head>
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --mono-font: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    --hue: 333;
+    --bg: hsl(var(--hue) 100% 0%);
+    --fg: hsl(var(--hue) 0% 90%);
+    --legend-fg: hsl(var(--hue) 100% 90%);
+  }
+
+  html,
+  body {
+    height: 100%;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-size: 14px;
+    font-family: var(--font);
+  }
+
+  body {
+    overscroll-behavior: contain;
+    touch-action: none;
+    overflow: hidden;
+  }
+
+  .data {
+    font-family: var(--mono-font);
+    min-width:10rem;
+  }
+
+  h2 {
+    font-size: 0.8em;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  section {
+    display:flex;
+    gap: 1rem;
+  }
+  section>div>div {
+    display:flex;
+    gap:0.5rem;
+  }
+  .plot {
+    width: 10em;
+    height: 5em;
+  }
+</style>
+
+<body>
+  <section>
+      <div>
+        <h2>x</h2>
+        <div>
+          <div>in: <span class="data" id="in-x">?</span></div>
+          <div>out: <span class="data" id="out-x">?</span></div>
+        </div>
+        <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-x"></plot-element>
+      </div>
+      <div>
+        <h2>y</h2>
+        <div>
+          <div>in: <span class="data" id="in-y">?</span></div>
+          <div>out: <span class="data" id="out-y">?</span></div>
+        </div>
+        <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-y"></plot-element>
+      </div>
+      <div>
+        <h2>z</h2>
+        <div>
+          <div>in: <span class="data" id="in-z">?</span></div>
+          <div>out: <span class="data" id="out-z">?</span></div>
+        </div>
+        <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-z"></plot-element>
+      </div>
+    <script type="module" src="./plotter.js"></script>
+    <script type="module" src="../../../ixfx/components.js"></script>
+  </section>
+</body>
+
+</html>

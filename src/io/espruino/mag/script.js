@@ -1,130 +1,117 @@
-
-import { delay } from '../../../ixfx/flow.js';
-import { Espruino } from '../../../ixfx/io.js';
-import { setCssDisplay, setHtml } from './util.js';
-
+import { Bipolar } from '../../../ixfx/numbers.js';
+import * as Numbers from '../../../ixfx/numbers.js';
+import * as Util from './util.js';
+import * as Html from './html.js';
+import * as EspruinoSnippets from './espruino.js';
 
 const settings = Object.freeze({
-  // Script to execute on Espruino
-  script:
-    `
-    Puck.magOn();
-    Puck.on('mag', xyx => {
-      Bluetooth.println(JSON.stringify(accel));
-    });
-    NRF.on("disconnect", () => reset());
-    `,
   // Filter device list
-  device: `` // Put in the name of your device here, eg `Puck.js a123`
+  device: ``, // Put in the name of your device here, eg `Puck.js a123`,
+  // Interpolation amount for each axis
+  axisInterpolation: 0.01
 });
 
 /**
  * @typedef {Readonly<{
- * acc: Vector3d
- * gyro: Vector3d
+ *  lastReading: Util.MagReading
+ *  mag: Util.MagReading
  * }>} State
  */
 
 /** @type State */
-let state = Object.freeze({
-  acc: { x: 0, y: 0, z: 0 },
-  gyro: { x: 0, y: 0, z: 0 }
-});
-
-function use() {
-  const { acc, gyro } = state;
-
-  setHtml(`lblAcc`, `acc:   x: ${acc.x} y: ${acc.y} z: ${acc.z}`);
-  setHtml(`lblGyro`, `gyro: x: ${gyro.x} y: ${gyro.y} z: ${gyro.z}`);
+let state = {
+  lastReading: { x: 0, y: 0, z: 0 },
+  mag: { x: 0, y: 0, z: 0 }
 };
 
 /**
- * Called when data is received
- * @param {import('../../../ixfx/io.js').IoDataEvent} event 
- * @returns 
+ * Use the state
+ * @param {State} state 
  */
-function onData(event) {
-  // Don't even try to parse if it doesn't
-  // look like JSON
-  const data = event.data.trim(); // Remove line breaks etc
-  if (!data.startsWith(`{`)) return;
-  if (!data.endsWith(`}`)) return;
+function use(state) {
+  const { x, y, z } = state.mag;
 
-  // So far so good, try to parse as JSON
-  try {
-    const d = JSON.parse(data);
-    console.log(d);
-    saveState({
-      acc: d.acc,
-      gyro: d.gyro
-    });
-    use();
-  } catch (error) {
-    console.warn(error);
-  }
+  // Do something with values...
+
+  // ...display them on page
+  Html.set(`x`, x);
+  Html.set(`y`, y);
+  Html.set(`z`, z);
+
 };
 
+function update() {
+  const { axisInterpolation } = settings;
+  const { lastReading, mag } = state;
 
-async function connect() {
-  const { script } = settings;
+  // Do additional processing of data?
 
-  try {
-    // Filter by name, if defined in settings
-    const options = settings.device.length > 0 ? { name: settings.device } : {};
+  // Eg. interpolate from mag values from last reading
+  const x = Numbers.interpolate(axisInterpolation, mag.x, lastReading.x);
+  const y = Numbers.interpolate(axisInterpolation, mag.y, lastReading.y);
+  const z = Numbers.interpolate(axisInterpolation, mag.z, lastReading.z);
 
-    // Connect to Puck
-    const p = await Espruino.puck(options);
-    console.log(`Connected`);
+  // Save newly calculated data
+  saveState({ mag: { x, y, z } });
 
-    // Listen for events
-    p.addEventListener(`change`, event => {
-      console.log(`${event.priorState} -> ${event.newState}`);
-    });
+  use(state);
 
+  // Call itself again, in a loop
+  window.requestAnimationFrame(update);
+}
 
-    // Send script after a moment
-    delay(async () => {
-      await p.writeScript(script);
-      onConnected(true);
-      p.addEventListener(`data`, onData);
-    }, 1000);
+/**
+ * Function to clean input data and return normalised data,
+ * where z, y & z are on -1..1 scale.
+ * 
+ * This will get called at pace of data sending from the Espruino
+ * @param {Util.MagReading} data 
+ * @returns 
+ */
+function normaliseData(data) {
+  let { x, y, z } = data;
 
-  } catch (error) {
-    console.error(error);
-  }
+  // Clamp to very broad ranges. 
+  // This ought to be narrowed down depending on your interests...
+  // Bipolar.scale is clamped to -1...1 scale.
+  x = Bipolar.scale(x, -28_000, 28_000);
+  y = Bipolar.scale(y, -28_000, 28_000);
+  z = Bipolar.scale(z, -28_000, 28_000);
+
+  // Compose x, y & z values into an object
+  const cleaned = { x, y, z };
+
+  // Save to state
+  saveState({ lastReading: cleaned });
+
+  // Return it back (so it can later be sent to plotter etc)
+  return cleaned;
 };
 
 function setup() {
-  document.querySelector(`#btnConnect`)?.addEventListener(`click`, connect);
+  // Init the helper
+  Util.init(normaliseData);
+
+  // Connect when button is pressed
+  document.querySelector(`#btnConnect`)?.addEventListener(`click`, () => {
+    // Pass in chosen script, callback to receive data and optional Puck id filter
+    Util.connect(EspruinoSnippets.poll, settings.device);
+  });
+
+  update();
 };
 
 setup();
 
 
 /**
- * Called when connection state changes
- * @param {boolean} connected 
- */
-function onConnected(connected) {
-  setCssDisplay(`preamble`, connected ? `none` : `block`);
-  setCssDisplay(`data`, connected ? `block` : `none`);
-};
-
-/**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
-
-/**
- * @typedef {Readonly<{
-* x: number
-* y: number
-* z: number
-* }>} Vector3d
-*/
