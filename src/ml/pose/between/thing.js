@@ -1,6 +1,6 @@
 import { Points } from '../../../ixfx/geometry.js';
 import { interpolate } from '../../../ixfx/numbers.js';
-import * as MoveNet from "../Poses.js";
+import { Poses } from "../util/Poses.js";
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -34,7 +34,7 @@ export const use = (thing) => {
  * Updates a given thing based on state
  * @param {Thing} thing
  * @param {import('./script.js').State} ambientState
- * @param {MoveNet.PoseTracker} poseTracker
+ * @param {Poses.PoseTracker} poseTracker
  * @returns {Thing}
  */
 export const update = (thing, ambientState, poseTracker) => {

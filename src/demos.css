@@ -116,6 +116,7 @@ body {
 }
 .pill:visited {
   opacity: 0.8;
+  color:var(--sl-color-black);
 }
 .demos .source,
 .demos .readme,

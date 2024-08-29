@@ -1,26 +1,25 @@
-// @ts-ignore
-import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
 import { Points } from '../../../ixfx/geometry.js';
 import { Bipolar, interpolate } from '../../../ixfx/numbers.js';
 import * as Dom from '../../../ixfx/dom.js';
-import * as MoveNet from "../Poses.js";
+import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 import * as Util from './util.js';
+
+const pc = new PosesConsumer({ maxAgeMs: 2000 });
 
 const settings = Object.freeze({
   // How often to compute data from poses & update thing
   updateSpeedMs: 10,
   // How much to push toward 0 neutral position
-  tiltDecay: 0.001,
+  tiltDecay: 0.01,
   // How much of computed angle to fold in
-  angleAmount: 0.003,
+  angleAmount: 0.03,
   // Empirically-discovered min angle
   tiltMin: -0.5,
   // Empirically-discovered max angle
   tiltMax: 0.5,
-  remote: new Remote(),
-  poses: new MoveNet.PosesTracker({ maxAgeMs: 2000 }),
-  dataDisplay: new Dom.DataDisplay()
+  poses: pc.poses,
+  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
 
 });
 
@@ -106,40 +105,16 @@ const update = () => {
 
 /**
  * Return angle (in radians) between left and right shoulder
- * @param {MoveNet.PoseTracker} pose 
+ * @param {Poses.PoseTracker} pose 
  */
 const computeShoulderAngle = (pose) => {
-  const left = pose.keypoint(`left_shoulder`);
-  const right = pose.keypoint(`right_shoulder`);
-  const angleRadians = Points.angle(left, right);
-  return angleRadians;
-};
-
-/**
- * Called when a new pose is detected
- * @param {*} event 
- */
-const onPoseAdded = (event) => {
-  const poseTracker = /** @type MoveNet.PoseTracker */(event.detail);
-  console.log(`Pose added: ${poseTracker.guid}`);
-};
-
-/**
- * Called when a pose is no longer being tracked
- * @param {*} event 
- */
-const onPoseExpired = (event) => {
-  const poseTracker = /** @type MoveNet.PoseTracker */(event.detail);
-  console.log(`Pose expired: ${poseTracker.guid}`);
+  const left = pose.landmark(`left_shoulder`);
+  const right = pose.landmark(`right_shoulder`);
+  return Points.angleRadian(left, right);
 };
 
 
 function setup() {
-  const { remote, poses } = settings;
-  remote.onData = onReceivedPoses;
-  poses.events.addEventListener(`added`, onPoseAdded);
-  poses.events.addEventListener(`expired`, onPoseExpired);
-
   // Automatically size canvas to viewport
   Dom.fullSizeCanvas(`#canvas`, onResized => {
     saveState({ bounds: onResized.bounds });
@@ -161,19 +136,6 @@ function setup() {
 
 setup();
 
-/**
- * Called when we receive data
- * @param {*} packet 
- */
-function onReceivedPoses(packet) {
-  const { _from, data } = packet;
-  const poseData =/** @type MoveNet.Pose[] */(data);
-
-  // Pass each pose over to the poses tracker
-  for (const pose of poseData) {
-    settings.poses.seen(_from, pose);
-  }
-};
 
 /**
  * Update state
@@ -184,5 +146,6 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 

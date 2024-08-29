@@ -1,32 +1,59 @@
-import * as MoveNet from "../Poses.js";
-
 // @ts-ignore
-import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
+import { LitElement } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
+import { MlVision } from "../../lib/index.js";
+import { shortGuid } from '../../../ixfx/random.js';
 
+// Parse query params
 const params = (new URL(document.location.toString())).searchParams;
-const peerId = params.get(`peerId`);
-const remote = new Remote({
-  allowNetwork: false,
-  // Set peer id if it's not null
-  peerId: peerId === null ? undefined : peerId
-  // websocket: `wss://${window.location.host}/ws`
+
+// Use 'peerId' specified as URL parameter or a random one
+const peerId = params.get(`peerId`) ?? shortGuid();
+
+// Setup
+const ds = new MlVision(`#is`, {
+  // Mode to run: pose, hand, objects, face
+  mode: `pose`,
+  // How often to run computation on image
+  // Increase number to reduce CPU load, but add latency
+  computeFreqMs: 100,
+  // Remote id
+  remote: {
+    peerId
+  },
+  // Default camera
+  camera: {
+    facingMode: `user`,
+  },
+  // Settings for pose detection
+  pose: {
+    // See: https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker#configurations_options
+    outputSegmentationMasks: false,
+    minPoseDetectionConfidence: 0.5,
+    minPosePresenceConfidence: 0.5,
+    minTrackingConfidence: 0.5,
+    numPoses: 5,
+    // For more on models:
+    // https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker#models
+    modelPath: `pose_landmarker_lite.task`,
+    verbosity: `errors`,
+    matcher: {
+      distanceThreshold: 0.1,
+      maxAgeMs: 2000,
+      verbosity: `errors`
+    }
+  },
+  // For troubleshooting, try 'info' or 'debug'
+  verbosity: `errors`,
+  wasmBase: `/ml/lib`,
+  modelsBase: `/ml/lib/`,
+  hideModelSelector: true
 });
 
-// Default config for tracking 6 poses
-const moveNetConfig = MoveNet.Models.MoveNetTypes.defaultMoveNetConfig(6);
-/** @type Partial<MoveNet.Config> */
-const config = {
-  moveNet: moveNetConfig,
-  debug:false,
-  recordSamplingMs:50,
-  preferredCameraSize: {
-    width: 800,
-    height: 600
-  }
-};
-const ml = MoveNet.mount(`#container`, config);  
-ml.onPoseData =(data) => {
-  if (data.length === 0) return;
-  remote.broadcast(data);
-};
+ds.init();
 
+// Eg dump out data
+// const client = new Client();
+// client.addEventListener(`message`, event => {
+//   const { detail } = event;
+//   console.log(detail);
+// })

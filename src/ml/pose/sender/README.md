@@ -1,5 +1,7 @@
 # pose-sender
 
+See `script.js` for parameters to tune the pose detection.
+
 Transmits pose data via Remote.
 
 To specify an id of the peer, use the `peerId` URL parameter. That is, we access the sketch via:

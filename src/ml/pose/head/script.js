@@ -1,16 +1,15 @@
-// @ts-ignore
-import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
 import * as Dom from '../../../ixfx/dom.js';
 import { Points } from '../../../ixfx/geometry.js';
-import * as MoveNet from "../Poses.js";
+import { Poses, PosesConsumer } from "../util/Poses.js";
+
+const pc = new PosesConsumer({ maxAgeMs: 500 });
 
 const settings = Object.freeze({
   // How quickly to call update()
   updateRateMs: 100,
-  remote: new Remote(),
-  poses: new MoveNet.PosesTracker({maxAgeMs: 500 }),
+  poses: pc.poses,
   canvasEl: /** @type HTMLCanvasElement */(document.querySelector(`#canvas`)),
-  dataDisplay: new Dom.DataDisplay()
+  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
 });
 
 /**
@@ -37,7 +36,7 @@ let state = Object.freeze({
     center: { x: 0, y: 0 },
   },
   scaleBy: 1,
-  heads:[]
+  heads: []
 });
 
 /**
@@ -45,7 +44,7 @@ let state = Object.freeze({
  * new from latest pose data
  */
 const update = () => {
-  const {poses} = settings;
+  const { poses } = settings;
 
   // Compute a head size for each pose
   const heads = [];
@@ -53,21 +52,21 @@ const update = () => {
     const head = computeHead(pose);
     heads.push(head);
   }
-  saveState({heads});
+  saveState({ heads });
 
   // For debug purposes, dump data to a table
   settings.dataDisplay.update(heads);
 };
 
 /**
- * Returns a circle based on a few head keypoints
- * @param {MoveNet.PoseTracker} pose
+ * Returns a circle based on a few head landmarks
+ * @param {Poses.PoseTracker} pose
  * @return {Head} 
  */
 const computeHead = (pose) => {
-  const nose = pose.keypoint(`nose`);
-  const leftEar = pose.keypoint(`left_ear`);
-  const rightEar = pose.keypoint(`right_ear`);
+  const nose = pose.landmark(`nose`);
+  const leftEar = pose.landmark(`left_ear`);
+  const rightEar = pose.landmark(`right_ear`);
   const earDistance = Points.distance(leftEar, rightEar);
   const radius = earDistance / 2;
   return {
@@ -103,12 +102,12 @@ const drawHead = (context, head) => {
   const { scaleBy } = state;
   const { poses } = settings;
 
-  const headAbs = Points.multiplyScalar(head,scaleBy);
-  const radius = head.radius*scaleBy;
+  const headAbs = Points.multiplyScalar(head, scaleBy);
+  const radius = head.radius * scaleBy;
   const tracker = poses.getByGuid(head.poseId);
   if (tracker === undefined) return;
   const hue = tracker.hue;
-  
+
   // Translate canvas so 0,0 is the center of head
   context.save();
   context.translate(headAbs.x, headAbs.y);
@@ -116,7 +115,7 @@ const drawHead = (context, head) => {
   // Draw a circle
   context.beginPath();
   context.fillStyle = `hsl(${hue},60%,70%)`;
-  context.arc(0,0,radius,0,Math.PI*2);
+  context.arc(0, 0, radius, 0, Math.PI * 2);
   context.fill();
 
   // Draw id of head
@@ -132,8 +131,8 @@ const drawHead = (context, head) => {
  * @param {*} event 
  */
 const onPoseAdded = (event) => {
-  const poseTracker = /** @type MoveNet.PoseTracker */(event.detail);
-  console.log(`Pose added: ${poseTracker.guid}`);
+  const poseTracker = /** @type Poses.PoseTracker */(event.detail);
+  //console.log(`Pose added: ${poseTracker.guid}`);
 };
 
 /**
@@ -141,37 +140,21 @@ const onPoseAdded = (event) => {
  * @param {*} event 
  */
 const onPoseExpired = (event) => {
-  const poseTracker = /** @type MoveNet.PoseTracker */(event.detail);
-  console.log(`Pose expired: ${poseTracker.guid}`);
-};
-
-/**
- * Called when we have pose data via Remote
- * @param {*} packet 
- */
-const onReceivedPoses = (packet) => {
-  const { _from, data } = packet;
-  const poseData =/** @type MoveNet.Pose[] */(data);
-  
-  // Pass each pose over to the poses tracker
-  for (const pose of poseData) {
-    settings.poses.seen(_from, pose);
-  }
+  const poseTracker = /** @type Poses.PoseTracker */(event.detail);
+  //console.log(`Pose expired: ${poseTracker.guid}`);
 };
 
 /**
  * Setup and run main loop 
  */
 function setup() {
-  const { updateRateMs, remote, poses } = settings;
-  
-  remote.onData = onReceivedPoses;
-  poses.events.addEventListener(`added`, onPoseAdded);
-  poses.events.addEventListener(`expired`, onPoseExpired);
+  const { updateRateMs, poses } = settings;
+  poses.addEventListener(`added`, onPoseAdded);
+  poses.addEventListener(`expired`, onPoseExpired);
 
   Dom.fullSizeCanvas(`#canvas`, arguments_ => {
     // Update state with new size of canvas
-    saveState({ 
+    saveState({
       bounds: arguments_.bounds,
       scaleBy: Math.min(arguments_.bounds.width, arguments_.bounds.height)
     });
@@ -183,6 +166,7 @@ function setup() {
     setTimeout(updateLoop, updateRateMs);
   };
   updateLoop();
+
 
   // Draw as fast as possible
   const animationLoop = () => {
@@ -198,10 +182,10 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
-  
+
 }

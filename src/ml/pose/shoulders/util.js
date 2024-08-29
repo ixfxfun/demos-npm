@@ -1,4 +1,4 @@
-import { Points } from '../../../ixfx/geometry.js';
+
 
 /**
  * @typedef {object} Bounds
@@ -28,7 +28,7 @@ export const textContent = (query, text) => {
  * @param {CanvasRenderingContext2D} context 
  * @param {number} radius
  */
-export function drawLabelledCircle(context, radius, fillStyle = `black`, message = ``, textFillStyle = `white`)  {
+export function drawLabelledCircle(context, radius, fillStyle = `black`, message = ``, textFillStyle = `white`) {
   // Fill a circle
   context.beginPath();
   context.arc(0, 0, radius, 0, Math.PI * 2);

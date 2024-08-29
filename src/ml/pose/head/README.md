@@ -1,4 +1,6 @@
-# head
+# pose-head
+
+Make sure your 'sender' is using the 'pose' model.
 
 This basic demo demonstrates:
 1. Receiving pose data of one or more bodies
@@ -8,4 +10,4 @@ This basic demo demonstrates:
 
 It is limited because it mirrors the data to the canvas.
 
-We use two provided helper files `PosesTracker.js` and `PoseTracker.js`, contained in the parent folder. This help with data housekeeping, and shouldn't need to be changed.
+We use helper files from `pose-helper`. They shouldn't need to be modified.

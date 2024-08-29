@@ -1,24 +1,23 @@
-// @ts-ignore
-import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
 import { Arrays } from '../../../ixfx/data.js';
 import { Points } from '../../../ixfx/geometry.js';
-import * as MoveNet from "../Poses.js";
+import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 import * as Util from './util.js';
+
+const pc = new PosesConsumer({ maxAgeMs: 1000 });
 
 const settings = Object.freeze({
   // How often to update the Things
   thingUpdateSpeedMs: 15,
   // How often to update main state
   updateSpeedMs: 200,
-  remote: new Remote(),
-  poses: new MoveNet.PosesTracker({ maxAgeMs: 1000 }),
+  poses: pc.poses
 });
 
 /** 
  * @typedef {Readonly<{
- * things:Things.Thing[]
- * middles:Array<{id:string,position:Points.Point}>
+ *  things:Things.Thing[]
+ *  middles:Array<{id:string,position:Points.Point}>
  * }>} State
  */
 
@@ -47,7 +46,7 @@ const update = () => {
  * @param {*} event 
  */
 const onPoseAdded = (event) => {
-  const poseTracker = /** @type MoveNet.PoseTracker */(event.detail);
+  const poseTracker = /** @type Poses.PoseTracker */(event.detail);
 
   // Create a thing for this pose
   const x = poseTracker.middle.x;
@@ -64,7 +63,7 @@ const onPoseAdded = (event) => {
 const onPoseExpired = (event) => {
   const { poses } = settings;
   const { things } = state;
-  const poseTracker = /** @type MoveNet.PoseTracker */(event.detail);
+  const poseTracker = /** @type Poses.PoseTracker */(event.detail);
 
   // Synchronise list of things with current poses
 
@@ -91,10 +90,9 @@ const onPoseExpired = (event) => {
 const getThing = (guid) => state.things.find(t => t.id === guid);
 
 function setup() {
-  const { remote, poses } = settings;
-  remote.onData = onReceivedPoses;
-  poses.events.addEventListener(`added`, onPoseAdded);
-  poses.events.addEventListener(`expired`, onPoseExpired);
+  const { poses } = settings;
+  poses.addEventListener(`added`, onPoseAdded);
+  poses.addEventListener(`expired`, onPoseExpired);
 
   // Update things
   setInterval(() => {
@@ -131,19 +129,6 @@ function setup() {
   animationLoop();
 };
 
-/**
- * Called when we receive data
- * @param {*} packet 
- */
-function onReceivedPoses(packet) {
-  const { _from, data } = packet;
-  const poseData =/** @type MoveNet.Pose[] */(data);
-
-  // Pass each pose over to the poses tracker
-  for (const pose of poseData) {
-    settings.poses.seen(_from, pose);
-  }
-};
 
 setup();
 
@@ -156,6 +141,7 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 
 /**
