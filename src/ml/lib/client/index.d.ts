@@ -1,5 +1,7 @@
 import * as ixfx_geometry_js from 'ixfx/geometry.js';
 import { Line, Point, RectPositioned } from 'ixfx/geometry.js';
+import { ImageSource } from '@mediapipe/tasks-vision';
+import { Options as Options$1 } from '@clinth/remote';
 import * as ixfx_trackers_js from 'ixfx/trackers.js';
 import { TrackedPointMap, TrackedValueOpts, PointTracker } from 'ixfx/trackers.js';
 
@@ -53,20 +55,53 @@ declare const lineBetween: (pose: PoseData, a: PoseLandmarks | number, b: PoseLa
 declare const roughCenter: (pose: PoseData) => ixfx_geometry_js.Point | undefined;
 
 /**
- * Tracks landmarks over time for a single pose (ie. body).
+ * PoseTracker keeps track of a landmarks for a single pose.
+ * This is useful for tracking the movement of a pose or its landmarks over time.
+ * It does this by making a PointTracker for each keypoint of a pose.
  *
- * It's important to call .seen() with pose data.
+ * @example
+ * ```js
+ * // Create a tracker (fromId is the id of sender, poseId is the id of the pose)
+ * const pt = new PoseTracker(fromId, poseId, options);
+ * // ...and whenever there is data, call .seen()
+ * pt.seen(pose);
+ * ```
+ *
+ * When creating, the most useful tuning options are `sampleLimit` which governs
+ * how many of the most recent samples to keep, and `storeIntermediate` (true/false)
+ * to store intermediate data.
+ *
+ * ## Accessing keypoints
+ *  You can get the raw keypoint data from the pose
+ * ```js
+ * // Get a single point
+ * const nosePoint = pose.keypointValue(`nose`); // { x, y, score, name }
+ * // Get all points
+ * for (const kp of poses.getRawValues()) {
+ * // { x, y, score, name }
+ * }
+ * ```
+ * But the real power comes from getting the [PointTracker](https://api.ixfx.fun/classes/Trackers.PointTracker) for a keypoint, since it keeps track of not just the last data, but a whole trail of historical data for a given keypoint.
+ * ```js
+ * const noseTracker = pose.keypoint(`nose`); // PointTracker
+ * ```
+ * Once we have the PointTracker, there are a _lot_ of things to access:
+ *
  */
 declare class PoseTracker {
     #private;
     points: TrackedPointMap;
     /**
      * Creates a PoseTracker
+     *
+     * Defaults:
+     * * sampleLimit: 10
+     * * storeIntermediate: false
      * @param fromId Data source for pose (ie device)
      * @param poseId Id of pose from TFjs
      * @param options
      */
-    constructor(fromId: string, poseId: string, options: TrackedValueOpts);
+    constructor(fromId: string, poseId: string, options?: TrackedValueOpts);
     /**
      * Reset stored data for the tracker
      */
@@ -370,6 +405,8 @@ declare class PosesTracker extends EventTarget {
     clear(): void;
 }
 
+type ProcessorModes = `pose` | `objects` | `hand` | `face`;
+
 type NormalizedLandmark = {
     /** The x coordinates of the normalized landmark. */
     x: number;
@@ -458,7 +495,50 @@ type HandLandmarkerResult = {
     handedness: Category[][];
 };
 
+type RecordingData = {
+    name: string;
+    rateMs: number;
+    samples: any[];
+    mode: string;
+};
+type SourceKinds = `camera` | `file` | `recording`;
 type Verbosity = `errors` | `info` | `debug`;
+type SourceData = {
+    kind: SourceKinds;
+    id: string;
+    label: string;
+};
+type CameraOptions = {
+    width?: number;
+    height?: number;
+    facingMode?: `user` | `environment`;
+};
+type ObjectDetectorOptions = {
+    verbosity: Verbosity;
+    scoreThreshold: number;
+    modelPath: string;
+};
+type CommonModelOptions = {
+    wasmBase: string;
+    modelsBase: string;
+};
+interface ISource {
+    start(): Promise<boolean>;
+    stop(): void;
+}
+type PoseMatcherOptions = {
+    /**
+     * If pose is more than this distance away, assume it's a different body
+     * Default: 0.1
+     */
+    distanceThreshold: number;
+    /**
+     * If a pose hasn't been seen for this long, delete.
+     * Default: 2000
+     */
+    maxAgeMs: number;
+    verbosity: Verbosity;
+};
 type HandDetectorOptions = {
     verbosity: Verbosity;
     numHands: number;
@@ -467,6 +547,57 @@ type HandDetectorOptions = {
     minTrackingConfidence: number;
     modelPath: string;
 };
+type FaceDetectorOptions = {
+    verbosity: Verbosity;
+    modelPath: string;
+    /**
+     * Default: 0.5
+     */
+    minDetectionConfidence: number;
+    /**
+     * Default: 0.3
+     */
+    minSupressionThreshold: number;
+};
+type PoseDetectorOptions = {
+    numPoses: number;
+    minPoseDetectionConfidence: number;
+    minPosePresenceConfidence: number;
+    minTrackingConfidence: number;
+    outputSegmentationMasks: boolean;
+    modelPath: string;
+    matcher: PoseMatcherOptions;
+    verbosity: Verbosity;
+};
+type OverlayOptions = {
+    show: boolean;
+    label: boolean;
+};
+type Options = {
+    camera: CameraOptions;
+    hideModelSelector?: boolean;
+    mode: ProcessorModes;
+    overlay: OverlayOptions;
+    pose?: PoseDetectorOptions;
+    objects?: ObjectDetectorOptions;
+    hand?: HandDetectorOptions;
+    face?: FaceDetectorOptions;
+    computeFreqMs: number;
+    remote: Options$1;
+    /**
+     * 'errors','info','debug'
+     */
+    verbosity: Verbosity;
+    wasmBase: string;
+    modelsBase: string;
+};
+type ComputeCallback = (result: unknown) => void;
+type OnDispatcherData = (mode: ProcessorModes, v: unknown) => void;
+interface IModel {
+    compute(v: ImageSource, callback: ComputeCallback, timestamp: number): void;
+    dispose(): void;
+    init(): Promise<boolean>;
+}
 type PoseData = {
     poseid: string;
     landmarks: NormalizedLandmark[];
@@ -480,6 +611,7 @@ declare const index$1_PoseTracker: typeof PoseTracker;
 type index$1_PosesTracker = PosesTracker;
 declare const index$1_PosesTracker: typeof PosesTracker;
 type index$1_PosesTrackerOptions = PosesTrackerOptions;
+declare const index$1_TrackedValueOpts: typeof TrackedValueOpts;
 declare const index$1_centroid: typeof centroid;
 declare const index$1_centroidWorld: typeof centroidWorld;
 declare const index$1_getLandmark: typeof getLandmark;
@@ -490,19 +622,36 @@ declare const index$1_horizontalSort: typeof horizontalSort;
 declare const index$1_lineBetween: typeof lineBetween;
 declare const index$1_roughCenter: typeof roughCenter;
 declare namespace index$1 {
-  export { type index$1_PoseData as PoseData, type index$1_PoseLandmarks as PoseLandmarks, index$1_PoseTracker as PoseTracker, index$1_PosesTracker as PosesTracker, type index$1_PosesTrackerOptions as PosesTrackerOptions, index$1_centroid as centroid, index$1_centroidWorld as centroidWorld, index$1_getLandmark as getLandmark, index$1_getLandmarkIndexByName as getLandmarkIndexByName, index$1_getLandmarkNameByIndex as getLandmarkNameByIndex, index$1_getWorldLandmark as getWorldLandmark, index$1_horizontalSort as horizontalSort, index$1_lineBetween as lineBetween, index$1_roughCenter as roughCenter };
+  export { type index$1_PoseData as PoseData, type index$1_PoseLandmarks as PoseLandmarks, index$1_PoseTracker as PoseTracker, index$1_PosesTracker as PosesTracker, type index$1_PosesTrackerOptions as PosesTrackerOptions, index$1_TrackedValueOpts as TrackedValueOpts, index$1_centroid as centroid, index$1_centroidWorld as centroidWorld, index$1_getLandmark as getLandmark, index$1_getLandmarkIndexByName as getLandmarkIndexByName, index$1_getLandmarkNameByIndex as getLandmarkNameByIndex, index$1_getWorldLandmark as getWorldLandmark, index$1_horizontalSort as horizontalSort, index$1_lineBetween as lineBetween, index$1_roughCenter as roughCenter };
 }
 
 type index_BoundingBox = BoundingBox;
+type index_CameraOptions = CameraOptions;
 type index_Category = Category;
+type index_CommonModelOptions = CommonModelOptions;
+type index_ComputeCallback = ComputeCallback;
 type index_Detection = Detection;
+type index_FaceDetectorOptions = FaceDetectorOptions;
 type index_HandDetectorOptions = HandDetectorOptions;
 type index_HandLandmarkerResult = HandLandmarkerResult;
+type index_IModel = IModel;
+type index_ISource = ISource;
 type index_Landmark = Landmark;
 type index_NormalizedKeypoint = NormalizedKeypoint;
 type index_NormalizedLandmark = NormalizedLandmark;
+type index_ObjectDetectorOptions = ObjectDetectorOptions;
+type index_OnDispatcherData = OnDispatcherData;
+type index_Options = Options;
+type index_OverlayOptions = OverlayOptions;
+type index_PoseData = PoseData;
+type index_PoseDetectorOptions = PoseDetectorOptions;
+type index_PoseMatcherOptions = PoseMatcherOptions;
+type index_RecordingData = RecordingData;
+type index_SourceData = SourceData;
+type index_SourceKinds = SourceKinds;
+type index_Verbosity = Verbosity;
 declare namespace index {
-  export type { index_BoundingBox as BoundingBox, index_Category as Category, index_Detection as Detection, index_HandDetectorOptions as HandDetectorOptions, index_HandLandmarkerResult as HandLandmarkerResult, index_Landmark as Landmark, index_NormalizedKeypoint as NormalizedKeypoint, index_NormalizedLandmark as NormalizedLandmark };
+  export type { index_BoundingBox as BoundingBox, index_CameraOptions as CameraOptions, index_Category as Category, index_CommonModelOptions as CommonModelOptions, index_ComputeCallback as ComputeCallback, index_Detection as Detection, index_FaceDetectorOptions as FaceDetectorOptions, index_HandDetectorOptions as HandDetectorOptions, index_HandLandmarkerResult as HandLandmarkerResult, index_IModel as IModel, index_ISource as ISource, index_Landmark as Landmark, index_NormalizedKeypoint as NormalizedKeypoint, index_NormalizedLandmark as NormalizedLandmark, index_ObjectDetectorOptions as ObjectDetectorOptions, index_OnDispatcherData as OnDispatcherData, index_Options as Options, index_OverlayOptions as OverlayOptions, index_PoseData as PoseData, index_PoseDetectorOptions as PoseDetectorOptions, index_PoseMatcherOptions as PoseMatcherOptions, index_RecordingData as RecordingData, index_SourceData as SourceData, index_SourceKinds as SourceKinds, index_Verbosity as Verbosity };
 }
 
-export { type BoundingBox, type Category, type Detection, type HandLandmarkerResult, index as Hands, type Landmark, type NormalizedKeypoint, type NormalizedLandmark, index$1 as Poses };
+export { type BoundingBox, type Category, type Detection, type HandLandmarkerResult, index as Hands, type Landmark, type NormalizedKeypoint, type NormalizedLandmark, index$1 as Poses, type ProcessorModes };

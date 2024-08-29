@@ -1,3 +1,4 @@
+// @ts-ignore
 import { LitElement } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import { MlVision, Client } from "../../lib/index.js";
 import { shortGuid } from '../../../ixfx/random.js';
@@ -22,7 +23,9 @@ const ds = new MlVision(`#is`, {
   },
   face: {
     minDetectionConfidence: 0.5,
-    minSupressionThreshold: 0.3
+    minSupressionThreshold: 0.3,
+    verbosity: `errors`,
+    modelPath: `blaze_face_short_range.tflite`
   },
   // How often to run computation on image
   computeFreqMs: 10,
@@ -30,7 +33,7 @@ const ds = new MlVision(`#is`, {
   // For troubleshooting, try 'info' or 'debug'
   verbosity: `errors`,
   wasmBase: `/ml/lib`,
-  modelsBase: `/ml/lib/`,
+  modelsBase: `https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/latest/`,
   hideModelSelector: true
 });
 

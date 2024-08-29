@@ -45,7 +45,8 @@ const ds = new MlVision(`#is`, {
   // For troubleshooting, try 'info' or 'debug'
   verbosity: `errors`,
   wasmBase: `/ml/lib`,
-  modelsBase: `/ml/lib/`,
+  // If you download models locally, put them in /ml/lib, use the setting '/ml/lib'
+  modelsBase: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/`,
   hideModelSelector: true
 });
 

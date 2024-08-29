@@ -32281,7 +32281,9 @@ export {
   VideoSourceElement,
   VisionElement,
   defaults2 as defaults,
-  getLowest
+  getLowest,
+  getProcessorModes,
+  validateProcessorMode
 };
 /*! Bundled license information:
 

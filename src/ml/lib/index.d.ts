@@ -4,53 +4,12 @@ import * as lit_html from 'lit-html';
 import { Ref } from 'lit/directives/ref.js';
 import * as Mp from '@mediapipe/tasks-vision';
 import { ImageSource, Detection as Detection$1, HandLandmarkerResult as HandLandmarkerResult$1, NormalizedLandmark as NormalizedLandmark$1, BoundingBox as BoundingBox$1 } from '@mediapipe/tasks-vision';
-import { Point } from 'ixfx/geometry.js';
 import { Options as Options$1 } from '@clinth/remote';
-
-declare class Log {
-    verbosity: Verbosity;
-    prefix: string;
-    constructor(prefix: string, verbosity: Verbosity | Log);
-    info(msg: any): void;
-    debug(msg: any): void;
-}
-
-declare class TrackedPose {
-    centroid: Point;
-    firstSeen: number;
-    lastSeen: number;
-    id: string;
-    constructor();
-}
-type PoseMatcherOptions = {
-    /**
-     * If pose is more than this distance away, assume it's a different body
-     * Default: 0.1
-     */
-    distanceThreshold: number;
-    /**
-     * If a pose hasn't been seen for this long, delete.
-     * Default: 2000
-     */
-    maxAgeMs: number;
-    verbosity: Verbosity;
-};
-declare const getLowest: <T>(data: Array<T>, fn: (d: T) => number) => {
-    data: T;
-    score: number;
-} | undefined;
-declare class PoseMatcher {
-    tracked: TrackedPose[];
-    distanceThreshold: number;
-    ageThreshold: number;
-    lastPrune: number;
-    log: Log;
-    constructor(opts: PoseMatcherOptions);
-    toPoses(poses: Mp.PoseLandmarkerResult): Generator<PoseData, void, unknown>;
-    toPose(n: Mp.NormalizedLandmark[], l: Mp.Landmark[]): PoseData;
-}
+import { Point } from 'ixfx/geometry.js';
 
 type ProcessorModes = `pose` | `objects` | `hand` | `face`;
+declare const getProcessorModes: () => string[];
+declare const validateProcessorMode: (a: any, fallback?: ProcessorModes) => ProcessorModes;
 
 type NormalizedLandmark = {
     /** The x coordinates of the normalized landmark. */
@@ -171,6 +130,19 @@ interface ISource {
     start(): Promise<boolean>;
     stop(): void;
 }
+type PoseMatcherOptions = {
+    /**
+     * If pose is more than this distance away, assume it's a different body
+     * Default: 0.1
+     */
+    distanceThreshold: number;
+    /**
+     * If a pose hasn't been seen for this long, delete.
+     * Default: 2000
+     */
+    maxAgeMs: number;
+    verbosity: Verbosity;
+};
 type HandDetectorOptions = {
     verbosity: Verbosity;
     numHands: number;
@@ -241,6 +213,14 @@ declare class Dispatcher extends EventTarget {
     onData: OnDispatcherData | undefined;
     constructor(options: Options);
     receivedData(mode: ProcessorModes, data: any): void;
+}
+
+declare class Log {
+    verbosity: Verbosity;
+    prefix: string;
+    constructor(prefix: string, verbosity: Verbosity | Log);
+    info(msg: any): void;
+    debug(msg: any): void;
 }
 
 declare const defaults: (mode: ProcessorModes) => Options;
@@ -520,6 +500,28 @@ declare global {
     }
 }
 
+declare class TrackedPose {
+    centroid: Point;
+    firstSeen: number;
+    lastSeen: number;
+    id: string;
+    constructor();
+}
+declare const getLowest: <T>(data: Array<T>, fn: (d: T) => number) => {
+    data: T;
+    score: number;
+} | undefined;
+declare class PoseMatcher {
+    tracked: TrackedPose[];
+    distanceThreshold: number;
+    ageThreshold: number;
+    lastPrune: number;
+    log: Log;
+    constructor(opts: PoseMatcherOptions);
+    toPoses(poses: Mp.PoseLandmarkerResult): Generator<PoseData, void, unknown>;
+    toPose(n: Mp.NormalizedLandmark[], l: Mp.Landmark[]): PoseData;
+}
+
 declare class PoseDetector implements IModel {
     readonly p: CommonModelOptions;
     lp: Mp.PoseLandmarker | undefined;
@@ -564,4 +566,4 @@ declare class Processing extends EventTarget {
     get currentMode(): ProcessorModes;
 }
 
-export { type BoundingBox, type CameraOptions, type Category, Client, type CommonModelOptions, type ComputeCallback, type Detection, type FaceDetectorOptions, type HandDetectorOptions, type HandLandmarkerResult, type IModel, type ISource, type Landmark, MlVision, ModelElement, type NormalizedKeypoint, type NormalizedLandmark, type ObjectDetectorOptions, type OnDispatcherData, type OnReceivedData, type Options, OverlayElement, type OverlayOptions, type PoseData, PoseDetector, type PoseDetectorOptions, PoseMatcher, type PoseMatcherOptions, Processing, type ProcessingStates, RecPanel, type RecordingData, type SourceData, type SourceKinds, type Verbosity, VideoSourceElement, type VideoSourceStates, VisionElement, defaults, getLowest };
+export { type BoundingBox, type CameraOptions, type Category, Client, type CommonModelOptions, type ComputeCallback, type Detection, type FaceDetectorOptions, type HandDetectorOptions, type HandLandmarkerResult, type IModel, type ISource, type Landmark, MlVision, ModelElement, type NormalizedKeypoint, type NormalizedLandmark, type ObjectDetectorOptions, type OnDispatcherData, type OnReceivedData, type Options, OverlayElement, type OverlayOptions, type PoseData, PoseDetector, type PoseDetectorOptions, PoseMatcher, type PoseMatcherOptions, Processing, type ProcessingStates, type ProcessorModes, RecPanel, type RecordingData, type SourceData, type SourceKinds, type Verbosity, VideoSourceElement, type VideoSourceStates, VisionElement, defaults, getLowest, getProcessorModes, validateProcessorMode };

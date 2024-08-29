@@ -35,7 +35,7 @@ const ds = new MlVision(`#is`, {
   // For troubleshooting, try 'info' or 'debug'
   verbosity: `errors`,
   wasmBase: `/ml/lib`,
-  modelsBase: `/ml/lib/`,
+  modelsBase: `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/`,
   hideModelSelector: true
 });
 

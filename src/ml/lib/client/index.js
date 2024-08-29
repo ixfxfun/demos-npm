@@ -12747,16 +12747,26 @@ var PoseTracker = class {
   #hue;
   /**
    * Creates a PoseTracker
+   * 
+   * Defaults:
+   * * sampleLimit: 10
+   * * storeIntermediate: false
    * @param fromId Data source for pose (ie device)
    * @param poseId Id of pose from TFjs
    * @param options 
    */
-  constructor(fromId, poseId, options) {
+  constructor(fromId, poseId, options = {}) {
     this.#poseId = poseId;
     this.#fromId = fromId;
     this.#guid = fromId + `-` + poseId;
     this.#hue = Math.random() * 360;
-    this.points = points({ id: poseId, ...options });
+    const opts = {
+      id: poseId,
+      debug: options.debug ?? false,
+      sampleLimit: 10,
+      storeIntermediate: false
+    };
+    this.points = points(opts);
   }
   /**
    * Reset stored data for the tracker
