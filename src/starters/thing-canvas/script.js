@@ -1,5 +1,5 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { clamp } from '../../ixfx/numbers.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { clamp } from 'ixfx/numbers.js';
 import * as Things from './thing.js';
 import * as Util from './util.js';
 
@@ -19,9 +19,7 @@ const settings = Object.freeze({
  * }} State
  */
 
-/**
- * @type {State}
- */
+/** @type {State} */
 let state = Object.freeze({
   thing: Things.create(),
   hue: 0,
@@ -30,12 +28,12 @@ let state = Object.freeze({
 
 /**
  * Makes use of the data contained in `state`
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   const { canvas } = settings;
   const { ctx } = canvas;
   const { hue, thing } = state;
-
 
   // 1. Eg. use the ambient state
   ctx.fillStyle = `hsl(${hue}, 100%, 90%)`;
@@ -59,11 +57,8 @@ const update = () => {
   hue = hue % 360; // 0..360 scale
   movement = clamp(movement); // 0..1 scale
 
-  // 3. Save state
-  saveState({ hue, movement });
-
-  // 4. Use state
-  use();
+  // 3. Save & use state
+  use(saveState({ hue, movement }));
 
   // 5. Call itself
   window.requestAnimationFrame(update);
@@ -100,5 +95,6 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 

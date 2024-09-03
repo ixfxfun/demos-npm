@@ -1,12 +1,18 @@
-import { frequencyTimer } from '../../ixfx/flow.js';
-import { Oscillators } from '../../ixfx/modulation.js';
+import { frequencyTimer } from 'ixfx/flow.js';
+import { Oscillators } from 'ixfx/modulation.js';
 
 const settings = Object.freeze({
   osc: Oscillators.sine(frequencyTimer(0.1))
 });
 
+/**
+ * @typedef {Readonly<{
+ *  oscValue: number
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
-  /** @type {number} */
   oscValue: 0
 });
 
@@ -14,12 +20,16 @@ const update = () => {
   const { osc } = settings;
 
   const v = osc.next().value; // Sample oscillator
-  saveState ({
+  saveState({
     oscValue: v ?? Number.NaN
   });
 };
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ */
+const use = (state) => {
   const { oscValue } = state;
 
   // Use oscValue somehow... here's two examples:
@@ -30,13 +40,13 @@ const use = () => {
 
   // 2. Use it to offset an element
   const thing = /** @type HTMLElement */(document.querySelector(`#thing`));
-  if (thing) thing.style.transform = `translate(${oscValue*300}px, 0px)`;
+  if (thing) thing.style.transform = `translate(${oscValue * 300}px, 0px)`;
 };
 
 function setup() {
   const loop = () => {
     update();
-    use();
+    use(state);
     window.requestAnimationFrame(loop);
   };
   window.requestAnimationFrame(loop);
@@ -45,11 +55,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

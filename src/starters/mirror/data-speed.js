@@ -1,35 +1,43 @@
-import { clamp } from '../../ixfx/numbers.js';
+import { clamp } from 'ixfx/numbers.js';
 
 const settings = Object.freeze({
   fullMode: window.location.hash === `#full`,
   // On a full scale of 0..1000, what speed
   // is considered maximum
-  speedMax: 20
+  speedMax: 20,
+  labelEl: /** @type HTMLElement */(document.querySelector(`label[for="slider"]`)),
+  spotEl: /** @type HTMLElement */(document.querySelector(`#spot`))
 });
 
+/**
+ * @typedef {Readonly<{
+ *  lastSliderValue:number
+ *  speed:number
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
-  /** @type number */
   lastSliderValue: 0,
-  /** @type number */
   speed: 0
 });
 
-const use = () => {
-  const { fullMode } = settings;
+/**
+ * Use state
+ * @param {State} state
+ */
+const use = (state) => {
+  const { fullMode, labelEl, spotEl } = settings;
   const { speed } = state;
 
   // Update numeric output
-  const labelElement = /** @type HTMLElement */(document.querySelector(`label[for="slider"]`));
-  if (labelElement) labelElement.innerHTML = speed.toFixed(2);
+  labelEl.innerHTML = speed.toFixed(2);
 
   // Map slider value to colour saturation
-  const spotElement = /** @type HTMLElement */(document.querySelector(`#spot`));
-
-  // 0..100
   const saturation = Math.round(speed * 100);
   const hsl = `hsl(var(--hue), ${saturation}%, 50%)`;
-  if (spotElement && !fullMode) {
-    spotElement.style.backgroundColor = hsl;
+  if (spotEl && !fullMode) {
+    spotEl.style.backgroundColor = hsl;
   } else if (fullMode) {
     document.body.style.backgroundColor = hsl;
   }
@@ -61,7 +69,7 @@ function setup() {
       lastSliderValue: v,
       speed,
     });
-    use();
+    use(state);
   });
 
   const buttonFullScreen = /** @type HTMLElement */(document.querySelector(`#btnFullScreen`));
@@ -76,17 +84,18 @@ function setup() {
     const spotElement = /** @type HTMLElement */(document.querySelector(`#spot`));
     if (spotElement) spotElement.style.display = `none`;
   }
-  use();
+  use(state);
 };
 setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

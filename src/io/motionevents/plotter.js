@@ -1,11 +1,11 @@
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import { Plot2 } from "../../ixfx/visual.js";
-import { parentSize } from "../../ixfx/dom.js";
+import { Plot2 } from "ixfx/visual.js";
+import { parentSize } from "ixfx/dom.js";
 
 const settings = Object.freeze({
   accelPlot: new Plot2.Plot(/** @type HTMLCanvasElement */(document.querySelector(`#accelPlot`))),
   accelGravPlot: new Plot2.Plot(/** @type HTMLCanvasElement */(document.querySelector(`#accelGravPlot`))),
-  rotRatePlot: new Plot2.Plot(/** @type HTMLCanvasElement */(document.querySelector(`#rotRatePlot`))),    
+  rotRatePlot: new Plot2.Plot(/** @type HTMLCanvasElement */(document.querySelector(`#rotRatePlot`))),
 });
 
 const r = new Remote({
@@ -16,13 +16,13 @@ const r = new Remote({
 
 r.onData = (message) => {
   const { accelPlot, accelGravPlot, rotRatePlot } = settings;
-  
+
   accelPlot.plot(message.accel);
   accelPlot.update();
-  
+
   accelGravPlot.plot(message.accelGrav);
   accelGravPlot.update();
-  
+
   rotRatePlot.plot(message.rotRate);
   rotRatePlot.update();
 };

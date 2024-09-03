@@ -1,4 +1,4 @@
-import { clamp } from '../../ixfx/numbers.js';
+import { clamp } from 'ixfx/numbers.js';
 import * as Things from './thing.js';
 import * as Util from './util.js';
 
@@ -32,8 +32,9 @@ let state = Object.freeze({
 
 /**
  * Makes use of the data contained in `state`
+ * @param {State} state
  */
-const use = () => {};
+const use = (state) => {};
 
 const update = () => {
   const { movementDecay, elapsedMax } = settings;
@@ -45,12 +46,10 @@ const update = () => {
   // Calculate relative time since last press
   pressElapsed = (performance.now() - lastPress) / elapsedMax;
 
-  saveState({
+  use(saveState({
     movement: clamp(movement),
     pressElapsed: clamp(pressElapsed)
-  });
-
-  use();
+  }));
   setTimeout(update);
 };
 
@@ -129,5 +128,6 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 

@@ -1,4 +1,4 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
+import { CanvasHelper } from 'ixfx/dom.js';
 import * as Things from './thing.js';
 
 // Settings for sketch
@@ -26,11 +26,11 @@ let state = Object.freeze({
 
 /**
  * Makes use of the data contained in `state`
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   const { canvas } = settings;
   const { things } = state;
-
 
   // 1. Eg. use the ambient state
 
@@ -45,7 +45,7 @@ const update = () => {
   // 2. Sanity check
   // 3. Save state
   // 4. Use state
-  use();
+  use(saveState({}));
 
   // 5. Call itself
   window.requestAnimationFrame(update);
@@ -87,6 +87,7 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 
 /**

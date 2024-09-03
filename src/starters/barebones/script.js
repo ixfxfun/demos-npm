@@ -1,26 +1,44 @@
-// #region Settings & state
 const settings = Object.freeze({});
 
-let state = Object.freeze({});
-// #endregion
+/**
+ * @typedef {Readonly<{
+ *  someProp: number
+ * }>} State
+ */
 
-const use = () => {};
+/** @type State */
+let state = Object.freeze({
+  someProp: 0
+});
+
+/**
+ * Use state
+ * @param {State} state 
+ */
+function use(state) {};
+
+function update() {
+  // Compute state
+  const state = saveState({});
+
+  // Pass it on
+  use(state);
+}
 
 function setup() {
   // Call every half a second
-  setInterval(use, 500);
+  setInterval(update, 500);
 };
 
-// #region Toolbox
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
 setup();
-// #endregion

@@ -1,4 +1,4 @@
-import { Points } from '../../ixfx/geometry.js';
+import { Points } from 'ixfx/geometry.js';
 
 /**
  * Position an element from its middle

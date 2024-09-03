@@ -1,8 +1,7 @@
-
-import { movingAverage } from '../../ixfx/numbers.js';
-import { AudioAnalysers } from '../../ixfx/io.js';
-import { clamp, flip } from '../../ixfx/numbers.js';
-import { defaultErrorHandler } from '../../ixfx/dom.js';
+import { movingAverage } from 'ixfx/numbers.js';
+import { AudioAnalysers } from 'ixfx/io.js';
+import { clamp, flip } from 'ixfx/numbers.js';
+import { defaultErrorHandler } from 'ixfx/dom.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

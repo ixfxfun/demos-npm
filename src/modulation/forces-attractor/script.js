@@ -1,7 +1,7 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Forces } from '../../ixfx/modulation.js';
-import { Points } from '../../ixfx/geometry.js';
-import { repeatSync } from '../../ixfx/flow.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { Forces } from 'ixfx/modulation.js';
+import { Points } from 'ixfx/geometry.js';
+import { repeatSync } from 'ixfx/flow.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -52,7 +52,11 @@ const update = () => {
   saveState({ attractees: attracteesAltered });
 };
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ */
+const use = (state) => {
   const { canvas } = settings;
   const { ctx, width, height } = canvas;
 
@@ -76,7 +80,7 @@ const use = () => {
 function setup() {
   const loop = () => {
     update();
-    use();
+    use(state);
     window.requestAnimationFrame(loop);
   };
   loop();
@@ -98,13 +102,14 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
 
 /**

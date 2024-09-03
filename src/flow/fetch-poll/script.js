@@ -8,7 +8,7 @@
  * demonstrated in `fetch-outdated` where data is only fetched if we 
  * haven't gotten it yet, or if it's older than some age. 
  */
-import { continuously } from "../../ixfx/flow.js";
+import { continuously } from "ixfx/flow.js";
 
 // Define settings
 const settings = Object.freeze({

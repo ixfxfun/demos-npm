@@ -1,6 +1,6 @@
-import { delay } from '../../../ixfx/flow.js';
-import { Espruino } from '../../../ixfx/io.js';
-import {setCssDisplay} from './util.js';
+import { delay } from 'ixfx/flow.js';
+import { Espruino } from 'ixfx/io.js';
+import { setCssDisplay } from './util.js';
 
 const scripts = Object.freeze({
   poll: `setInterval(()=>Bluetooth.println(E.getTemperature()), 1000);NRF.on('disconnect',()=>reset());`
@@ -22,7 +22,7 @@ const use = () => {
   const { temp, pointer } = state;
   const lblDataElement = /** @type HTMLElement */(document.querySelector(`#lblData`));
   if (!lblDataElement) return;
-  
+
   lblDataElement.textContent = Number.isNaN(temp) ? `?°` : `${temp.toFixed(0)}°`;
 
   // Generate some text-shadow CSS for added 🎉
@@ -38,7 +38,7 @@ const setup = () => {
   const { script } = settings;
   const onConnected = (connected) => {
     setCssDisplay(`preamble`, connected ? `none` : `block`);
-    setCssDisplay(`lblData`,  connected ? `contents` : `none`);
+    setCssDisplay(`lblData`, connected ? `contents` : `none`);
   };
 
   document.addEventListener(`pointermove`, event => {
@@ -95,7 +95,7 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

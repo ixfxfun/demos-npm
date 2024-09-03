@@ -1,5 +1,5 @@
-import * as Flow from '../../ixfx/flow.js';
-import * as Mod from '../../ixfx/modulation.js';
+import * as Flow from 'ixfx/flow.js';
+import * as Mod from 'ixfx/modulation.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -32,8 +32,12 @@ const update = () => {
   saveState({ elem });
 };
 
-// Update visuals
-const use = () => {
+/**
+ * Update visuals
+ * @param {State} state 
+ * @returns 
+ */
+const use = (state) => {
   const { elem } = state;
 
   const thingElement = document.querySelector(`#thing`);
@@ -57,18 +61,19 @@ function setup() {
 
   Flow.continuously(() => {
     update();
-    use();
+    use(state);
   }, 100).start();
 };
 setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

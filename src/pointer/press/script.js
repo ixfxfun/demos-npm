@@ -23,14 +23,15 @@ let state = Object.freeze({
 
 /**
  * Use data in `state`
+ * @param {State} state
  */
-const use = () => {};
+const use = (state) => {};
 
 /**
  * Update `state`
  */
 const update = () => {
-  use();
+  use(state);
   window.requestAnimationFrame(update);
 };
 
@@ -52,7 +53,7 @@ const setup = () => {
 
   // Update thing at a fixed rate
   setInterval(() => {
-    saveState({ 
+    saveState({
       thing: Thing.update(state.thing, state)
     });
 
@@ -71,10 +72,11 @@ setup();
  * Save state
  * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
 

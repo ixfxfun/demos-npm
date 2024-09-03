@@ -1,5 +1,4 @@
 import * as Things from './thing.js';
-import * as Util from './util.js';
 
 // Settings for sketch
 const settings = Object.freeze({
@@ -24,8 +23,9 @@ let state = Object.freeze({
 
 /**
  * Makes use of the data contained in `state`
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   // 1. Use the state some how
 };
 
@@ -34,7 +34,7 @@ const update = () => {
   // 2. Sanity check
   // 3. Save state
   // 4. Use state
-  use();
+  use(saveState({}));
 
   // 5. Call itself
   window.requestAnimationFrame(update);
@@ -43,7 +43,7 @@ const update = () => {
 function setup() {
   // Create things
   const things = [];
-  for (let index=1;index<=settings.spawnThings;index++) {
+  for (let index = 1; index <= settings.spawnThings; index++) {
     things.push(Things.create(index));
   }
 
@@ -77,11 +77,12 @@ setup();
  * Save state
  * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
 
 /**
@@ -98,7 +99,7 @@ function updateThingInState(thingId, updatedThing) {
   const things = state.things.map(thing => {
     // Is it the thing we want to change?
     if (thing.id !== thingId) return thing; // nup
-    
+
     // Return mutated thing
     completedThing = {
       ...thing,
@@ -108,6 +109,6 @@ function updateThingInState(thingId, updatedThing) {
   });
 
   // Save changed things
-  saveState({things});
+  saveState({ things });
   return completedThing;
 }

@@ -1,3 +1,4 @@
+import { clamp } from "ixfx/numbers.js";
 /**
  * @typedef {{
  *  x: number,
@@ -6,6 +7,7 @@
  *  mass: number
  * }} Thing
  */
+
 
 
 /**
@@ -19,3 +21,24 @@ export function create() {
     scale: Math.random() * 0.5
   };
 }
+
+/**
+ * Updates the thing
+ * @param {Thing} thing 
+ * @param {import("./script.js").State} state
+ */
+export const update = (thing, state) => {
+  const { distanceDiff } = state;
+  const { scale, mass } = thing;
+
+  let computedScale = scale * (0.9999);
+
+  computedScale = computedScale + (distanceDiff * mass * 0.1);
+  computedScale = clamp(computedScale, 0.01);
+
+  return {
+    ...thing,
+    scale: computedScale
+  };
+
+};

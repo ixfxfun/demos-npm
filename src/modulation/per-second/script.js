@@ -1,17 +1,26 @@
-
-import { clamp } from '../../ixfx/numbers.js';
-import { Sources } from '../../ixfx/modulation.js';
+import { clamp } from 'ixfx/numbers.js';
+import { Sources } from 'ixfx/modulation.js';
 
 const settings = Object.freeze({
   ageMod: Sources.perSecond(0.1)
 });
 
+/**
+ * @typedef {Readonly<{
+ *  age:number
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
-  /** @type number */
   age: 0
 });
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ */
+const use = (state) => {
   const { age } = state;
 
   const element = document.querySelector(`#ageValue`);
@@ -26,11 +35,10 @@ const update = () => {
 
   age += ageMod();
 
-  saveState({
+  // Save & use state
+  use(saveState({
     age: clamp(age)
-  });
-
-  use();
+  }));
 };
 
 function setup() {
@@ -46,12 +54,13 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
 

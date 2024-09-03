@@ -1,6 +1,5 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Forces } from '../../ixfx/modulation.js';
-import { Points } from '../../ixfx/geometry.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { Forces } from 'ixfx/modulation.js';
 
 const settings = Object.freeze({
   pinnedAt: { x: 0.5, y: 0.2 },
@@ -11,14 +10,25 @@ const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
 });
 
+/**
+ * @typedef {Readonly<{
+ * thing: {
+ *  position: import('ixfx/geometry.js').Point
+ *  mass: number
+ * },
+ * pause:boolean
+ * pendulumForce: Forces.ForceFn,
+ * springForce: Forces.ForceFn
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
   thing: {
     position: { x: 1, y: 0.5 },
     mass: settings.mass
   },
-  /** @type boolean */
   pause: false,
-
   // FORCES
   pendulumForce: Forces.pendulumForce(settings.pinnedAt),
   springForce: Forces.springForce(settings.pinnedAt, 0.2),
@@ -36,7 +46,11 @@ const update = () => {
   }
 };
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ */
+const use = (state) => {
   const { lineWidth, thingRadius, pinRadius, canvas } = settings;
   const { thing } = state;
   const { ctx, width, height } = canvas;
@@ -71,7 +85,7 @@ const use = () => {
 function setup() {
   const loop = () => {
     update();
-    use();
+    use(state);
     window.requestAnimationFrame(loop);
   };
   loop();

@@ -1,5 +1,5 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Points, Rects } from '../../ixfx/geometry.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { Points, Rects } from 'ixfx/geometry.js';
 
 /**
  * These are the fixed settings for things

@@ -1,4 +1,4 @@
-import * as Dom from '../../ixfx/dom.js';
+import * as Dom from 'ixfx/dom.js';
 
 const settings = Object.freeze({
   log: Dom.log(`#log`, {

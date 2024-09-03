@@ -1,8 +1,13 @@
-import * as Dom from '../../ixfx/dom.js';
+import * as Dom from 'ixfx/dom.js';
 
 const settings = Object.freeze({
   updateRateMs: 1000,
-  dataDisplay: new Dom.DataDisplay()
+  dataDisplay: new Dom.DataDisplay({
+    numbers: {
+      leftPadding: 2,
+      precision: 2
+    }
+  })
 });
 
 

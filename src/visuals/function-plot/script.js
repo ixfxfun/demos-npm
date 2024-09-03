@@ -1,11 +1,13 @@
-
-import { jitter } from '../../ixfx/modulation.js';
-import { Bipolar } from '../../ixfx/numbers.js';
+import { jitter } from 'ixfx/modulation.js';
+import { Bipolar } from 'ixfx/numbers.js';
 import * as Plot from './plot.js';
 
+/**
+ * @typedef {Readonly<{}>} State
+ */
 
 const update = () => {
-  use();
+  use({});
   window.requestAnimationFrame(update);
 
 };
@@ -65,14 +67,10 @@ const powerCurve = (x, a, b) => {
 // Plot functions are called with a value from 0..1
 // and are expected to output a value of -1 to 1.
 const draw = () => {
-
   //Plot.plot(sine, { strokeStyle: `lightblue` });
   //Plot.plot(x => sincImpulse(x, 20), { strokeStyle: `orange` });
 
-
   Plot.plot(x => powerCurve(x, 1.1, 2), { strokeStyle: `orange` });
-
-
 
   // Random:
   //Plot.plot(x => Math.random() * x, { strokeStyle: `silver` });
@@ -85,10 +83,13 @@ const draw = () => {
 };
 
 
-function use() {
+/**
+ * Use state
+ * @param {State} state 
+ */
+function use(state) {
   Plot.newFrame();
   draw();
-
 };
 
 

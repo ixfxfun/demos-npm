@@ -2,22 +2,28 @@
  * An extention of `velocity` with arbitrary number of things
  * being moved.
  */
-import { Points } from '../../ixfx/geometry.js';
-import { Forces } from '../../ixfx/modulation.js';
-import { continuously } from '../../ixfx/flow.js';
-import { point as pointTracker } from '../../ixfx/trackers.js';
-
+import { Points } from 'ixfx/geometry.js';
+import { Forces } from 'ixfx/modulation.js';
+import { continuously } from 'ixfx/flow.js';
+import { PointTracker, point as pointTracker } from 'ixfx/trackers.js';
 import * as Util from './util.js';
 import * as Thing from './thing.js';
 
 // Define settings
 const settings = Object.freeze({
   thingsCount: 5,
-
 });
 
+/**
+ * @typedef {Readonly<{
+ *  things: Thing.Thing[]
+ *  pointerMovement: PointTracker
+ *  window: import('ixfx/geometry.js').Rect
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
-  /** @type {import('./thing.js').Thing[]} */
   things: [], // things we'll be moving
   // Track the pointer movementX,movementY
   pointerMovement: pointTracker(),
@@ -112,11 +118,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

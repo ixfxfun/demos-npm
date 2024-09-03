@@ -1,6 +1,4 @@
-
-import { Envelopes } from '../../ixfx/modulation.js';
-import { continuously } from '../../ixfx/flow.js';
+import { Envelopes } from 'ixfx/modulation.js';
 
 const settings = Object.freeze({
   sampleRateMs: 5,
@@ -33,19 +31,17 @@ const update = () => {
   // Set value to 0 if envelope has not been started
   if (Number.isNaN(envelopeValue)) envelopeValue = 0;
 
-  saveState({
+  use(saveState({
     envelopeValue
-  });
-
-  use();
-
+  }));
   window.requestAnimationFrame(update);
 };
 
 /**
  * Apply the state to visual properties etc...
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   const { envelopeValue } = state;
   console.log(envelopeValue);
 };
@@ -67,4 +63,5 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }

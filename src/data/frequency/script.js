@@ -1,4 +1,4 @@
-import { frequency } from '../../ixfx/trackers.js';
+import { frequency } from 'ixfx/trackers.js';
 
 let state = Object.freeze({
   freq: frequency()

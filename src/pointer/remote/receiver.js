@@ -1,7 +1,5 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-// import { inlineConsole } from "../../ixfx/dom.js";
-// inlineConsole();
 
 const settings = Object.freeze({
   remote: new Remote({
@@ -14,7 +12,7 @@ const setup = () => {
   const { remote } = settings;
   remote.onData = (d) => {
     console.log(d);
-    setText(`remote-data`,JSON.stringify(d));
+    setText(`remote-data`, JSON.stringify(d));
   };
 };
 setup();

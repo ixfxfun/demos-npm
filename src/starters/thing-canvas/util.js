@@ -1,7 +1,4 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Points } from '../../ixfx/geometry.js';
-
-
+import { CanvasHelper } from 'ixfx/dom.js';
 
 /**
  * Draws a circle with optional text

@@ -1,5 +1,5 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Circles } from '../../ixfx/geometry.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { Circles } from 'ixfx/geometry.js';
 import * as Util from './util.js';
 
 // Define settings
@@ -15,13 +15,14 @@ const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
 });
 
-/** @typedef {{ 
- * distance: number
- * }} State */
+/** 
+ * @typedef {Readonly<{ 
+ *  distance: number
+ * }>} State 
+ **/
 
 /** @type State */
 let state = Object.freeze({
-
   distance: 0
 });
 
@@ -29,7 +30,11 @@ const update = () => {
   // Do nothing
 };
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ */
+const use = (state) => {
   const { hue, saturation, circle, canvas } = settings;
   const { distance } = state;
   const { ctx, width, height } = canvas;
@@ -85,7 +90,7 @@ const setup = () => {
 
   const loop = () => {
     update();
-    use();
+    use(state);
     window.requestAnimationFrame(loop);
   };
   loop();
@@ -101,5 +106,6 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 

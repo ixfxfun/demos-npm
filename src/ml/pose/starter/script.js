@@ -1,4 +1,4 @@
-import * as Dom from '../../../ixfx/dom.js';
+import * as Dom from 'ixfx/dom.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Util from './util.js';
 

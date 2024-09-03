@@ -1,5 +1,5 @@
-import { Easings } from '../../ixfx/modulation.js';
-import { Flow, Data } from '../../ixfx/bundle.js';
+import { Easings } from 'ixfx/modulation.js';
+import { Data } from 'ixfx/bundle.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -11,6 +11,14 @@ const settings = Object.freeze({
   thingElement: /** @type HTMLElement */(document.querySelector(`#thing`)),
 });
 
+
+/**
+ * @typedef {Readonly<{
+ *  easing:ComputeFn
+ * }>} State
+ */
+
+/** @type State */
 let state = {
   easing: () => 0
 };
@@ -41,9 +49,7 @@ function use(computed) {
 
   thingElement.textContent = Util.percentage(easing);
   Util.translateElement(thingElement, easing, 0);
-
 };
-
 
 // Called on pointerup or keyup. 
 // Resets the easing function
@@ -73,11 +79,15 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
+/**
+ * @typedef {() => number} ComputeFn
+ */

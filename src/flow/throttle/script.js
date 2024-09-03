@@ -1,4 +1,4 @@
-import { throttle } from '../../ixfx/flow.js';
+import { throttle } from 'ixfx/flow.js';
 
 const settings = Object.freeze({
   log: document.querySelector(`#log`),
@@ -8,7 +8,7 @@ const settings = Object.freeze({
 
 const onMove = (elapsedMs, ...arguments_) => {
   const { log } = settings;
-  
+
   //console.log(`Elapsed: ${elapsedMs}`);
   //console.log(args);
 

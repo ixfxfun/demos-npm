@@ -1,5 +1,5 @@
-import { TaskQueueMutable, sleep } from "../../ixfx/flow.js";
-import { log } from '../../ixfx/dom.js';
+import { TaskQueueMutable, sleep } from "ixfx/flow.js";
+import { log } from 'ixfx/dom.js';
 
 const settings = Object.freeze({
   processIntervalMs: 1000,

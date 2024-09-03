@@ -1,13 +1,23 @@
-import { Points } from '../../ixfx/geometry.js';
-import { Forces } from '../../ixfx/modulation.js';
-import { continuously } from '../../ixfx/flow.js';
-import { point as pointTracker } from '../../ixfx/trackers.js';
+import { Points } from 'ixfx/geometry.js';
+import { Forces } from 'ixfx/modulation.js';
+import { continuously } from 'ixfx/flow.js';
+import { PointTracker, point as pointTracker } from 'ixfx/trackers.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
-  thingEl: document.querySelector(`#thing`)
+  thingEl: /** @type HTMLElement */(document.querySelector(`#thing`))
 });
 
+/**
+ * @typedef {Readonly<{
+ *  position: import('ixfx/geometry.js').Point,
+ *  velocity: import('ixfx/geometry.js').Point
+ *  pointerMovement: PointTracker
+ *  window: import('ixfx/geometry.js').Rect
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
   // Assign random position (normalised 0..1 scale)
   position: Points.random(),
@@ -42,8 +52,9 @@ const update = () => {
 
 /**
  * Position thing based on state
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   const { thingEl } = settings;
   const { position, window } = state;
 
@@ -56,7 +67,7 @@ const use = () => {
 function setup() {
   continuously(() => {
     update();
-    use();
+    use(state);
   }).start();
 
   // Update our tracking of window size if there's a resize
@@ -108,11 +119,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

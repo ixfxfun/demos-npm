@@ -1,7 +1,6 @@
-import { clamp } from '../../ixfx/numbers.js';
+import { clamp } from 'ixfx/numbers.js';
 import * as Things from './thing.js';
 import * as Util from './util.js';
-
 
 // Settings for sketch
 const settings = Object.freeze({
@@ -13,9 +12,9 @@ const settings = Object.freeze({
 
 /** 
  * @typedef {Readonly<{
- * hue: number
- * movement: number
- * thing: Things.Thing
+ *  hue: number
+ *  movement: number
+ *  thing: Things.Thing
  * }>} State
  */
 
@@ -28,8 +27,9 @@ let state = Object.freeze({
 
 /**
  * Makes use of the data contained in `state`
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   const { hue } = state;
 
   // 1. Eg. use the ambient state
@@ -50,13 +50,10 @@ const update = () => {
   hue = hue % 360; // 0..360 scale
   movement = clamp(movement); // 0..1 scale
 
-  // 3. Save state
-  saveState({ hue, movement });
+  // 3. Save & use state
+  use(saveState({ hue, movement }));
 
-  // 4. Use state
-  use();
-
-  // 5. Call itself
+  // 4. Call itself
   window.requestAnimationFrame(update);
 };
 
@@ -101,5 +98,6 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 

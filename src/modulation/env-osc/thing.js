@@ -1,8 +1,6 @@
-import { Points } from '../../ixfx/geometry.js';
-import { Data, Flow, Modulation, Random, Numbers } from '../../ixfx/bundle.js';
-import { Envelopes } from '../../ixfx/modulation.js';
+import { Data, Modulation, Random } from 'ixfx/bundle.js';
 import * as Util from './util.js';
-import { Bipolar } from '../../ixfx/numbers.js';
+import { Bipolar } from 'ixfx/numbers.js';
 
 const settings = Object.freeze({
   minimumDistance: 0.1

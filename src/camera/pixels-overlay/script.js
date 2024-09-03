@@ -1,9 +1,9 @@
-import { Camera } from '../../ixfx/io.js';
-import { Video } from '../../ixfx/visual.js';
-import * as Trackers from '../../ixfx/trackers.js';
-import { defaultErrorHandler } from '../../ixfx/dom.js';
+import { Camera } from 'ixfx/io.js';
+import { Video } from 'ixfx/visual.js';
+import * as Trackers from 'ixfx/trackers.js';
+import { defaultErrorHandler } from 'ixfx/dom.js';
 import * as Util from './util.js';
-import { movingAverage } from '../../ixfx/numbers.js';
+import { movingAverage } from 'ixfx/numbers.js';
 
 const settings = Object.freeze({
   // Difference in grayscale value to count as a changed pixel

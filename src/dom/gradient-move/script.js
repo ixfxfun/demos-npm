@@ -6,7 +6,7 @@
  *  CSS linear gradients, 
  *  CSS background clipping
  */
-import { Points } from '../../ixfx/geometry.js';
+import { Points } from 'ixfx/geometry.js';
 
 /**
  * Define our 'thing' (this is optional) which consists of 
@@ -19,8 +19,8 @@ const settings = Object.freeze({
   gradient: [
     // Red at 0%, blue at 100%
     // ..more colours can be added with appropriate stop points
-    [ 0, `red` ],
-    [ 1, `blue` ]
+    [0, `red`],
+    [1, `blue`]
   ],
   /** @type {HTMLElement|null} */
   textEl: document.querySelector(`#text`),
@@ -70,7 +70,7 @@ const use = () => {
   setGradient();
 };
 // Setup
-function setup () {
+function setup() {
   document.addEventListener(`pointermove`, event => {
     // Transform screen coordinate to relative coordinate
     const pointerRelative = Points.normaliseByRect(
@@ -79,7 +79,7 @@ function setup () {
       window.innerHeight);
 
     // Calculate angle from center
-    const angleRadians = Points.angle(pointerRelative, { x: 0.5, y: 0.5 });
+    const angleRadians = Points.angleRadian(pointerRelative, { x: 0.5, y: 0.5 });
 
     saveState({
       pointer: pointerRelative,
@@ -98,7 +98,7 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

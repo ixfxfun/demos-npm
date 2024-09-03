@@ -1,5 +1,6 @@
-import { Easings } from '../../ixfx/modulation.js';
-import * as Data from '../../ixfx/data.js';
+import { Easings } from 'ixfx/modulation.js';
+import * as Data from 'ixfx/data.js';
+import * as Util from './util.js';
 
 const settings = Object.freeze({
   // Use a manual 'Easer' so we can advanced it when we want 
@@ -10,7 +11,7 @@ const settings = Object.freeze({
 
 /**
  * @typedef {Readonly<{
- * value:number
+ *  value:number
  * }>} State
  */
 
@@ -54,7 +55,7 @@ const use = (computed) => {
   const thingElementBounds = thingElement.getBoundingClientRect();
   const width = document.body.clientWidth - thingElementBounds.width;
 
-  thingElement.textContent = percentage(value);
+  thingElement.textContent = Util.percentage(value);
 
   // Move element
   thingElement.style.transform = `translate(${value * width}px, 0px)`;
@@ -78,15 +79,6 @@ function setup() {
 setup();
 
 /**
- * Make a human-friendly percentage
- * @param {number} v 
- * @returns 
- */
-function percentage(v) {
-  return Math.floor(v * 100) + `%`;
-}
-
-/**
  * Update state
  * @param {Partial<state>} s 
  */
@@ -95,4 +87,5 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }

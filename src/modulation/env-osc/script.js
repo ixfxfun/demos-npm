@@ -1,5 +1,5 @@
-import { Envelopes } from '../../ixfx/modulation.js';
-import { count } from '../../ixfx/numbers.js';
+import { Envelopes } from 'ixfx/modulation.js';
+import { count } from 'ixfx/numbers.js';
 import * as Things from './thing.js';
 
 const settings = Object.freeze({
@@ -26,7 +26,11 @@ let state = {
   mod: 0
 };
 
-const use = () => {
+/**
+ * Use state
+ * @param {SketchState} state 
+ */
+const use = (state) => {
   for (const t of state.things) {
     Things.use(t);
   }
@@ -51,13 +55,12 @@ const update = async () => {
   // 2. Wait for all these promises to resolve
   const changedThings = await Promise.all(promises);
 
-  // 3. Save final results
+  // 3. Save & use final results
   saveState({
     things: changedThings,
     mod: envelopeValue
   });
-
-  use();
+  use(state);
   window.requestAnimationFrame(update);
 };
 
@@ -78,7 +81,6 @@ const setup = () => {
 
   // Release envelope on pointerup
   window.addEventListener(`pointerup`, event => {
-    console.log(`pointerup`);
     const { envelope } = settings;
     envelope.release();
   });
@@ -100,5 +102,6 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return s;
 }
 

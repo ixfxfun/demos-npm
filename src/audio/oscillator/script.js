@@ -1,4 +1,4 @@
-import { scaleClamped, scalePercent } from '../../ixfx/numbers.js';
+import { scaleClamped, scalePercent } from 'ixfx/numbers.js';
 import * as Osc from './oscillator.js';
 
 const settings = Object.freeze({

@@ -1,6 +1,6 @@
-import { Points } from '../../../ixfx/geometry.js';
-import { Bipolar, interpolate } from '../../../ixfx/numbers.js';
-import * as Dom from '../../../ixfx/dom.js';
+import { Points } from 'ixfx/geometry.js';
+import { Bipolar, interpolate } from 'ixfx/numbers.js';
+import * as Dom from 'ixfx/dom.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 import * as Util from './util.js';
@@ -108,8 +108,9 @@ const update = () => {
  * @param {Poses.PoseTracker} pose 
  */
 const computeShoulderAngle = (pose) => {
-  const left = pose.landmark(`left_shoulder`);
-  const right = pose.landmark(`right_shoulder`);
+  const left = pose.landmarkValue(`left_shoulder`);
+  const right = pose.landmarkValue(`right_shoulder`);
+  if (!left || !right) return Number.NaN;
   return Points.angleRadian(left, right);
 };
 

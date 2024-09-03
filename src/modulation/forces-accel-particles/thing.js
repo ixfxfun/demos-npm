@@ -1,12 +1,14 @@
-import { Points } from '../../ixfx/geometry.js';
-import { Forces } from '../../ixfx/modulation.js';
-import * as Random from '../../ixfx/random.js';
+import { Points } from 'ixfx/geometry.js';
+import { Forces } from 'ixfx/modulation.js';
+import * as Random from 'ixfx/random.js';
+
 /** 
- * @typedef Thing
- * @property {Points.Point} position
- * @property {Points.Point} velocity
- * @property {number} mass
- * @property {string} id 
+ * @typedef {Readonly<{
+ *  position: Points.Point
+ *  velocity: Points.Point
+ *  mass: number
+ *  id: string
+ * }>} Thing
  */
 
 const settings = Object.freeze({
@@ -26,7 +28,7 @@ export const update = (t) => {
   // Wrap point to be between 0,0 and 1,1
   // This means if the new position is outside the bounds of the screen
   // it will carry over to other side
-  const posAfterWrap = Points.wrap(changedThing.position ?? { x: 0.5, y: 0.5 } );
+  const posAfterWrap = Points.wrap(changedThing.position ?? { x: 0.5, y: 0.5 });
 
   // Return new thing
   return {
@@ -72,7 +74,7 @@ export const getOrCreateElement = (t) => {
     element.id = id;
     element.style.width = Math.round(t.mass * thingSizeMax) + `px`;
     element.style.height = Math.round(t.mass * thingSizeMax) + `px`;
-    
+
     document.body.append(element);
   }
   return element;

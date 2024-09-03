@@ -1,4 +1,4 @@
-import { Serial } from '../../../ixfx/io.js';
+import { Serial } from 'ixfx/io.js';
 
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true, eol: `\n` }),
@@ -75,7 +75,7 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

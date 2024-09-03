@@ -1,8 +1,7 @@
-import { Arrays } from '../../../ixfx/data.js';
-import { Points } from '../../../ixfx/geometry.js';
+import { Arrays } from 'ixfx/data.js';
+import { Points } from 'ixfx/geometry.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
-import * as Util from './util.js';
 
 const pc = new PosesConsumer({ maxAgeMs: 1000 });
 

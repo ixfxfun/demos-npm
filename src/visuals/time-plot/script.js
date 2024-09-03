@@ -1,5 +1,5 @@
 
-import { jitter } from '../../ixfx/modulation.js';
+import { jitter } from 'ixfx/modulation.js';
 import * as Plot from './plot.js';
 
 /**
@@ -16,10 +16,12 @@ let state = Object.freeze({
 const update = () => {
   let { ticks } = state;
   ticks += 0.01;
-  saveState({
+
+  // Save and use state
+  use(saveState({
     ticks
-  });
-  use();
+  }));
+
   window.requestAnimationFrame(update);
 
 };
@@ -81,8 +83,11 @@ function demoSines() {
   });
 }
 
-
-function use() {
+/**
+ * Use state
+ * @param {State} state 
+ */
+function use(state) {
   Plot.newFrame();
   draw();
 
@@ -103,4 +108,5 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }

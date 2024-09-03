@@ -1,6 +1,6 @@
-import { Points } from '../../ixfx/geometry.js';
-import { interpolate, clamp } from '../../ixfx/numbers.js';
-import { CanvasHelper } from '../../ixfx/dom.js';
+import { Points } from 'ixfx/geometry.js';
+import { interpolate, clamp } from 'ixfx/numbers.js';
+import { CanvasHelper } from 'ixfx/dom.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

@@ -1,5 +1,6 @@
-import { Flow, Data, Modulation } from '../../ixfx/bundle.js';
-import { Points } from '../../ixfx/geometry.js';
+import * as Data from 'ixfx/data.js';
+import * as Modulation from 'ixfx/modulation.js';
+import { Points } from 'ixfx/geometry.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -16,6 +17,21 @@ const settings = Object.freeze({
   thingElement: /** @type HTMLElement */ (document.querySelector(`#thing`))
 });
 
+/**
+ * @typedef {()=>number} ComputeFn
+ */
+
+/**
+ * @typedef {Readonly<{
+ *  spring:ComputeFn
+ *  to: import('ixfx/geometry.js').Point
+ *  from: import('ixfx/geometry.js').Point
+ *  currentPos: import('ixfx/geometry.js').Point
+ *  isDone:boolean 
+ * }>} RawState
+ */
+
+/** @type RawState */
 let rawState = {
   // Initially spring value will compute as 0
   spring: () => 0,
@@ -40,20 +56,22 @@ const update = async () => {
   // spring (0..1) as the %
   const pos = Points.interpolate(spring, from, to, true);
 
-  saveState({
+  // Save & trigger a visual refresh
+  use(saveState({
     isDone: spring === 1,
     currentPos: pos
-  });
-
-  // Trigger a visual refresh
-  use();
+  }));
 
   // Loop
   window.requestAnimationFrame(update);
 };
 
-
-const use = () => {
+/**
+ * Use state
+ * @param {RawState} state 
+ * @returns 
+ */
+const use = (state) => {
   const { thingElement } = settings;
   const { isDone, currentPos } = rawState;
 
@@ -84,11 +102,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<rawState>} s 
+ * @param {Partial<RawState>} s 
  */
 function saveState(s) {
   rawState = Object.freeze({
     ...rawState,
     ...s
   });
+  return rawState;
 }

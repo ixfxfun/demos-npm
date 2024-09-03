@@ -1,11 +1,16 @@
-export const moveElement = (element, pos) => {
+/**
+ * Move an element by its middle to an relative point
+ * @param {HTMLElement|null} element 
+ * @param {import('ixfx/geometry.js').Point} relativePosition 
+ */
+export const moveElement = (element, relativePosition) => {
   if (!element) return;
 
   const halfSize = element.getBoundingClientRect().width / 2;
 
   // Move element
-  element.style.left = (pos.x * window.innerWidth) - halfSize + `px`;
-  element.style.top = (pos.y * window.innerHeight) - halfSize + `px`;
+  element.style.left = (relativePosition.x * window.innerWidth) - halfSize + `px`;
+  element.style.top = (relativePosition.y * window.innerHeight) - halfSize + `px`;
 };
 
 /**

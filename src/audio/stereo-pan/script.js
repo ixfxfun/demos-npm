@@ -1,6 +1,6 @@
-import { scaleClamped } from '../../ixfx/numbers.js';
-import { Oscillators } from '../../ixfx/modulation.js';
-import { repeat } from '../../ixfx/flow.js';
+import { scaleClamped } from 'ixfx/numbers.js';
+import { Oscillators } from 'ixfx/modulation.js';
+import { repeat } from 'ixfx/flow.js';
 import { Audio } from '../audio.js';
 
 const settings = Object.freeze({

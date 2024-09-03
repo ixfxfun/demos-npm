@@ -1,6 +1,6 @@
 /**
  * Function to set `innerHTML` for an element
- * @param {*} query 
+ * @param {string} query 
  * @returns 
  */
 export function htmlContent(query) {

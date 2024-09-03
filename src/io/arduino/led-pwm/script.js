@@ -1,7 +1,7 @@
 /**
  * Sends JSON to a microcontroller
  */
-import { Serial } from '../../../ixfx/io.js';
+import { Serial } from 'ixfx/io.js';
 
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true })
@@ -72,7 +72,7 @@ setup();
  * Save state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

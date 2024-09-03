@@ -1,5 +1,5 @@
-import { Espruino } from '../../../ixfx/io.js';
-import {setClassAll} from './util.js';
+import { Espruino } from 'ixfx/io.js';
+import { setClassAll } from './util.js';
 
 // No settings needed for this sketch
 const settings = Object.freeze({
@@ -22,7 +22,7 @@ const trigger = (triggerWhat) => {
   const { espruino } = state;
 
   if (!triggerWhat) throw new Error(`triggerWhat parameter missing`);
-  
+
   // Check we initialised OK
   if (!espruino) {
     console.warn(`Espruino not connected?`);
@@ -111,7 +111,7 @@ function onEspruinoConnected(connected) {
  * Save state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

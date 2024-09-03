@@ -1,7 +1,5 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-// import { inlineConsole } from "../../ixfx/dom.js";
-// inlineConsole();
 
 const settings = Object.freeze({
   remote: new Remote({
@@ -21,20 +19,20 @@ const onPointerMove = (event) => {
     y: event.y / window.innerHeight,
     pointerId: event.pointerId,
     movementX: event.movementX / window.innerWidth,
-    movementY: event.movementY /  window.innerHeight,
+    movementY: event.movementY / window.innerHeight,
     pressure: event.pressure
   };
   remote.broadcast(d);
 };
 
-const setup = () => {  
+const setup = () => {
   // Listen for pointermove events
   document.addEventListener(`pointermove`, onPointerMove);
-  
+
   // Prevent zoom gestures
   document.addEventListener(`wheel`, event => {
     event.preventDefault();
-  }, { passive:false });
+  }, { passive: false });
 
 };
 setup();

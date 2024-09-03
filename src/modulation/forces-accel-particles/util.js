@@ -1,7 +1,12 @@
-import { Points } from '../../ixfx/geometry.js';
+import { Points } from 'ixfx/geometry.js';
 
+/**
+ * Move an element by its middle to an relative point
+ * @param {HTMLElement} element 
+ * @param {import('ixfx/geometry.js').Point} relativePosition 
+ */
 export const moveElement = (element, relativePosition) => {
-  
+
   // Position is given in relative coordinates, need to map to viewport
   const absPos = Points.multiply(relativePosition, window.innerWidth, window.innerHeight);
 

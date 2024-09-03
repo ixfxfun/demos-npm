@@ -1,7 +1,7 @@
 
-import { delay } from '../../../ixfx/flow.js';
-import { Espruino } from '../../../ixfx/io.js';
-import {setCssDisplay} from './util.js';
+import { delay } from 'ixfx/flow.js';
+import { Espruino } from 'ixfx/io.js';
+import { setCssDisplay } from './util.js';
 
 const scripts = Object.freeze({
   // Define a function that sends back data
@@ -33,11 +33,11 @@ let state = Object.freeze({
 
 const use = () => {
   const { data } = state;
-  
+
   const dataElement = /** @type HTMLElement */(document.querySelector(`#data`));
   if (!dataElement) return;
 
-  const dataString = data.map((v,index) => `<div>${index}. ${v}</div>`);
+  const dataString = data.map((v, index) => `<div>${index}. ${v}</div>`);
   dataElement.innerHTML = dataString.join(`\n`);
 };
 
@@ -48,7 +48,7 @@ const use = () => {
  */
 const onData = (event) => {
   // Remove line breaks etc
-  const data = event.data.trim(); 
+  const data = event.data.trim();
 
   // Don't even try to parse if it doesn't
   // look like JSON
@@ -57,7 +57,7 @@ const onData = (event) => {
 
   try {
     const d = JSON.parse(data);
-   
+
     // Assuming its an array of numbers
     saveState({ data: d });
     use();
@@ -71,7 +71,7 @@ const onData = (event) => {
  * @param {*} connected 
  */
 const onConnected = (connected) => {
-  setCssDisplay(`preamble`,  connected ? `none` : `block`);
+  setCssDisplay(`preamble`, connected ? `none` : `block`);
   setCssDisplay(`data`, connected ? `block` : `none`);
   setCssDisplay(`controls`, connected ? `block` : `none`);
 };
@@ -123,7 +123,7 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

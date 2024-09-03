@@ -1,10 +1,10 @@
-import { StateMachine } from '../../ixfx/flow.js';
+import { StateMachine } from 'ixfx/flow.js';
 
 // Init settings
 const settings = Object.freeze({
   transitions: {
     sleep: `awake`,
-    awake: [ `sleep`, `excited`, `angry` ],
+    awake: [`sleep`, `excited`, `angry`],
     excited: `awake`,
     angry: `awake`
   },
@@ -17,7 +17,7 @@ let state = Object.freeze({
 });
 
 const use = () => {
-  const { stateEl, possibleStatesEl } =settings;
+  const { stateEl, possibleStatesEl } = settings;
   const { sm } = state;
   stateEl.textContent = sm.value;
   possibleStatesEl.textContent = StateMachine.possible(sm).join(`, `);
@@ -60,7 +60,7 @@ setup();
  * Saves state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

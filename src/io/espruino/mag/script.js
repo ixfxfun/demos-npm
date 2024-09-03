@@ -1,5 +1,5 @@
-import { Bipolar } from '../../../ixfx/numbers.js';
-import * as Numbers from '../../../ixfx/numbers.js';
+import { Bipolar } from 'ixfx/numbers.js';
+import * as Numbers from 'ixfx/numbers.js';
 import * as Util from './util.js';
 import * as Html from './html.js';
 import * as EspruinoSnippets from './espruino.js';

@@ -1,5 +1,10 @@
-import { Points } from '../../ixfx/geometry.js';
+import { Points } from 'ixfx/geometry.js';
 
+/**
+ * Move an element by its middle to an absolute point
+ * @param {HTMLElement} element 
+ * @param {import('ixfx/geometry.js').Point} pos 
+ */
 export const moveElement = (element, pos) => {
   // Get size of element to move
   const size = element.getBoundingClientRect();

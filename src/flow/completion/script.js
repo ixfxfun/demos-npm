@@ -1,6 +1,4 @@
-// #region Imports
-import { Elapsed } from '../../ixfx/flow.js';
-// #endregion
+import * as Flow from 'ixfx/flow.js';
 
 const settings = Object.freeze({
   // How much time is considered 100%
@@ -8,35 +6,35 @@ const settings = Object.freeze({
 });
 
 let state = Object.freeze({
-  /** @type Elapsed.Since */
-  completion: Elapsed.infinity()
+  completion: Flow.relative(0)
 });
 
 const use = () => {
-  const { completion }  = state;
+  const { completion } = state;
 
   const indicatorElement = document.querySelector(`#indicator`);
   const indicatorLevelElement = /** @type {HTMLElement} */(indicatorElement?.children[0]);
 
-  let v = completion();
-  
+  let v = completion.elapsed;
+
   // If we've reset, use 0 instead
   if (!Number.isFinite(v)) {
     v = 0;
   }
-  
+
   setDebug(`completion: ${v.toPrecision(2)}`);
 
   // Assign to height
-  indicatorLevelElement.style.height = (v*100)+ `%`; 
+  indicatorLevelElement.style.height = (v * 100) + `%`;
 };
 
 document.querySelector(`#one`)?.addEventListener(`pointerdown`, event => {
   event.stopPropagation();
 
+
   // Set a function to track elapsed time
   saveState({
-    completion: Elapsed.progress(settings.totalMs, { clampValue: true })
+    completion: Flow.relative(settings.totalMs, { clampValue: true })
   });
 });
 
@@ -45,7 +43,7 @@ document.querySelector(`#one`)?.addEventListener(`pointerup`, event => {
 
   // Remove the function
   saveState({
-    completion: Elapsed.infinity()
+    completion: Flow.relative(0)
   });
 });
 
@@ -60,7 +58,7 @@ function setup() {
  * Save state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

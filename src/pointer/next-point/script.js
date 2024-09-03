@@ -1,6 +1,6 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Points, Vectors } from '../../ixfx/geometry.js';
-import { PointTracker, point } from '../../ixfx/trackers.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { Points, Vectors } from 'ixfx/geometry.js';
+import { PointTracker, point } from 'ixfx/trackers.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -59,9 +59,9 @@ const onPointerMove = (event) => {
 /**
  * This is run at animation speed. It
  * should just draw based on whatever is in state
- * @returns 
+ * @param {State} state 
  */
-const use = () => {
+const use = (state) => {
   const { circleHue } = settings;
   const { pointer, prediction } = state;
 
@@ -126,7 +126,7 @@ const setup = () => {
 
   // Animation loop
   const animationLoop = () => {
-    use();
+    use(state);
     window.requestAnimationFrame(animationLoop);
   };
   animationLoop();
@@ -145,6 +145,7 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 
 /** 

@@ -1,5 +1,5 @@
-import { Easings } from '../../ixfx/modulation.js';
-import * as Data from '../../ixfx/data.js';
+import { Easings } from 'ixfx/modulation.js';
+import * as Data from 'ixfx/data.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -13,6 +13,11 @@ const settings = Object.freeze({
 });
 
 
+/**
+ * @typedef {Readonly<{
+ *  x: ComputeFn
+ * }>} State
+ */
 let state = {
   // By default, compute x by just returning 0
   x: () => 0
@@ -91,11 +96,16 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }
+
+/**
+ * @typedef {() => number} ComputeFn
+ */

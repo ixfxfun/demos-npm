@@ -1,5 +1,4 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Points } from '../../ixfx/geometry.js';
+import { CanvasHelper } from 'ixfx/dom.js';
 import * as Things from './thing.js';
 import * as Util from './util.js';
 
@@ -19,9 +18,7 @@ const settings = Object.freeze({
  * }} State
  */
 
-/**
- * @type {State}
- */
+/** @type {State} */
 let state = Object.freeze({
   things: [],
   hue: 0,
@@ -30,8 +27,9 @@ let state = Object.freeze({
 
 /**
  * Makes use of the data contained in `state`
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   const { canvas } = settings;
   const { hue, things } = state;
   const { ctx } = canvas;
@@ -56,13 +54,10 @@ const update = () => {
   // 2. Sanity check
   hue = hue % 360; // 0..360 scale
 
-  // 3. Save state
-  saveState({ hue });
+  // 3. Save & use state
+  use(saveState({ hue }));
 
-  // 4. Use state
-  use();
-
-  // 5. Call itself
+  // 4. Call itself
   window.requestAnimationFrame(update);
 };
 
@@ -116,6 +111,7 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 
 /**

@@ -1,6 +1,5 @@
-
-import { Envelopes } from '../../ixfx/modulation.js';
-import { Data } from '../../ixfx/bundle.js';
+import { Envelopes } from 'ixfx/modulation.js';
+import { Data } from 'ixfx/bundle.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -97,5 +96,6 @@ function saveState(s) {
     ...rawState,
     ...s
   });
+  return rawState;
 }
 

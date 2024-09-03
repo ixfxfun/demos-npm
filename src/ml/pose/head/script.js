@@ -1,5 +1,5 @@
-import * as Dom from '../../../ixfx/dom.js';
-import { Points } from '../../../ixfx/geometry.js';
+import * as Dom from 'ixfx/dom.js';
+import { Points } from 'ixfx/geometry.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 
 const pc = new PosesConsumer({ maxAgeMs: 500 });
@@ -50,6 +50,7 @@ const update = () => {
   const heads = [];
   for (const pose of poses.get()) {
     const head = computeHead(pose);
+    if (!head) continue; // No head detected
     heads.push(head);
   }
   saveState({ heads });
@@ -61,12 +62,13 @@ const update = () => {
 /**
  * Returns a circle based on a few head landmarks
  * @param {Poses.PoseTracker} pose
- * @return {Head} 
+ * @return {Head|undefined} 
  */
 const computeHead = (pose) => {
-  const nose = pose.landmark(`nose`);
-  const leftEar = pose.landmark(`left_ear`);
-  const rightEar = pose.landmark(`right_ear`);
+  const nose = pose.landmarkValue(`nose`);
+  const leftEar = pose.landmarkValue(`left_ear`);
+  const rightEar = pose.landmarkValue(`right_ear`);
+  if (!leftEar || !rightEar || !nose) return; // No ears or nose :/
   const earDistance = Points.distance(leftEar, rightEar);
   const radius = earDistance / 2;
   return {

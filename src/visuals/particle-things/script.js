@@ -1,16 +1,28 @@
-import { Trackers, Numbers } from '../../ixfx/bundle.js';
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Points, radianToDegree } from '../../ixfx/geometry.js';
-import { repeatSync } from '../../ixfx/flow.js';
+import { Trackers, Numbers } from 'ixfx/bundle.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { Points, radianToDegree } from 'ixfx/geometry.js';
+import { repeatSync } from 'ixfx/flow.js';
 import * as Util from './util.js';
 import * as Things from './thing.js';
+import { NumberTracker } from 'ixfx/trackers.js';
 
 // Define settings
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
 });
 
-// Initial state with empty values
+/**
+ * @typedef {Readonly<{
+ * pointA: import('ixfx/geometry.js').Point
+ * pointB: import('ixfx/geometry.js').Point
+ * things: ReadonlyArray<Things.Thing>
+ * distance:number
+ * distanceAvg: NumberTracker
+ * distanceDiff: number
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
   pointA: {
     y: 0.5,
@@ -20,16 +32,13 @@ let state = Object.freeze({
     x: 0.8,
     y: 0.5
   },
-  /** @type {readonly Things.Thing[]} */
   things: [...repeatSync(() => Things.create(), { count: 40 })],
-  /** @type number */
   distance: 0,
   distanceAvg: Trackers.number({
     id: `distance`,
     storeIntermediate: true,
     sampleLimit: 200
   }),
-  /** @type number */
   distanceDiff: 0
 });
 
@@ -49,37 +58,19 @@ const update = () => {
     distance, distanceDiff
   });
 
-  const things = state.things.map(t => updateThing(t));
+  const things = state.things.map(t => Things.update(t, state));
   saveState({ things });
 
   setText(`debug`, `
-  distance: ${distance}
-  distanceAvg: ${distanceAvg.avg}
-  distanceDiff: ${distanceDiff.toFixed(2)}
-  angle: ${angle}
-  angleDegrees: ${angleDegrees}
+    distance: ${distance}
+    distanceAvg: ${distanceAvg.avg}
+    distanceDiff: ${distanceDiff.toFixed(2)}
+    angle: ${angle}
+    angleDegrees: ${angleDegrees}
   `);
 };
 
-/**
- * 
- * @param {Things.Thing} thing 
- */
-const updateThing = (thing) => {
-  const { distanceDiff } = state;
-  const { scale, mass } = thing;
 
-  let computedScale = scale * (0.9999);
-
-  computedScale = computedScale + (distanceDiff * mass * 0.1);
-  computedScale = Numbers.clamp(computedScale, 0.01);
-
-  return {
-    ...thing,
-    scale: computedScale
-  };
-
-};
 
 function setText(id, text) {
   const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
@@ -88,7 +79,11 @@ function setText(id, text) {
   }
 }
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ */
+const use = (state) => {
   const { canvas } = settings;
   const { pointA, pointB } = state;
 
@@ -163,7 +158,7 @@ const onPointerMove = (event) => {
 
 function setup() {
   const loop = () => {
-    use();
+    use(state);
     window.requestAnimationFrame(loop);
   };
   loop();
@@ -186,4 +181,5 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }

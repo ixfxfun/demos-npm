@@ -54,12 +54,9 @@ You can provide some options to override the default behaviour. The options are:
 ```js
 // Remove a pose if it hasn't been seen for this long
 maxAgeMs: 10_000,
-// Reset keypoint tracker after this many samples/
-// 0 disables
-resetAfterSamples: 0,
 // How many samples to store if 'storeIntermediate' is enabled
 sampleLimit: 100,
-// Whether to store data for each pose keypoint
+// Whether to store data for each pose landmark
 storeIntermediate:false
 ```
 
@@ -93,12 +90,12 @@ remote.onData = (packet) {
 The poses tracker helpfully emits events to let you know if a pose appears for the first time, or when it disappears (eg because the body has moved out of camera frame, or we lose tracking)
 
 ```js
-poses.events.addEventListener(`expired`, event => { 
+poses.addEventListener(`expired`, event => { 
   const poseTracker = event.detail;
   console.log(`Pose expired: ${poseTracker.guid}`);
 });
 
-poses.events.addEventListener(`added`, event => {
+poses.addEventListener(`added`, event => {
   const poseTracker = event.detail;
   console.log(`Pose added: ${poseTracker.guid}`);
 });
@@ -117,12 +114,12 @@ poses.events.addEventListener(`added`, event => {
 ```js
 // Get all PoseTrackers (ie. all visible bodies)
 for (const tracker of poses.get()) {
-  // Since we have the tracker, we can do low-level work with keypoints
+  // Since we have the tracker, we can do low-level work with landmarks
 }
 
 // Get the raw pose data (ie all visible bodies), sorted by age
 for (const pose of poses.getRawPosesByAge()) {
-  pose.keypoints; // array of { x, y, z?, score, name }
+  pose.landmarks; // array of { x, y, z?, score, name }
 }
 ```
 
@@ -167,7 +164,7 @@ Sort array of poses horizontally:
 const sorted = MoveNet.horizontalSort(poses);
 ```
 
-Get centroid of pose (including all keypoints):
+Get centroid of pose (including all landmarks):
 ```js
 const centroid = MoveNet.centroid(pose); // {x,y}
 ```

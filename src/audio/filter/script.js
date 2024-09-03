@@ -1,7 +1,7 @@
-import { scaleClamped } from '../../ixfx/numbers.js';
-import { Oscillators } from '../../ixfx/modulation.js';
-import { repeat } from '../../ixfx/flow.js';
-import * as Random from '../../ixfx/random.js';
+import { scaleClamped } from 'ixfx/numbers.js';
+import { Oscillators } from 'ixfx/modulation.js';
+import { repeat } from 'ixfx/flow.js';
+import * as Random from 'ixfx/random.js';
 import { Audio } from '../audio.js';
 
 const settings = Object.freeze({
@@ -15,9 +15,9 @@ const settings = Object.freeze({
 
 /**
  * @typedef {Readonly<{
- * filterFreq: number // filter freq in Hz
- * filterQ: number
- * readingAutoFilter: boolean
+ *  filterFreq: number // filter freq in Hz
+ *  filterQ: number
+ *  readingAutoFilter: boolean
  * }>} State
  */
 
@@ -28,7 +28,12 @@ let state = {
   readingAutoFilter: false
 };
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ * @returns 
+ */
+const use = (state) => {
   const { audioId, audio } = settings;
   const { filterFreq, filterQ } = state;
 
@@ -77,8 +82,9 @@ const randomFilter = () => {
   play();
 
   // Random value of 200Hz - 2kHz
-  saveState({ filterFreq: Random.integer({ min: 200, max: 2000 }) });
-  use();
+  use(saveState({
+    filterFreq: Random.integer({ min: 200, max: 2000 })
+  }));
 };
 
 /**
@@ -97,8 +103,7 @@ const autoStart = async () => {
   for await (const v of repeat(autoPan, { delay: autoFilterUpdateRateMs })) {
     // Value from oscillator will be 0..1. We need 200Hz...2kHz
     const freq = scaleClamped(v, 0, 1, 200, 2000);
-    saveState({ filterFreq: freq });
-    use();
+    use(saveState({ filterFreq: freq }));
 
     // If stop button has been pressed, exit out
     if (!state.readingAutoFilter) break;
@@ -126,8 +131,7 @@ const pointerInArea = (event) => {
   const freq = scaleClamped(pointerEvent.x, 0, bounds.width, 200, 2000);
 
   // But we want -1 to 1 range
-  saveState({ filterFreq: freq });
-  use();
+  use(saveState({ filterFreq: freq }));
 };
 
 function setup() {

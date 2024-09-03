@@ -1,6 +1,6 @@
-import { Points } from '../../ixfx/geometry.js';
-import { Forces } from '../../ixfx/modulation.js';
-import { continuously } from '../../ixfx/flow.js';
+import { Points } from 'ixfx/geometry.js';
+import { Forces } from 'ixfx/modulation.js';
+import { continuously } from 'ixfx/flow.js';
 import * as Util from './util.js';
 
 // Define settings
@@ -13,10 +13,21 @@ const settings = Object.freeze({
     diminishBy: 0.001
   },
   // Drag force so it slows down
-  dragForce: Forces.magnitudeForce(0.01)
+  dragForce: Forces.magnitudeForce(0.01),
+  thingEl: /** @type HTMLElement */(document.querySelector(`#thing`)),
+  targetEl:  /** @type HTMLElement */(document.querySelector(`#target`))
 });
 
-let state = Object.freeze({
+/**
+ * @typedef {Readonly<{
+ *  position: import('ixfx/geometry.js').Point
+ *  velocity:import('ixfx/geometry.js').Point
+ *  targetPos:import('ixfx/geometry.js').Point
+ *  window: import('ixfx/geometry.js').Rect
+ * }>} State
+ */
+
+let state = {
   // Assign random position (normalised 0..1 scale)
   position: Points.random(),
   // Starting velocity is 0, at rest
@@ -28,14 +39,14 @@ let state = Object.freeze({
     width: window.innerWidth,
     height: window.innerHeight
   }
-});
+};
 
 const update = () => {
   const { target, dragForce } = settings;
   const { targetPos, position, velocity } = state;
 
   // Apply targetForce
-  const t = Forces.apply({ velocity, position }, 
+  const t = Forces.apply({ velocity, position },
     // Push towards target
     Forces.targetForce(targetPos, target),
     dragForce
@@ -55,27 +66,27 @@ const update = () => {
 
 /**
  * Position thing based on state
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
+  const { thingEl } = settings;
   const { position } = state;
 
-  const thingElement =  document.querySelector(`#thing`);
-  
   // Move the element
-  Util.moveElement(thingElement, position);
+  Util.moveElement(thingEl, position);
 };
 
-function setup(){ 
-  const targetElement = document.querySelector(`#target`);
+function setup() {
+  const { targetEl } = settings;
 
   continuously(() => {
     update();
-    use();
+    use(state);
   }).start();
 
   // Update our tracking of window size if there's a resize
   window.addEventListener(`resize`, () => {
-    saveState({ window: { width: window.innerWidth, height: window.innerHeight } } );
+    saveState({ window: { width: window.innerWidth, height: window.innerHeight } });
   });
 
   window.addEventListener(`pointerup`, (event) => {
@@ -86,20 +97,21 @@ function setup(){
 
     // Set new target
     saveState({ targetPos: pointerRelative });
-    Util.moveElement(targetElement, state.targetPos);
+    Util.moveElement(targetEl, state.targetPos);
   });
 
-  Util.moveElement(targetElement, state.targetPos);
+  Util.moveElement(targetEl, state.targetPos);
 };
 setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
+  return state;
 }

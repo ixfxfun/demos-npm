@@ -1,5 +1,3 @@
-
-
 /**
  * @typedef {object} Bounds
  * @property {number} width

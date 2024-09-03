@@ -1,5 +1,4 @@
-import { Arrays, Pool } from '../../ixfx/data.js';
-
+import { Arrays, Pool } from 'ixfx/data.js';
 
 import * as Audio from './audio.js';
 
@@ -8,7 +7,7 @@ const settings = Object.freeze({
     // How many voices
     capacity: 5,
     // Call 'voiceAdded' to make a new voice,
-    // 'voice'Removed' to remove a voice
+    // 'voiceRemoved' to remove a voice
     generate: voiceAdded,
     free: voiceRemoved,
     // Clean up voices after 1s

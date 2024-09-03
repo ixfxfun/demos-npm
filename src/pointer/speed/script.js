@@ -1,5 +1,5 @@
-import { Points } from '../../ixfx/geometry.js';
-import { movingAverage, scalePercent, scaleClamped } from '../../ixfx/numbers.js';
+import { Points } from 'ixfx/geometry.js';
+import { movingAverage, scalePercent, scaleClamped } from 'ixfx/numbers.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -66,7 +66,11 @@ const update = () => {
   });
 };
 
-const use = () => {
+/**
+ * Use state
+ * @param {State} state 
+ */
+const use = (state) => {
   const { speed, speedAvg } = state;
   const { fontWidth, fontWeight } = settings;
 
@@ -108,7 +112,7 @@ const setup = () => {
   // Update speed every 50ms
   setInterval(() => {
     update();
-    use();
+    use(state);
   }, settings.updateRateMs);
 };
 setup();
@@ -122,5 +126,6 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }
 

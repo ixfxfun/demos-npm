@@ -2,8 +2,8 @@
  * Simple demo of moving an element by cursor keys.
  * See README.md
  */
-import { getTranslation } from '../../../ixfx/dom.js';
-import { Points } from "../../../ixfx/geometry.js";
+import { getTranslation } from 'ixfx/dom.js';
+import { Points } from "ixfx/geometry.js";
 
 const settings = Object.freeze({
   // How many pixels to move with each key press
@@ -83,7 +83,8 @@ const moveElement = (element, vector) => {
   const yPx = vector.y * pixelSteps;
 
   const trans = getTranslation(element);
-  const transResult = Points.sum(trans, xPx, yPx);
+  console.log(trans);
+  const transResult = Points.sum(trans, xPx, yPx, 0);
 
   element.style.transform = `translate(${transResult.x}px, ${transResult.y}px)`;
 };

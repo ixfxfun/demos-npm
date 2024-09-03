@@ -1,7 +1,7 @@
-import { pointerVisualise } from '../../ixfx/dom.js';
-import { Points } from '../../ixfx/geometry.js';
-import * as Trackers from '../../ixfx/trackers.js';
-import * as Numbers from '../../ixfx/numbers.js';
+import { pointerVisualise } from 'ixfx/dom.js';
+import { Points } from 'ixfx/geometry.js';
+import * as Trackers from 'ixfx/trackers.js';
+import * as Numbers from 'ixfx/numbers.js';
 
 // Pointer visualiser. Useful for debugging. It's what adds the red border
 pointerVisualise(document.body);
@@ -82,18 +82,17 @@ const onPointerMove = (event) => {
   // 20 in practice means 2000%
   scale = Numbers.clamp(scale + v, 0.1, 20);
 
-  // Save & then use
-  saveState({
+  // Save & use state
+  use(saveState({
     scale
-  });
-  use();
-
+  }));
 };
 
 /**
  * Update screen with state
+ * @param {State} state
  */
-const use = () => {
+const use = (state) => {
   const { thingEl } = settings;
   const { scale } = state;
   console.log(scale);
@@ -132,4 +131,5 @@ function saveState(s) {
     ...state,
     ...s
   });
+  return state;
 }

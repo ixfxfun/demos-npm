@@ -1,7 +1,8 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Forces } from '../../ixfx/modulation.js';
-import { Points, Rects } from '../../ixfx/geometry.js';
-import * as Random from '../../ixfx/random.js';
+import { CanvasHelper } from 'ixfx/dom.js';
+import { Forces } from 'ixfx/modulation.js';
+import { Points, Rects } from 'ixfx/geometry.js';
+import * as Random from 'ixfx/random.js';
+
 /**
  * @typedef {Readonly<{ 
 *  position: Points.Point
@@ -46,7 +47,6 @@ const settings = Object.freeze({
 
 /** @type State */
 let state = Object.freeze({
-  /** @type Thing[] */
   things: [],
   pointer: { x: 0.5, y: 0.5 }
 });
@@ -142,11 +142,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} partialState 
  */
-function saveState(s) {
+function saveState(partialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialState
   });
+  return state;
 }

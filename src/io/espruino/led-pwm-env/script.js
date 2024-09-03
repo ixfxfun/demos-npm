@@ -1,6 +1,5 @@
-import { continuously } from '../../../ixfx/flow.js';
-import { Espruino } from '../../../ixfx/io.js';
-import { adsr, defaultAdsrOpts as defaultAdsrOptions } from '../../../ixfx/modulation.js';
+import { Espruino } from 'ixfx/io.js';
+import { Envelopes } from 'ixfx/modulation.js';
 import { setCssDisplay } from './util.js';
 
 const settings = Object.freeze({
@@ -9,7 +8,7 @@ const settings = Object.freeze({
   pwmLed: `LED2`,
   updateRateMs: 30,
   // Use a simple ADSR envelope
-  env: adsr(defaultAdsrOptions())
+  env: new Envelopes.Adsr()
 });
 
 /**

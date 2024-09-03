@@ -1,6 +1,6 @@
 /**
  * Function to set `textContext` for an element
- * @param {*} query 
+ * @param {string} query 
  * @returns 
  */
 export function textContent(query) {

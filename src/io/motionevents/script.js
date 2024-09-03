@@ -1,4 +1,4 @@
-import { log, Forms } from '../../ixfx/dom.js';
+import { log, Forms } from 'ixfx/dom.js';
 
 const settings = Object.freeze({
   lastEl: /** @type HTMLElement */(document.querySelector(`#last`)),
@@ -40,7 +40,7 @@ const onMotion = (event) => {
 const startEvents = async () => {
   // @ts-ignore
   if (typeof DeviceMotionEvent.requestPermission === `function`) {
-  // @ts-ignore
+    // @ts-ignore
     const p = await DeviceMotionEvent.requestPermission();
     if (p === `granted`) {
       window.addEventListener(`devicemotion`, onMotion);
