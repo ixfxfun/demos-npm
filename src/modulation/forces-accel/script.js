@@ -22,7 +22,7 @@ let state = Object.freeze({
   // Assign random position (normalised 0..1 scale)
   position: Points.random(),
   // Random velocity on normalised 0..1 scale, and then reduced to lower speed
-  velocity: Points.divide(Points.random(), 200),
+  velocity: Points.divide(Points.random(), 200, 200),
   // Track the pointer movementX,movementY
   pointerMovement: pointTracker(),
   // Record size of window
@@ -90,7 +90,7 @@ function setup() {
     // If we have some info
     if (nfo !== undefined) {
       // Normalise the average movement, and divide by 200 to reduce the speed
-      const avg = Points.divide(Points.normalise(nfo.fromInitial.average), 200);
+      const avg = Points.divide(Points.normalise(nfo.fromInitial.average), 200, 200);
 
       // For debug purposes, show velocity x,y on screen
       const labelElement = /** @type HTMLElement */(document.querySelector(`#velocity`));

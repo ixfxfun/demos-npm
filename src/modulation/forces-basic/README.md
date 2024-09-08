@@ -68,7 +68,7 @@ All of the forces are tuned to taste, and worth playing with.
 
 ## Types
 
-We use a [type annotation](../../_readmes/typing.md) for the particle:
+We use a [type annotation](https://ixfx.fun/reference/type-annotation/) for the particle:
 
 ```js
 /**

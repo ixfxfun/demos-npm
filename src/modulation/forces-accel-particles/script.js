@@ -81,7 +81,7 @@ const setup = () => {
     // If we have some info
     if (nfo !== undefined) {
       // Normalise the average movement, and divide to reduce the speed
-      const avg = Points.divide(Points.normalise(nfo.fromInitial.average), 500);
+      const avg = Points.divide(Points.normalise(nfo.fromInitial.average), 500, 500);
 
       // For debug purposes, show velocity x,y on screen
       const labelElement = document.querySelector(`#velocity`);

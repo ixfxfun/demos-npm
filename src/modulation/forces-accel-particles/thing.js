@@ -49,7 +49,7 @@ export const create = () => {
     // Assign random position (normalised 0..1 scale)
     position: Points.random(),
     // Random velocity on normalised 0..1 scale, and then reduced to lower speed
-    velocity: Points.divide(Points.random(), 200),
+    velocity: Points.divide(Points.random(), 200, 200),
   };
   return t;
 };

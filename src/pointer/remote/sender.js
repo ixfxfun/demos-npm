@@ -4,6 +4,8 @@ import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
 const settings = Object.freeze({
   remote: new Remote({
     allowNetwork: true,
+    // eg if you use a Glitch-hosted websocket server:
+    // websocket: `wss://MY-PROJECT-NAME.glitch.me/ws`
     websocket: `wss://${window.location.host}/ws`
   })
 });

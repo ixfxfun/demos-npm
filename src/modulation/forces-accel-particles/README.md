@@ -32,7 +32,7 @@ smaller value:
 const nfo = pointerMovement.lastResult;
 
 // Divide average's x & y by 500:
-const avg = Points.divide(Points.normalise(nfo.fromInitial.average), 500);
+const avg = Points.divide(Points.normalise(nfo.fromInitial.average), 500, 500);
 ```
 
 `avg` is then applied as an acceleration force to all the particles:
