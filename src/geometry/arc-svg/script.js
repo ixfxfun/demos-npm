@@ -17,14 +17,22 @@ const settings = Object.freeze({
   waveSaw: Modulation.wave({ hertz: 0.5, shape: `saw` })
 });
 
-// State
-let state = Object.freeze({
-  /** @type {number} */
+/**
+ * @typedef {Readonly<{
+ * sine:number
+ * saw:number
+ * viewportSize: { width: number, height: number }
+ * viewportCenter: { x: number, y: number }
+ * }>} State
+ */
+
+/** @type State */
+let state = {
   sine: 0,
-  /** @type {number} */
   saw: 0,
-  bounds: { width: 0, height: 0, center: { x: 0, y: 0 } },
-});
+  viewportSize: { width: 0, height: 0 },
+  viewportCenter: { x: 0, y: 0 }
+};
 
 // Update state of world
 const update = () => {
@@ -42,12 +50,12 @@ const update = () => {
  */
 const updateSvg = (arcElement) => {
   const { radiusProportion } = settings;
-  const { bounds, sine, saw } = state;
+  const { viewportCenter, viewportSize, sine, saw } = state;
 
   // Sine wave runs from 0-100%, producing a radius that is too large. 
   // Scale to 0-40%
   const radius = settings.radiusMin +
-    (bounds.width * Numbers.scalePercent(sine, 0, radiusProportion));
+    (viewportSize.width * Numbers.scalePercent(sine, 0, radiusProportion));
 
   // Apply same sine value to stroke width
   const width = settings.strokeWidthMin + (sine * settings.strokeWidthMax);
@@ -59,7 +67,8 @@ const updateSvg = (arcElement) => {
   const arc = Arcs.fromDegrees(radius,
     settings.startDegrees + offset,
     settings.endDegrees + offset,
-    bounds.center);
+    true,
+    viewportCenter);
 
   // Apply stroke width
   Svg.applyStrokeOpts(arcElement, { strokeWidth: width });
@@ -75,7 +84,14 @@ function setup() {
   // Resize SVG element to match viewport
   Dom.parentSize(svg, arguments_ => {
     saveState({
-      bounds: windowBounds()
+      viewportSize: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      },
+      viewportCenter: {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2
+      }
     });
   });
 
@@ -94,19 +110,11 @@ function setup() {
   loop();
 };
 
-const windowBounds = () => ({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  center: {
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2
-  }
-});
 setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({

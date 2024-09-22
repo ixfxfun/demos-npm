@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>keyboard-remote</title>
+</head>
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --mono-font: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    --hue: 250;
+    --bg: hsl(var(--hue) 24% 87%);
+    --fg: hsl(var(--hue) 100% 9%);
+    --padding: 0.3em;
+  }
+
+  html,
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-size: 14px;
+    font-family: var(--font);
+  }
+
+  #last {
+    font-family: var(--mono-font);
+  }
+
+  #log {
+    height: 10em;
+    font-family: var(--mono-font);
+  }
+</style>
+
+<body>
+<script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <h1>keyboard-remote</h1>
+  <p>This sketch demonstrates sending keyboard events from one device/sketch to another. For example, have a sketch running on a mobile be controlled from your laptop.</p>
+  <p>By default, the sending will only work on your own machine. Try this out by opening the sender and receiver sketches in different windows.</p>
+   <p>Multiple senders and receivers can be used.</p>
+  <ul>
+    <li><a href="sender.html">sender</a></li>
+    <li><a href="receiver.html">receiver</a></li>
+  </ul>
+  <p>Please see README.md and <a href="https://ixfx.fun/reference/websockets/">ixfx guide</a> for more details on connecting between devices.</p>
+</body>
+
+</html>

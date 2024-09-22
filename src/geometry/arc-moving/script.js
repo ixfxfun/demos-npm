@@ -11,8 +11,18 @@ const settings = Object.freeze({
   movedEl: /** @type HTMLElement */(document.querySelector(`#moved`))
 });
 
+/**
+ * @typedef {Readonly<{
+ *  viewportSize: { width:number, height:number }
+ *  viewportCenter: { x:number, y:number }
+ *  coord: { x:number, y:number }
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
-  bounds: { width: 0, height: 0, center: { x: 0, y: 0 } },
+  viewportSize: { width: 0, height: 0 },
+  viewportCenter: { x: 0, y: 0 },
   coord: { x: 0, y: 0 }
 });
 
@@ -20,20 +30,20 @@ let state = Object.freeze({
 const update = () => {
   // Get fields we need
   const { wave, radiusProportion } = settings;
-  const bounds = state.bounds;
-  const center = bounds.center;
+  const { viewportSize, viewportCenter } = state;
 
   // Set radius to be proportional to screen size so it's always visible
   // - Radius will be radiusProportion% of viewport 
   //   width or height, whichever is smaller
-  const radius = Math.min(bounds.width, bounds.height) * radiusProportion;
+  const radius = Math.min(viewportSize.width, viewportSize.height) * radiusProportion;
 
   // Define arc
   const arc = Arcs.fromDegrees(
     radius,
     settings.startAngle,
     settings.endAngle,
-    center);
+    true,
+    viewportCenter);
 
   // Calculate relative point on arc using current wave amount
   const coord = Arcs.interpolate(wave(), arc);
@@ -54,7 +64,7 @@ const use = () => {
 };
 
 // Update state when viewport size changes
-const sizeChange = () => {
+const onWindowResize = () => {
   // Center of viewport
   const width = document.body.clientWidth;
   const height = document.body.clientHeight;
@@ -62,15 +72,16 @@ const sizeChange = () => {
 
   // Update state
   saveState({
-    bounds: { width, height, center },
+    viewportCenter: center,
+    viewportSize: { width, height }
   });
 };
 
 function setup() {
   const { movedEl } = settings;
 
-  window.addEventListener(`resize`, sizeChange);
-  sizeChange(); // Trigger to use current size
+  window.addEventListener(`resize`, onWindowResize);
+  onWindowResize(); // Trigger to use current size
 
   // After 2 seconds, reset button text
   const clickedTimeout = timeout(() => {
@@ -95,7 +106,7 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({

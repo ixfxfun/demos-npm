@@ -1,5 +1,5 @@
 import { movingAverage } from 'ixfx/numbers.js';
-import { AudioAnalysers } from 'ixfx/io.js';
+import { Audio } from 'ixfx/io.js';
 import { clamp, flip } from 'ixfx/numbers.js';
 import { defaultErrorHandler } from 'ixfx/dom.js';
 import * as Util from './util.js';
@@ -71,7 +71,7 @@ const start = () => {
   // Initialise analyser. 
   // Analyser runs in a loop, calling `onData` very fast. 
   // We use that loop to drive the sketch rather than make another
-  AudioAnalysers.peakLevel(onData);
+  Audio.analyserPeakLevel(onData);
 
   // Disable button so it's not clicked twice
   btnStartEl.setAttribute(`disabled`, `true`);

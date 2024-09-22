@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <title>thing-canvas</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bpm</title>
 </head>
 
 <body>
@@ -19,28 +19,42 @@
     }
 
     :root {
-      --hue: 80;
+      --hue: 290;
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       --bg: hsl(var(--hue), 10%, 80%);
-      --fg: hsl(var(--hue), 100%, 10%);
+      --fg: hsl(var(--hue), 100%, 20%);
+      --radius: 0.3em;
     }
 
     body {
       background-color: var(--bg);
       color: var(--fg);
+      height: 100vh;
       font-family: var(--font);
       user-select: none;
       -webkit-user-select: none;
-      overscroll-behavior: none;
-      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
+    #thing {
+      background-color: hsl(var(--hue), 50%, 20%);
+      width:100vw;
+      height:100vh;
+      border-radius: 100%;
+      left: 0;
+      top: 0;
+      position: fixed;
+    }
   </style>
   <section>
-    <h1>thing-canvas</h1>
-    <canvas id="canvas"></canvas>
-    <script type="module" src="script.js"></script>
+    <h1>bpm</h1>
+    <p>Object scales according to bpm.</p>
+    <div id="thing"></span>
   </section>
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>

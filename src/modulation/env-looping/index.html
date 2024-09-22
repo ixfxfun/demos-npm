@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bare bones</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>env-looping</title>
 </head>
 
 <body>
@@ -19,22 +19,23 @@
     }
 
     :root {
-      --hue: 200;
+      --hue: 230;
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      --bg: hsl(var(--hue), 10%, 80%);
-      --fg: hsl(var(--hue), 100%, 30%);
+      --bg: hsl(var(--hue), 10%, 10%);
+      --fg: hsl(var(--hue), 70%, 90%);
+      --radius: 0.3em;
     }
 
     body {
       background-color: var(--bg);
+      padding: 2em;
       color: var(--fg);
       font-family: var(--font);
     }
   </style>
-  <section>
-    <h1>bare bones</h1>
-    <script type="module" src="script.js"></script>
-  </section>
+  <h1>env-looping</h1>
+  <p>(values are printed to console)</p>
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>

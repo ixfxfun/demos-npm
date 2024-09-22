@@ -24,15 +24,21 @@
       --fg: hsl(var(--hue), 100%, 90%);
     }
 
-    body {
-      background-color: var(--bg);
-      color: var(--fg);
-      font-family: var(--font);
-      user-select: none;
-      -webkit-user-select: none;
-      overscroll-behavior: none;
-      overflow: hidden;
-    }
+
+  html,
+  body {
+    box-sizing: border-box;
+    background-color: var(--bg);
+    color: var(--fg);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: var(--font);
+    overscroll-behavior: contain;
+    cursor: crosshair;
+  }
+
+  
 
     .thing {
       position: absolute;
