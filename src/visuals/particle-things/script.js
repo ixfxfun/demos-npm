@@ -8,7 +8,7 @@ import { NumberTracker } from 'ixfx/trackers.js';
 
 // Define settings
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /**
@@ -62,11 +62,11 @@ const update = () => {
   saveState({ things });
 
   setText(`debug`, `
-    distance: ${distance}
-    distanceAvg: ${distanceAvg.avg}
+    distance: ${distance.toFixed(2)}
+    distanceAvg: ${distanceAvg.avg.toFixed(2)}
     distanceDiff: ${distanceDiff.toFixed(2)}
-    angle: ${angle}
-    angleDegrees: ${angleDegrees}
+    angle: ${angle.toFixed(2)}
+    angleDegrees: ${angleDegrees.toFixed(2)}
   `);
 };
 

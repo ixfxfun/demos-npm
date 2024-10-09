@@ -12,7 +12,7 @@ const randomPoint = () => ({
 });
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   gravity: 0.01,
   // Drawing settings
   dotColour: `hsla(${Colour.getCssVariable(`hue`, `100`)}, 100%, 80%, 0.8)`,

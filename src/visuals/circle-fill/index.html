@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Circle fill</title>
 </head>
 
 <body>
-<script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
   <style>
     *,
     *:before,
@@ -31,15 +31,21 @@
       font-family: var(--font);
     }
 
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
     a:link,
     a:visited {
       color: var(--fg);
     }
   </style>
+  <canvas id="canvas"></canvas>
   <section>
     <h1>Circle fill</h1>
     <p>Different ways of calculating random points in a circle.</p>
-    <canvas id="canvas"></canvas>
     <script type="module" src="script.js"></script>
   </section>
 </body>

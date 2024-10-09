@@ -6,7 +6,7 @@ import { gaussian } from '../../ixfx/random.js';
 import * as Particle from './particle.js';
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   // How much to age with each loop (% of current age)
   agePerLoop: 0.02,
   // How many particles to spawn each loop

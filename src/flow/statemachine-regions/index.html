@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>regions</title>
   <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
 
@@ -31,13 +31,19 @@
       color: var(--fg);
       font-family: var(--font);
     }
+
+    #canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   </style>
+  <canvas id="canvas"></canvas>
   <section>
     <h1>regions</h1>
     <p>This sketch demonstrates using a state machine. Each circle is 'activated' based on pointer proximity, and only
-      when the prior one is already actiated. After a period of inactivity, the state is reset.</p>
+      when the prior one is already activated. After a period of inactivity, the state is reset.</p>
     <div>State: <span id="state">?</span></div>
-    <canvas id="canvas"></canvas>
     <script type="module" src="script.js"></script>
   </section>
 </body>

@@ -8,7 +8,7 @@ const settings = Object.freeze({
   thingUpdateSpeedMs: 10,
   hueChange: 0.5,
   movementDecay: 0.1,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /** 

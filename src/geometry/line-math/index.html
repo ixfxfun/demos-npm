@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>line-math</title>
 </head>
 
@@ -21,17 +21,22 @@
       background-color: var(--bg);
       color: var(--fg);
     }
-  </style>
-  <section>
-    <div>
-      Relative distance: <span id="lblDistance">?</span><br />
-      Slope: <span id="lblSlope">?</span><br />
-      Angle (rad): <span id="lblAngleRad">?</span><br />
 
-    </div>
-    <canvas id="canvas"></canvas>
-    <script type="module" src="script.js"></script>
-  </section>
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <canvas id="canvas"></canvas>
+  <div>
+    Relative distance: <span id="lblDistance">?</span><br>
+    Slope: <span id="lblSlope">?</span><br>
+    Angle (rad): <span id="lblAngleRad">?</span><br>
+
+  </div>
+  <script type="module" src="script.js"></script>
+
 </body>
 
 </html>

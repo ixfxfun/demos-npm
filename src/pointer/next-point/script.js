@@ -6,7 +6,7 @@ import * as Util from './util.js';
 const settings = Object.freeze({
   updateRateMs: 10,
   circleHue: 320,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /**

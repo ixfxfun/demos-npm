@@ -7,7 +7,7 @@ const settings = Object.freeze({
   thingRadius: 40,
   pinRadius: 20,
   lineWidth: 10,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /**

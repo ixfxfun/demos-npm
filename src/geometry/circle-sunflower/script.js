@@ -7,7 +7,7 @@ const piPi = Math.PI * 2;
 
 // #region Settings & state
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   // Visualisation of points
   dots: {
     radius: 0.005,

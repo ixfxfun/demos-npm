@@ -5,7 +5,7 @@ import { CanvasHelper } from '../../ixfx/dom.js';
 import { Arrays } from '../../ixfx/data.js';
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   rows: 15,
   cols: 15,
   colours: [`bisque`, `cadetblue`, `cornflowerblue`, `coral`],
@@ -22,7 +22,7 @@ const settings = Object.freeze({
  * @typedef {{
  * grid: Grids.GridVisual
  * gridData: Maps.IMapImmutable<String,GridData>
- * highlightedCell: Grids.Cell|undefined
+ * highlightedCell: Grids.GridCell|undefined
  * }} State
  */
 
@@ -41,7 +41,7 @@ function use() {
 
   canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  for (const cell of Grids.cells(grid)) drawCell(cell, canvas.ctx);
+  for (const cell of Grids.By.cells(grid)) drawCell(cell, canvas.ctx);
 
   if (highlightedCell) {
     const cellData = gridData.get(keyForCell(highlightedCell));
@@ -51,7 +51,7 @@ function use() {
 
 /** 
  * Draws a cell
- * @param {Grids.Cell} cell 
+ * @param {Grids.GridCell} cell 
  * @param {CanvasRenderingContext2D} context 
  */
 function drawCell(cell, context) {
@@ -127,7 +127,7 @@ function setup() {
   });
 
   let gridData = Maps.immutable();
-  for (const cell of Grids.cells(grid)) {
+  for (const cell of Grids.By.cells(grid)) {
     // Compute random data
     const data = {
       karma: Math.random().toFixed(2),

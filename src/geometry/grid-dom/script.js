@@ -49,7 +49,7 @@ function setup() {
 
   if (gridElement === null) return;
 
-  for (const row of Grids.rows(grid)) {
+  for (const row of Grids.As.rows(grid)) {
     // Make HTML for each cell. This produces an array of strings
     //   Note we encode the coordinate of the cell in the attributes
     const cellsHtml = row.map(cell => `<div data-x="${cell.x}" data-y="${cell.y}" class="cell"></div>`);
@@ -70,7 +70,7 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

@@ -2,7 +2,7 @@ import { Modulation, Numbers, Iterables } from '../../ixfx/bundle.js';
 import { CanvasHelper } from '../../ixfx/dom.js';
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport`, scaleBy: `min` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both`, coordinateScale: `min` }),
   outerColour: `indigo`,
   innerColour: `pink`,
   piPi: Math.PI * 2,

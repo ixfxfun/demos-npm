@@ -20,7 +20,7 @@ import * as Random from 'ixfx/random.js';
 */
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   maxRadius: 50,
   hue: 200,
   aging: 0.99,

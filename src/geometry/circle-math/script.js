@@ -1,37 +1,45 @@
 import { CanvasHelper } from '../../ixfx/dom.js';
-import { Points, Circles } from '../../ixfx/geometry.js';
+import { Circles } from '../../ixfx/geometry.js';
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport`, scaleBy: `min` }),
-  circle: {
-    x: 0.5, y: 0.5, radius: 0.3
-  },
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both`, coordinateScale: `min` }),
+  radius: 0.3,
   ringThickness: 40
 });
 
-/** @typedef {Readonly<{
- *  pointer: Points.Point
- *  nearest: Points.Point|undefined
+/** 
+ * @typedef {Readonly<{
+ *  pointer: {x:number,y:number}
+ *  nearest: {x:number,y:number}|undefined
+ *  circle: {x:number,y:number,radius:number}
  * }>} State
  **/
 
 /** @type {State} */
 let state = Object.freeze({
-  pointer: { x: 0.5, y: 0.5 },
-  nearest: undefined
+  pointer: { x: 0, y: 0 },            // Location of pointer, in viewport-coords
+  circle: { x: 0, y: 0, radius: 0 },  // Location & size of main circle, in viewport-coords
+  nearest: undefined                  // Nearest point on perimeter
 });
+
 
 // Update state of world
 const update = () => {
-  const { circle } = settings;
   const { pointer } = state;
 
+  // Compute absolute size & position of circle
+  const mid = settings.canvas.toAbsoluteFixed({ x: 0.5, y: 0.5 });
+  const circle = {
+    ...mid,
+    radius: settings.radius * Math.min(window.innerHeight, window.innerWidth)
+  };
+
+  let nearest = mid;
   if (pointer) {
-    const nearest = Circles.nearest(circle, pointer);
-    if (!Points.isNaN(nearest)) {
-      saveState({ nearest });
-    }
+    // Get nearest point on perimeter
+    nearest = Circles.nearest(circle, pointer);
   }
+  saveState({ nearest, circle });
 };
 
 /**
@@ -42,14 +50,13 @@ const update = () => {
  */
 const drawDot = (canvas, circle, fillStyle = ``) => {
   const { ctx } = canvas;
-  const absPos = canvas.toAbsolute(circle);
 
   // If radius is less than 1, assume it's a relative value
   // that needs converting
   const radius = circle.radius < 1 ? circle.radius * canvas.dimensionMin : circle.radius;
 
   ctx.save();
-  ctx.translate(absPos.x, absPos.y);
+  ctx.translate(circle.x, circle.y);
 
   ctx.beginPath();
   ctx.arc(0, 0, radius, 0, Math.PI * 2);
@@ -70,11 +77,10 @@ const drawDot = (canvas, circle, fillStyle = ``) => {
  */
 const drawRing = (canvas, circle, strokeStyle, lineWidth) => {
   const { ctx } = canvas;
-  const absPos = canvas.toAbsolute(circle);
   const radius = circle.radius < 1 ? circle.radius * canvas.dimensionMin : circle.radius;
 
   ctx.save();
-  ctx.translate(absPos.x, absPos.y);
+  ctx.translate(circle.x, circle.y);
 
   ctx.beginPath();
   ctx.strokeStyle = strokeStyle;
@@ -86,39 +92,37 @@ const drawRing = (canvas, circle, strokeStyle, lineWidth) => {
   ctx.restore();
 };
 
-const drawState = () => {
+const use = () => {
   const { canvas, ringThickness } = settings;
   const { ctx, width, height } = canvas;
-  const { nearest } = state;
+  const { nearest, circle } = state;
 
   // Clear canvas
   ctx.clearRect(0, 0, width, height);
 
   // Draw the silver ring
-  drawRing(canvas, settings.circle, `silver`, ringThickness);
+  drawRing(canvas, circle, `silver`, ringThickness);
 
   // Draw filled yellow dot at pointer position
   drawDot(canvas, { ...state.pointer, radius: ringThickness / 2 }, `yellow`);
 
   // Draw filled black dot for closest point on circle
   if (nearest) {
-    // 
-    drawDot(canvas, { ...nearest, radius: ringThickness / 2.2 }, `black`);
+    drawDot(canvas, { ...nearest, radius: ringThickness / 2.2 }, `white`);
   }
 };
 
 function setup() {
-  const { canvas } = settings;
   const loop = () => {
     update();
-    drawState();
+    use();
     window.requestAnimationFrame(loop);
   };
   loop();
 
   document.addEventListener(`pointermove`, event => {
     saveState({
-      pointer: canvas.toRelative(event)
+      pointer: { x: event.x, y: event.y }
     });
   });
 };
@@ -126,7 +130,7 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({

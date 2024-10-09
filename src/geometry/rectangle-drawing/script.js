@@ -12,7 +12,7 @@ import { Rects, Lines } from '../../ixfx/geometry.js';
 const settings = Object.freeze({
   centerColour: `yellow`,
   cornerColour: `blue`,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /**

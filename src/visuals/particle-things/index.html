@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>particle-things</title>
 </head>
 
 <body>
-<script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
   <style>
     *,
     *:before,
@@ -37,12 +37,19 @@
       font-family: var(--mono-font);
       font-size: 2em;
     }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
   </style>
+  <canvas id="canvas"></canvas>
   <section>
     <h1>particle-things</h1>
     <div id="debug">
     </div>
-    <canvas id="canvas"></canvas>
     <script type="module" src="script.js"></script>
   </section>
 </body>

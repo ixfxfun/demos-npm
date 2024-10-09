@@ -8,7 +8,7 @@ const settings = Object.freeze({
   // How many things to spawn
   spawnThings: 100,
   // Create an ixfx CanvasHelper to manage scaling and sizing
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /** 

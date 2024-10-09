@@ -5,7 +5,7 @@ import { repeatSync } from 'ixfx/flow.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   // Visual option for attractor
   attractorRadius: 50,
 

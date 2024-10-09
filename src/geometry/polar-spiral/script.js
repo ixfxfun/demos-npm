@@ -11,7 +11,7 @@ const settings = Object.freeze({
   slowWave: Modulation.wave({ shape: `sine`, hertz: 0.001 }),
   fastWave: Modulation.wave({ shape: `sine`, hertz: 0.1 }),
   steps: 1000,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /**

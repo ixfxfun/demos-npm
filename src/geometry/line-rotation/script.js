@@ -6,7 +6,7 @@ const piPi = Math.PI * 2;
 
 // Define settings
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   // Set up three lines, using relative coordinates
   lineMid: {
     a: { x: 0.1, y: 0.5 },

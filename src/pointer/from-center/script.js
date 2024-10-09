@@ -12,7 +12,7 @@ const settings = Object.freeze({
   },
   hue: 290,
   saturation: 0.1,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /** 

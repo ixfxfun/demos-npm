@@ -3,7 +3,7 @@ import { CanvasHelper } from 'ixfx/dom.js';
 // Define settings - properties that don't change
 const settings = Object.freeze({
   updateRateMs: 10,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 // Initial state - properties that change as code runs

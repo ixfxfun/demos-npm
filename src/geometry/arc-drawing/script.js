@@ -9,8 +9,8 @@ const settings = Object.freeze({
     x: 0.5,
     y: 0.5
   },
-  canvasBackdrop: new CanvasHelper(`#backdrop`, { fill: `viewport` }),
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvasBackdrop: new CanvasHelper(`#backdrop`, { resizeLogic: `both` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   outerColour: `indigo`,
   innerColour: `pink`,
   piPi: Math.PI * 2,

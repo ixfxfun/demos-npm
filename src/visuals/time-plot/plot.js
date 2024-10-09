@@ -8,7 +8,7 @@ const settings = Object.freeze({
   strokeStyle: `pink`,
   // Vertical space in pixels from top and bottom of screen
   verticalPadding: 50,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 export const newFrame = () => {

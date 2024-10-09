@@ -5,7 +5,7 @@ import { StateMachine, Elapsed } from 'ixfx/flow.js';
 import { Circles } from 'ixfx/geometry.js';
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
 
   resetMachineAfterMs: 2000,
   // Distance threshold for circles to activate

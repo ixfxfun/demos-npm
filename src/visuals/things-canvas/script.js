@@ -8,7 +8,7 @@ const settings = Object.freeze({
   // How many things to spawn
   spawnThings: 100,
   hueChange: 0.1,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /** 

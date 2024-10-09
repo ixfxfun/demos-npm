@@ -4,7 +4,7 @@ import { numericRange, clamp } from '../../ixfx/numbers.js';
 const piPi = Math.PI * 2;
 
 const settings = Object.freeze({
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` }),
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   // Visualisation of points
   dotRadius: 0.01,
   dotHue: 270,

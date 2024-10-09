@@ -12,7 +12,7 @@ const settings = Object.freeze({
   pointSize: 0.005,
   origin: { x: 0.5, y: 0.5, radius: 0.5 },
   radius: 0.5,
-  canvas: new CanvasHelper(`#canvas`, { fill: `viewport` })
+  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
 /**

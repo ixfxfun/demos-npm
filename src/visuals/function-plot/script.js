@@ -68,9 +68,9 @@ const powerCurve = (x, a, b) => {
 // and are expected to output a value of -1 to 1.
 const draw = () => {
   //Plot.plot(sine, { strokeStyle: `lightblue` });
-  //Plot.plot(x => sincImpulse(x, 20), { strokeStyle: `orange` });
+  Plot.plot(x => sincImpulse(x, 20), { strokeStyle: `orange` });
 
-  Plot.plot(x => powerCurve(x, 1.1, 2), { strokeStyle: `orange` });
+  //Plot.plot(x => powerCurve(x, 1.1, 2), { strokeStyle: `orange` });
 
   // Random:
   //Plot.plot(x => Math.random() * x, { strokeStyle: `silver` });
