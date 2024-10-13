@@ -1,37 +1,36 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import { Points } from 'ixfx/geometry.js';
 import * as Dom from 'ixfx/dom.js';
 import * as Numbers from "ixfx/numbers.js";
+import { Triangles } from "ixfx/geometry.js";
 import * as MpVision from '../../lib/client/index.js';
 import * as Hands from '../hands.js';
+import * as Things from './thing.js';
+import { Flow } from "ixfx/bundle.js";
 
 const settings = Object.freeze({
-  // How quickly to call update()
-  updateRateMs: 100,
+  // Scale calculated area of palm
+  areaScaler: Numbers.scaler(0.0005, 0.003, 0, 1, undefined, true),
 
-  // Scale pinch distance
-  pinchScale: Numbers.scaler(0, 0.5),
-
-  // Interpolation of pinch value
-  pinchInterpolator: Numbers.interpolate(0.1),
-
+  thingCount: 150,
+  updateRateMs: 1, // How quickly to call update()
   remote: new Remote(),
   dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
   thingEl: /** @type HTMLElement */(document.querySelector(`#thing`))
 });
 
+
 /**
  * @typedef {Readonly<{
- *  pinchRaw:number
- *  pinch:number
+ *  palmArea:number
+ *  things:readonly Things.Thing[]
  * }>} State
  */
 
 /** @type State */
 let state = {
-  pinchRaw: 0,
-  pinch: 0
+  palmArea: 0,
+  things: []
 };
 
 /**
@@ -39,32 +38,28 @@ let state = {
  * new from latest pose data
  */
 const update = () => {
-  const { pinchInterpolator } = settings;
-  const { pinchRaw } = state;
-  let { pinch } = state;
+  let { things, palmArea } = state;
 
-  // Interpolate the pinch value, to smooth
-  // out the slow rate of data from ML model.
-  pinch = pinchInterpolator(pinch, pinchRaw);
+  // Update each thing
+  things = things.map(t => Things.update(t, state));
 
-  // Save state
-  saveState({ pinch });
-
-  // Debug display
-  settings.dataDisplay.update({ pinch, pinchRaw });
+  // Save it
+  saveState({ things: things });
 };
 
 /**
  * Uses state
- * 
  */
 function use() {
-  const { thingEl } = settings;
-  const { pinch } = state;
+  // Do something...
+  const { palmArea, things } = state;
 
-  let x = (5 * pinch) + 0.01; // Always make sure there's a little bit
-  let y = 1 * (1 - pinch);
-  thingEl.style.scale = `${x} ${y}`;
+  for (const t of things) {
+    Things.use(t);
+  }
+
+  // Debug
+  settings.dataDisplay.update({ palmArea });
 }
 
 /**
@@ -72,31 +67,29 @@ function use() {
  * @param {MpVision.HandLandmarkerResult} hands 
  */
 const updateFromHands = (hands) => {
-  const { pinchScale } = settings;
   if (!hands || hands.landmarks.length === 0) {
-    // No data, reset to 0
-    saveState({ pinchRaw: 0 });
+    // No data... do something special?
+    saveState({ palmArea: 0 });
     return;
   }
 
-  // Get landmarks for first hand
-  const lm = hands.landmarks[0];
+  // Eg get data for first hand
+  const hand = Hands.getHand(0, hands);
+  const palmArea = calculatePalmArea(hand.worldLandmarks);
 
-  // Thumb
-  const thumb = lm[4];
-
-  // Pointer
-  const pointer = lm[8];
-
-  // Raw distance
-  let pinch = Points.distance(thumb, pointer);
-
-  // Scale & invert
-  pinch = 1 - Numbers.clamp(pinchScale(pinch));
-
-  saveState({ pinchRaw: pinch });
+  saveState({ palmArea });
 };
 
+/**
+ * Calculates area of palm. This can indicate up/down pivoting
+ * @param {MpVision.Landmark[]} landmarks
+ */
+const calculatePalmArea = (landmarks) => {
+  const { areaScaler } = settings;
+  const palm = Hands.getPalmTriangle2d(landmarks);
+  const area = Triangles.area(palm);
+  return areaScaler(area);
+};
 
 /**
  * Setup and run main loop 
@@ -105,6 +98,10 @@ function setup() {
   const { updateRateMs, remote } = settings;
 
   remote.onData = onReceivedPoses;
+
+  // Create some things
+  const things = [...Flow.repeatSync(Things.create, { count: settings.thingCount })];
+  saveState({ things: things });
 
   // Update at updateRateMs
   const updateLoop = () => {
@@ -116,7 +113,6 @@ function setup() {
 
 };
 setup();
-
 
 /**
  * Called when we have pose data via Remote.
@@ -136,7 +132,6 @@ function onReceivedPoses(packet) {
     console.warn(`Did not find 'handedness' property as expected. Is the sender set to 'hand'?`);
     return;
   }
-
   updateFromHands(handsData);
 };
 

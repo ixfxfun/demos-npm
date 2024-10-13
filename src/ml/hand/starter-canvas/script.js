@@ -1,37 +1,27 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import { Points } from 'ixfx/geometry.js';
 import * as Dom from 'ixfx/dom.js';
-import * as Numbers from "ixfx/numbers.js";
 import * as MpVision from '../../lib/client/index.js';
 import * as Hands from '../hands.js';
 
 const settings = Object.freeze({
-  // How quickly to call update()
-  updateRateMs: 100,
-
-  // Scale pinch distance
-  pinchScale: Numbers.scaler(0, 0.5),
-
-  // Interpolation of pinch value
-  pinchInterpolator: Numbers.interpolate(0.1),
-
+  canvasHelper: new Dom.CanvasHelper(`canvas`, { resizeLogic: `both` }),
+  updateRateMs: 100, // How quickly to call update()
   remote: new Remote(),
   dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
   thingEl: /** @type HTMLElement */(document.querySelector(`#thing`))
 });
 
+
 /**
  * @typedef {Readonly<{
- *  pinchRaw:number
- *  pinch:number
+ *  blah:number
  * }>} State
  */
 
 /** @type State */
 let state = {
-  pinchRaw: 0,
-  pinch: 0
+  blah: 0
 };
 
 /**
@@ -39,62 +29,53 @@ let state = {
  * new from latest pose data
  */
 const update = () => {
-  const { pinchInterpolator } = settings;
-  const { pinchRaw } = state;
-  let { pinch } = state;
-
-  // Interpolate the pinch value, to smooth
-  // out the slow rate of data from ML model.
-  pinch = pinchInterpolator(pinch, pinchRaw);
-
-  // Save state
-  saveState({ pinch });
-
-  // Debug display
-  settings.dataDisplay.update({ pinch, pinchRaw });
+  // Debug display, eg: 
+  // settings.dataDisplay.update({ field1, field2 );
 };
 
 /**
  * Uses state
- * 
  */
 function use() {
-  const { thingEl } = settings;
-  const { pinch } = state;
+  const { canvasHelper } = settings;
+  const { ctx } = canvasHelper;
 
-  let x = (5 * pinch) + 0.01; // Always make sure there's a little bit
-  let y = 1 * (1 - pinch);
-  thingEl.style.scale = `${x} ${y}`;
+  // Clear the canvas
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+  // Eg: draw a rectangle
+  ctx.fillStyle = `red`;
+  ctx.fillRect(100, 100, 100, 100);
+
+  // Eg. draw a circle
+  ctx.beginPath();
+  ctx.arc(200, 200, 50, 0, Math.PI * 2);
+  ctx.fillStyle = `yellow`;
+  ctx.fill();
+
+  // Eg. draw a line
+  ctx.beginPath();
+  ctx.moveTo(150, 150);
+  ctx.lineTo(300, 300);
+  ctx.strokeStyle = `purple`;
+  ctx.lineWidth = 4;
+  ctx.stroke();
 }
+
 
 /**
  * Called with data from MediaPipe
  * @param {MpVision.HandLandmarkerResult} hands 
  */
 const updateFromHands = (hands) => {
-  const { pinchScale } = settings;
   if (!hands || hands.landmarks.length === 0) {
-    // No data, reset to 0
-    saveState({ pinchRaw: 0 });
+    // No data... do something special?
     return;
   }
 
-  // Get landmarks for first hand
-  const lm = hands.landmarks[0];
+  // Eg get data for first hand
+  const hand = Hands.getHand(0, hands);
 
-  // Thumb
-  const thumb = lm[4];
-
-  // Pointer
-  const pointer = lm[8];
-
-  // Raw distance
-  let pinch = Points.distance(thumb, pointer);
-
-  // Scale & invert
-  pinch = 1 - Numbers.clamp(pinchScale(pinch));
-
-  saveState({ pinchRaw: pinch });
 };
 
 
@@ -136,7 +117,6 @@ function onReceivedPoses(packet) {
     console.warn(`Did not find 'handedness' property as expected. Is the sender set to 'hand'?`);
     return;
   }
-
   updateFromHands(handsData);
 };
 

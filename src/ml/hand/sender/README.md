@@ -1,4 +1,4 @@
-# pose-sender
+# sender
 
 ## Local models
 
@@ -23,6 +23,7 @@ Instead of:
 ```
 
 ## Emitting
+
 Transmits pose data via Remote.
 
 To specify an id of the peer, use the `peerId` URL parameter. That is, we access the sketch via:

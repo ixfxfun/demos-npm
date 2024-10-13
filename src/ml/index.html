@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ixfx / machine learning</title>
   <link rel="stylesheet" href="../demos.css">
 </head>
@@ -14,26 +14,29 @@
     <header>
       <a href="../">../</a> machine learning
     </header>
-      <div>
-        
-        
-        <div class="demos">
-          <div>
-            <h1>pose</h1>
-            <p>Detect key points of the human body using <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker">MediaPipe</a>.</p>
-            <ul class="pillbox">
-              <li><a class="pill" href="https://github.com/ClintH/ixfx-demos/blob/main/ml/pose/README.md">README</a>
-              </li>
-              <li><a class="pill" href="lib/client/docs/">Helper docs</a></li>
-            </ul>
-            <ul class="nobullets">
+    <div>
+
+
+      <div class="demos">
+        <div>
+          <h1>pose</h1>
+          <p>Detect key points of the human body using <a
+              href="https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker">MediaPipe</a>.</p>
+          <ul class="pillbox">
+            <li><a class="pill" href="https://github.com/ClintH/ixfx-demos/blob/main/ml/pose/README.md">README</a>
+            </li>
+            <li><a class="pill" href="lib/client/docs/">Helper docs</a></li>
+          </ul>
+          <ul class="nobullets">
             <li>
               <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/pose/head/script.js"></a>
               <a href="./pose/head/index.html">head</a>: Simple calculation based on a few points.
             </li>
             <li>
-              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/pose/shoulders-basic/script.js"></a>
-              <a href="./pose/shoulders-basic/index.html">shoulders-basic</a>: demonstrates basic calcuation from points.
+              <a class="source"
+                href="https://github.com/ClintH/ixfx-demos/tree/main/ml/pose/shoulders-basic/script.js"></a>
+              <a href="./pose/shoulders-basic/index.html">shoulders-basic</a>: demonstrates basic calcuation from
+              points.
             </li>
             <li>
               <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/pose/shoulders/script.js"></a>
@@ -45,66 +48,80 @@
             </li>
             <li>
               <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/pose/between/script.js"></a>
-              <a href="./pose/between/index.html">between</a>: works with distance between bodies. Uses the DOM and Things model.
+              <a href="./pose/between/index.html">between</a>: works with distance between bodies. Uses the DOM and
+              Things model.
             </li>
             <li>
               <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/pose/sender/script.js"></a>
               <a href="./pose/sender/index.html">sender</a>: generate and emit body pose data.
             </li>
-            </ul>
-          </div>
+          </ul>
+        </div>
 
-          <div>
-            <h1>hand</h1>
-            <p>Detect key points of the hand using <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker">MediaPipe</a>.</p>
-            <ul class="nobullets">
-              <li>
-                <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/hand/pinch/script.js"></a>
-                <a href="./hand/pinch/index.html">pinch</a>: Calculate a pinch gesture.
-                <div class="techniques">Interpolation</div>
-              </li>
-              <li>
-                <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/hand/sender/script.js"></a>
-                <a href="./hand/sender/index.html">sender</a>: generate and emit hand pose data.
-                
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h1>face</h1>
-            <p>Detect a few key points of the face using <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">MediaPipe</a>.</p>
-            <ul class="nobullets">
-              <li>
-                <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/face/demo/script.js"></a>
-                <a href="./face/demo/index.html">demo</a>: compute angles of face movement
-              </li>
-              <li>
-                <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/face/sender/script.js"></a>
-                <a href="./face/sender/index.html">sender</a>: generate and emit face pose data.
-                
-              </li>
-            </ul>
-          </div>
+        <div>
+          <h1>hand</h1>
+          <p>Detect key points of the hand using <a
+              href="https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker">MediaPipe</a>.</p>
+          <ul class="nobullets">
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/hand/pinch/script.js"></a>
+              <a href="./hand/pinch/index.html">pinch</a>: Calculate a pinch gesture.
+              <div class="techniques">Interpolation</div>
+            </li>
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/hand/pinch/script.js"></a>
+              <a href="./hand/techniques/index.html">techniques</a>: Demonstrates a few inferences from data
+              <div class="techniques">Points.distance, Numbers.average, Numbers.scaler</div>
+            </li>
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/hand/palm/script.js"></a>
+              <a href="./hand/palm/index.html">palm</a>: Control things using area of palm
+              <div class="techniques">Things</div>
+            </li>
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/hand/sender/script.js"></a>
+              <a href="./hand/sender/index.html">sender</a>: generate and emit hand pose data.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h1>face</h1>
+          <p>Detect a few key points of the face using <a
+              href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">MediaPipe</a>.</p>
+          <ul class="nobullets">
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/face/demo/script.js"></a>
+              <a href="./face/demo/index.html">demo</a>: compute angles of face movement
+            </li>
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/face/sender/script.js"></a>
+              <a href="./face/sender/index.html">sender</a>: generate and emit face pose data.
+
+            </li>
+          </ul>
+        </div>
 
 
-          <div>
-            <h1>objects</h1>
-            <p>Detect a small number of objects using <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/object_detector#get_started">MediaPipe</a>.</p>
-            <ul class="nobullets">
-              <li>
-                <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/objects/demo/script.js"></a>
-                <a href="./objects/demo/index.html">demo</a>
-              </li>
-              <li>
-                <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/objects/sender/script.js"></a>
-                <a href="./objects/sender/index.html">sender</a>: generate and emit face pose data.
-                
-              </li>
-            </ul>
-          </div>
+        <div>
+          <h1>objects</h1>
+          <p>Detect a small number of objects using <a
+              href="https://ai.google.dev/edge/mediapipe/solutions/vision/object_detector#get_started">MediaPipe</a>.
+          </p>
+          <ul class="nobullets">
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/objects/demo/script.js"></a>
+              <a href="./objects/demo/index.html">demo</a>
+            </li>
+            <li>
+              <a class="source" href="https://github.com/ClintH/ixfx-demos/tree/main/ml/objects/sender/script.js"></a>
+              <a href="./objects/sender/index.html">sender</a>: generate and emit face pose data.
+
+            </li>
+          </ul>
         </div>
       </div>
- 
+    </div>
+
   </main>
 </body>
 
