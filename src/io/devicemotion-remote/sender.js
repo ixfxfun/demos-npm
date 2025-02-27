@@ -1,4 +1,5 @@
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
+import * as Dom from 'ixfx/dom.js';
 
 const settings = Object.freeze({
   lastDataEl: /** @type HTMLElement */(document.querySelector(`#lastData`))
@@ -30,19 +31,23 @@ const onMotion = (event) => {
   const { lastDataEl } = settings;
   const { paused } = state;
   if (paused) return;
-  
-  const v = (x) => x.toPrecision(2);
-  
+
+  const v = (x) => {
+    if (!x) return 0;
+    return x.toPrecision(2);
+  };
+
+  console.log(event);
   // Grab some values
   const d = {
     accel: getXyz(event.acceleration),
     accelGrav: getXyz(event.accelerationIncludingGravity),
     rotRate: getAbg(event.rotationRate)
   };
-  
+
   // Send it
   r.broadcast(d);
-  
+
   // Show it
   lastDataEl.innerHTML = `
   <table>
@@ -68,24 +73,37 @@ const onMotion = (event) => {
 };
 
 const startEvents = async () => {
+  if (typeof DeviceMotionEvent === `undefined`) {
+    console.log(`DeviceMotionEvent unavailable`);
+    return;
+  }
   // @ts-ignore
   if (typeof DeviceMotionEvent.requestPermission === `function`) {
-  // @ts-ignore
+    console.log(`Requesting permission`);
+    // @ts-ignore
     const p = await DeviceMotionEvent.requestPermission();
     if (p === `granted`) {
+      console.log(`Listening for devicemotion events (1)`);
       window.addEventListener(`devicemotion`, onMotion);
     } else {
-      console.log(`Permission denied`);
+      console.log(`Permission denied when listening for devicemotion events`);
     }
   } else {
+    console.log(`Listening for devicemotion events (2)`);
     window.addEventListener(`devicemotion`, onMotion);
+
   }
   document.querySelector(`#btnStart`)?.remove();
 };
 
 const setup = () => {
+  Dom.inlineConsole({
+    insertIntoEl: `#console`,
+    witholdCss: true
+  });
+
   /** @type HTMLInputElement */(document.querySelector(`#txtPeerId`)).value = r.id;
-  
+
   document.querySelector(`#btnStart`)?.addEventListener(`click`, startEvents);
   document.querySelector(`#btnPause`)?.addEventListener(`click`, event => {
     state = {
@@ -93,6 +111,26 @@ const setup = () => {
       paused: !state.paused
     };
   });
-  
+
+  // Debug: generate random data
+  // setInterval(() => {
+  //   onMotion({
+  //     acceleration: {
+  //       x: Math.random(),
+  //       y: Math.random(),
+  //       z: Math.random()
+  //     },
+  //     accelerationIncludingGravity: {
+  //       x: Math.random(),
+  //       y: Math.random(),
+  //       z: Math.random()
+  //     },
+  //     rotationRate: {
+  //       alpha: Math.random(),
+  //       beta: Math.random(),
+  //       gamma: Math.random()
+  //     }
+  //   });
+  // }, 1000);
 };
 setup();

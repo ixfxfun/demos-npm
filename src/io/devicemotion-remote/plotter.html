@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>plotter</title>
+  <link rel="stylesheet" href="../../demos.css">
+  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+
+</head>
+
+<body>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #log {
+      font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+    }
+
+    h2 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      font-size: small;
+    }
+
+    .plot {
+      width: 90vw;
+      height: 20vh;
+    }
+  </style>
+  <section>
+    <h1>plotter</h1>
+    <h2>
+      accel
+    </h2>
+    <div class="plot">
+      <plot-element line-width="5" data-width="10" render="line" id="accelPlot"></plot-element>
+    </div>
+
+    <h2>
+      accelGrav
+    </h2>
+    <div class="plot">
+      <plot-element line-width="5" data-width="10" render="line" id="accelGravPlot"></plot-element>
+    </div>
+
+    <h2>
+      rotRate
+    </h2>
+    <div class="plot">
+      <plot-element line-width="5" data-width="10" render="line" id="rotRatePlot"></plot-element>
+    </div>
+    <div id="remote-status"></div>
+  </section>
+  <script type="module" src="plotter.js"></script>
+
+</body>
+
+</html>

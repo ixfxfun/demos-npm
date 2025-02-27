@@ -14,7 +14,8 @@ const settings = Object.freeze({
 /**
  * @typedef {Readonly<{
  * wave: number
- * bounds: { center: {x:number, y:number}, width: number, height: number}
+ * viewportSize: { width: number, height: number }
+ * viewportCenter: { x:number, y:number }
  * pointers: {}
  * }>} State
  */
@@ -22,7 +23,8 @@ const settings = Object.freeze({
 /** @type State */
 let state = {
   wave: 0,
-  bounds: { width: 0, height: 0, center: { x: 0, y: 0 } },
+  viewportSize: { width: 0, height: 0 },
+  viewportCenter: { x: 0, y: 0 },
   pointers: {}
 };
 
@@ -41,7 +43,7 @@ const update = () => {
  */
 const updateSvg = () => {
   const { originPoint } = settings;
-  const { bounds, wave, pointers } = state;
+  const { viewportSize, wave, pointers } = state;
   const svg = document.querySelector(`svg`);
 
   if (!svg) return;
@@ -50,7 +52,7 @@ const updateSvg = () => {
   const strokeWidth = settings.strokeWidthMin + (wave * settings.strokeWidthMax);
 
   // Calc absolute point of origin according to screen size
-  const originAbs = Points.multiply(originPoint, bounds.width, bounds.height);
+  const originAbs = Points.multiply(originPoint, viewportSize.width, viewportSize.height);
 
   /** @type {Svg.LineDrawingOpts} */
   const drawingOptions = {
@@ -72,12 +74,20 @@ const updateSvg = () => {
 };
 
 function setup() {
-  // Resize SVG element to match viewport
-  Dom.parentSize(`svg`, arguments_ => {
-    saveState({
-      bounds: windowBounds()
+  const svg = document.querySelector(`svg`);
+  if (svg) {
+    // Resize SVG element to match viewport
+    Dom.ElementSizer.svgViewport(svg, size => {
+      svg.setAttribute(`viewbox`, `0 0 ${size.width} ${size.height}`);
+      saveState({
+        viewportSize: size,
+        viewportCenter: {
+          x: size.width / 2,
+          y: size.height / 2
+        }
+      });
     });
-  });
+  }
 
   window.addEventListener(`touchmove`, event => {
     event.preventDefault();

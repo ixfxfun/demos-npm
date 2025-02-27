@@ -97,7 +97,7 @@ export const getFingertip = (fingerName, landmarks) => {
   const indexes = FingerIndexes[fingerName];
   if (!indexes) throw new Error(`Finger not found? (${fingerName})`);
   const tipIndex = indexes.at(-1);
-  if (!tipIndex) return Points.Placeholder3d;
+  if (tipIndex === undefined) return Points.Placeholder3d;
   return landmarks[tipIndex];
 };
 
@@ -152,7 +152,7 @@ export const getKnuckle = (fingerName, landmarks) => {
   const indexes = FingerIndexes[fingerName];
   if (!indexes) throw new Error(`Finger not found? (${fingerName})`);
   const tipIndex = fingerName === `thumb` ? indexes.at(1) : indexes.at(0);
-  if (!tipIndex) return Points.Placeholder3d;
+  if (tipIndex === undefined) return Points.Placeholder3d;
   return landmarks[tipIndex];
 };
 
@@ -192,7 +192,7 @@ export const findIndexByHandedness = (which, results, threshold = 0.8) => Iterab
  */
 export const findByHandedness = (which, results, threshold = 0.8) => {
   const index = Iterables.Sync.first(filterIndexByHandedness(which, results, threshold));
-  if (!index) return;
+  if (index === undefined) return;
   return getHand(index, results);
 };
 

@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mobile-sensors</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../demos.css">
   <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
 
 </head>
@@ -53,8 +53,16 @@
     }
 
 
-    #lastData {
+    #lastData,
+    #console {
       word-break: break-all;
+    }
+
+    #console {
+      margin-top: 1em;
+      max-height: 10em;
+      overflow: scroll;
+      font-size: 0.7em;
     }
 
     table {
@@ -65,28 +73,29 @@
       width: 30vw;
     }
   </style>
+  <section>
+    <h1>mobile-sensors</h1>
+    <button id="btnStart">Start sensors</button>
+    <div>
+      <label>
+        Id:
+        <input id="txtPeerId">
+      </label>
+    </div>
+    <h2>
+      Last data
+    </h2>
+    <div id="lastData">
 
-  <h1>mobile-sensors</h1>
-  <button id="btnStart">Start sensors</button>
-  <div>
-    <label>
-      Id:
-      <input id="txtPeerId" />
-    </label>
-  </div>
-  <h2>
-    Last data
-  </h2>
-  <div id="lastData">
+    </div>
 
-  </div>
-
-  <button id="btnPause">
-    Pause
-  </button>
-  <div id="remote-status"></div>
+    <button id="btnPause">
+      Pause
+    </button>
+    <div id="remote-status"></div>
+    <div id="console"></div>
+  </section>
   <script type="module" src="sender.js"></script>
-
 </body>
 
 </html>

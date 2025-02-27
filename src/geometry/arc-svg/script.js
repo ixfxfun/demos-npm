@@ -71,6 +71,7 @@ const updateSvg = (arcElement) => {
     viewportCenter);
 
   // Apply stroke width
+
   Svg.applyStrokeOpts(arcElement, { strokeWidth: width });
 
   // Update existing SVG element with new details
@@ -82,15 +83,13 @@ function setup() {
   if (svg === null) return;
 
   // Resize SVG element to match viewport
-  Dom.parentSize(svg, arguments_ => {
+  Dom.ElementSizer.svgViewport(svg, size => {
+    svg.setAttribute(`viewbox`, `0 0 ${size.width} ${size.height}`);
     saveState({
-      viewportSize: {
-        width: window.innerWidth,
-        height: window.innerHeight
-      },
+      viewportSize: size,
       viewportCenter: {
-        x: window.innerWidth / 2,
-        y: window.innerHeight / 2
+        x: size.width / 2,
+        y: size.height / 2
       }
     });
   });

@@ -37,7 +37,7 @@ const update = () => {
   const distance = Points.distance(reference, pointer);
 
   // Angle
-  const angleDeg = radianToDegree(Points.angle(reference, pointer));
+  const angleDeg = radianToDegree(Points.angleRadian(reference, pointer));
 
   // Update state with calculations...
   saveState({

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>devicemotion</title>
+  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+
+</head>
+
+<body>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .data,
+    #log {
+      font-family: monospace;
+    }
+
+    .data>table {
+      border: 1px solid var(--spotL);
+    }
+
+    .data td {
+      width: 5rem;
+      padding: 0.5rem;
+    }
+
+    .data.frozen {
+      background-color: lightblue;
+    }
+
+    h2 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      font-size: small;
+    }
+
+    .paused {
+      border: 2px solid red;
+    }
+
+
+    .data,
+    #console {
+      word-break: break-all;
+    }
+
+    #console {
+      margin-top: 1em;
+      max-height: 10em;
+      overflow: scroll;
+      font-size: 0.7em;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      width: 30vw;
+    }
+
+    plot-element {
+      width: 80vw;
+      height: 6em;
+      border: 1px solid rgb(152, 152, 152);
+    }
+  </style>
+  <section>
+    <h1>devicemotion view</h1>
+    <div id="toolbar">
+      <button id="btnStart">Start</button>
+      <button disabled id="btnPause">Pause</button>
+    </div>
+    <h2>Last data</h2>
+    <div class="data" id="accel"></div>
+    <plot-element line-width="5" data-width="10" render="line" id="accelPlot"></plot-element>
+
+    <div class="data" id="accelGrav"></div>
+    <plot-element line-width="5" data-width="10" render="line" id="accelGravPlot"></plot-element>
+
+    <div class="data" id="rotRate"></div>
+    <plot-element line-width="5" data-width="10" render="line" id="rotRatePlot"></plot-element>
+
+    <h2>Console</h2>
+    <div id="console"></div>
+  </section>
+  <script type="module" src="view.js"></script>
+</body>
+
+</html>

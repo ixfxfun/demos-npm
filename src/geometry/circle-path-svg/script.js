@@ -11,14 +11,24 @@ const settings = Object.freeze({
   wave: Modulation.wave({ shape: `saw`, hertz: 0.1 })
 });
 
-let state = Object.freeze({
-  /** @type {number} */
+/**
+ * @typedef {Readonly<{
+* loop:number
+* pointer: { x: number, y: number }
+* circleEl: SVGPathElement|undefined
+* viewportSize: { width: number, height: number }
+* viewportCenter: { x: number, y: number }
+* }>} State
+*/
+
+/** @type State */
+let state = {
   loop: 0,
-  bounds: { width: 0, height: 0, center: { x: 0, y: 0 } },
+  viewportSize: { width: 0, height: 0 },
+  viewportCenter: { x: 0, y: 0 },
   pointer: { x: 0, y: 0 },
-  /** @type {SVGPathElement|undefined} */
   circleEl: undefined
-});
+};
 
 // Update state of world
 const update = () => {
@@ -31,13 +41,13 @@ const update = () => {
 
 const use = () => {
   const { radiusProportion } = settings;
-  const { circleEl, bounds, loop } = state;
+  const { circleEl, viewportSize, viewportCenter, loop } = state;
   if (!circleEl) return;
 
-  const radius = radiusProportion * Math.min(bounds.width, bounds.height);
+  const radius = radiusProportion * Math.min(viewportSize.width, viewportSize.height);
 
   // Define circle, using center for x,y 
-  const circle = { radius, ...bounds.center };
+  const circle = { radius, ...viewportCenter };
 
   // Rotate circle (and thus text with it)
   circleEl.style.transformOrigin = `50% 50%`; // Rotate from middle
@@ -55,9 +65,14 @@ function setup() {
   if (svg === null) return;
 
   // Resize SVG element to match viewport
-  Dom.parentSize(svg, arguments_ => {
+  Dom.ElementSizer.svgViewport(svg, size => {
+    svg.setAttribute(`viewbox`, `0 0 ${size.width} ${size.height}`);
     saveState({
-      bounds: windowBounds()
+      viewportSize: size,
+      viewportCenter: {
+        x: size.width / 2,
+        y: size.height / 2
+      }
     });
   });
 

@@ -18,14 +18,16 @@ const settings = Object.freeze({
  * sine:number
  * pointer: {x: number, y:number}
  * circleEl: SVGCircleElement|undefined
- * bounds: { center: { x:number,y:number },width:number,height:number}
+ * viewportSize: { width:number, height:number }
+ * viewportCenter: { x:number, y:number },
  * }} State
  */
 
 /** @type State */
 let state = Object.freeze({
   sine: 0,
-  bounds: { width: 0, height: 0, center: { x: 0, y: 0 } },
+  viewportSize: { width: 0, height: 0 },
+  viewportCenter: { x: 0, y: 0 },
   pointer: { x: 0, y: 0 },
   circleEl: undefined
 });
@@ -41,12 +43,12 @@ const update = () => {
 
 const use = () => {
   const { radiusProportion } = settings;
-  const { bounds, sine, pointer, circleEl } = state;
+  const { viewportSize, sine, pointer, circleEl } = state;
 
   if (circleEl === undefined) return;
 
   const radius = settings.radiusMin +
-    (bounds.width * Numbers.scalePercent(sine, 0, radiusProportion));
+    (viewportSize.width * Numbers.scalePercent(sine, 0, radiusProportion));
 
   const width = settings.strokeWidthMin + (sine * settings.strokeWidthMax);
 
@@ -68,9 +70,14 @@ const setup = () => {
   if (svg === null) return;
 
   // Resize SVG element to match viewport
-  Dom.parentSize(svg, () => {
+  Dom.ElementSizer.svgViewport(svg, size => {
+    svg.setAttribute(`viewbox`, `0 0 ${size.width} ${size.height}`);
     saveState({
-      bounds: windowBounds()
+      viewportSize: size,
+      viewportCenter: {
+        x: size.width / 2,
+        y: size.height / 2
+      }
     });
   });
 
