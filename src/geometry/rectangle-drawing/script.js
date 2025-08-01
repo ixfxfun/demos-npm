@@ -1,12 +1,6 @@
-/**
- * Demonstrates:
- *  - Creating a rectangle based on center and top-left reference points
- *  - Drawing a rectangle using `strokeRect` (in-built)
- *  - Computing corners coordinates, computing line geometry for a rectangle
- *  - Drawing based on these computed composite shapes
- */
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Rects, Lines } from '../../ixfx/geometry.js';
+
+import { CanvasHelper } from '@ixfx/visual';
+import { Rects, Lines } from '@ixfx/geometry';
 
 // Define settings
 const settings = Object.freeze({

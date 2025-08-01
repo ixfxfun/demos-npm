@@ -1,9 +1,9 @@
-import { Arrays, Pool } from 'ixfx/data.js';
-
+import * as Arrays from '@ixfx/arrays';
+import { Pool } from '@ixfx/flow';
 import * as Audio from './audio.js';
 
 const settings = Object.freeze({
-  voices: Pool.create({
+  voices: new Pool({
     // How many voices
     capacity: 5,
     // Call 'voiceAdded' to make a new voice,

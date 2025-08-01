@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>face</title>
   <link rel="stylesheet" href="../../base.css">
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx/": "/ixfx/" } }</script>
 </head>
+
 <body>
   <style>
     *,
@@ -48,14 +49,14 @@
       <iframe src="../sender/index.html"></iframe>
     </section>
     <script type="module">
-    document.querySelector(`#btnCloseFrame`)?.addEventListener(`click`, event => {
-      document.querySelector(`#sourceSection`)?.remove();
-      const element = event.target;
-      if (element) /** @type {HTMLElement} */(element).remove(); // Remove button too
-    });
-    document.querySelector(`#lnkNewWindow`)?.addEventListener(`click`, event => {
-      document.querySelector(`#sourceSection`)?.remove();
-    });
+      document.querySelector(`#btnCloseFrame`)?.addEventListener(`click`, event => {
+        document.querySelector(`#sourceSection`)?.remove();
+        const element = event.target;
+        if (element) /** @type {HTMLElement} */(element).remove(); // Remove button too
+      });
+      document.querySelector(`#lnkNewWindow`)?.addEventListener(`click`, event => {
+        document.querySelector(`#sourceSection`)?.remove();
+      });
     </script>
     <!-- ----  -->
 

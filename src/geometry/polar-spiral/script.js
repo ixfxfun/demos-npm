@@ -1,9 +1,6 @@
-/**
- * Read more: https://en.wikipedia.org/wiki/Archimedean_spiral
- */
-import { Modulation, Numbers } from '../../ixfx/bundle.js';
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Polar } from '../../ixfx/geometry.js';
+import { Modulation, Numbers } from '@ixfx/bundle';
+import { CanvasHelper } from '@ixfx/visual';
+import { Polar } from '@ixfx/geometry';
 
 const settings = Object.freeze({
   colour: `gray`,

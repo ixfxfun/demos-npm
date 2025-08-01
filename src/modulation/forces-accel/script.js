@@ -1,7 +1,7 @@
-import { Points } from 'ixfx/geometry.js';
-import { Forces } from 'ixfx/modulation.js';
-import { continuously } from 'ixfx/flow.js';
-import { PointTracker, point as pointTracker } from 'ixfx/trackers.js';
+import { Points, Rects } from '@ixfx/geometry';
+import { Forces } from '@ixfx/modulation';
+import { continuously } from '@ixfx/core';
+import { PointsTracker, PointTracker } from '@ixfx/geometry';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -10,10 +10,10 @@ const settings = Object.freeze({
 
 /**
  * @typedef {Readonly<{
- *  position: import('ixfx/geometry.js').Point,
- *  velocity: import('ixfx/geometry.js').Point
+ *  position: Points.Point,
+ *  velocity: Points.Point
  *  pointerMovement: PointTracker
- *  window: import('ixfx/geometry.js').Rect
+ *  window: Rects.Rect
  * }>} State
  */
 
@@ -24,7 +24,7 @@ let state = Object.freeze({
   // Random velocity on normalised 0..1 scale, and then reduced to lower speed
   velocity: Points.divide(Points.random(), 200, 200),
   // Track the pointer movementX,movementY
-  pointerMovement: pointTracker(),
+  pointerMovement: new PointTracker(),
   // Record size of window
   window: {
     width: window.innerWidth,

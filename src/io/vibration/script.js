@@ -1,4 +1,4 @@
-import { defaultErrorHandler } from 'ixfx/dom.js';
+import { defaultErrorHandler } from '@ixfx/dom';
 
 let state = Object.freeze({});
 

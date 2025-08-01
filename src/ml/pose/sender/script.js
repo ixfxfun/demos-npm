@@ -1,7 +1,7 @@
 // @ts-ignore
 import { LitElement } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import { MlVision } from "../../lib/index.js";
-import { shortGuid } from 'ixfx/random.js';
+import { shortGuid } from '@ixfx/random';
 
 // Parse query params
 const params = (new URL(document.location.toString())).searchParams;

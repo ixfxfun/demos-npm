@@ -1,9 +1,14 @@
-import { Easings } from 'ixfx/modulation.js';
-import * as Data from 'ixfx/data.js';
+import * as Core from '@ixfx/core';
+import * as Mod from '@ixfx/modulation';
 import * as Util from './util.js';
 
+/** @type Mod.Easings.EasingOptions */
+let y
+/** @type Mod.Easings.EasingOptions */
+let z
+
 const settings = Object.freeze({
-  easing: /** @type Easings.Options */({
+  easing: /** @type Mod.Easings.EasingOptions */({
     name: `quintIn`,
     duration: 1000,
   }),
@@ -25,7 +30,7 @@ let state = {
 
 /**
  * Make visual udpates based on current state
- * @param {Data.ResolvedObject<state>} computed
+ * @param {Core.ResolvedObject<state>} computed
  * @returns 
  */
 async function use(computed) {
@@ -49,7 +54,7 @@ const onPointerUp = (event) => {
   const pos = Util.relativePosition(sliderElement, event);
 
   // The easing function will produce 0..1 on a non-linear scale (ie. curved a little)
-  const e = Easings.create(easing);
+  const e = Mod.Easings.create(easing);
 
   // We want to ease from the current value to the new target
   const currentX = state.x();         // Current x value
@@ -76,7 +81,7 @@ const onPointerUp = (event) => {
 
 async function update() {
   // Resolve functions in state
-  const computed = await Data.resolveFields(state);
+  const computed = await Core.resolveFields(state);
 
   // Use the computed state
   await use(computed);

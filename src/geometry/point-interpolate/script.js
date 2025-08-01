@@ -1,4 +1,4 @@
-import { Points } from '../../ixfx/geometry.js';
+import { Points } from '@ixfx/geometry';
 
 // Define settings
 const settings = Object.freeze({
@@ -53,14 +53,14 @@ const use = () => {
 
 // Keep track of screen size whenever it resizes
 const onResize = () => {
-  saveState ({
+  saveState({
     bounds: {
       width: window.innerWidth,
       height: window.innerHeight
     }
   });
 };
-  
+
 
 /**
  * Handle pointerdown and pointermove
@@ -95,7 +95,7 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

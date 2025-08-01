@@ -1,5 +1,5 @@
-import { frequencyTimer } from 'ixfx/flow.js';
-import { Oscillators } from 'ixfx/modulation.js';
+import { frequencyTimer } from '@ixfx/flow';
+import { Oscillators } from '@ixfx/modulation';
 
 const settings = Object.freeze({
   osc: Oscillators.sine(frequencyTimer(0.1))

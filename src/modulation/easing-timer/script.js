@@ -1,9 +1,9 @@
-import { Easings } from 'ixfx/modulation.js';
-import { Data } from 'ixfx/bundle.js';
+import { Easings } from '@ixfx/modulation';
+import * as Core from '@ixfx/core';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
-  easing: /** @type Easings.Options */({
+  easing: /** @type Easings.EasingOptions */({
     name: `sineIn`,
     duration: 1000,
   }),
@@ -26,7 +26,7 @@ let state = {
 
 async function update() {
   // Resolve functions in state
-  const computed = await Data.resolveFields(state);
+  const computed = await Core.resolveFields(state);
 
   // Use the computed state
   await use(computed);
@@ -36,7 +36,7 @@ async function update() {
 
 /**
  * Make visual udpates based on current state
- * @param {Data.ResolvedObject<state>} computed
+ * @param {Core.ResolvedObject<state>} computed
  * @returns 
  */
 function use(computed) {

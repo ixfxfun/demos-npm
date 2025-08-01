@@ -1,6 +1,6 @@
-import { Points } from 'ixfx/geometry.js';
-import { Forces } from 'ixfx/modulation.js';
-import { continuously } from 'ixfx/flow.js';
+import { Points, Rects } from '@ixfx/geometry';
+import { Forces } from '@ixfx/modulation';
+import { continuously } from '@ixfx/core';
 import * as Util from './util.js';
 
 // Define settings
@@ -20,10 +20,10 @@ const settings = Object.freeze({
 
 /**
  * @typedef {Readonly<{
- *  position: import('ixfx/geometry.js').Point
- *  velocity:import('ixfx/geometry.js').Point
- *  targetPos:import('ixfx/geometry.js').Point
- *  window: import('ixfx/geometry.js').Rect
+ *  position: Points.Point
+ *  velocity:Points.Point
+ *  targetPos:Points.Point
+ *  window: Rects.Rect
  * }>} State
  */
 

@@ -1,28 +1,33 @@
 <!doctype html>
 
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>hand sender</title>
-    <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
 
-    <style>
-     html,body {
+<head>
+  <meta charset="utf-8">
+  <title>hand sender</title>
+  <script type="importmap">{ "imports": { "@ixfx/": "/ixfx/" } }</script>
+
+  <style>
+    html,
+    body {
       margin: 0;
       padding: 0;
       height: 100vh;
       width: 100vw;
       overflow: hidden;
       background-color: black;
-     }
-     #is {
-      height:100vh;
-      width:100vw;
-     }
-    </style>
-  </head>
-  <body data-server-no-reload>
-    <vision-element id="is"></vision-element>
-    <script type="module" src="./script.js"></script>
-  </body>
+    }
+
+    #is {
+      height: 100vh;
+      width: 100vw;
+    }
+  </style>
+</head>
+
+<body data-server-no-reload>
+  <vision-element id="is"></vision-element>
+  <script type="module" src="./script.js"></script>
+</body>
+
 </html>

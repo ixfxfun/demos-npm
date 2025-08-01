@@ -1,6 +1,7 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { repeatSync } from '../../ixfx/flow.js';
-import { Colour } from '../../ixfx/visual.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { repeatSync } from '@ixfx/flow';
+import { getCssVariable } from '@ixfx/dom';
+import { Colour } from '@ixfx/visual';
 
 /**
  * Returns a new random point with radius
@@ -15,7 +16,7 @@ const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   gravity: 0.01,
   // Drawing settings
-  dotColour: `hsla(${Colour.getCssVariable(`hue`, `100`)}, 100%, 80%, 0.8)`,
+  dotColour: `hsla(${getCssVariable(`hue`, `100`)}, 100%, 80%, 0.8)`,
   radiusMax: 10
 });
 
@@ -106,7 +107,7 @@ const clear = () => {
 
   // Fade out previously painted pixels
   ctx.globalCompositeOperation = `source-over`;
-  ctx.fillStyle = `hsla(${Colour.getCssVariable(`hue`, `100`)}, 100%, 1%, 0.1)`;
+  ctx.fillStyle = `hsla(${getCssVariable(`--hue`, `100`)}, 100%, 1%, 0.1)`;
   ctx.fillRect(0, 0, width, height);
 };
 

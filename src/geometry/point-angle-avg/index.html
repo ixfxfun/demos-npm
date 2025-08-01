@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <title>point-angle</title>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 </head>
 
 <body>
@@ -16,7 +17,8 @@
       --fg: hsl(var(--hue), 92%, 15%);
     }
 
-    html, body {
+    html,
+    body {
       user-select: none;
       -webkit-user-select: none;
       overscroll-behavior: none;
@@ -55,13 +57,13 @@
       <div class="thing" id="thingAvg">→</div>
       Averaged
     </h2>
-    Angle degrees: <span id="lblAngleDegAvg">?</span><br />
-    Angle radians: <span id="lblAngleRadAvg">?</span><br />
+    Angle degrees: <span id="lblAngleDegAvg">?</span><br>
+    Angle radians: <span id="lblAngleRadAvg">?</span><br>
     <h2>
       <div class="thing" id="thingRaw">→</div>Raw
     </h2>
-    Angle degrees: <span id="lblAngleDegRaw">?</span><br />
-    Angle radians: <span id="lblAngleRadRaw">?</span><br />
+    Angle degrees: <span id="lblAngleDegRaw">?</span><br>
+    Angle radians: <span id="lblAngleRadRaw">?</span><br>
   </section>
 
   <script type="module" src="script.js"></script>

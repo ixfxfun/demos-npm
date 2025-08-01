@@ -2,8 +2,8 @@
  * Simple demo of moving an element by cursor keys.
  * See README.md
  */
-import { getTranslation } from 'ixfx/dom.js';
-import { Points } from "ixfx/geometry.js";
+import { getTranslation } from '@ixfx/dom';
+import { Points } from '@ixfx/geometry';
 
 const settings = Object.freeze({
   // How many pixels to move with each key press

@@ -41,10 +41,10 @@ bc.addEventListener(`message`, ev => {
 /**
  * 
  * @param {string} query 
- * @returns import('ixfx/components.js').PlotElement
+ * @returns import('@ixfx/components.js').PlotElement
  */
 function getPlotter(query) {
-  const el = /** @type import('ixfx/components.js').PlotElement|null */(document.querySelector(query));
+  const el = /** @type import('@ixfx/components.js').PlotElement|null */(document.querySelector(query));
   if (!el) throw new Error(`Could not find element: ${query}`);
   return el;
 }

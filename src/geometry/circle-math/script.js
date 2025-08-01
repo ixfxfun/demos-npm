@@ -1,5 +1,5 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Circles } from '../../ixfx/geometry.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { Circles } from '@ixfx/geometry';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both`, coordinateScale: `min` }),

@@ -1,6 +1,7 @@
-import { Points } from 'ixfx/geometry.js';
-import { Bipolar, interpolate } from 'ixfx/numbers.js';
-import * as Dom from 'ixfx/dom.js';
+import { Points } from '@ixfx/geometry';
+import { CanvasHelper } from '@ixfx/visual';
+import { Bipolar, interpolate } from '@ixfx/numbers';
+import * as Dom from '@ixfx/dom';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 import * as Util from './util.js';
@@ -19,28 +20,21 @@ const settings = Object.freeze({
   // Empirically-discovered max angle
   tiltMax: 0.5,
   poses: pc.poses,
-  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
-
+  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
+  // Automatically sizes canvas for us
+  canvasHelper: new CanvasHelper(`canvas`, { resizeLogic: `both` })
 });
 
 /** 
  * @typedef {{
  *  tilt:number
  *  thing: Things.Thing
- *  bounds: import('./util.js').Bounds
  * }} State
  */
 
-/**
- * @type {State}
- */
+/** @type {State} */
 let state = Object.freeze({
   thing: Things.create(),
-  bounds: {
-    width: 0, height: 0,
-    min: 0, max: 0,
-    center: { x: 0, y: 0 },
-  },
   // Bipolar value: -1...1
   tilt: 0
 });
@@ -49,15 +43,16 @@ let state = Object.freeze({
  * Makes use of the data contained in `state`
  */
 const use = () => {
-  const { bounds, thing, tilt } = state;
-  const context = Util.getDrawingContext();
+  const { thing, tilt } = state;
+  const { canvasHelper } = settings;
+  const { ctx } = canvasHelper;
 
   Util.textContent(`#info`, tilt);
 
-  context.fillStyle = `hsl(220, 100%, 90%)`;
-  context.fillRect(0, 0, bounds.width, bounds.height);
+  ctx.fillStyle = `hsl(220, 100%, 90%)`;
+  ctx.fillRect(0, 0, canvasHelper.width, canvasHelper.height);
 
-  Things.use(thing, context, bounds);
+  Things.use(thing, ctx, canvasHelper);
 };
 
 const update = () => {
@@ -116,11 +111,6 @@ const computeShoulderAngle = (pose) => {
 
 
 function setup() {
-  // Automatically size canvas to viewport
-  Dom.fullSizeCanvas(`#canvas`, onResized => {
-    saveState({ bounds: onResized.bounds });
-  });
-
   // Update
   setInterval(() => {
     update();

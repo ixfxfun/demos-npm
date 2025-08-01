@@ -1,6 +1,6 @@
-import * as Mod from '../../ixfx/modulation.js';
-import * as Numbers from '../../ixfx/numbers.js';
-import { CanvasHelper } from '../../ixfx/dom.js';
+import * as Mod from '@ixfx/modulation';
+import * as Numbers from '@ixfx/numbers';
+import { CanvasHelper } from '@ixfx/visual';
 
 // Define settings
 const settings = Object.freeze({

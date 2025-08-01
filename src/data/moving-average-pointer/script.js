@@ -2,13 +2,13 @@
  * Demonstrates using two movingAverage instances to smooth
  * pointer x,y positions in order to position an element.
  */
-import { movingAverage } from 'ixfx/numbers.js';
-import { Points } from 'ixfx/geometry.js';
-import { mapObjectShallow } from 'ixfx/data.js';
+import { movingAverage } from '@ixfx/numbers';
+import { Points } from '@ixfx/geometry';
+import { Records } from '@ixfx/core';
 
 const settings = Object.freeze({
   // Create an averager for x and y
-  average: mapObjectShallow({ x: 0, y: 0 }, args => movingAverage(100))
+  average: Records.mapObjectShallow({ x: 0, y: 0 }, args => movingAverage(100))
 });
 
 let state = Object.freeze({
@@ -46,6 +46,9 @@ const use = () => {
 const moveElement = (thingElement) => {
   if (!thingElement) return;
   const { avg } = state;
+
+  // If we don't have a valid average, don't do anything
+  if (Points.isNaN(avg)) return;
 
   // Map x,y to absolute pos
   const abs = Points.multiply(avg, window.innerWidth, window.innerHeight);
@@ -92,6 +95,7 @@ setup();
  * @param {Partial<state>} s 
  */
 function saveState(s) {
+
   state = Object.freeze({
     ...state,
     ...s

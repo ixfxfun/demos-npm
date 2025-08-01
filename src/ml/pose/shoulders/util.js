@@ -7,14 +7,6 @@
  * @property {number} max
  */
 
-export const getDrawingContext = (query = `#canvas`) => {
-  /** @type HTMLCanvasElement|null */
-  const canvasElement = document.querySelector(query);
-  const context = canvasElement?.getContext(`2d`);
-  if (!context || !canvasElement) throw new Error(`Could not get canvas`);
-  return context;
-};
-
 export const textContent = (query, text) => {
   const element = document.querySelector(query);
   if (element === null) return;

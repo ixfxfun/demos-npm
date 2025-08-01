@@ -1,8 +1,8 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import { Points } from 'ixfx/geometry.js';
-import * as Dom from 'ixfx/dom.js';
-import * as Numbers from "ixfx/numbers.js";
+import { Points } from '@ixfx/geometry';
+import * as Dom from '@ixfx/dom';
+import * as Numbers from "@ixfx/numbers";
 import * as MpVision from '../../lib/client/index.js';
 import * as Hands from '../hands.js';
 

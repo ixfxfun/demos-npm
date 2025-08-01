@@ -1,4 +1,4 @@
-import * as Dom from 'ixfx/dom.js';
+import * as Dom from '@ixfx/dom';
 
 const settings = Object.freeze({
   updateRateMs: 1000

@@ -1,6 +1,5 @@
-import { Points, radianToDegree } from 'ixfx/geometry.js';
-import { Dom, Numbers } from 'ixfx/bundle.js';
-import { Bipolar } from 'ixfx/numbers.js';
+import { Points, radianToDegree } from '@ixfx/geometry';
+import { Dom, Numbers } from '@ixfx/bundle';
 import * as Util from './util.js';
 import * as EspruinoSnippets from './espruino.js';
 
@@ -112,9 +111,9 @@ function normaliseData(data) {
   }
 
   // Scale value to a rough min/max. Return result will be on -1...1 bipolar scale (Bipolar.scale also clamps)
-  x = Bipolar.scale(x, -magnetMax, magnetMax);
-  y = Bipolar.scale(y, -magnetMax, magnetMax);
-  z = Bipolar.scale(z, -magnetMax, magnetMax);
+  x = Numbers.Bipolar.scale(x, -magnetMax, magnetMax);
+  y = Numbers.Bipolar.scale(y, -magnetMax, magnetMax);
+  z = Numbers.Bipolar.scale(z, -magnetMax, magnetMax);
 
   // Compose x, y & z values into an object
   const cleaned = { x, y, z };

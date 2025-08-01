@@ -1,21 +1,22 @@
-import { Svg, Colour } from '../../ixfx/visual.js';
-import { Points } from '../../ixfx/geometry.js';
-import { Numbers, Dom, Modulation } from '../../ixfx/bundle.js';
+import { Dom, Modulation } from '@ixfx/bundle';
+import { Svg, Colour } from '@ixfx/visual';
+import { Points, Rects } from '@ixfx/geometry';
 
 const settings = Object.freeze({
   // Relative middle
   originPoint: { x: 0.5, y: 0.5 },
   strokeWidthMax: 70,
   strokeWidthMin: 3,
-  strokeStyle: Colour.getCssVariable(`arc`, `#FACF5A`),
+  // Gets the --arc CSS variable value, or uses a fallback value
+  strokeStyle: Colour.toStringFirst(`arc`, `#FACF5A`),
   wave: Modulation.wave({ shape: `sine`, hertz: 0.1 })
 });
 
 /**
  * @typedef {Readonly<{
  * wave: number
- * viewportSize: { width: number, height: number }
- * viewportCenter: { x:number, y:number }
+ * viewportSize: Rects.Rect
+ * viewportCenter: Points.Point
  * pointers: {}
  * }>} State
  */

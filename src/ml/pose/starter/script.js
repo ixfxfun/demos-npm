@@ -1,4 +1,5 @@
-import * as Dom from 'ixfx/dom.js';
+import * as Dom from '@ixfx/dom';
+import { CanvasHelper } from '@ixfx/visual';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Util from './util.js';
 
@@ -7,7 +8,9 @@ const pc = new PosesConsumer();
 
 const settings = Object.freeze({
   poses: pc.poses,
-  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
+  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
+  // Automatically sizes canvas for us
+  canvasHelper: new CanvasHelper(`canvas`, { resizeLogic: `both` })
 });
 
 /** 
@@ -55,6 +58,8 @@ const update = () => {
  * @param {State} state 
  */
 const use = (state) => {
+  const { canvasHelper } = settings;
+  const { ctx } = canvasHelper;
   // get stuff from state
   // do stuff with it...
 
@@ -62,8 +67,6 @@ const use = (state) => {
 
 
 function setup() {
-  // Automatically size canvas to viewport
-  Dom.fullSizeCanvas(`#canvas`);
 
   // Draw loop
   window.requestAnimationFrame(update);

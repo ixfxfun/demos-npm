@@ -1,6 +1,7 @@
-import { Points } from 'ixfx/geometry.js';
-import { Forces } from 'ixfx/modulation.js';
+import { Points } from '@ixfx/geometry';
+import { Forces } from '@ixfx/modulation';
 import * as Util from './util.js';
+import { CanvasHelper } from '@ixfx/visual';
 
 const settings = Object.freeze({
   hueInterpolateAmount: 0.01,
@@ -26,19 +27,19 @@ const settings = Object.freeze({
  * Make use of data from `thing`
  * @param {Thing} thing 
  * @param {CanvasRenderingContext2D} context
- * @param {import('./util.js').Bounds} bounds
+ * @param {CanvasHelper} canvasHelper
  */
-export const use = (thing, context, bounds) => {
+export const use = (thing, context, canvasHelper) => {
   const { position, size } = thing;
 
-  const absolutePosition = Points.multiply(position, bounds.width, bounds.height);
+  const absolutePosition = Points.multiply(position, canvasHelper.width, canvasHelper.height);
 
   // Translate so 0,0 is the middle of the Thing
   context.save();
   context.translate(absolutePosition.x, absolutePosition.y);
 
   // Radius is size of thing proportional to half the smallest screen dimension
-  const radius = size * bounds.min / 2;
+  const radius = size * canvasHelper.dimensionMin / 2;
 
   // Opacity is based on 'surprise'
   const opacity = 1;

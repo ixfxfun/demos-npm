@@ -1,4 +1,4 @@
-import { Espruino } from 'ixfx/io.js';
+import { Espruino } from '@ixfx/io'
 import { setClassAll } from './util.js';
 
 // No settings needed for this sketch

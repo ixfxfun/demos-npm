@@ -1,19 +1,23 @@
-import { Points } from 'ixfx/geometry.js';
-import { Bipolar } from 'ixfx/numbers.js';
-import * as Dom from 'ixfx/dom.js';
+import { Points } from '@ixfx/geometry';
+import { Bipolar } from '@ixfx/numbers';
+import * as Dom from '@ixfx/dom';
+import { CanvasHelper } from '@ixfx/visual';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Util from './util.js';
 
 const pc = new PosesConsumer({ maxAgeMs: 2000 });
 
 const settings = Object.freeze({
+  // Tracked poses
   poses: pc.poses,
   // How often to compute data from poses & update thing
   updateSpeedMs: 10,
-  // Min and max tilt values
-  // (empirically figured out)
+  // Min and max tilt values (empirically figured out)
   tiltRange: [-0.5, 0.5],
-  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
+  // Be able to show some debug info for ourselves
+  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
+  // Automatically sizes canvas for us
+  canvasHelper: new CanvasHelper(`canvas`, { resizeLogic: `both` }),
 });
 
 /** 
@@ -30,10 +34,15 @@ let state = Object.freeze({
   tilt: 0
 });
 
+/**
+ * Calculates a combined shoulder angle of all poses,
+ * returning a value on bipolar -1 ... 1 scale. Where 0 means middle.
+ * @returns 
+ */
 const calculateCombinedAngle = () => {
   const { poses, tiltRange } = settings;
 
-  // If there's no poses:
+  // If there's no poses, say that angle is 0
   if (poses.size === 0) return 0;
 
   let angleTotal = 0;
@@ -52,8 +61,8 @@ const calculateCombinedAngle = () => {
   // Calculate average
   let angle = angleTotal / counted;
   if (Number.isNaN(angle)) {
-    // Can be NaN if there were no poses
-    angle = 0;
+    // Could be NaN if there were no poses. Treat this as being in the middle.
+    return 0;
   }
 
   // Put on bipolar scale (-1...1)
@@ -84,18 +93,18 @@ const update = () => {
  */
 const use = (state) => {
   const { tilt } = state;
+  const { canvasHelper } = settings;
+  const { ctx } = canvasHelper;
+
   // For debug purposes, dump data to a table
   settings.dataDisplay.update(state);
 
-  const ctx = Util.getDrawingContext();
-
   // Fade out canvas
   ctx.fillStyle = `hsl(0,0%,100%,0.01)`;
-
   ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
-  // Get x coordinate based on bipolar value
-  const x = window.innerWidth * Bipolar.toScalar(tilt);
+  // Get x coordinate based on current tilt value (bipolar)
+  const x = Bipolar.toScalar(tilt, window.innerWidth);
 
   Util.drawDot(ctx, x, window.innerHeight / 2, 50 * Math.random(), `black`);
 };
@@ -111,9 +120,6 @@ const computeShoulderAngle = (pose) => {
 };
 
 function setup() {
-  // Automatically size canvas to viewport
-  Dom.fullSizeCanvas(`#canvas`);
-
   // Draw loop
   window.requestAnimationFrame(update);
 };

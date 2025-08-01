@@ -7,13 +7,6 @@
  * @property {number} max
  */
 
-export const getDrawingContext = (query = `#canvas`) => {
-  /** @type HTMLCanvasElement|null */
-  const canvasElement = document.querySelector(query);
-  const context = canvasElement?.getContext(`2d`);
-  if (!context || !canvasElement) throw new Error(`Could not get canvas`);
-  return context;
-};
 
 /**
  * Draw a dot at an absolute position
@@ -46,6 +39,12 @@ export const relativePoint = (x, y) => {
   };
 };
 
+/**
+ * Make point absolute
+ * @param {number} x 
+ * @param {number} y 
+ * @returns 
+ */
 export const absPoint = (x, y) => {
   return {
     x: x * window.innerWidth,

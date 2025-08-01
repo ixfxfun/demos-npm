@@ -1,4 +1,4 @@
-import * as Flow from 'ixfx/flow.js';
+import * as Flow from '@ixfx/flow';
 
 const settings = Object.freeze({
   // How much time is considered 100%

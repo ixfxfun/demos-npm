@@ -1,6 +1,6 @@
-import { Iterables } from 'ixfx/bundle.js';
+import * as Iterables from '@ixfx/iterables';
+import { Points, Triangles } from '@ixfx/geometry';
 import * as MpVision from '../lib/client/index.js';
-import { Points, Triangles } from 'ixfx/geometry.js';
 
 
 /**
@@ -218,7 +218,7 @@ export function* filterIndexByHandedness(which, results, threshold = 0.8) {
 
 /**
  * Returns a landmark as as tring
- * @param {MpVision.NormalizedLandmark|MpVision.Landmark|number|import('ixfx/geometry.js').Point} point 
+ * @param {MpVision.NormalizedLandmark|MpVision.Landmark|number|Points.Point} point 
  */
 export function lmString(point, precision = 2) {
   if (typeof point === `number`) {

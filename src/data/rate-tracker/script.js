@@ -1,4 +1,4 @@
-import { rate } from 'ixfx/trackers.js';
+import { rate } from '@ixfx/trackers';
 
 const settings = Object.freeze({
   updateRateMs: 500,

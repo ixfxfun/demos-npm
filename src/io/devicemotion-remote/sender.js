@@ -1,5 +1,5 @@
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import * as Dom from 'ixfx/dom.js';
+import * as Dom from '@ixfx/dom';
 
 const settings = Object.freeze({
   lastDataEl: /** @type HTMLElement */(document.querySelector(`#lastData`))

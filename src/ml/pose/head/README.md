@@ -1,4 +1,4 @@
-# pose-head
+# pose/head
 
 Make sure your 'sender' is using the 'pose' model.
 
@@ -10,4 +10,4 @@ This basic demo demonstrates:
 
 It is limited because it mirrors the data to the canvas.
 
-We use helper files from `pose-helper`. They shouldn't need to be modified.
+In this demo we draw a circle for each detected head. The circle is positioned relative to where the head appears in the camera frame. It's also sized roughly based on how much of the camera frame the head fills.

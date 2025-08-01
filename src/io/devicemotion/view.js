@@ -1,6 +1,6 @@
-import * as Dom from 'ixfx/dom.js';
+import * as Dom from '@ixfx/dom';
+import { PlotElement } from '@ixfx/components';
 import * as DeviceMotion from './devicemotion.js';
-import { PlotElement } from 'ixfx/components.js';
 
 const settings = Object.freeze({
   accelEl: /** @type HTMLElement */(document.querySelector(`#accel`)),

@@ -1,10 +1,10 @@
-import * as Numbers from 'ixfx/numbers.js';
-import * as Trackers from 'ixfx/trackers.js';
+import * as Numbers from '@ixfx/numbers';
+import { PointTracker } from '@ixfx/geometry';
 import * as Util from "./util.js";
 
 const settings = Object.freeze({
   // Tracker for point. Reset when there is a pointerdown
-  tracker: Trackers.point({
+  tracker: new PointTracker({
     sampleLimit: 5
   }),
   // How much to decay values by each loop
@@ -17,7 +17,7 @@ const settings = Object.freeze({
 
 /** 
  * @typedef {{
- *  relative:import("ixfx/trackers.js").PointTrack|undefined,
+ *  relative:import('@ixfx/geometry').PointTrack|undefined,
  *  angle: number
  *  speed: number
  * }} State

@@ -1,4 +1,4 @@
-import { clamp } from "ixfx/numbers.js";
+import { clamp } from "@ixfx/numbers";
 /**
  * @typedef {{
  *  x: number,

@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>point-tracker</title>
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 
@@ -26,13 +26,14 @@
       --fg: hsl(var(--hue), 100%, 10%);
     }
 
-    html, body {
+    html,
+    body {
       user-select: none;
       -webkit-user-select: none;
       overscroll-behavior: none;
       touch-action: none;
     }
-    
+
 
     body {
       background-color: var(--bg);

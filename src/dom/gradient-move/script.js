@@ -6,7 +6,7 @@
  *  CSS linear gradients, 
  *  CSS background clipping
  */
-import { Points } from 'ixfx/geometry.js';
+import { Points } from '@ixfx/geometry';
 
 /**
  * Define our 'thing' (this is optional) which consists of 

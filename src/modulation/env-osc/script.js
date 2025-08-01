@@ -1,5 +1,5 @@
-import { Envelopes } from 'ixfx/modulation.js';
-import { count } from 'ixfx/numbers.js';
+import { Numbers } from '@ixfx/bundle';
+import { Envelopes } from '@ixfx/modulation';
 import * as Things from './thing.js';
 
 const settings = Object.freeze({
@@ -86,7 +86,7 @@ const setup = () => {
   });
 
   // Create 5 things
-  for (const v of count(settings.howManyThings)) {
+  for (const v of Numbers.count(settings.howManyThings)) {
     generateThing();
   }
   update();

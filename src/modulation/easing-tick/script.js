@@ -1,5 +1,5 @@
-import { Easings } from 'ixfx/modulation.js';
-import * as Data from 'ixfx/data.js';
+import { Easings } from '@ixfx/modulation';
+import * as Core from '@ixfx/core';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -39,7 +39,7 @@ const onPointerOrKeyUp = (event) => {
 
 /**
  * Make visual udpates based on current state
- * @param {Data.ResolvedObject<state>} computed
+ * @param {Core.ResolvedObject<state>} computed
  * @returns 
  */
 const use = (computed) => {
@@ -63,7 +63,7 @@ const use = (computed) => {
 
 async function update() {
   // Resolve functions in state
-  const computed = await Data.resolveFields(state);
+  const computed = await Core.resolveFields(state);
 
   // Use the computed state
   await use(computed);

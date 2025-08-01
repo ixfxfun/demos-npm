@@ -1,6 +1,6 @@
-import { Sources } from 'ixfx/modulation.js';
-import { resolveFields } from 'ixfx/data.js';
-import { clamp, scale, scalePercent } from 'ixfx/numbers.js';
+import { Sources } from '@ixfx/modulation';
+import { resolveFields } from '@ixfx/core';
+import { clamp, scalePercent } from '@ixfx/numbers';
 
 const settings = {
   thingEl: /** @type HTMLElement */(document.querySelector(`#thing`)),

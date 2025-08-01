@@ -1,6 +1,6 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Colour } from '../../ixfx/visual.js';
-import { Points, Lines } from '../../ixfx/geometry.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { Lines } from '@ixfx/geometry';
+import { getCssVariable } from '@ixfx/dom';
 
 const piPi = Math.PI * 2;
 
@@ -22,7 +22,8 @@ const settings = Object.freeze({
   },
   // How much to increment by on each loop (radians)
   rotationIncrement: 0.005,
-  lineStyle: Colour.getCssVariable(`fg`, `#22EACA`)
+  // Get CSS variable --fg, or if it's missing use a fallback value
+  lineStyle: getCssVariable(`--fg`, `#22EACA`)
 });
 
 // Initial state with empty values

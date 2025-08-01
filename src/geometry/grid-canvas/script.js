@@ -6,11 +6,11 @@
  *  - dampening modulation value
  *  - calculating distance from a cell to pointer
  */
-import { Grids, Points } from '../../ixfx/geometry.js';
-import * as Modulation from '../../ixfx/modulation.js';
-import * as Flow from '../../ixfx/flow.js';
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { scalePercent } from '../../ixfx/numbers.js';
+import { Grids, Points } from '@ixfx/geometry';
+import * as Modulation from '@ixfx/modulation';
+import * as Flow from '@ixfx/flow';
+import { CanvasHelper } from '@ixfx/visual';
+import { scalePercent } from '@ixfx/numbers';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),

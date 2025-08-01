@@ -1,4 +1,4 @@
-import { log, Forms } from 'ixfx/dom.js';
+import { log, Forms } from '@ixfx/dom';
 
 const settings = Object.freeze({
   lastEl: /** @type HTMLElement */(document.querySelector(`#last`)),

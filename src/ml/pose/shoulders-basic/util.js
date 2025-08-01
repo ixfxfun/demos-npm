@@ -1,5 +1,3 @@
-
-
 /**
  * @typedef {object} Bounds
  * @property {number} width
@@ -9,13 +7,6 @@
  * @property {number} max
  */
 
-export const getDrawingContext = (query = `#canvas`) => {
-  /** @type HTMLCanvasElement|null */
-  const canvasElement = document.querySelector(query);
-  const context = canvasElement?.getContext(`2d`);
-  if (!context || !canvasElement) throw new Error(`Could not get canvas`);
-  return context;
-};
 
 /**
  * Draw a dot at an absolute position

@@ -4,7 +4,7 @@
  * This makes it easy to use CSS styling and DOM elements for further interaction.
  */
 
-import { Grids } from '../../ixfx/geometry.js';
+import { Grids } from '@ixfx/geometry';
 
 // Define settings
 const settings = Object.freeze({

@@ -1,4 +1,4 @@
-import * as Dom from 'ixfx/dom.js';
+import * as Dom from '@ixfx/dom';
 import * as DeviceMotion from './devicemotion.js';
 
 const settings = Object.freeze({});

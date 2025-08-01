@@ -1,4 +1,4 @@
-import { Points, radianToDegree } from '../../ixfx/geometry.js';
+import { Points, radianToDegree } from '@ixfx/geometry';
 
 /**
  * Make `x` and `y` relative with respect to window dimensions
@@ -42,6 +42,6 @@ export const textContent = (query, text) => {
   if (element === null) return;
   if (element === undefined) return;
   if (text === undefined) text = ``;
-  if (typeof text === `number`) text =text.toString();
+  if (typeof text === `number`) text = text.toString();
   element.textContent = text;
 };

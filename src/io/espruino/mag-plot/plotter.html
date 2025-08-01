@@ -5,11 +5,12 @@
 No need to edit this file!
 --------------------------
 -->
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>plot</title>
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 <style>
@@ -39,7 +40,7 @@ No need to edit this file!
 
   .data {
     font-family: var(--mono-font);
-    min-width:10rem;
+    min-width: 10rem;
   }
 
   h2 {
@@ -53,13 +54,15 @@ No need to edit this file!
   }
 
   section {
-    display:flex;
+    display: flex;
     gap: 1rem;
   }
+
   section>div>div {
-    display:flex;
-    gap:0.5rem;
+    display: flex;
+    gap: 0.5rem;
   }
+
   .plot {
     width: 10em;
     height: 5em;
@@ -68,32 +71,31 @@ No need to edit this file!
 
 <body>
   <section>
+    <div>
+      <h2>x</h2>
       <div>
-        <h2>x</h2>
-        <div>
-          <div>in: <span class="data" id="in-x">?</span></div>
-          <div>out: <span class="data" id="out-x">?</span></div>
-        </div>
-        <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-x"></plot-element>
+        <div>in: <span class="data" id="in-x">?</span></div>
+        <div>out: <span class="data" id="out-x">?</span></div>
       </div>
+      <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-x"></plot-element>
+    </div>
+    <div>
+      <h2>y</h2>
       <div>
-        <h2>y</h2>
-        <div>
-          <div>in: <span class="data" id="in-y">?</span></div>
-          <div>out: <span class="data" id="out-y">?</span></div>
-        </div>
-        <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-y"></plot-element>
+        <div>in: <span class="data" id="in-y">?</span></div>
+        <div>out: <span class="data" id="out-y">?</span></div>
       </div>
+      <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-y"></plot-element>
+    </div>
+    <div>
+      <h2>z</h2>
       <div>
-        <h2>z</h2>
-        <div>
-          <div>in: <span class="data" id="in-z">?</span></div>
-          <div>out: <span class="data" id="out-z">?</span></div>
-        </div>
-        <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-z"></plot-element>
+        <div>in: <span class="data" id="in-z">?</span></div>
+        <div>out: <span class="data" id="out-z">?</span></div>
       </div>
+      <plot-element hide-legend max-length=50 render="line" line-width="2" class="plot" id="plot-z"></plot-element>
+    </div>
     <script type="module" src="./plotter.js"></script>
-    <script type="module" src="../../../ixfx/components.js"></script>
   </section>
 </body>
 

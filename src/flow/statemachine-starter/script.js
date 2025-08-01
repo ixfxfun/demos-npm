@@ -1,4 +1,4 @@
-import { StateMachine } from 'ixfx/flow.js';
+import { StateMachine } from '@ixfx/flow';
 
 // Init settings
 const settings = Object.freeze({

@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <title>pose-shoulders</title>
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 
@@ -35,17 +35,30 @@
       overscroll-behavior: none;
       touch-action: none;
     }
+
     #ixfx-data-display {
       top: unset !important;
       right: unset !important;
       bottom: 0 !important;
       left: 0 !important;
     }
+
+    canvas,
+    section {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    section {
+      padding: 1rem;
+    }
   </style>
+  <canvas id="canvas"></canvas>
   <section>
     <h1>pose-shoulders</h1>
+    <p>Angle your shoulders to tilt the circle.</p>
     <a href="../sender/index.html" target="_blank">Remote</a>
-    <canvas id="canvas"></canvas>
     <div id="info">?</div>
     <script type="module" src="script.js"></script>
   </section>

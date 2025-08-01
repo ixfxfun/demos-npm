@@ -1,4 +1,4 @@
-import { CanvasHelper } from 'ixfx/dom.js';
+import { CanvasHelper } from '@ixfx/visual';
 
 // Define settings - properties that don't change
 const settings = Object.freeze({

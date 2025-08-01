@@ -1,8 +1,9 @@
-import { clamp } from 'ixfx/numbers.js';
-import { CanvasHelper } from 'ixfx/dom.js';
-import { Colour } from 'ixfx/visual.js';
-import { StateMachine, Elapsed } from 'ixfx/flow.js';
-import { Circles } from 'ixfx/geometry.js';
+import { clamp } from '@ixfx/numbers';
+import { getCssVariable } from '@ixfx/dom';
+import { CanvasHelper } from '@ixfx/visual';
+import { StateMachine } from '@ixfx/flow';
+import { Circles } from '@ixfx/geometry';
+import { elapsedInfinity, elapsedSince } from '@ixfx/core';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
@@ -16,11 +17,11 @@ const settings = Object.freeze({
    */
   circles: [],
   // Get --hue variable from the HTML
-  hue: Colour.getCssVariable(`hue`, `100`)
+  hue: getCssVariable(`hue`, `100`)
 });
 
 let state = Object.freeze({
-  elapsed: Elapsed.infinity(),
+  elapsed: elapsedInfinity(),
   /** @type string */
   current: ``,
   /** @type number[] */
@@ -72,7 +73,7 @@ const update = async () => {
 
   if (result?.value !== current) {
     // State has changed, keep track of it
-    elapsed = Elapsed.since();
+    elapsed = elapsedSince();
     state = {
       ...state,
       elapsed,

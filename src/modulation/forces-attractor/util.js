@@ -1,6 +1,5 @@
-import { Drawing } from 'ixfx/visual.js';
-import { CanvasHelper } from 'ixfx/dom.js';
-import { Points, Shapes } from 'ixfx/geometry.js';
+import { CanvasHelper, Drawing } from '@ixfx/visual';
+import { Points, Shapes } from '@ixfx/geometry';
 
 const settings = Object.freeze({
   // Visual options for attractees

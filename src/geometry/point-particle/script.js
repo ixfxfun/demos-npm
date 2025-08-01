@@ -1,8 +1,8 @@
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { repeatSync } from '../../ixfx/flow.js';
-import { jitter } from '../../ixfx/modulation.js';
-import { flip } from '../../ixfx/numbers.js';
-import { gaussian } from '../../ixfx/random.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { repeatSync } from '@ixfx/flow';
+import { jitter } from '@ixfx/modulation';
+import { flip } from '@ixfx/numbers';
+import { gaussian } from '@ixfx/random';
 import * as Particle from './particle.js';
 
 const settings = Object.freeze({

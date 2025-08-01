@@ -1,14 +1,14 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import * as Dom from 'ixfx/dom.js';
+import { DataDisplay } from '@ixfx/dom';
+import { average, Bipolar, scaleClamped } from "@ixfx/numbers";
 import * as MpVision from "../../pose/util/Poses.js";
-import { average, Bipolar, scaleClamped } from "ixfx/numbers.js";
 
 const settings = Object.freeze({
   // How quickly to call update()
   updateRateMs: 100,
   remote: new Remote(),
-  dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
+  dataDisplay: new DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
 });
 
 /**

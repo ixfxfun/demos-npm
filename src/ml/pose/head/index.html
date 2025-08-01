@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>pose/head</title>
   <link rel="stylesheet" href="../../base.css">
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 
@@ -22,7 +22,7 @@
 
     :root {
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      --bg: black;
+      --bg: rgb(106, 106, 106);
       --fg: white;
     }
 
@@ -38,7 +38,15 @@
       bottom: 0 !important;
       left: 0 !important;
     }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   </style>
+  <canvas id="canvas"></canvas>
+
   <section>
     <!-- If you're not using the panel, comment-out these lines... -->
     <section class="s" id="sourceSection">
@@ -50,19 +58,18 @@
       <iframe src="../sender/index.html"></iframe>
     </section>
     <script type="module">
-    document.querySelector(`#btnCloseFrame`)?.addEventListener(`click`, event => {
-      document.querySelector(`#sourceSection`)?.remove();
-      const element = event.target;
-      if (element) /** @type {HTMLElement} */(element).remove(); // Remove button too
-    });
-    document.querySelector(`#lnkNewWindow`)?.addEventListener(`click`, event => {
-      document.querySelector(`#sourceSection`)?.remove();
-    });
+      document.querySelector(`#btnCloseFrame`)?.addEventListener(`click`, event => {
+        document.querySelector(`#sourceSection`)?.remove();
+        const element = event.target;
+        if (element) /** @type {HTMLElement} */(element).remove(); // Remove button too
+      });
+      document.querySelector(`#lnkNewWindow`)?.addEventListener(`click`, event => {
+        document.querySelector(`#sourceSection`)?.remove();
+      });
     </script>
     <!-- ----  -->
 
     <h1>pose/head</h1>
-    <canvas id="canvas"></canvas>
     <script type="module" src="script.js"></script>
   </section>
 </body>

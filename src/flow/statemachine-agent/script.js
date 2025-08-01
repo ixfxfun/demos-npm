@@ -1,5 +1,5 @@
-import { clamp } from 'ixfx/numbers.js';
-import { StateMachine, continuously } from 'ixfx/flow.js';
+import { clamp } from '@ixfx/numbers';
+import { StateMachine, continuously } from '@ixfx/flow';
 
 // Settings
 const settings = Object.freeze({
@@ -9,13 +9,19 @@ const settings = Object.freeze({
   labelEnergy:/** @type HTMLElement */(document.querySelector(`#labelEnergy`))
 });
 
-// Regular state
-let state = Object.freeze({
-  /** @type string */
+/**
+ * @typedef {Readonly<{
+ * current:string
+ * energy:number
+ * }>} State
+ */
+
+
+/** @type State */
+let state = {
   current: ``,
-  /** @type number */
   energy: 0.5,
-});
+};
 
 // State machine transitions
 const stateMachine = Object.freeze({
@@ -108,10 +114,9 @@ async function setup() {
   continuously(async () => {
     const result = await driver.run();
     if (result?.value !== state.current) {
-      state = {
-        ...state,
-        current: /** @type string*/(result?.value),
-      };
+      saveState({
+        current: result?.value
+      });
     }
 
     updateUi();
@@ -119,9 +124,11 @@ async function setup() {
 };
 await setup();
 
+
 function updateEnergy(amt) {
-  const { energy } = state;
-  state = { ...state, energy: clamp(energy + amt) };
+  saveState({
+    energy: clamp(state.energy + amt)
+  })
 }
 
 function stateToEmoji(state) {
@@ -143,4 +150,16 @@ function stateToEmoji(state) {
     }
   }
   return `?`;
+}
+
+/**
+ * Save state
+ * @param {Partial<State>} s 
+ */
+function saveState(s) {
+  state = Object.freeze({
+    ...state,
+    ...s
+  });
+  return state;
 }

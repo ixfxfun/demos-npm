@@ -1,6 +1,6 @@
 import * as MpVision from "../../pose/util/Poses.js";
-import { Points } from 'ixfx/geometry.js';
-import { Bipolar, scale, scaleClamped } from "ixfx/numbers.js";
+import { Points } from '@ixfx/geometry';
+import { Bipolar, scale, scaleClamped } from "@ixfx/numbers";
 
 /**
  * Compute tilt angle of head. It should return 0 when head is

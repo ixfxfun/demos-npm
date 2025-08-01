@@ -1,5 +1,6 @@
-import * as Dom from 'ixfx/dom.js';
-import { Points } from 'ixfx/geometry.js';
+import * as Dom from '@ixfx/dom';
+import { CanvasHelper } from '@ixfx/visual';
+import { Points } from '@ixfx/geometry';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 
 const pc = new PosesConsumer({ maxAgeMs: 500 });
@@ -7,8 +8,11 @@ const pc = new PosesConsumer({ maxAgeMs: 500 });
 const settings = Object.freeze({
   // How quickly to call update()
   updateRateMs: 100,
+  // Tracked poses
   poses: pc.poses,
-  canvasEl: /** @type HTMLCanvasElement */(document.querySelector(`#canvas`)),
+  // Automatically sizes canvas for us
+  canvasHelper: new CanvasHelper(`canvas`, { resizeLogic: `both` }),
+  // Overlay to show data for debugging
   dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } })
 });
 
@@ -23,19 +27,12 @@ const settings = Object.freeze({
 
 /**
  * @typedef {Readonly<{
- * bounds: { width: number, height: number, center: Points.Point }
- * scaleBy: number
  * heads: Array<Head>
  * }>} State
  */
 
 /** @type State */
 let state = Object.freeze({
-  bounds: {
-    width: 0, height: 0,
-    center: { x: 0, y: 0 },
-  },
-  scaleBy: 1,
   heads: []
 });
 
@@ -80,18 +77,17 @@ const computeHead = (pose) => {
 };
 
 const draw = () => {
-  const { width, height } = state.bounds;
   const { heads } = state;
-  const context = settings.canvasEl.getContext(`2d`);
-  if (!context) return;
+  const { canvasHelper } = settings;
+  const { ctx } = canvasHelper;
 
   // Fade out the canvas
-  context.fillStyle = `rgba(0,0,0,0.015)`;
-  context.fillRect(0, 0, width, height);
+  ctx.fillStyle = `rgba(227, 227, 227, 0.44)`;
+  ctx.fillRect(0, 0, canvasHelper.width, canvasHelper.height);
 
   // Draw each head
   for (const head of heads) {
-    drawHead(context, head);
+    drawHead(ctx, head);
   }
 };
 
@@ -101,8 +97,9 @@ const draw = () => {
  * @param {Head} head 
  */
 const drawHead = (context, head) => {
-  const { scaleBy } = state;
   const { poses } = settings;
+  const { canvasHelper } = settings;
+  const scaleBy = canvasHelper.dimensionMin;
 
   const headAbs = Points.multiplyScalar(head, scaleBy);
   const radius = head.radius * scaleBy;
@@ -153,14 +150,6 @@ function setup() {
   const { updateRateMs, poses } = settings;
   poses.addEventListener(`added`, onPoseAdded);
   poses.addEventListener(`expired`, onPoseExpired);
-
-  Dom.fullSizeCanvas(`#canvas`, arguments_ => {
-    // Update state with new size of canvas
-    saveState({
-      bounds: arguments_.bounds,
-      scaleBy: Math.min(arguments_.bounds.width, arguments_.bounds.height)
-    });
-  });
 
   // Update at updateRateMs
   const updateLoop = () => {

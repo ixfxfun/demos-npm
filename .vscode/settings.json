@@ -1,0 +1,84 @@
+{
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "eslint.format.enable": true,
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "search.exclude": {
+    "**/_lib": true,
+    "ml/**/*": true,
+    "**/*.code-search": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "files.eol": "\n",
+  "editor.inlayHints.enabled": "on",
+  "editor.inlayHints.padding": true,
+  "editor.foldingImportsByDefault": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.completeJSDocs": true,
+  "javascript.suggest.completeFunctionCalls": true,
+  "javascript.suggest.enabled": true,
+  "javascript.suggest.jsdoc.generateReturns": true,
+  "javascript.suggest.paths": true,
+  "javascript.preferences.importModuleSpecifier": "shortest",
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "javascript.inlayHints.enumMemberValues.enabled": false,
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": false,
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "javascript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
+  "javascript.inlayHints.parameterTypes.enabled": false,
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": false,
+  "javascript.inlayHints.variableTypes.enabled": false,
+  "javascript.inlayHints.variableTypes.suppressWhenTypeMatchesName": true,
+  "typescript.inlayHints.enumMemberValues.enabled": false,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": false,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": false,
+  "typescript.inlayHints.variableTypes.enabled": false,
+  "typescript.inlayHints.variableTypes.suppressWhenTypeMatchesName": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+  "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+  "typescript.format.insertSpaceAfterCommaDelimiter": true,
+  "typescript.format.insertSpaceAfterSemicolonInForStatements": true,
+  "typescript.format.insertSpaceAfterTypeAssertion": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+  "typescript.format.indentSwitchCase": true,
+  "chat.agent.enabled": false,
+  "chat.commandCenter.enabled": false,
+  "chat.mcp.enabled": false,
+  "chat.extensionTools.enabled": false,
+  "chat.sendElementsToChat.enabled": false,
+  "livePreview.showServerStatusNotifications": false,
+  "livePreview.serverRoot": "docs",
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "**/*.fiveserverrc"
+      ],
+      "url": "/.vscode/fiveserver.schema.json"
+    }
+  ],
+  "cSpell.words": [
+    "Arduino",
+    "crosshair",
+    "Espruino",
+    "importmap",
+    "ixfx",
+    "WLED"
+  ]
+}

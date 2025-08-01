@@ -1,6 +1,6 @@
-import { Arcs } from '../../ixfx/geometry.js';
-import { timeout } from '../../ixfx/flow.js';
-import { Modulation, Numbers } from '../../ixfx/bundle.js';
+import { Arcs } from '@ixfx/geometry';
+import * as Modulation from '@ixfx/modulation';
+import { timeout } from '@ixfx/flow';
 
 const settings = Object.freeze({
   wave: Modulation.wave({ hertz: 0.1 }),

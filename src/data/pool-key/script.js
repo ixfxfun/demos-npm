@@ -1,8 +1,8 @@
-import * as Arrays from 'ixfx/arrays.js';
-import { Pool } from 'ixfx/data.js';
+import * as Arrays from '@ixfx/arrays';
+import { Pool } from '@ixfx/flow';
 
 const settings = Object.freeze({
-  pool: Pool.create({
+  pool: new Pool({
     capacity: 5,
     userExpireAfterMs: 1 * 1000,
     resourcesWithoutUserExpireAfterMs: 5 * 1000,

@@ -1,5 +1,5 @@
-import { flip, clamp, scale } from "ixfx/numbers.js";
-import * as Trackers from "ixfx/trackers.js";
+import { flip, clamp, scale } from '@ixfx/numbers';
+import * as Trackers from '@ixfx/trackers';
 
 const settings = Object.freeze({
   // Element to hold created letters

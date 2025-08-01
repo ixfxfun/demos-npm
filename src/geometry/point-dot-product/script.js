@@ -1,4 +1,4 @@
-import { Points } from '../../ixfx/geometry.js';
+import { Points } from '@ixfx/geometry';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -8,7 +8,7 @@ const settings = Object.freeze({
 
 let state = Object.freeze({
   // Current heading
-  heading: { x:0, y:0 },
+  heading: { x: 0, y: 0 },
   /** 
    * Current dot product
    * @type number */
@@ -17,7 +17,7 @@ let state = Object.freeze({
 
 const use = () => {
   const { heading, dotProduct } = state;
-  
+
   // TODO: Do something interesting with dotProduct
 
   // ...for debug, display data
@@ -49,7 +49,7 @@ const onPointerMove = (event) => {
 
   // Calculate dot product of heading and target vector
   const dotProduct = Points.dotProduct(heading, compareTo);
-  
+
   saveState({ heading, dotProduct });
   use();
 };
@@ -63,7 +63,7 @@ setup();
  * Save state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

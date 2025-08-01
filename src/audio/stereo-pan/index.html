@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>stereo-pan</title>
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 
@@ -46,16 +46,16 @@
     <p>
       <button id="btnStop">Stop playback</button>
     </p>
-    <hr />
+    <hr>
     <p>
       <button id="btnRandom">Random pan value</button>
     </p>
-    <hr />
+    <hr>
 
     <p>Click in area below to start playback; move pointer inside to pan</p>
     <div id="panArea">
     </div>
-    <hr />
+    <hr>
     <p>Uses an ixfx oscillator to make an auto-pan</p>
     <button id="btnAutoStart">Start pan</button>
     <button id="btnAutoStop">Stop pan</button>

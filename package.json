@@ -7,32 +7,35 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "npm run clean && npm run ixfx && concurrently npm:watch:*",
-    "ws": "npm run ixfx && concurrently npm:watch:* npm:serve:ws",
-    "build": "npm run clean && npm run static && npm run ixfx && tsc",
-    "static": "cpx \"src/**/*.{html,css,js}\" docs",
-    "clean": "rimraf docs",
-    "ixfx": "copyfiles --up 3 node_modules/ixfx/dist/**.* docs/ixfx",
-    "watch:tsc": "tsc --watch",
-    "watch:static": "cpx \"src/**/*.{html,css,js}\" docs --watch",
-    "serve:http": "five-server",
-    "serve:ws": "node express-ws-server"
+    "start": "vite --port=5175",
+    "build": "vite build",
+    "rebuild": "rm -rf docs && npm run build"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.4.0",
-    "body-parser": "^1.20.2",
-    "concurrently": "^8.2.2",
+    "@typescript-eslint/parser": "^8.38.0",
+    "body-parser": "^2.2.0",
+    "concurrently": "^9.2.0",
     "copyfiles": "^2.4.1",
-    "cpx2": "^7.0.1",
-    "eslint-plugin-unicorn": "^55.0.0",
-    "express": "^4.19.2",
+    "cpx2": "^8.0.0",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "express": "^5.1.0",
     "express-ws": "^5.0.2",
-    "five-server": "^0.3.3",
-    "ixfx": "latest",
+    "five-server": "^0.4.4",
     "rimraf": "^6.0.1",
-    "typescript": "^5.5.4"
+    "typescript": "^5.9.2"
   },
   "stackblitz": {
     "startCommand": "npm run start"
+  },
+  "dependencies": {
+    "@ixfx/bundle": "0.41.4",
+    "@ixfx/components": "0.0.5",
+    "@ixfx/numbers": "0.43.0",
+    "@ixfx/trackers": "0.40.0",
+    "@ixfx/visual": "0.47.0",
+    "bezier-js": "6.1.4",
+    "json5": "2.2.3",
+    "lit": "3.3.1",
+    "vite": "7.0.6"
   }
 }

@@ -1,6 +1,6 @@
-import { continuously } from "ixfx/flow.js";
-import { log } from 'ixfx/dom.js';
-import { Stacks } from 'ixfx/collections.js';
+import { continuously } from "@ixfx/flow";
+import { log } from '@ixfx/dom';
+import { Stacks } from '@ixfx/collections';
 
 let state = {
   toProcess: Stacks.immutable()

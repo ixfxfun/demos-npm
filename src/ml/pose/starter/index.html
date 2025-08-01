@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <title>starter</title>
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 
@@ -34,17 +34,29 @@
       overscroll-behavior: none;
       touch-action: none;
     }
+
     #ixfx-data-display {
       top: unset !important;
       right: unset !important;
       bottom: 0 !important;
       left: 0 !important;
     }
+
+    canvas,
+    section {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    section {
+      padding: 1rem;
+    }
   </style>
   <section>
+    <canvas id="canvas"></canvas>
     <h1>starter</h1>
     Open the <a href="../sender/index.html" target="_blank">Remote</a> in a new window and see the console for data.
-    <canvas id="canvas"></canvas>
     <script type="module" src="script.js"></script>
   </section>
 </body>

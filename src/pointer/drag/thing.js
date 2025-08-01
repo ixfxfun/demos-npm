@@ -1,5 +1,5 @@
-import { Points } from 'ixfx/geometry.js';
-import { clamp } from 'ixfx/numbers.js';
+import { Points } from '@ixfx/geometry';
+import { clamp } from '@ixfx/numbers';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

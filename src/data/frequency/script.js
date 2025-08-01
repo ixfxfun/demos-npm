@@ -1,4 +1,4 @@
-import { frequency } from 'ixfx/trackers.js';
+import { frequency } from '@ixfx/trackers';
 
 let state = Object.freeze({
   freq: frequency()
@@ -17,7 +17,7 @@ const use = () => {
   const topFive = sorted.slice(0, Math.min(sorted.length, 5));
 
   // Calculate the min, max and avg over all frequencies
-  const mma = freq.minMaxAvg();
+  const mma = freq.computeValues();
 
   // Calculate percentage for a given letter
   const percent = (kv) => Math.round(kv[1] / mma.total * 100);

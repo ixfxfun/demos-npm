@@ -1,5 +1,5 @@
-import { Sources } from 'ixfx/modulation.js';
-import { scalePercent } from 'ixfx/numbers.js';
+import { Sources } from '@ixfx/modulation';
+import { scalePercent } from '@ixfx/numbers';
 
 const settings = {
   thingEl: /** @type HTMLElement */(document.querySelector(`#thing`)),

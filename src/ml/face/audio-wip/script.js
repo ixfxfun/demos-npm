@@ -1,12 +1,12 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
 
-import * as Dom from 'ixfx/dom.js';
+import * as Dom from '@ixfx/dom';
+import * as Arrays from "@ixfx/arrays";
+import { Points } from '@ixfx/geometry';
 import * as MpVision from "../../pose/util/Poses.js";
 import { Bipolar, scale, scaleClamped, wrapInteger } from "ixfx/numbers.js";
-import { Points } from 'ixfx/geometry.js';
 import * as Faces from './faces.js';
-import { Arrays } from "ixfx/data.js";
 
 const settings = Object.freeze({
   // How quickly to call update()

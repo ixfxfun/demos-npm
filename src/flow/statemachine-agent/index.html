@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>regions</title>
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 
@@ -20,9 +20,9 @@
     }
 
     :root {
-      --bg: hsl(100,10%,80%);
-      --text: hsl(100,10%,10%);
-      --text-accent: hsl(100,60%,20%);
+      --bg: hsl(100, 10%, 80%);
+      --text: hsl(100, 10%, 10%);
+      --text-accent: hsl(100, 60%, 20%);
     }
 
     body {
@@ -35,37 +35,41 @@
     h1 {
       color: var(--text-accent);
     }
+
     .data {
       padding: 1em;
       text-transform: uppercase;
     }
+
     #labelState {
-      font-size: 2em; 
+      font-size: 2em;
       vertical-align: center;
     }
+
     #labelStateEmoji {
-      font-size:4em;
+      font-size: 4em;
     }
+
     .container {
-      display: flex; 
-      padding: 1em; 
+      display: flex;
+      padding: 1em;
       align-items: center;
       justify-content: space-evenly;
       flex-wrap: wrap;
     }
   </style>
-    <div class="container">
-      <div id="labelStateEmoji">        
-      </div>
-      <div id="labelState">
-      </div>
-      <div class="data">
-       Energy<br />
-        <span id="labelEnergy">  </span>
-      </div>
+  <div class="container">
+    <div id="labelStateEmoji">
     </div>
-    
-    <script type="module" src="script.js"></script>
+    <div id="labelState">
+    </div>
+    <div class="data">
+      Energy<br>
+      <span id="labelEnergy"> </span>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>

@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <title>point-dot-product</title>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 </head>
 
 <body>
@@ -26,12 +27,12 @@
       pointer-events: none;
     }
 
-    html, body {
+    html,
+    body {
       user-select: none;
       -webkit-user-select: none;
       overscroll-behavior: none;
       touch-action: none;
-      cursor: none;
     }
 
     body {
@@ -53,10 +54,11 @@
   </style>
   <section>
     <h1>point-dot-product</h1>
-    <p>Calculates similarity between direction of pointer movement to another vector (in this case, an upwards vector).</p>
-    <p>The dot product gets closer to 1 as it matches the vector.</p>
-    <p>Click and drag.</p>
-    <div>Pointer vector: <span id="vector"></span></div> 
+    <p>Calculates similarity between direction of pointer movement to another vector (in this case, an upwards vector).
+    </p>
+    <p>Click and drag, noticing that as you drag in an upward direction the dot product gets closer to 1 (and downwards
+      closer to -1)</p>
+    <div>Pointer vector: <span id="vector"></span></div>
     <div id="thing">⬆</div>
     <div>Dot product: <span id="dot-product"></span></div>
 

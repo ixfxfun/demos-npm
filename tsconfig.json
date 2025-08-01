@@ -13,7 +13,15 @@
     "rootDirs": [
       "docs",
       "src"
-    ]
+    ],
+    "paths": {
+      "@ixfx/trackers.js": [
+        "../node_modules/@ixfx/trackers/dist/src/index"
+      ],
+      "@ixfx/numbers.js": [
+        "../node_modules/@ixfx/numbers/dist/src/index"
+      ],
+    }
   },
   // "include": [
   //   "**/*.ts"

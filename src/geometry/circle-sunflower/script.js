@@ -1,11 +1,8 @@
-// #region Imports
-import { CanvasHelper } from '../../ixfx/dom.js';
-import { Points, SurfacePoints } from '../../ixfx/geometry.js';
-import { numericRange, clamp } from '../../ixfx/numbers.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { Points, SurfacePoints } from '@ixfx/geometry';
+import { numericRange, clamp } from '@ixfx/numbers';
 const piPi = Math.PI * 2;
-// #endregion
 
-// #region Settings & state
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   // Visualisation of points
@@ -31,12 +28,18 @@ const settings = Object.freeze({
   radiansRange: numericRange(0.001, 0, Math.PI * 2, true),
 });
 
+/**
+ * @typedef {Readonly<{
+ * pointerAbs: Points.Point
+ * pointsAbs: Points.Point[]
+ * }>} State
+ */
+
+/** @type State */
 let state = Object.freeze({
   pointerAbs: { x: 0, y: 0 },
-  /** @type {Points.Point[]} */
   pointsAbs: [],
 });
-// #endregion
 
 // Update state of world: Rotate sphere, generate points
 const update = () => {

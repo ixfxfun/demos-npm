@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>bpm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>elapsed</title>
 </head>
 
 <body>
-<script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
   <style>
     *,
     *:before,
@@ -41,8 +41,8 @@
 
     #thing {
       background-color: hsl(var(--hue), 50%, 20%);
-      width:100vw;
-      height:100vh;
+      width: 100vw;
+      height: 100vh;
       border-radius: 100%;
       left: 0;
       top: 0;
@@ -52,7 +52,7 @@
   <section>
     <h1>bpm</h1>
     <p>Object scales according to bpm.</p>
-    <div id="thing"></span>
+    <div id="thing"></div>
   </section>
   <script type="module" src="script.js"></script>
 </body>

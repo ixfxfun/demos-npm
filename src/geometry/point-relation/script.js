@@ -1,4 +1,4 @@
-import { Points, radianToDegree } from '../../ixfx/geometry.js';
+import { Points, radianToDegree } from '@ixfx/geometry';
 import * as Util from './util.js';
 
 /**
@@ -18,9 +18,9 @@ let state = Object.freeze({
 
 const use = () => {
   const { results } = state;
-  
+
   if (!results) return; // No results, nothing to do 🤷🏼‍♂️
-  
+
   // TODO: Do something interesting with data from results
   const { centroid } = results;
 
@@ -38,7 +38,7 @@ const displayData = (result) => {
 
   // Get angle in a more typical degrees
   const angleDeg = radianToDegree(angle);
-  
+
   // Data to dump
   const lines = [
     `Distance start: ${distanceFromStart.toPrecision(2)}`,
@@ -47,7 +47,7 @@ const displayData = (result) => {
     `Average: ${Points.toString(average, 2)}`,
     `Centroid: ${Points.toString(centroid, 2)}`,
     `Speed: ${speed.toPrecision(2)}`];
-  
+
   // Wrap in DIVs
   const linesWithDivs = lines.map(line => `<div>${line}</div>`);
 
@@ -60,7 +60,7 @@ const onPointerDown = event => {
 
   // Convert to relative coordinate
   const pointerRelative = Util.relativePos(event);
- 
+
   // Init new 'relation', and update state
   saveState({ relationFromPointerDown: Points.relation(pointerRelative) });
 
@@ -107,7 +107,7 @@ setup();
  * Update state
  * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

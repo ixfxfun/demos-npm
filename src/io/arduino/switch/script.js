@@ -1,4 +1,4 @@
-import { Serial } from 'ixfx/io.js';
+import { Serial } from '@ixfx/io'
 
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true, eol: `\n` }),

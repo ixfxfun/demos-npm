@@ -1,7 +1,7 @@
-import { CanvasHelper } from 'ixfx/dom.js';
-import { Forces } from 'ixfx/modulation.js';
-import { Points } from 'ixfx/geometry.js';
-import { repeatSync } from 'ixfx/flow.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { Forces } from '@ixfx/modulation';
+import { Points } from '@ixfx/geometry';
+import { repeatSync } from '@ixfx/flow';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

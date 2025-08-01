@@ -1,7 +1,7 @@
-import * as Data from 'ixfx/data.js';
-import * as Modulation from 'ixfx/modulation.js';
-import { Points } from 'ixfx/geometry.js';
+import * as Modulation from '@ixfx/modulation';
+import { Points } from '@ixfx/geometry';
 import * as Util from './util.js';
+import { resolveFields } from '@ixfx/core';
 
 const settings = Object.freeze({
   spring: /** @type Modulation.SpringOptions */({
@@ -24,9 +24,9 @@ const settings = Object.freeze({
 /**
  * @typedef {Readonly<{
  *  spring:ComputeFn
- *  to: import('ixfx/geometry.js').Point
- *  from: import('ixfx/geometry.js').Point
- *  currentPos: import('ixfx/geometry.js').Point
+ *  to: Points.Point
+ *  from: Points.Point
+ *  currentPos: Points.Point
  *  isDone:boolean 
  * }>} RawState
  */
@@ -48,7 +48,7 @@ let rawState = {
 // Update state with value from spring
 const update = async () => {
   // Compute functions on state object
-  const state = await Data.resolveFields(rawState);
+  const state = await resolveFields(rawState);
 
   const { spring, to, from } = state;
 

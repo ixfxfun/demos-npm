@@ -1,4 +1,4 @@
-import { Points, radianToDegree } from '../../ixfx/geometry.js';
+import { Points, radianToDegree } from '@ixfx/geometry';
 
 /**
  * Sets the innerText of an element with `id`
@@ -6,7 +6,7 @@ import { Points, radianToDegree } from '../../ixfx/geometry.js';
  * @param {string} text
  * @returns void
  */
-export function setText(id, text)  {
+export function setText(id, text) {
   const element = document.querySelector(`#${id}`);
   if (!element) return;
   element.textContent = text;

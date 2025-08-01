@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>audio / filter</title>
-  <script type="importmap">{ "imports": { "ixfx/": "/ixfx/" } } </script>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 
 </head>
 
@@ -45,16 +45,16 @@
     <p>
       <button id="btnStop">Stop playback</button>
     </p>
-    <hr />
+    <hr>
     <p>
       <button id="btnRandom">Random filter value</button>
     </p>
-    <hr />
+    <hr>
 
     <p>Click in area below to start playback; move pointer inside to filter</p>
     <div id="area">
     </div>
-    <hr />
+    <hr>
     <p>Uses an ixfx oscillator to make an auto-filter</p>
     <button id="btnAutoStart">Start filter</button>
     <button id="btnAutoStop">Stop filter</button>

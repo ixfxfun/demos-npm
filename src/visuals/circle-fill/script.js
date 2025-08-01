@@ -1,6 +1,6 @@
-import { CanvasHelper } from 'ixfx/dom.js';
-import { repeatSync } from 'ixfx/flow.js';
-import { Points, Circles, Polar } from 'ixfx/geometry.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { repeatSync } from '@ixfx/flow';
+import { Points, Circles, Polar } from '@ixfx/geometry';
 
 const settings = Object.freeze({
   numberOfPoints: 500,
@@ -12,7 +12,12 @@ const settings = Object.freeze({
   pointSize: 0.005,
   origin: { x: 0.5, y: 0.5, radius: 0.5 },
   radius: 0.5,
-  canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
+  canvas: new CanvasHelper(`#canvas`, {
+    // Trigger use() if viewport resizes
+    resizeLogic: `both`,
+    clearOnResize: false,
+    onResized: use
+  })
 });
 
 /**
@@ -61,9 +66,8 @@ const randomPoints = (circle, numberOfPoints) => {
 /**
  * This is run at animation speed. It
  * should just draw based on whatever is in state
- * @param {State} state 
  */
-const use = (state) => {
+function use() {
   const { numberOfPoints, pointColour, origin, radius, pointSize, canvas } = settings;
   const { ctx } = canvas;
 
@@ -86,10 +90,7 @@ const use = (state) => {
   }
 };
 
-function setup() {
-  use(state);
-};
-setup();
+use();
 
 /**
  * Save state

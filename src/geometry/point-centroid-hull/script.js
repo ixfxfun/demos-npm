@@ -1,5 +1,5 @@
-import { Lines, Points } from '../../ixfx/geometry.js';
-import { Svg } from '../../ixfx/visual.js';
+import { Lines, Points } from '@ixfx/geometry';
+import { Svg } from '@ixfx/visual';
 
 // Define settings
 const settings = Object.freeze({
@@ -29,12 +29,12 @@ const update = () => {
 };
 
 const use = () => {
-  const {  pointSize, lineStyle } = settings;
+  const { pointSize, lineStyle } = settings;
   const { centroid, convexHull } = state;
 
   const centroidElement = /** @type {HTMLElement} */ (document.querySelector(`#centroid`));
   const svgElement = /** @type {SVGSVGElement|null} */(document.querySelector(`#svg`));
-  
+
   // Position centroid
   if (centroidElement) positionThing(centroidElement, centroid, pointSize);
 
@@ -70,9 +70,9 @@ const addPoint = (point) => {
 
   // Add to list of points
   saveState({
-    points: [ ...state.points, point ]
+    points: [...state.points, point]
   });
-  
+
   // Create element for point
   const element = document.createElement(`div`);
   element.classList.add(`point`);
@@ -97,7 +97,7 @@ setup();
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

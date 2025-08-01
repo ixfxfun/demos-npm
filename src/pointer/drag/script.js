@@ -1,4 +1,4 @@
-import { Points } from 'ixfx/geometry.js';
+import { Points } from '@ixfx/geometry';
 import * as Things from './thing.js';
 import * as Util from './util.js';
 

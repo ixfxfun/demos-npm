@@ -1,11 +1,12 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import * as Dom from 'ixfx/dom.js';
+import * as Dom from '@ixfx/dom';
+import { CanvasHelper } from "@ixfx/visual";
 import * as MpVision from '../../lib/client/index.js';
 import * as Hands from '../hands.js';
 
 const settings = Object.freeze({
-  canvasHelper: new Dom.CanvasHelper(`canvas`, { resizeLogic: `both` }),
+  canvasHelper: new CanvasHelper(`canvas`, { resizeLogic: `both` }),
   updateRateMs: 100, // How quickly to call update()
   remote: new Remote(),
   dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),

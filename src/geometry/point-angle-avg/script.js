@@ -1,13 +1,13 @@
-import { Points, radianToDegree } from '../../ixfx/geometry.js';
-import { scale } from '../../ixfx/numbers.js';
-import * as Trackers from '../../ixfx/trackers.js';
+import { PointTracker, radianToDegree } from '@ixfx/geometry';
+import { scale } from '@ixfx/numbers';
+import { NumberTracker } from '@ixfx/trackers';
 import * as Util from './util.js';
 
-let state = Object.freeze({
+const settings = {
   /**
    * Keep track of pointer movements
    */
-  moveTracker: Trackers.point({
+  moveTracker: new PointTracker({
     id: `move`,
     storeIntermediate: true,
     sampleLimit: 5
@@ -15,16 +15,20 @@ let state = Object.freeze({
   /**
    * Keep track of average angle of movement
    */
-  angleAvg: Trackers.number({
+  angleAvg: new NumberTracker({
     id: `angle`,
     storeIntermediate: true,
     // Use the last 100 samples for the average
     sampleLimit: 100
   })
+}
+
+
+let state = Object.freeze({
 });
 
 const use = () => {
-  const { angleAvg } = state;
+  const { angleAvg } = settings;
 
   const avgRadians = angleAvg.avg;
   const avgDegrees = radianToDegree(avgRadians);
@@ -50,7 +54,7 @@ const use = () => {
 
 
 const onPointerMove = (event) => {
-  const { moveTracker, angleAvg } = state;
+  const { moveTracker, angleAvg } = settings;
   event.preventDefault();
 
   const pointerRelative = Util.relativePos(event);

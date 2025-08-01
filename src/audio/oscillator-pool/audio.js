@@ -1,6 +1,6 @@
-import { arrayIndex as RandomArrayIndex } from 'ixfx/random.js';
-import { jitterAbsolute } from 'ixfx/modulation.js';
-import { Bipolar } from 'ixfx/numbers.js';
+import { randomIndex, bipolar as randomBipolar } from '@ixfx/random';
+import { jitterAbsolute } from '@ixfx/modulation';
+import { Bipolar } from '@ixfx/numbers';
 
 // Settings for the audio things
 const settings = Object.freeze({
@@ -81,7 +81,7 @@ export const create = (context) => {
   const { oscillator, tones, frequencyJitter: driftJitter } = settings;
 
   // Pick a random base frequency
-  let frequency = tones[RandomArrayIndex(tones)];
+  let frequency = tones[randomIndex(tones)];
 
   // Add drift
   frequency = frequency + driftJitter(frequency);
@@ -121,7 +121,7 @@ export const create = (context) => {
     frequency,
     gain: 0,
     // Start with random pan value
-    pan: Bipolar.random()
+    pan: randomBipolar()
   };
 };
 

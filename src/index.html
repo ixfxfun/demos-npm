@@ -1,102 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ixfx demos</title>
-    <link rel="stylesheet" href="./demos.css" />
-  </head>
 
-  <body>
-    <main>
-      <section id="parent">
-        <h1>ixfx demos</h1>
-        <div>
-          <h2>modules</h2>
-          <ul class="nobullets">
-            <li>/ <a href="./data/">data</a></li>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ixfx demos</title>
+  <link rel="stylesheet" href="./demos.css">
+</head>
 
-            <li>/ <a href="./dom/">dom</a></li>
-            <li>/ <a href="./geometry/">geometry</a></li>
-            <li>/ <a href="./io/">input output</a></li>
-            <li>/ <a href="./modulation/">modulation</a></li>
-            <li>/ <a href="./pointer/">pointer</a></li>
-            <li>/ <a href="./flow/">flow</a></li>
-            <li>/ <a href="./visuals/">visuals</a></li>
-          </ul>
-        </div>
+<body>
+  <main>
+    <section id="parent">
+      <h1>ixfx demos</h1>
+      <div>
+        <h2>modules</h2>
+        <ul class="nobullets">
+          <li>/ <a href="./data/">data</a></li>
 
-        <div>
-          <h2>media</h2>
-          <ul class="nobullets">
-            <li>/ <a href="./audio/">audio</a></li>
-            <li>/ <a href="./camera/">camera</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2><a href="./ml/">machine learning</a></h2>
-        </div>
-        <div>
-          <h2>etc</h2>
-          <ul class="nobullets">
-            <li>/ <a href="./starters/">starters</a></li>
-            <li>
-              / <a href="https://clinth.github.io/ixfx-play/">playgrounds</a>
-            </li>
-          </ul>
-        </div>
+          <li>/ <a href="./dom/">dom</a></li>
+          <li>/ <a href="./geometry/">geometry</a></li>
+          <li>/ <a href="./io/">input output</a></li>
+          <li>/ <a href="./modulation/">modulation</a></li>
+          <li>/ <a href="./pointer/">pointer</a></li>
+          <li>/ <a href="./flow/">flow</a></li>
+          <li>/ <a href="./visuals/">visuals</a></li>
+        </ul>
+      </div>
 
-        <div id="links">
-          <h2>links</h2>
-          <ul class="nobullets">
-            <li class="local">
-              &gt;
-              <a
-                href="https://demos.ixfx.fun/"
-                >View demos online</a
-              >
-            </li>
-            <li>
-              &gt;
-              <a
-                href="https://ixfx.fun/"
-                >Guide</a
-              >
-            </li>
-            <li>
-              &gt;
-              <a
-                href="https://github.com/ixfxfun/demos/"
-                >GitHub</a
-              >
-            </li>
-            <li>
-              &gt;
-              <a href="https://github.com/ixfxfun/demos/issues"
-                >Found a bug in a demo? Please report it!</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2>edit online</h2>
-          <p>
-            It's possible to play with the code directly in your browser and see results quick: <a href="https://ixfx.fun/guides/getting-started/">see the ixfx guide</a>.
-          </ul>
-        </div>
-      </section>
-    </main>
+      <div>
+        <h2>media</h2>
+        <ul class="nobullets">
+          <li>/ <a href="./audio/">audio</a></li>
+          <li>/ <a href="./camera/">camera</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2><a href="./ml/">machine learning</a></h2>
+      </div>
+      <div>
+        <h2>etc</h2>
+        <ul class="nobullets">
+          <li>/ <a href="./starters/">starters</a></li>
+          <li>
+            / <a href="https://clinth.github.io/ixfx-play/">playgrounds</a>
+          </li>
+        </ul>
+      </div>
 
-    <script type="module">
-      const host = window.location.host;
+      <div id="links">
+        <h2>links</h2>
+        <ul class="nobullets">
+          <li class="local">
+            &gt;
+            <a href="https://demos.ixfx.fun/">View demos online</a>
+          </li>
+          <li>
+            &gt;
+            <a href="https://ixfx.fun/">Guide</a>
+          </li>
+          <li>
+            &gt;
+            <a href="https://github.com/ixfxfun/demos/">GitHub</a>
+          </li>
+          <li>
+            &gt;
+            <a href="https://github.com/ixfxfun/demos/issues">Found a bug in a demo? Please report it!</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>edit online</h2>
+        <p>
+          It's possible to play with the code directly in your browser and see results quick: <a
+            href="https://ixfx.fun/guides/getting-started/">see the ixfx guide</a>.
+        </p>
+      </div>
+    </section>
+  </main>
 
-      // If we're online, hide #local
-      if (host.endsWith(`github.io`) || host.endsWith(`glitch.io`) || host.endsWith('.fun')) {
-        const el = document.getElementById(`local`);
-        document
-          .querySelectorAll(`.local`)
-          .forEach((el) => (el.style.display = `none`));
-      }
-    </script>
-  </body>
+  <script type="module">
+    const host = window.location.host;
+
+    // If we're online, hide #local
+    if (host.endsWith(`github.io`) || host.endsWith(`glitch.io`) || host.endsWith('.fun')) {
+      const el = document.getElementById(`local`);
+      document
+        .querySelectorAll(`.local`)
+        .forEach((el) => (el.style.display = `none`));
+    }
+  </script>
+</body>
+
 </html>

@@ -1,5 +1,5 @@
-import { delay } from 'ixfx/flow.js';
-import { Espruino } from 'ixfx/io.js';
+import { delay } from '@ixfx/flow';
+import { Espruino } from '@ixfx/io'
 import { setCssDisplay, setHtml } from './util.js';
 
 // Two alternative scripts to run on the Puck
@@ -46,7 +46,7 @@ function use() {
 
 /**
  * Called when data is received
- * @param {import('ixfx/io.js').IoDataEvent} event 
+ * @param {import('@ixfx/io.js').IoDataEvent} event 
  * @returns 
  */
 function onData(event) {

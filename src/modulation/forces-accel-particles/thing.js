@@ -1,6 +1,6 @@
-import { Points } from 'ixfx/geometry.js';
-import { Forces } from 'ixfx/modulation.js';
-import * as Random from 'ixfx/random.js';
+import { Points } from '@ixfx/geometry';
+import { Forces } from '@ixfx/modulation';
+import * as Random from '@ixfx/random';
 
 /** 
  * @typedef {Readonly<{

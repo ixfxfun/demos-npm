@@ -1,6 +1,8 @@
-import { Data, Modulation, Random } from 'ixfx/bundle.js';
+import * as Modulation from '@ixfx/modulation';
+import * as Random from '@ixfx/random';
+import { Bipolar } from '@ixfx/numbers';
 import * as Util from './util.js';
-import { Bipolar } from 'ixfx/numbers.js';
+import { resolveFields } from '@ixfx/core';
 
 const settings = Object.freeze({
   minimumDistance: 0.1
@@ -35,7 +37,7 @@ export const update = async (thing, modValue) => {
   const { minimumDistance } = settings;
 
   // Resolve any functions
-  const state = await Data.resolveFields(thing);
+  const state = await resolveFields(thing);
   const { position, osc } = state;
 
   // Oscillator ranges from 0..1, 

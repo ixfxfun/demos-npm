@@ -1,4 +1,4 @@
-import { clamp } from 'ixfx/numbers.js';
+import { clamp } from '@ixfx/numbers';
 
 const settings = Object.freeze({
   fullMode: window.location.hash === `#full`,

@@ -1,10 +1,9 @@
-import { Trackers, Numbers } from 'ixfx/bundle.js';
-import { CanvasHelper } from 'ixfx/dom.js';
-import { Points, radianToDegree } from 'ixfx/geometry.js';
-import { repeatSync } from 'ixfx/flow.js';
+import { CanvasHelper } from '@ixfx/visual';
+import { Points, radianToDegree } from '@ixfx/geometry';
+import { repeatSync } from '@ixfx/flow';
+import { NumberTracker } from '@ixfx/trackers';
 import * as Util from './util.js';
 import * as Things from './thing.js';
-import { NumberTracker } from 'ixfx/trackers.js';
 
 // Define settings
 const settings = Object.freeze({
@@ -13,8 +12,8 @@ const settings = Object.freeze({
 
 /**
  * @typedef {Readonly<{
- * pointA: import('ixfx/geometry.js').Point
- * pointB: import('ixfx/geometry.js').Point
+ * pointA: Points.Point
+ * pointB: Points.Point
  * things: ReadonlyArray<Things.Thing>
  * distance:number
  * distanceAvg: NumberTracker
@@ -34,7 +33,7 @@ let state = Object.freeze({
   },
   things: [...repeatSync(() => Things.create(), { count: 40 })],
   distance: 0,
-  distanceAvg: Trackers.number({
+  distanceAvg: new NumberTracker({
     id: `distance`,
     storeIntermediate: true,
     sampleLimit: 200

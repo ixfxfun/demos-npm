@@ -1,5 +1,5 @@
 
-import { jitter } from 'ixfx/modulation.js';
+import { jitter } from '@ixfx/modulation';
 import * as Plot from './plot.js';
 
 /**

@@ -1,0 +1,10 @@
+    "start": "npm run clean && npm run ixfx && concurrently npm:watch:*",
+    "ws": "npm run ixfx && concurrently npm:watch:* npm:serve:ws",
+    "build": "npm run clean && npm run static && npm run ixfx && tsc",
+    "static": "cpx \"src/**/*.{html,css,js}\" docs",
+    "clean": "rimraf docs",
+    "ixfx": "copyfiles --up 3 node_modules/ixfx/dist/**.* docs/ixfx",
+    "watch:tsc": "tsc --watch",
+    "watch:static": "cpx \"src/**/*.{html,css,js}\" docs --watch",
+    "serve:http": "five-server",
+    "serve:ws": "node express-ws-server"

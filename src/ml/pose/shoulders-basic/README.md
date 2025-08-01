@@ -1,3 +1,3 @@
-# shoulders-basic
+# pose/shoulders-basic
 
 Calculate angle of shoulders.

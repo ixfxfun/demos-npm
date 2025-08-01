@@ -1,4 +1,4 @@
-import { throttle } from 'ixfx/flow.js';
+import { throttle } from '@ixfx/flow';
 
 const settings = Object.freeze({
   log: document.querySelector(`#log`),

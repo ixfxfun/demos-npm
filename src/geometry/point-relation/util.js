@@ -1,4 +1,4 @@
-import { Points, radianToDegree } from '../../ixfx/geometry.js';
+import { Points } from '@ixfx/geometry';
 
 /**
  * Returns the relative position from an absolute one
@@ -18,7 +18,7 @@ export function relativePos(pos) {
  * @param {string} text
  * @returns void
  */
-export function setHtml(id, text)  {
+export function setHtml(id, text) {
   const element = document.querySelector(`#${id}`);
   if (!element) return;
   if (element.textContent === text) return;
@@ -31,7 +31,7 @@ export function setHtml(id, text)  {
  * @param pos {{x:number, y:number}} Relative coordinate
  */
 export function positionIdByRelative(id, pos) {
-  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));  
+  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
   if (!element) return;
   pos = Points.multiply(pos, window.innerWidth, window.innerHeight);
 

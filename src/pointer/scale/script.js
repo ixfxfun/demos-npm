@@ -1,7 +1,7 @@
-import { pointerVisualise } from 'ixfx/dom.js';
-import { Points } from 'ixfx/geometry.js';
-import * as Trackers from 'ixfx/trackers.js';
-import * as Numbers from 'ixfx/numbers.js';
+import { pointerVisualise } from '@ixfx/visual';
+import { Points, PointsTracker } from '@ixfx/geometry';
+import * as Trackers from '@ixfx/trackers';
+import * as Numbers from '@ixfx/numbers';
 
 // Pointer visualiser. Useful for debugging. It's what adds the red border
 pointerVisualise(document.body);
@@ -14,7 +14,7 @@ const settings = Object.freeze({
 
 /**
  * @typedef {{
- * pointers: Trackers.TrackedPointMap
+ * pointers: PointsTracker
  * twoFingerDistance: Trackers.NumberTracker
  * scale: number
  * }} State
@@ -23,7 +23,7 @@ const settings = Object.freeze({
 /** @type State */
 let state = Object.freeze({
   // Track pointer locations
-  pointers: Trackers.points(),
+  pointers: new PointsTracker(),
   // Track how the distance between two pointers changes
   twoFingerDistance: Trackers.number(),
   // Current text scaling value

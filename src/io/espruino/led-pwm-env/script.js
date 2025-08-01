@@ -1,5 +1,5 @@
-import { Espruino } from 'ixfx/io.js';
-import { Envelopes } from 'ixfx/modulation.js';
+import { Espruino } from '@ixfx/io'
+import { Envelopes } from '@ixfx/modulation';
 import { setCssDisplay } from './util.js';
 
 const settings = Object.freeze({

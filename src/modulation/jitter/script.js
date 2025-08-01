@@ -1,6 +1,7 @@
-import * as Flow from 'ixfx/flow.js';
-import * as Mod from 'ixfx/modulation.js';
+import * as Flow from '@ixfx/flow';
+import * as Mod from '@ixfx/modulation';
 import * as Util from './util.js';
+import { continuously } from '@ixfx/core';
 
 const settings = Object.freeze({
   // Define our jitterer
@@ -59,7 +60,7 @@ function setup() {
     saveState({ pointer: { x: 0.5, y: 0.5 } });
   });
 
-  Flow.continuously(() => {
+  continuously(() => {
     update();
     use(state);
   }, 100).start();

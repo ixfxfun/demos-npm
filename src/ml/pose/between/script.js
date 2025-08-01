@@ -1,5 +1,5 @@
-import { Arrays } from 'ixfx/data.js';
-import { Points } from 'ixfx/geometry.js';
+import * as Arrays from '@ixfx/arrays';
+import { Points } from '@ixfx/geometry';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 
