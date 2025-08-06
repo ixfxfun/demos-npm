@@ -52,6 +52,6 @@ const randomMessage = () => {
 function setup() {
   // Call `randomMsg` every 2 seconds
   window.setInterval(randomMessage, 2000);
-};
+}
 setup();
 

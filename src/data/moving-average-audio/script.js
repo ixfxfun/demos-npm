@@ -5,7 +5,7 @@ import { defaultErrorHandler } from '@ixfx/dom';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
-  btnStartEl:/** @type HTMLElement */(document.querySelector(`#btnStart`)),
+  btnStartEl: /** @type HTMLElement */(document.querySelector(`#btnStart`)),
   // Calculate an average over 100 samples
   averager: movingAverage(100),
 });
@@ -85,7 +85,7 @@ function setup() {
   // Show unexpected errors on the page to help debugger;
   defaultErrorHandler();
   btnStartEl.addEventListener(`click`, start);
-};
+}
 setup();
 
 /**

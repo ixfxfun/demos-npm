@@ -224,7 +224,7 @@ function setup() {
   };
   updateLoop();
 
-};
+}
 setup();
 
 /**
@@ -247,7 +247,7 @@ function onReceivedPoses(packet) {
   }
 
   updateFromHands(handsData);
-};
+}
 
 /**
  * Update state

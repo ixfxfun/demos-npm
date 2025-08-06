@@ -8,7 +8,7 @@ import { Bipolar, scale, scaleClamped } from "@ixfx/numbers";
  * (ie left-ear to left-shoulder versus right-ear to right-shoulder)
  * @param {MpVision.Detection} face 
  */
-export const computeTilt = (face, range = [-1, 1]) => {
+export const computeTilt = (face, range = [ -1, 1 ]) => {
   if (!face) return 0;
   const leftEar = face.keypoints[4];
   const rightEar = face.keypoints[5];

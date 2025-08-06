@@ -86,7 +86,7 @@ function setup() {
     }
   });
 
-};
+}
 
 /**
  * Save state

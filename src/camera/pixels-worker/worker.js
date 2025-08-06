@@ -113,7 +113,7 @@ function saveState(s) {
  */
 const rgbaIndexes = (width, x, y) => {
   const p = y * (width * 4) + x * 4;
-  return [p, p + 1, p + 2, p + 3];
+  return [ p, p + 1, p + 2, p + 3 ];
 };
 
 /**

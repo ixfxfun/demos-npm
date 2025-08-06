@@ -19,8 +19,8 @@ const settings = Object.freeze({
   gradient: [
     // Red at 0%, blue at 100%
     // ..more colours can be added with appropriate stop points
-    [0, `red`],
-    [1, `blue`]
+    [ 0, `red` ],
+    [ 1, `blue` ]
   ],
   /** @type {HTMLElement|null} */
   textEl: document.querySelector(`#text`),
@@ -54,7 +54,7 @@ const setGradient = () => {
   const linearGradient = `linear-gradient(
     ${angleRadians + Math.PI / 2}rad, 
     ${hues.join(`, `
-  )}`;
+    )}`;
 
   // Assign CSS to text element
   textEl.style.background = linearGradient;
@@ -91,7 +91,7 @@ function setup() {
 
   // Set initial gradient
   setGradient();
-};
+}
 setup();
 
 /**

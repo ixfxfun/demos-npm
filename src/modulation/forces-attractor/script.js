@@ -29,7 +29,7 @@ let state = Object.freeze({
     mass: 1,
     angle: Math.random() * Math.PI * 2
   },
-  attractees: [...repeatSync(generate, { count: 20 })],
+  attractees: [ ...repeatSync(generate, { count: 20 }) ],
 });
 
 const update = () => {
@@ -97,7 +97,7 @@ function setup() {
       }
     });
   });
-};
+}
 setup();
 
 /**

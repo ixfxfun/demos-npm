@@ -1,4 +1,4 @@
-import { Espruino } from '@ixfx/io'
+import { Espruino } from '@ixfx/io';
 import { setClassAll } from './util.js';
 
 // No settings needed for this sketch
@@ -83,7 +83,7 @@ function setup() {
   );
 
   onEspruinoConnected(false);
-};
+}
 setup();
 
 /**

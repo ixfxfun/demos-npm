@@ -56,7 +56,7 @@ const onPointerMove = (event) => {
 
 function setup() {
   document.addEventListener(`pointermove`, onPointerMove);
-};
+}
 setup();
 
 /**

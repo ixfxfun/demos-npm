@@ -2,7 +2,7 @@
  * Generates a stacked set of gradients based on a given
  * angle interval. Gradient hues are rotated over time.
  */
-import { continuously } from '@ixfx/flow';
+import { continuously } from 'ixfx';
 import * as Numbers from '@ixfx/numbers';
 
 const settings = Object.freeze({
@@ -21,7 +21,7 @@ let state = Object.freeze({
   /** @type {number} */
   offset: 0,
   // Set to hues in setup
-  hues: [0, 1, 2], // Dummy values to start
+  hues: [ 0, 1, 2 ], // Dummy values to start
 });
 
 // Assigns gradients to body, based on settings and state
@@ -54,13 +54,13 @@ function setup() {
   const { interval } = settings;
 
   // Generate a set of hues
-  saveState({ hues: [...Numbers.numericRange(interval, 0, 360)] });
+  saveState({ hues: [ ...Numbers.numericRange(interval, 0, 360) ] });
 
   continuously(() => {
     update();
     use();
-  }).start();
-};
+  }, 0).start();
+}
 setup();
 
 /**

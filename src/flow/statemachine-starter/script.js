@@ -4,12 +4,12 @@ import { StateMachine } from '@ixfx/flow';
 const settings = Object.freeze({
   transitions: {
     sleep: `awake`,
-    awake: [`sleep`, `excited`, `angry`],
+    awake: [ `sleep`, `excited`, `angry` ],
     excited: `awake`,
     angry: `awake`
   },
   stateEl: /** @type HTMLElement */(document.querySelector(`#state`)),
-  possibleStatesEl:  /** @type HTMLElement */(document.querySelector(`#possibleStates`))
+  possibleStatesEl: /** @type HTMLElement */(document.querySelector(`#possibleStates`))
 });
 
 let state = Object.freeze({
@@ -53,7 +53,7 @@ function setup() {
     updateMachine(element.textContent?.toLocaleLowerCase());
   });
   use();
-};
+}
 setup();
 
 /**

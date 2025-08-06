@@ -9,33 +9,51 @@
   "scripts": {
     "start": "vite --port=5175",
     "build": "vite build",
-    "rebuild": "rm -rf docs && npm run build"
+    "rebuild": "rm -rf docs && npm run build",
+    "ws": "node express-ws-server.js"
+  },
+  "dependencies": {
+    "@clinth/remote": "^2.2.0",
+    "@ixfx/arrays": "latest",
+    "@ixfx/collections": "latest",
+    "@ixfx/core": "latest",
+    "@ixfx/debug": "latest",
+    "@ixfx/dom": "latest",
+    "@ixfx/events": "latest",
+    "@ixfx/flow": "latest",
+    "@ixfx/geometry": "latest",
+    "@ixfx/guards": "latest",
+    "@ixfx/io": "latest",
+    "@ixfx/iterables": "latest",
+    "@ixfx/modulation": "latest",
+    "@ixfx/numbers": "latest",
+    "@ixfx/process": "latest",
+    "@ixfx/random": "latest",
+    "@ixfx/rx": "latest",
+    "@ixfx/trackers": "latest",
+    "@ixfx/ui": "latest",
+    "@ixfx/visual": "latest",
+    "bezier-js": "6.1.4",
+    "ixfx": "latest",
+    "json5": "2.2.3"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.38.0",
+    "@html-eslint/eslint-plugin": "0.44.0",
+    "@html-eslint/parser": "0.44.0",
+    "@stylistic/eslint-plugin": "5.2.2",
     "body-parser": "^2.2.0",
-    "concurrently": "^9.2.0",
-    "copyfiles": "^2.4.1",
-    "cpx2": "^8.0.0",
-    "eslint-plugin-unicorn": "^60.0.0",
+    "eslint": "9.32.0",
     "express": "^5.1.0",
     "express-ws": "^5.0.2",
-    "five-server": "^0.4.4",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.9.2"
+    "globals": "16.3.0",
+    "rimraf": "latest",
+    "typescript": "latest",
+    "typescript-eslint": "8.39.0",
+    "vite": "7.0.6",
+    "ws": "^8.18.3"
   },
   "stackblitz": {
     "startCommand": "npm run start"
   },
-  "dependencies": {
-    "@ixfx/bundle": "latest",
-    "@ixfx/components": "latest",
-    "@ixfx/numbers": "latest",
-    "@ixfx/trackers": "latest",
-    "@ixfx/visual": "latest",
-    "bezier-js": "6.1.4",
-    "json5": "2.2.3",
-    "lit": "3.3.1",
-    "vite": "7.0.6"
-  }
+  "browserslist": "last 2 Chrome versions"
 }

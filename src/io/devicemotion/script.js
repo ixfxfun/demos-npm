@@ -1,7 +1,11 @@
 import * as Dom from '@ixfx/dom';
 import * as DeviceMotion from './devicemotion.js';
 
-const settings = Object.freeze({});
+const settings = Object.freeze({
+  // If true, uses fake data if sensors could
+  // not be used for some reason.
+  useFakeDataAsFallback: true
+});
 
 /** 
  * @typedef {Readonly<{
@@ -23,11 +27,13 @@ const onMotion = (data) => {
   if (state.paused) return;
 
   // Do something with data...
+  console.log(data);
 };
 
 
 const setup = () => {
   const btnStart = /** @type HTMLButtonElement */(document.querySelector(`#btnStart`));
+  const tipDiv = /** @type HTMLDivElement */(document.querySelector(`#tip`));
 
   // Useful for catching errors when running on mobile
   Dom.inlineConsole({
@@ -36,8 +42,10 @@ const setup = () => {
   });
 
   btnStart.addEventListener(`click`, () => {
-    DeviceMotion.listen(onMotion);
+
+    DeviceMotion.listen(onMotion, settings.useFakeDataAsFallback);
     btnStart.disabled = true;
+    tipDiv.remove();
   });
 };
 setup();

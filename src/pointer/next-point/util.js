@@ -1,5 +1,5 @@
 export function setText(id, message) {
-  const element =  /** @type HTMLElement */(document.querySelector(`#${id}`));
+  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
   if (element && element.textContent !== message) {
     element.textContent = message;
   }
@@ -13,11 +13,11 @@ export function setText(id, message) {
  * @param {string} message?
  * @param {string} textFillStyle?
  */
-export function drawLabelledCircle(context, circle, fillStyle = `black`, message = ``, textFillStyle = `white`)  {
+export function drawLabelledCircle(context, circle, fillStyle = `black`, message = ``, textFillStyle = `white`) {
   // Translate so 0,0 is the center of circle
   context.save();
   context.translate(circle.x, circle.y);
-  
+
   // Fill a circle
   context.beginPath();
   context.arc(0, 0, circle.radius ?? 5, 0, Math.PI * 2);

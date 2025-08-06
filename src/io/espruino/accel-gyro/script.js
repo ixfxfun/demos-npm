@@ -1,5 +1,5 @@
 import { delay } from '@ixfx/flow';
-import { Espruino } from '@ixfx/io'
+import { Espruino } from '@ixfx/io';
 import { setCssDisplay, setHtml } from './util.js';
 
 // Two alternative scripts to run on the Puck
@@ -42,7 +42,7 @@ function use() {
   const { acc, gyro } = state;
   setHtml(`lblAcc`, `acc:   x: ${acc.x} y: ${acc.y} z: ${acc.z}`);
   setHtml(`lblGyro`, `gyro: x: ${gyro.x} y: ${gyro.y} z: ${gyro.z}`);
-};
+}
 
 /**
  * Called when data is received
@@ -68,7 +68,7 @@ function onData(event) {
   } catch (error) {
     console.warn(error);
   }
-};
+}
 
 async function connect() {
   const { script } = settings;
@@ -95,11 +95,11 @@ async function connect() {
   } catch (error) {
     console.error(error);
   }
-};
+}
 
 function setup() {
   document.querySelector(`#btnConnect`)?.addEventListener(`click`, connect);
-};
+}
 
 setup();
 
@@ -111,7 +111,7 @@ setup();
 function onConnected(connected) {
   setCssDisplay(`preamble`, connected ? `none` : `block`);
   setCssDisplay(`data`, connected ? `block` : `none`);
-};
+}
 
 /**
  * Update state

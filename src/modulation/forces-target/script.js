@@ -15,7 +15,7 @@ const settings = Object.freeze({
   // Drag force so it slows down
   dragForce: Forces.magnitudeForce(0.01),
   thingEl: /** @type HTMLElement */(document.querySelector(`#thing`)),
-  targetEl:  /** @type HTMLElement */(document.querySelector(`#target`))
+  targetEl: /** @type HTMLElement */(document.querySelector(`#target`))
 });
 
 /**
@@ -101,7 +101,7 @@ function setup() {
   });
 
   Util.moveElement(targetEl, state.targetPos);
-};
+}
 setup();
 
 /**

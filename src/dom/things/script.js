@@ -43,7 +43,7 @@ const update = () => {
   hue += hueChange;
 
   // 2. Sanity check
-  hue = hue%360; // 0..360 scale
+  hue = hue % 360; // 0..360 scale
 
   // 3. Save state
   saveState({ hue });
@@ -57,7 +57,7 @@ const update = () => {
 
 function setup() {
   const things = [];
-  for (let index=1;index<=settings.spawnThings;index++) {
+  for (let index = 1; index <= settings.spawnThings; index++) {
     things.push(Things.create(index));
   }
   saveState({ things });
@@ -72,12 +72,12 @@ function setup() {
     // Get new thing state
     let things = state.things.map(
       thing => Things.onMovement(
-        thing, 
+        thing,
         movement,
         elementsUnderCursor)
     );
     saveState({ things });
-    
+
   });
 
   // Update things at a fixed rate
@@ -99,7 +99,7 @@ function setup() {
   // Update state of sketch and use state
   // at full speed
   update();
-};
+}
 
 setup();
 
@@ -107,7 +107,7 @@ setup();
  * Save state
  * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
@@ -128,7 +128,7 @@ function updateThingInState(thingId, updatedThing) {
   const things = state.things.map(thing => {
     // Is it the thing we want to change?
     if (thing.id !== thingId) return thing; // nup
-    
+
     // Return mutated thing
     completedThing = {
       ...thing,
@@ -138,6 +138,6 @@ function updateThingInState(thingId, updatedThing) {
   });
 
   // Save changed things
-  saveState({things});
+  saveState({ things });
   return completedThing;
 }

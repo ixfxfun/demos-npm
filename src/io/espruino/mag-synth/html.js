@@ -29,10 +29,8 @@ export const set = (query, value) => {
   /** @type string */
   let formatted = ``;
   if (typeof value === `number`) {
-    if (value < 10)
-      formatted = Numbers.round(2, value).toString();
-    else
-      formatted = Numbers.round(0, value).toString();
+    if (value < 10) formatted = Numbers.round(2, value).toString();
+    else formatted = Numbers.round(0, value).toString();
   } else if (typeof value === `boolean`) {
     formatted = value ? `True` : `False`;
   } else {

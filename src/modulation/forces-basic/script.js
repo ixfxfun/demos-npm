@@ -137,7 +137,7 @@ function setup() {
   });
 
   spawn();
-};
+}
 setup();
 
 /**

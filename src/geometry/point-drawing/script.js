@@ -23,7 +23,7 @@ const settings = Object.freeze({
 let state = Object.freeze({
   // Generate 100 random points
   // with x,y and radius on 0..1 scale
-  points: [...repeatSync(randomPoint, { count: 100 })]
+  points: [ ...repeatSync(randomPoint, { count: 100 }) ]
 });
 
 const use = () => {
@@ -118,7 +118,7 @@ function setup() {
     window.requestAnimationFrame(loop);
   };
   window.requestAnimationFrame(loop);
-};
+}
 setup();
 
 /**

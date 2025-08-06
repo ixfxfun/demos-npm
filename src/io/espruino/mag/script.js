@@ -1,5 +1,5 @@
 import { Points, radianToDegree } from '@ixfx/geometry';
-import { Dom, Numbers } from '@ixfx/bundle';
+import { Dom, Numbers } from 'ixfx';
 import * as Util from './util.js';
 import * as EspruinoSnippets from './espruino.js';
 
@@ -51,7 +51,7 @@ function use(state) {
 
   // Debug-print out values to page
   dataDisplay.update({ mag: state.mag, strength, xyDegrees });
-};
+}
 
 /**
  * Do some additional processing of sensor data
@@ -123,7 +123,7 @@ function normaliseData(data) {
 
   // Return it back (so it can later be sent to plotter etc)
   return cleaned;
-};
+}
 
 function setup() {
   // Init the helper, giving it a function to receive the data
@@ -143,7 +143,7 @@ function setup() {
     }
   });
   update();
-};
+}
 
 setup();
 

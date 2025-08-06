@@ -51,7 +51,7 @@ function setup() {
 
   // Trigger envelope
   settings.envelope.trigger();
-};
+}
 setup();
 
 /**

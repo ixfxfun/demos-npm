@@ -1,4 +1,4 @@
-import { Espruino } from '@ixfx/io'
+import { Espruino } from '@ixfx/io';
 import * as HtmlUtil from './html.js';
 
 /** @type NormaliseData|undefined  */
@@ -30,7 +30,7 @@ function onConnected(connected) {
   // And also add/remove .hidden for elements that opt-in
   HtmlUtil.cssToggle(`.hide-when-connected`, connected, `hidden`);
   HtmlUtil.cssToggle(`.show-when-connected`, !connected, `hidden`);
-};
+}
 
 /**
  * Connect to Espruino
@@ -64,7 +64,7 @@ export async function connect(script, deviceFilter) {
   } catch (error) {
     console.error(error);
   }
-};
+}
 
 /**
  * Data received from Espruino.

@@ -25,11 +25,11 @@ import { SimpleEventEmitter } from '@ixfx/events';
 export const parseLeds = (colours) => {
   /** @type Led[] */
   const leds = [];
-  for (const [i, v] of colours.entries()) {
+  for (const [ i, v ] of colours.entries()) {
     const colour = (typeof v === `string`) ? v : v[1];
     const index = (typeof v === `string`) ? i : v[0];
 
-    const parsed = Colour.toHsl(colour);
+    const parsed = Colour.HslSpace.fromCss(colour);
     leds.push({
       index,
       ...parsed
@@ -91,7 +91,7 @@ export const updateSegment = (segment, leds, mixer) => {
   }
 
   // Insert the new values
-  return [...without, ...leds];
+  return [ ...without, ...leds ];
 };
 
 /**
@@ -130,7 +130,7 @@ export const setRange = (segment, colour, start, count, total, mixer) => {
  * @param {Led[]} leds
  */
 const isContiguous = (leds) => {
-  for (const [i, led] of leds.entries()) {
+  for (const [ i, led ] of leds.entries()) {
     if (led.index === i) continue;
     return false;
   }
@@ -249,7 +249,7 @@ export class WledSegment {
    * @param {number} [start] 
    * @param {number} [count] 
    */
-  *each(start, count) {
+  * each(start, count) {
     if (this.#leds.length !== this.length) throw new Error(`.led field does not have expected length of ${this.length}. Got: ${this.#leds.length}`);
     const s = start ?? 0;
     const c = count ?? this.length;
@@ -275,7 +275,7 @@ export class WledSegment {
    * @param {Hsl} colour 
    */
   setPixel(index, colour) {
-    this.leds = setPixel(this.leds, [{ ...colour, index }]);
+    this.leds = setPixel(this.leds, [ { ...colour, index } ]);
   }
 
   /**
@@ -487,9 +487,9 @@ export class Wled extends SimpleEventEmitter {
     super();
     this.#_url = websocketUrl;
     this.#_state = new StateMachine.StateMachineWithEvents({
-      closed: [`open`, `connecting`],
-      open: [`closed`],
-      connecting: [`open`, `closed`]
+      closed: [ `open`, `connecting` ],
+      open: [ `closed` ],
+      connecting: [ `open`, `closed` ]
     }, { initial: `closed` });
 
     this.#_state.addEventListener(`change`, event => {
@@ -540,7 +540,9 @@ export class Wled extends SimpleEventEmitter {
     if (this.ws !== undefined) {
       try {
         this.ws.close();
-      } catch {}
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     const s = new WebSocket(this.#_url);

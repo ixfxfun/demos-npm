@@ -37,5 +37,5 @@ function setup() {
       console.error(error);
     }
   });
-};
+}
 setup();

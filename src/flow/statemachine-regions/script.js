@@ -25,7 +25,7 @@ let state = Object.freeze({
   /** @type string */
   current: ``,
   /** @type number[] */
-  distances: [1, 1, 1],
+  distances: [ 1, 1, 1 ],
 });
 
 /**
@@ -102,7 +102,7 @@ const use = () => {
   const stateLabel = current;
 
   // Draw each circle
-  for (const [index, c] of circles.entries()) {
+  for (const [ index, c ] of circles.entries()) {
     // Distance inverted (so 1 is close, 0 far)
     const d = Math.floor((1 - distances[index]) * 100);
 
@@ -192,7 +192,7 @@ function setup() {
     window.setTimeout(processStateLoop, 1000);
   };
   processStateLoop();
-};
+}
 setup();
 
 //#region helpers

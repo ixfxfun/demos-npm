@@ -48,10 +48,10 @@ const update = () => {
 
   const circleAbs = { ...canvas.toAbsolute(circle), radius: circle.radius * canvas.dimensionMin };
   // Produce points on a Vogel spiral
-  const pointsAbs = [...SurfacePoints.circleVogelSpiral(circleAbs, {
+  const pointsAbs = [ ...SurfacePoints.circleVogelSpiral(circleAbs, {
     ...vogelOpts,
     rotation
-  })];
+  }) ];
 
   // As an alternative...
   // Produce points across 15 rings
@@ -78,7 +78,7 @@ const draw = () => {
   ctx.clearRect(0, 0, width, height);
   ctx.save();
   ctx.translate(0, 0);
-  for (const [index, ptAbs] of pointsAbs.entries()) {
+  for (const [ index, ptAbs ] of pointsAbs.entries()) {
     // Calc a % distance of pointer to this point
     const distance = 1 - clamp(Points.distance(pointerAbs, ptAbs) / canvas.dimensionMin);
 

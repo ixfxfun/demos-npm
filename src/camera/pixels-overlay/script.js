@@ -52,16 +52,15 @@ const use = () => {
   const { lblFps, lblDifferences } = settings;
 
   if (lblFps) lblFps.textContent = `FPS: ${fps}`;
-  if (lblDifferences)
-    lblDifferences.textContent = `Differences: ${Math.round(differences * 100)}%`;
+  if (lblDifferences) lblDifferences.textContent = `Differences: ${Math.round(differences * 100)}%`;
 };
 
 /**
  * In this simple frame processor, the current frame is compared
  * to the last frame. Pixels are compared to get the amount of change
  * frame-on-frame.
- * 
- * @param {ImageData} frame 
+ *
+ * @param {ImageData} frame
  * @param {CanvasRenderingContext2D} context
  */
 const update = (frame, context) => {
@@ -92,7 +91,7 @@ const update = (frame, context) => {
 
 /**
  * Compares `frame` with `lastFrame`.
- * @param {ImageData} frame 
+ * @param {ImageData} frame
  * @param {Uint8ClampedArray} lastFrame
  * @param {CanvasRenderingContext2D} context
  */
@@ -112,9 +111,9 @@ const compareFrames = (frame, lastFrame, context) => {
   for (let x = 0; x < w; x++) {
     // ...and top-to-bottom
     for (let y = 0; y < h; y++) {
-      const indexes = Util.rgbaIndexes(w, x, y);          // Get array location for pixel based on x,y
-      const pixel = Util.rgbaValues(current, indexes);  // Get pixel data
-      const pixelGray = Util.grayscale(pixel);           // Convert to greyscale
+      const indexes = Util.rgbaIndexes(w, x, y); // Get array location for pixel based on x,y
+      const pixel = Util.rgbaValues(current, indexes); // Get pixel data
+      const pixelGray = Util.grayscale(pixel); // Convert to greyscale
 
       // Get the grayscale value of the same pixel in last frame
       const lastFramePixelGray = Util.grayscale(Util.rgbaValues(lastFrame, indexes));
@@ -162,7 +161,7 @@ const startVideo = async () => {
   if (!visualise) canvasEl.style.display = `none`;
 
   try {
-    // Video.frames generator loops forever, 
+    // Video.frames generator loops forever,
     // returning ImageData from video stream
     const frames = Video.frames(videoEl, { canvasEl });
     saveState({ running: true });
@@ -189,13 +188,13 @@ function setup() {
   document.querySelector(`#btnStart`)?.addEventListener(`click`, async () => {
     await startVideo();
   });
-};
+}
 
 setup();
 
 /**
  * Save state
- * @param {Partial<State>} s 
+ * @param {Partial<State>} s
  */
 function saveState(s) {
   state = Object.freeze({

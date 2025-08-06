@@ -44,7 +44,7 @@ function setup() {
   });
 
   setInterval(update, settings.updateRateMs);
-};
+}
 setup();
 
 /**

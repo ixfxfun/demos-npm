@@ -91,7 +91,7 @@ function setup() {
 
   // Call every half a second
   setInterval(update, 500);
-};
+}
 
 /**
  * Save state

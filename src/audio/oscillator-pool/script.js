@@ -48,7 +48,7 @@ function voiceAdded() {
 
 /**
  * Pool calls this to remove a resource
- * @param {Audio.Thing} thing 
+ * @param {Audio.Thing} thing
  */
 function voiceRemoved(thing) {
   Audio.remove(thing);
@@ -59,7 +59,7 @@ const use = () => {
   const { keysPressed, pointersPressed } = state;
 
   // Keep alive voices that are currently triggered
-  const keys = [...keysPressed, ...pointersPressed];
+  const keys = [ ...keysPressed, ...pointersPressed ];
   for (const key of keys) {
     voices.use(key);
   }
@@ -77,7 +77,7 @@ const getAudioContext = () => {
 
 /**
  * When there's a keydown, add it to the list
- * @param {KeyboardEvent} event 
+ * @param {KeyboardEvent} event
  */
 const onKeyDown = (event) => {
   if (event.repeat) return; // Ignore repeat keydown events
@@ -85,26 +85,26 @@ const onKeyDown = (event) => {
 
   // Add new key to list of keys being pressed,
   // making sure we don't add duplicates
-  keysPressed = Arrays.unique([...keysPressed, event.key]);
+  keysPressed = Arrays.unique([ ...keysPressed, event.key ]);
   saveState({ keysPressed });
 };
 
 /**
  * When there's a pointer down, add its id to the list
- * @param {PointerEvent} event 
+ * @param {PointerEvent} event
  */
 const onPointerDown = (event) => {
   let { pointersPressed } = state;
 
   // Add to list of pointer ids, making sure we don't add duplicates
-  pointersPressed = Arrays.unique([...pointersPressed, event.pointerId.toString()]);
+  pointersPressed = Arrays.unique([ ...pointersPressed, event.pointerId.toString() ]);
   saveState({ pointersPressed });
 };
 
 /**
  * When there's a pointerup, remove from list
  * of pointerdown ids, and release voice from pool
- * @param {PointerEvent} event 
+ * @param {PointerEvent} event
  */
 const onPointerUp = (event) => {
   const { voices } = settings;
@@ -123,7 +123,7 @@ const onPointerUp = (event) => {
 /**
  * When there's a keyup, remove from list of held
  * keys and release voice
- * @param {KeyboardEvent} event 
+ * @param {KeyboardEvent} event
  */
 const onKeyUp = (event) => {
   const { voices } = settings;
@@ -163,12 +163,12 @@ function setup() {
     update();
     use();
   }, 10);
-};
+}
 setup();
 
 /**
  * Save state
- * @param {Partial<State>} s 
+ * @param {Partial<State>} s
  */
 function saveState(s) {
   state = Object.freeze({

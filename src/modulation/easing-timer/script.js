@@ -49,7 +49,7 @@ function use(computed) {
 
   thingElement.textContent = Util.percentage(easing);
   Util.translateElement(thingElement, easing, 0);
-};
+}
 
 // Called on pointerup or keyup. 
 // Resets the easing function
@@ -66,7 +66,7 @@ function trigger() {
   const e = Easings.create(easing);
 
   saveState({ easing: e });
-};
+}
 
 function setup() {
   // Wire up events
@@ -74,7 +74,7 @@ function setup() {
   document.addEventListener(`keyup`, trigger);
 
   update();
-};
+}
 setup();
 
 /**

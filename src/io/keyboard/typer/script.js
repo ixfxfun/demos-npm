@@ -5,7 +5,7 @@ const settings = Object.freeze({
   // Element to hold created letters
   lettersEl: document.querySelector(`#letters`),
   // Keys to allow even though they aren't letters/digits
-  allowCodes: [`Backquote`, `Minus`, `Equal`, `Plus`, `Period`, `Semicolon`, `Comma`, `Slash`, `Quote`, `Backslash`, `BracketLeft`, `BracketRight`],
+  allowCodes: [ `Backquote`, `Minus`, `Equal`, `Plus`, `Period`, `Semicolon`, `Comma`, `Slash`, `Quote`, `Backslash`, `BracketLeft`, `BracketRight` ],
   // Create a speed tracker that auto-resets after 3 samples
   speedTracker: Trackers.interval({ id: `typing`, resetAfterSamples: 3 })
 });
@@ -175,7 +175,7 @@ function setup() {
   // Listen for keydown/keyup
   document.addEventListener(`keydown`, onKeydown);
   document.addEventListener(`keyup`, onKeyup);
-};
+}
 setup();
 
 /**

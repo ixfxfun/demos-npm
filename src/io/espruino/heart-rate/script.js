@@ -1,5 +1,5 @@
 import { delay } from '@ixfx/flow';
-import { Espruino } from '@ixfx/io'
+import { Espruino } from '@ixfx/io';
 import { setHtml, setClass, setCssDisplay } from './util.js';
 
 const scripts = Object.freeze({
@@ -49,7 +49,7 @@ function use() {
   const elapsed = Date.now() - time;
   setHtml(`bpm`, bpm);
   setHtml(`confidence`, confidence);
-};
+}
 
 /**
  * Called when data is received from Espruino
@@ -80,7 +80,7 @@ function onData(event) {
     console.warn(error);
     console.log(data);
   }
-};
+}
 
 function setup() {
   // Listen for a click
@@ -88,7 +88,7 @@ function setup() {
 
   // Trigger connection
   connect();
-};
+}
 
 async function connect() {
   const { script } = settings;
@@ -121,7 +121,7 @@ async function connect() {
   } catch (error) {
     console.error(error);
   }
-};
+}
 
 /**
  * Called when connection succeds/fails
@@ -130,7 +130,7 @@ async function connect() {
 function onConnected(connected) {
   setCssDisplay(`preamble`, connected ? `none` : `block`);
   setCssDisplay(`data`, connected ? `block` : `none`);
-};
+}
 setup();
 
 /**

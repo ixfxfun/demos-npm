@@ -14,7 +14,7 @@ const settings = Object.freeze({
   // so there's enough head-room
   gain: 0.4,
   // Tones via https://ragajunglism.org/ragas/tanpuras/
-  tones: [130.8, 138.6, 146.8, 155.6, 164.8, 174.6, 92.5, 98, 103.8, 110, 116.5, 123.5, 55],
+  tones: [ 130.8, 138.6, 146.8, 155.6, 164.8, 174.6, 92.5, 98, 103.8, 110, 116.5, 123.5, 55 ],
   // Drift each voice's frequency a little
   frequencyJitter: jitterAbsolute({ relative: 0.001 }),
   // Drift each voice's panning a little
@@ -25,7 +25,7 @@ const settings = Object.freeze({
  * Use the Thing.
  * Applies current pan, frequency and gain settings to the
  * audio graph
- * @param {Thing} thing 
+ * @param {Thing} thing
  */
 export const use = (thing) => {
   const { frequency, gain, node } = thing;
@@ -38,8 +38,8 @@ export const use = (thing) => {
 /**
  * Update.
  * Computes new pan & frequency values for the thing
- * @param {Thing} thing 
- * @returns 
+ * @param {Thing} thing
+ * @returns
  */
 export const update = (thing) => {
   const { frequencyJitter, panJitter, gain } = settings;
@@ -55,7 +55,7 @@ export const update = (thing) => {
 
 /**
  * Removes the Thing
- * @param {Thing} thing 
+ * @param {Thing} thing
  */
 export const remove = (thing) => {
   const { node } = thing;
@@ -75,7 +75,7 @@ export const remove = (thing) => {
 /**
  * Create 'thing' and accompanying oscillator
  * @param {AudioContext} context
- * @returns {Thing} 
+ * @returns {Thing}
  */
 export const create = (context) => {
   const { oscillator, tones, frequencyJitter: driftJitter } = settings;
@@ -133,7 +133,7 @@ export const create = (context) => {
  */
 
 /**
- * @typedef {Readonly<{ 
+ * @typedef {Readonly<{
  * ctx: AudioContext
  * pan: StereoPannerNode
  * gain: GainNode

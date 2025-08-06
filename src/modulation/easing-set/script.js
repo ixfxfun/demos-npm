@@ -2,11 +2,6 @@ import * as Core from '@ixfx/core';
 import * as Mod from '@ixfx/modulation';
 import * as Util from './util.js';
 
-/** @type Mod.Easings.EasingOptions */
-let y
-/** @type Mod.Easings.EasingOptions */
-let z
-
 const settings = Object.freeze({
   easing: /** @type Mod.Easings.EasingOptions */({
     name: `quintIn`,
@@ -39,7 +34,7 @@ async function use(computed) {
 
   // Update UI
   fillElement.style.width = `${x * 100}%`;
-};
+}
 
 
 /**
@@ -96,7 +91,7 @@ function setup() {
   slider.addEventListener(`pointerup`, onPointerUp);
 
   update();
-};
+}
 setup();
 
 /**

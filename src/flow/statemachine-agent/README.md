@@ -3,7 +3,6 @@
 This sketch demonstrates driving a state machine for agent-like behaviour.
 
 * [Online demo](https://demos.ixfx.fun/flow/statemachine-regions/)
-* [Glitch version](https://glitch.com/edit/#!/ixix-state-machines-driver?path=script.js%3A134%3A0)
   
 At the top of the sketch, we have the settings. This consists of `updateSpeed` (how often to run the state machine driver), `stateMachine` which defines the transitions and `stateHandlers` which sets up what to do at each state.
 
@@ -24,4 +23,4 @@ The benefit of using state machines and the state machine 'driver' is that the s
 This could all be done with some big switch statements and if-then-else blocks, but here we get simplicity and safety.
 
 Read more:
-* [flow/StateMachine.drive](https://api.ixfx.fun/funcs/Flow.StateMachine.driver.html)
+* [ixfx Guide](https://ixfx.fun/flow/state-machine/driver/)

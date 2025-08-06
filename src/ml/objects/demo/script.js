@@ -82,7 +82,7 @@ function setup() {
   };
   updateLoop();
 
-};
+}
 setup();
 
 /**

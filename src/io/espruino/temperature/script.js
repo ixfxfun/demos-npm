@@ -1,5 +1,5 @@
 import { delay } from '@ixfx/flow';
-import { Espruino } from '@ixfx/io'
+import { Espruino } from '@ixfx/io';
 import { setCssDisplay } from './util.js';
 
 const scripts = Object.freeze({

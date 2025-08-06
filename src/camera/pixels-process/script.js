@@ -7,7 +7,7 @@ import * as Util from './util.js';
 const settings = Object.freeze({
   // Difference in grayscale value to count as a changed pixel
   threshold: 30,
-  // If true, the differencing is shown. If false, 
+  // If true, the differencing is shown. If false,
   // just the difference calculation is shown
   visualise: true,
   frameIntervalTracker: Trackers.interval({ id: `fps`, resetAfterSamples: 100 }),
@@ -45,15 +45,14 @@ const use = () => {
   const { visualise, lblFps, lblDifferences, canvasEl } = settings;
 
   if (lblFps) lblFps.textContent = `FPS: ${fps}`;
-  if (lblDifferences)
-    lblDifferences.textContent = `Differences: ${Math.round(differences * 100)}%`;
+  if (lblDifferences) lblDifferences.textContent = `Differences: ${Math.round(differences * 100)}%`;
 
   // Get drawing context if possible
   const context = canvasEl?.getContext(`2d`);
   if (canvasEl === null || !context) return;
 
-  // Write pixels to canvas. Pixels that were different are unchanged, 
-  // so they come through in original colour but pixels deemed same 
+  // Write pixels to canvas. Pixels that were different are unchanged,
+  // so they come through in original colour but pixels deemed same
   // as last frame were changed to grayscale and translucent
   if (visualise) context.putImageData(visFrame, 0, 0);
 
@@ -63,8 +62,8 @@ const use = () => {
  * In this simple frame processor, the current frame is compared
  * to the last frame. Pixels are compared to get the amount of change
  * frame-on-frame.
- * 
- * @param {ImageData} frame 
+ *
+ * @param {ImageData} frame
  */
 const update = (frame) => {
   const { lastFrame } = state;
@@ -95,10 +94,10 @@ const update = (frame) => {
 };
 
 /**
- * 
- * @param {ImageData} frame 
+ *
+ * @param {ImageData} frame
  * @param {Uint8ClampedArray} lastFrame
- * @returns 
+ * @returns
  */
 const compareFrame = (frame, lastFrame) => {
   const { data } = frame;
@@ -164,7 +163,7 @@ const startVideo = async () => {
   if (!visualise) canvasEl.style.display = `none`;
 
   try {
-    // Video.frames generator loops forever, 
+    // Video.frames generator loops forever,
     // returning ImageData from video stream
     for await (const frame of Video.frames(videoEl)) {
       // Update calculations
@@ -182,12 +181,12 @@ function setup() {
   document.querySelector(`#btnStart`)?.addEventListener(`click`, async () => {
     await startVideo();
   });
-};
+}
 setup();
 
 /**
  * Save state
- * @param {Partial<State>} s 
+ * @param {Partial<State>} s
  */
 function saveState(s) {
   state = Object.freeze({

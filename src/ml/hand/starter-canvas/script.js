@@ -96,7 +96,7 @@ function setup() {
   };
   updateLoop();
 
-};
+}
 setup();
 
 
@@ -119,7 +119,7 @@ function onReceivedPoses(packet) {
     return;
   }
   updateFromHands(handsData);
-};
+}
 
 /**
  * Update state

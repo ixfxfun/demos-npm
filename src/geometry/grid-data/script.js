@@ -7,7 +7,7 @@ const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
   rows: 15,
   cols: 15,
-  colours: [`bisque`, `cadetblue`, `cornflowerblue`, `coral`],
+  colours: [ `bisque`, `cadetblue`, `cornflowerblue`, `coral` ],
   tooltipEl: /** @type HTMLElement */(document.querySelector(`#tooltip`))
 });
 

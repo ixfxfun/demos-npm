@@ -51,7 +51,7 @@ const onMidiMessage = (message, input) => {
 async function setup() {
   try {
     const r = await navigator.requestMIDIAccess();
-    for (const [id, input] of r.inputs) {
+    for (const [ id, input ] of r.inputs) {
       console.log(`MIDI input: ${input.id} - ${input.name} (${input.manufacturer})`);
 
       input.addEventListener(`midimessage`, event => {
@@ -65,7 +65,7 @@ async function setup() {
   } catch (error) {
     console.error(error);
   }
-};
+}
 await setup();
 
 /**

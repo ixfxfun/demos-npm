@@ -1,4 +1,4 @@
-import { Serial } from '@ixfx/io'
+import { Serial } from '@ixfx/io';
 
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true, eol: `\n` }),
@@ -68,7 +68,7 @@ function setup() {
     }
   });
 
-};
+}
 setup();
 
 /**

@@ -38,5 +38,5 @@ function setup() {
     if (log) log.innerHTML = ``;
     if (raw) raw.innerHTML = ``;
   });
-};
+}
 setup();

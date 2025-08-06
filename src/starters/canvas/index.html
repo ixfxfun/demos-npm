@@ -19,16 +19,26 @@
     }
 
     :root {
-      --hue: 200;
-      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      --bg: hsl(var(--hue), 10%, 80%);
-      --fg: hsl(var(--hue), 100%, 30%);
+      color-scheme: light dark;
+      --hue: 300;
+      --font: system-ui;
+      --light: hsl(var(--hue), 10%, 80%);
+      --dark: hsl(var(--hue), 80%, 5%);
+      --accent: light-dark(hsl(var(--hue), 100%, 40%),hsl(var(--hue), 100%, 80%) )
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--fg);
+      background-color: light-dark(var(--light), var(--dark));
+      color: light-dark(var(--dark), var(--light));
       font-family: var(--font);
+    }
+
+    a:link,a:visited {
+      color: light-dark(var(--dark), var(--light));
+      text-decoration-style: wavy;
+    }
+    a:hover {
+      color: var(--accent);
     }
 
     canvas {

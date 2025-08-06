@@ -42,7 +42,7 @@ const use = () => {
   if (!svgElement) return;
   const lines = Lines.joinPointsToLines(...convexHull, convexHull[0]); // Add first point to close path
   Svg.clear(svgElement);
-  for (const [index, l] of lines.entries()) {
+  for (const [ index, l ] of lines.entries()) {
     Svg.Elements.line(l, svgElement, lineStyle, `#line-${index}`);
   }
 };
@@ -70,7 +70,7 @@ const addPoint = (point) => {
 
   // Add to list of points
   saveState({
-    points: [...state.points, point]
+    points: [ ...state.points, point ]
   });
 
   // Create element for point
@@ -90,7 +90,7 @@ function setup() {
   document.addEventListener(`click`, event => {
     addPoint({ x: event.x, y: event.y });
   });
-};
+}
 setup();
 
 /**

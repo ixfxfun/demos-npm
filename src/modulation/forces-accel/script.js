@@ -114,7 +114,7 @@ function setup() {
     // Track the movement
     pointerMovement.seen({ x: event.movementX, y: event.movementY });
   });
-};
+}
 setup();
 
 /**

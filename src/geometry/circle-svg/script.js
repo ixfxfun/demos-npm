@@ -1,5 +1,5 @@
 import { Svg } from '@ixfx/visual';
-import { Numbers, Modulation, Dom } from '@ixfx/bundle';
+import { Numbers, Modulation, Dom } from 'ixfx';
 
 // Define settings
 const settings = Object.freeze({

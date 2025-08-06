@@ -9,7 +9,6 @@ import { clamp } from "@ixfx/numbers";
  */
 
 
-
 /**
  * @returns {Thing}
  */

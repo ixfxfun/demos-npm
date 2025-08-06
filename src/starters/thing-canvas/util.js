@@ -28,7 +28,7 @@ export function drawLabelledCircle(context, radius, fillStyle = `black`, message
  */
 export const addUpMovement = (pointerEvent, canvas) => {
   let movement = 0;
-  const events = `getCoalescedEvents` in pointerEvent ? pointerEvent.getCoalescedEvents() : [pointerEvent];
+  const events = `getCoalescedEvents` in pointerEvent ? pointerEvent.getCoalescedEvents() : [ pointerEvent ];
   for (const event of events) {
     let { x, y } = canvas.toRelative(event.movementX, event.movementY);
 

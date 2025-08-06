@@ -1,6 +1,6 @@
 # stereo-pan
 
-Demonstates controlling audio panning with a few techniques:
+Demonstrates controlling audio panning with a few techniques:
 * Random pan value
 * Pan value based on relative pointer position
 * Panning based on an [oscillator](https://ixfx.fun/modulation/oscillators/usage/) value (aka auto pan)

@@ -62,7 +62,7 @@ function setup() {
   }
 
   gridElement.addEventListener(`click`, onCellClick);
-};
+}
 
 setup();
 

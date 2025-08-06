@@ -123,7 +123,7 @@ function setup() {
     saveState({ pause: false });
   });
 
-};
+}
 setup();
 
 /**

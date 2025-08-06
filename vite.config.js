@@ -17,9 +17,9 @@ function getHtmlEntryFiles(srcDir) {
       if (isDirectory) {
         // If it's a directory, recursively traverse it
         traverseDir(filePath);
-      } else if (path.extname(file) === '.html') {
+      } else if (path.extname(file) === `.html`) {
         // If it's an HTML file, add it to the entry object
-        const name = path.relative(srcDir, filePath).replace(/\..*$/, '');
+        const name = path.relative(srcDir, filePath).replace(/\..*$/, ``);
         entry[name] = filePath;
       }
     });
@@ -30,12 +30,11 @@ function getHtmlEntryFiles(srcDir) {
 }
 
 export default defineConfig({
-  root: "./src",
-  base: "./docs",
+  root: `./src`,
   build: {
     rollupOptions: {
-      input: getHtmlEntryFiles('src')
+      input: getHtmlEntryFiles(`src`)
     },
-    outDir: '../docs'
+    outDir: `./docs`
   },
 });

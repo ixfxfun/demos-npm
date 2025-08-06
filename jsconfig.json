@@ -16,6 +16,9 @@
       "ESNext"
     ],
     "paths": {
+      "@ixfx/lorp": [
+        "../node_modules/@ixfx/trackers/dist/src/index.js"
+      ],
       "@ixfx/trackers.js": [
         "../node_modules/@ixfx/trackers/dist/src/index"
       ],

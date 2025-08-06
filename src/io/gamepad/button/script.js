@@ -17,7 +17,7 @@ let state = Object.freeze({
 
 const use = () => {
   const { buttonPressed } = state;
- 
+
   // Element to visualise button press
   const element = document.querySelector(`#vis`);
   if (!element) return;
@@ -49,10 +49,10 @@ const readGamepad = (gamepad) => {
  * same one used previosuly.
  */
 export function getGamepad() {
-  const gamepads = /** @type Gamepad[] */(navigator.getGamepads 
-    ? navigator.getGamepads() 
+  const gamepads = /** @type Gamepad[] */(navigator.getGamepads ?
+    navigator.getGamepads() :
     // @ts-ignore
-    : (navigator.webkitGetGamepads ??  []));
+    (navigator.webkitGetGamepads ?? []));
 
   gamepads.some(gm => {
     if (gm === null) return;
@@ -60,7 +60,7 @@ export function getGamepad() {
       readGamepad(gm);
     }
   });
-};
+}
 
 function setup() {
   const loop = () => {
@@ -68,7 +68,7 @@ function setup() {
     use();
     window.requestAnimationFrame(loop);
   };
-  loop();  
+  loop();
 
   window.addEventListener(`gamepadconnected`, event => {
     console.log(`Gamepad connected`);
@@ -80,14 +80,14 @@ function setup() {
     console.log(`Gamepad disconnected`);
     saveState({ gamepadId: undefined });
   });
-};
+}
 setup();
 
 /**
  * Save state
  * @param {Partial<State>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

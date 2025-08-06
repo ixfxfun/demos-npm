@@ -88,7 +88,7 @@ function setup() {
     window.requestAnimationFrame(loop);
   };
   window.requestAnimationFrame(loop);
-};
+}
 setup();
 
 /**

@@ -33,7 +33,7 @@ function setup() {
   // Initialise inline console
   Dom.inlineConsole();
   setInterval(update, settings.updateRateMs);
-};
+}
 setup();
 
 /**

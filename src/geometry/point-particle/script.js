@@ -45,7 +45,7 @@ const update = () => {
     .filter(p => p.age > 0.001);
 
   // 2. Spawn new particles
-  const withNew = [...aged, ...repeatSync(() => Particle.create(state), { count: spawnPerLoop })];
+  const withNew = [ ...aged, ...repeatSync(() => Particle.create(state), { count: spawnPerLoop }) ];
 
   // 3. Move particles: some jitter applied to X, and drift upwards
   const moved = withNew.map(p => ({
@@ -142,7 +142,7 @@ function setup() {
   document.addEventListener(`pointerleave`, event => {
     defaultPosition();
   });
-};
+}
 setup();
 
 /**

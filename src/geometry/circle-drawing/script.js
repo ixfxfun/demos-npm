@@ -1,4 +1,4 @@
-import { Modulation, Iterables } from '@ixfx/bundle';
+import { Modulation, Iterables } from 'ixfx';
 import * as Numbers from '@ixfx/numbers';
 import { CanvasHelper } from '@ixfx/visual';
 

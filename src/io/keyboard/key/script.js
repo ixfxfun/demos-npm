@@ -38,7 +38,7 @@ const use = () => {
 
   const element = document.querySelector(`#vis`);
   if (!element) return;
-  
+
   if (pressed) {
     // Eg: if being held down, for how long
     const holdTime = Math.round(performance.now() - startPress);
@@ -101,7 +101,7 @@ const onKeyUp = (event) => {
     return;
   }
   console.log(`onKeyUp`);
-    
+
   event.preventDefault();
 
   // Update state
@@ -125,14 +125,14 @@ function setup() {
   document.addEventListener(`keyup`, onKeyUp);
 
   setInterval(use, settings.updateIntervalMs);
-};
+}
 setup();
 
 /**
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

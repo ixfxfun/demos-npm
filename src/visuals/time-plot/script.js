@@ -91,12 +91,12 @@ function use(state) {
   Plot.newFrame();
   draw();
 
-};
+}
 
 
 function setup() {
   update();
-};
+}
 setup();
 
 /**

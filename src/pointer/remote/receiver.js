@@ -20,7 +20,7 @@ const setup = () => {
 setup();
 
 function setText(id, message) {
-  const element =  /** @type HTMLElement */(document.querySelector(`#${id}`));
+  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
   if (element && element.textContent !== message) {
     element.textContent = message;
   }

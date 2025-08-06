@@ -125,7 +125,7 @@ function setup() {
       pointer: { x: event.x, y: event.y }
     });
   });
-};
+}
 setup();
 
 /**

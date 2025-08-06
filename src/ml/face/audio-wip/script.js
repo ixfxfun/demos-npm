@@ -13,10 +13,10 @@ const settings = Object.freeze({
   updateRateMs: 500,
   remote: new Remote(),
   dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
-  faceAngleRange: [-1, 1],
+  faceAngleRange: [ -1, 1 ],
   // Minor pentatonic scale
-  musicalScale: [`A`, `B`, `C`, `D`, `E`, `F`, `G`],
-  noteLengths: [`32n`, `16n`, `8n`, `1n`],
+  musicalScale: [ `A`, `B`, `C`, `D`, `E`, `F`, `G` ],
+  noteLengths: [ `32n`, `16n`, `8n`, `1n` ],
   // Create a Tone.js Monosythn
   // https://tonejs.github.io/docs/15.0.4/classes/MonoSynth.html
   synth: new Tone.MonoSynth({
@@ -140,7 +140,7 @@ function setup() {
   };
   updateLoop();
 
-};
+}
 setup();
 
 /**

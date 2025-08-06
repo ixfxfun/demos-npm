@@ -140,10 +140,9 @@ function setup() {
 
   // Kick off update loop
   update();
-};
+}
 
 setup();
-
 
 
 /**

@@ -1,4 +1,5 @@
 import { CanvasHelper } from '@ixfx/visual';
+import * as Draw from './drawing.js';
 
 // Define settings - properties that don't change
 const settings = Object.freeze({
@@ -6,8 +7,16 @@ const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` })
 });
 
-// Initial state - properties that change as code runs
-let state = Object.freeze({});
+/** 
+ * @typedef {Readonly<{
+ * randomValue:number
+ * }>} State
+ */
+
+/** @type State */
+let state = Object.freeze({
+  randomValue: 0
+});
 
 /**
  * This is called at a slower rate
@@ -15,8 +24,12 @@ let state = Object.freeze({});
  * mutating state in some manner
  */
 const update = () => {
-  // Do some calculations
-  // and call saveState({ ... })
+
+  // Compute state
+  let randomValue = Math.random();
+
+  // Save it
+  saveState({ randomValue });
 };
 
 /**
@@ -25,37 +38,25 @@ const update = () => {
  * @returns 
  */
 const draw = () => {
+  const { randomValue } = state;
+
   // Get canvas
   const { canvas } = settings;
+
   // Get drawing context
   const { ctx } = canvas;
+  const bounds = canvas.getRectangle();
 
   // Clear canvas
-  clear(canvas);
+  Draw.clear(ctx, bounds);
 
   // TODO: drawing...
-  drawLabelledCircle({ x: 0.2, y: 0.2, radius: 0.1 }, `pink`);
+  Draw.circleFilled(ctx, { x: 0.2, y: 0.2, radius: 0.1 }, {
+    fillStyle: `pink`,
+    message: randomValue.toFixed((2))
+  });
 };
 
-/**
- * Clears canvas
- * @param {CanvasHelper} canvas 
- */
-const clear = (canvas) => {
-  const { width, height } = canvas.size;
-  const { ctx } = canvas;
-
-  // Make background transparent
-  ctx.clearRect(0, 0, width, height);
-
-  // Clear with a colour
-  //ctx.fillStyle = `orange`;
-  //ctx.fillRect(0, 0, width, height);
-
-  // Fade out previously painted pixels
-  //ctx.fillStyle = `hsl(200, 100%, 50%, 0.1%)`;
-  //ctx.fillRect(0, 0, width, height);
-};
 
 /**
  * Setup and run main loop 
@@ -76,48 +77,17 @@ function setup() {
   };
   animationLoop();
 
-};
+}
 setup();
+
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<State>} s 
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s
   });
-}
-
-/**
- * Draws a circle with optional text
- * @param {{x:number, y:number, radius:number}} circle 
- */
-function drawLabelledCircle(circle, fillStyle = `black`, message = ``, textFillStyle = `white`) {
-  const { canvas } = settings;
-  const { ctx } = canvas;
-
-  // Convert relative radius based on canvas size
-  const radius = circle.radius * (canvas.dimensionMax / 2);
-
-  // Convert x,y to absolute point
-  const absolutePoint = canvas.toAbsolute(circle);
-
-  // Translate so 0,0 is the center of circle
-  ctx.save();
-  ctx.translate(absolutePoint.x, absolutePoint.y);
-
-  // Fill a circle
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, Math.PI * 2);
-  ctx.fillStyle = fillStyle;
-  ctx.fill();
-
-  if (message.length > 0) {
-    ctx.fillStyle = textFillStyle;
-    ctx.textAlign = `center`;
-    ctx.fillText(message, 0, 0);
-  }
-  ctx.restore();
 }

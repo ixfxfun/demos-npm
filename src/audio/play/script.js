@@ -12,8 +12,8 @@ const use = () => {};
 /**
  * Plays a sample by id.
  * The id should correspond to the HTML AUDIO element.
- * @param {string} id 
- * @returns 
+ * @param {string} id
+ * @returns
  */
 function playSample(id) {
   const { audio } = settings;
@@ -29,7 +29,7 @@ function playSample(id) {
 /**
  * Stops a sample by id.
  * The id should correspond to the HTML AUDIO element
- * @param {string} id 
+ * @param {string} id
  */
 function stopSample(id) {
   const { audio } = settings;
@@ -55,11 +55,11 @@ function setup() {
     stopSample(sampleId);
   });
 
-};
+}
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<state>} s
  */
 function saveState(s) {
   state = Object.freeze({

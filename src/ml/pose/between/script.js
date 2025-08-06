@@ -52,7 +52,7 @@ const onPoseAdded = (event) => {
   const thingForPose = Things.create(poseTracker.guid, x);
 
   // Add it
-  saveState({ things: [...state.things, thingForPose] });
+  saveState({ things: [ ...state.things, thingForPose ] });
 };
 
 /**
@@ -70,7 +70,7 @@ const onPoseExpired = (event) => {
   const existing = new Set(poses.getGuids());
 
   // Split the current list into dead/alive using ixfx Arrays.filterAB
-  const [dead, alive] = Arrays.filterAB(things, t => !existing.has(t.id));
+  const [ dead, alive ] = Arrays.filterAB(things, t => !existing.has(t.id));
 
   // Remove the dead thigns
   for (const d of dead) {
@@ -126,7 +126,7 @@ function setup() {
     window.requestAnimationFrame(animationLoop);
   };
   animationLoop();
-};
+}
 
 
 setup();

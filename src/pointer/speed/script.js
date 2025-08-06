@@ -7,9 +7,9 @@ const settings = Object.freeze({
   // This determines the scaling of speed
   maxSpeed: 1,
   // Range for font width
-  fontWidth: [50, 200],
+  fontWidth: [ 50, 200 ],
   // Range for font weight
-  fontWeight: [200, 900],
+  fontWeight: [ 200, 900 ],
   // Two moving averagers for x,y
   // Average over 30 samples
   avg: {

@@ -13,7 +13,7 @@ const settings = Object.freeze({
   // How often to compute data from poses & update thing
   updateSpeedMs: 10,
   // Min and max tilt values (empirically figured out)
-  tiltRange: [-0.5, 0.5],
+  tiltRange: [ -0.5, 0.5 ],
   // Be able to show some debug info for ourselves
   dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
   // Automatically sizes canvas for us
@@ -122,7 +122,7 @@ const computeShoulderAngle = (pose) => {
 function setup() {
   // Draw loop
   window.requestAnimationFrame(update);
-};
+}
 
 setup();
 

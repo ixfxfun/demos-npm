@@ -123,7 +123,7 @@ function setup() {
   };
   window.requestAnimationFrame(animationLoop);
 
-};
+}
 
 setup();
 

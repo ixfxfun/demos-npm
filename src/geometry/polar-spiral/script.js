@@ -1,4 +1,4 @@
-import { Modulation, Numbers } from '@ixfx/bundle';
+import { Modulation, Numbers } from 'ixfx';
 import { CanvasHelper } from '@ixfx/visual';
 import { Polar } from '@ixfx/geometry';
 
@@ -82,7 +82,7 @@ function setup() {
     window.requestAnimationFrame(loop);
   };
   loop();
-};
+}
 setup();
 
 /**

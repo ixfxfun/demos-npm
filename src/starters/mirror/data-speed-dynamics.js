@@ -50,7 +50,7 @@ function use(state) {
   } else if (fullMode) {
     document.body.style.backgroundColor = hsl;
   }
-};
+}
 
 // Called continuously in a loop
 function update() {
@@ -65,7 +65,7 @@ function update() {
   saveState({
     value: interpolatedValue
   });
-};
+}
 
 function setup() {
   const { fullMode, speedMax, jumboSlider } = settings;
@@ -122,7 +122,7 @@ function setup() {
     window.requestAnimationFrame(loop);
   };
   loop();
-};
+}
 setup();
 
 /**

@@ -1,6 +1,6 @@
 /**
  * Initialise audio with an oscillator source
- * @param {Options} [oscillatorOptions] 
+ * @param {Options} [oscillatorOptions]
  * @returns {BasicAudio}
  */
 export function create(oscillatorOptions = {}) {

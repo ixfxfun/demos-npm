@@ -1,6 +1,6 @@
 import { Arcs } from '@ixfx/geometry';
 import { Svg } from '@ixfx/visual';
-import { Numbers, Dom, Modulation } from '@ixfx/bundle';
+import { Numbers, Dom, Modulation } from 'ixfx';
 
 // Define settings
 const settings = Object.freeze({
@@ -107,7 +107,7 @@ function setup() {
     window.requestAnimationFrame(loop);
   };
   loop();
-};
+}
 
 setup();
 

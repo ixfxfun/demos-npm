@@ -2,7 +2,7 @@ import * as Util from './util.js';
 
 const settings = Object.freeze({
   // Key(s) we want to monitor
-  keys: [ `f`,`k`],
+  keys: [ `f`, `k` ],
   // Function to update DIV
   info: Util.htmlContent(`#info`),
   // How often to update visuals based on state
@@ -25,7 +25,7 @@ let state = Object.freeze({});
  * @returns 
  */
 const use = () => {
-  const { info } = settings; 
+  const { info } = settings;
 
   // Eg. get state of one key - 'f'
   //  const s = keyStates.get(`f`);
@@ -36,7 +36,7 @@ const use = () => {
 
   // Use state for all the keys
   let statesInfo = ``;
-  for (const [key, keyState] of keyStates) {
+  for (const [ key, keyState ] of keyStates) {
     statesInfo += `<h2>Key: ${key}</h2>`;
     statesInfo += getTextForKeyState(keyState).join(` <br />`);
     statesInfo += `<hr />`;
@@ -134,14 +134,14 @@ function setup() {
 
   // Call `use()` in a loop
   setInterval(use, settings.updateIntervalMs);
-};
+}
 setup();
 
 /**
  * Update state
  * @param {Partial<state>} s 
  */
-function saveState (s) {
+function saveState(s) {
   state = Object.freeze({
     ...state,
     ...s

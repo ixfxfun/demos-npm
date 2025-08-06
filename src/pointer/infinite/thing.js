@@ -7,7 +7,7 @@ const settings = Object.freeze({
   sizeEm: 10,
   // Min and max range of mass
   // Note that range can go up to 4, meaning 400%
-  massRange: [0.1, 4],
+  massRange: [ 0.1, 4 ],
   // Reduction of mass per loop
   meltRate: 0.999,
   activityInterpolation: 0.1

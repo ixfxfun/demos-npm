@@ -1,6 +1,6 @@
 import { Points, radianToDegree } from '@ixfx/geometry';
-import { Dom, Numbers } from '@ixfx/bundle';
-import { Audio } from '@ixfx/io'
+import { Dom, Numbers } from 'ixfx';
+import { Audio } from '@ixfx/io';
 
 import * as Util from './util.js';
 import * as EspruinoSnippets from './espruino.js';
@@ -15,7 +15,7 @@ const settings = Object.freeze({
   // or increased if you're hitting -1/1 too easily.
   magnetMax: 16_000,
   // Range of frequencies
-  frequencyRange: [65.406, 523.251],
+  frequencyRange: [ 65.406, 523.251 ],
   // Type of oscillator
   oscillator: /** @type OscillatorType */(`sawtooth`),
   // Helper to show raw data
@@ -61,7 +61,7 @@ function use(state) {
 
   gain.gain.setValueAtTime(strength, ctx.currentTime);
   osc.frequency.setValueAtTime(freq, ctx.currentTime);
-};
+}
 
 /**
  * Do some additional processing of sensor data
@@ -134,7 +134,7 @@ function normaliseData(data) {
 
   // Return it back (so it can later be sent to plotter etc)
   return cleaned;
-};
+}
 
 function setup() {
   const { frequencyRange, oscillator } = settings;
@@ -165,7 +165,7 @@ function setup() {
     }
   });
   update();
-};
+}
 
 setup();
 

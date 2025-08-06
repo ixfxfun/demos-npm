@@ -1,4 +1,4 @@
-import { Numbers } from '@ixfx/bundle';
+import { Numbers } from 'ixfx';
 import { Envelopes } from '@ixfx/modulation';
 import * as Things from './thing.js';
 
@@ -67,7 +67,7 @@ const update = async () => {
 function generateThing() {
   const thing = Things.generate();
   saveState({
-    things: [...state.things, thing]
+    things: [ ...state.things, thing ]
   });
   return thing;
 }

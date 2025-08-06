@@ -6,7 +6,7 @@ const settings = Object.freeze({
    * HTML Element for setting pitch with pointer movement
    */
   freqAreaElement: /** @type HTMLElement */(document.querySelector(`#freqArea`)),
-  /** 
+  /**
    * Settings for oscillator
    * @type Osc.Options
    */
@@ -15,15 +15,15 @@ const settings = Object.freeze({
     frequency: 440
   },
   // Min/max of frequency range
-  freqRange: [120, 1000]
+  freqRange: [ 120, 1000 ]
 });
 
-/** 
+/**
  * @typedef {Readonly<{
  *  audio:Osc.BasicAudio|undefined
  *  x: number
  *  y: number
- * }>} State  
+ * }>} State
  */
 
 /** @type State */
@@ -36,7 +36,7 @@ let state = {
 /**
  * Use the current state.
  * In this sketch that's setting oscillator frequency and audio gain according to scaled state values.
- * @returns 
+ * @returns
  */
 const use = () => {
   const { freqRange } = settings;
@@ -74,8 +74,8 @@ const muteOscillator = () => {
 
 /**
  * Pointer has moved in '#freqArea'
- * @param {Event} event 
- * @returns 
+ * @param {Event} event
+ * @returns
  */
 const pointermove = (event) => {
   const { freqAreaElement } = settings;
@@ -125,12 +125,12 @@ function setup() {
   freqAreaElement.addEventListener(`pointerup`, muteOscillator);
   freqAreaElement.addEventListener(`pointerleave`, muteOscillator);
   freqAreaElement.addEventListener(`pointermove`, pointermove);
-};
+}
 setup();
 
 /**
  * Save state
- * @param {Partial<State>} s 
+ * @param {Partial<State>} s
  */
 function saveState(s) {
   state = Object.freeze({

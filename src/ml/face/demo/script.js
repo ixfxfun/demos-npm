@@ -53,7 +53,7 @@ const update = () => {
  */
 const calculateUpDown = (face) => {
   // Get average y
-  const eyes = average([face.keypoints[0].y, face.keypoints[1].y]);
+  const eyes = average([ face.keypoints[0].y, face.keypoints[1].y ]);
 
   const mouth = face.keypoints[3].y;
 
@@ -114,7 +114,7 @@ function setup() {
   };
   updateLoop();
 
-};
+}
 setup();
 
 /**

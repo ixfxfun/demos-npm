@@ -64,7 +64,7 @@ function setup() {
     update();
     use(state);
   }, 100).start();
-};
+}
 setup();
 
 /**

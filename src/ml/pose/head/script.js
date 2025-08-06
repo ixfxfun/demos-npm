@@ -166,7 +166,7 @@ function setup() {
   };
   animationLoop();
 
-};
+}
 setup();
 
 /**

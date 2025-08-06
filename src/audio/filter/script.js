@@ -30,8 +30,8 @@ let state = {
 
 /**
  * Use state
- * @param {State} state 
- * @returns 
+ * @param {State} state
+ * @returns
  */
 const use = (state) => {
   const { audioId, audio } = settings;
@@ -117,15 +117,17 @@ const autoStop = () => {
 /**
  * 'pointermove' in #area element.
  * Updates the frequency based on relative X position within area
- * @param {PointerEvent|Event} event 
+ * @param {PointerEvent|Event} event
  */
 const pointerInArea = (event) => {
   const { audio } = settings;
   const pointerEvent = /** @type PointerEvent */(event);
+  const target = /** @type HTMLElement */(event.target);
 
   audio.init();
+
   // Size of area element
-  const bounds = /** @type HTMLElement */(event.target).getBoundingClientRect();
+  const bounds = target.getBoundingClientRect();
 
   // Compute relative value
   const freq = scaleClamped(pointerEvent.x, 0, bounds.width, 200, 2000);
@@ -154,12 +156,12 @@ function setup() {
   // Stop using oscillator to move filter
   document.querySelector(`#btnAutoStop`)?.addEventListener(`click`, autoStop);
 
-};
+}
 setup();
 
 /**
  * Save state
- * @param {Partial<State>} s 
+ * @param {Partial<State>} s
  */
 function saveState(s) {
   state = Object.freeze({

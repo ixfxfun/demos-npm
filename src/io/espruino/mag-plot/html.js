@@ -11,10 +11,8 @@ export const set = (id, value) => {
   const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
   if (!element) return;
   if (typeof value === `number`) {
-    if (value < 10)
-      value = Numbers.round(2, value);
-    else
-      value = Numbers.round(0, value);
+    if (value < 10) value = Numbers.round(2, value);
+    else value = Numbers.round(0, value);
   }
   element.innerHTML = value;
 };

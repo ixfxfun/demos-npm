@@ -37,7 +37,7 @@ let state = Object.freeze({
 const update = () => {
   const { radiansRange, sphere } = settings;
   const rotation = /** @type number */(radiansRange.next().value);
-  const points = [...SurfacePoints.sphereFibonacci(500, rotation, sphere)];
+  const points = [ ...SurfacePoints.sphereFibonacci(500, rotation, sphere) ];
 
   saveState({ points });
 };
@@ -63,7 +63,7 @@ const use = () => {
   ctx.translate(center.x - radius / 2, center.y - radius / 2);
 
   // For every point...
-  for (const [index, pt] of points.entries()) {
+  for (const [ index, pt ] of points.entries()) {
     // Calc a % distance of pointer to this point
     const distance = 1 - clamp(Points.distance(pointer, pt) / 0.7);
 

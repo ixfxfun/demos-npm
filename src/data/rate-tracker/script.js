@@ -50,7 +50,7 @@ function setup() {
     tracker.mark();
   });
   update();
-};
+}
 setup();
 
 /**

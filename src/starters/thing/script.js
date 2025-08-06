@@ -85,7 +85,7 @@ function setup() {
   // Update state of sketch and use state
   // at full speed
   update();
-};
+}
 
 setup();
 

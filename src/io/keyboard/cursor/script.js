@@ -63,11 +63,13 @@ const use = () => {
   if (!thingElement) return;
 
   // 1 for right, -1 for left, otherwise 0
-  let x = state.right ? 1 :
+  let x = state.right ?
+    1 :
     (state.left ? -1 : 0);
 
   // 1 for down, -1 for up, otherwise 0
-  let y = state.down ? 1 :
+  let y = state.down ?
+    1 :
     (state.up ? -1 : 0);
 
   moveElement(thingElement, { x, y });
@@ -125,7 +127,7 @@ function setup() {
   // Listen for keydown/keyup
   document.addEventListener(`keydown`, onKeydown);
   document.addEventListener(`keyup`, onKeyup);
-};
+}
 setup();
 
 /**

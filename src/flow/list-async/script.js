@@ -1,4 +1,4 @@
-import { continuously } from "@ixfx/flow";
+import { continuously } from 'ixfx';
 import { log } from '@ixfx/dom';
 import { Stacks } from '@ixfx/collections';
 
@@ -53,7 +53,7 @@ function setup() {
     process(`${n} - 2`);
     process(`${n} - 3`);
   });
-};
+}
 setup();
 
 /**

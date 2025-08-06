@@ -134,12 +134,12 @@ function setup() {
   document.querySelector(`#btnAutoStart`)?.addEventListener(`click`, autoStart);
   document.querySelector(`#btnAutoStop`)?.addEventListener(`click`, autoStop);
 
-};
+}
 setup();
 
 /**
  * Save state
- * @param {Partial<State>} s 
+ * @param {Partial<State>} s
  */
 function saveState(s) {
   state = Object.freeze({

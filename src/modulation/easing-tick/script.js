@@ -75,7 +75,7 @@ function setup() {
   document.addEventListener(`click`, onPointerOrKeyUp);
 
   update();
-};
+}
 setup();
 
 /**

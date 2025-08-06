@@ -1,4 +1,4 @@
-import { Espruino } from '@ixfx/io'
+import { Espruino } from '@ixfx/io';
 import { Envelopes } from '@ixfx/modulation';
 import { setCssDisplay } from './util.js';
 
@@ -56,7 +56,7 @@ function setLedPwm(pinName, rate) {
   }
   console.log(js);
   puck.write(js);
-};
+}
 
 /**
  * Use value from state
@@ -101,7 +101,7 @@ function update() {
   if (running) {
     setTimeout(update, updateRateMs);
   }
-};
+}
 
 /**
  * On keypress event
@@ -133,7 +133,7 @@ async function connect() {
     console.error(error);
     onConnected(false);
   }
-};
+}
 
 
 /**
@@ -142,12 +142,12 @@ async function connect() {
  */
 function onConnected(connected) {
   setCssDisplay(`preamble`, connected ? `none` : `block`);
-};
+}
 
 function setup() {
   document.querySelector(`#btnConnect`)?.addEventListener(`click`, connect);
   document.addEventListener(`keypress`, onKeyPress);
-};
+}
 
 setup();
 

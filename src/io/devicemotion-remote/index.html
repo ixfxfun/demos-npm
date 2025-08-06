@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mobile-sensors</title>
+  <title>devicemotion-remote</title>
   <link rel="stylesheet" href="../../demos.css">
   <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
 
@@ -13,12 +13,19 @@
 <body>
   <section>
     <h1>
-      mobile-sensors
+      devicemotion-remote
     </h1>
+    <p>Note: Cross-device communication requires some setup to get working, <a
+        href="https://ixfx.fun/reference/websockets/">see the guide for more</a>.</p>
+    <p>For a simpler sketch that doesn't send the data between devices, see <a href="../devicemotion/">devicemotion</a>.
+    </p>
     <ul>
-      <li><a href="receiver.html" target="_blank">Receiver (basic)</a></li>
-      <li><a href="plotter.html" target="_blank">Plotter</a> (not meant for extending, just visualising data)</li>
-      <li><a href="sender.html" target="_blank">Sender</a></li>
+      <li><a href="receiver.html" target="_blank">Receiver</a>: Demonstrates receiving data from another 'sender' sketch
+      </li>
+      <li><a href="sender.html" target="_blank">Sender</a>: Runs on a mobile device, meant for emitting data to the
+        'receiver' sketch.</li>
+      <li><a href="plotter.html" target="_blank">Plotter</a>: Not meant for extending, plots the data from a 'sender'
+      </li>
     </ul>
   </section>
 </body>

@@ -21,7 +21,7 @@ const settings = {
     // Use the last 100 samples for the average
     sampleLimit: 100
   })
-}
+};
 
 
 let state = Object.freeze({
@@ -74,7 +74,7 @@ function setup() {
     window.requestAnimationFrame(loop);
   };
   window.requestAnimationFrame(loop);
-};
+}
 setup();
 
 /**

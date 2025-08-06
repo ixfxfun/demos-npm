@@ -70,7 +70,7 @@ function setup() {
 
   // Draw loop
   window.requestAnimationFrame(update);
-};
+}
 
 setup();
 

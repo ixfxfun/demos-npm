@@ -85,7 +85,7 @@ function setup() {
     if (spotElement) spotElement.style.display = `none`;
   }
   use(state);
-};
+}
 setup();
 
 /**

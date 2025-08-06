@@ -44,7 +44,7 @@ const onPointerMove = (event) => {
   pointers.seen(event.pointerId.toString(), { x: event.x, y: event.y });
 
   // Get list of tracked pointers, in ascending order by age
-  const byAge = [...pointers.valuesByAge()];
+  const byAge = [ ...pointers.valuesByAge() ];
 
   // We need at least two pointers for gesture
   const a = byAge[0];

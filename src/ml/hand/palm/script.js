@@ -100,7 +100,7 @@ function setup() {
   remote.onData = onReceivedPoses;
 
   // Create some things
-  const things = [...Flow.repeatSync(Things.create, { count: settings.thingCount })];
+  const things = [ ...Flow.repeatSync(Things.create, { count: settings.thingCount }) ];
   saveState({ things: things });
 
   // Update at updateRateMs
@@ -111,7 +111,7 @@ function setup() {
   };
   updateLoop();
 
-};
+}
 setup();
 
 /**
@@ -133,7 +133,7 @@ function onReceivedPoses(packet) {
     return;
   }
   updateFromHands(handsData);
-};
+}
 
 /**
  * Update state

@@ -47,7 +47,7 @@ function setup() {
   TaskQueueMutable.shared.addEventListener(`started`, () => {
     log.log(`Queue started`);
   });
-};
+}
 setup();
 
 /**

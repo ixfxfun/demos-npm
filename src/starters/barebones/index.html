@@ -10,31 +10,40 @@
 <body>
   <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
   <style>
-    *,
-    *:before,
-    *:after,
-    html,
-    body {
-      box-sizing: border-box;
-    }
+*,
+*:before,
+*:after,
+html,
+body {
+  box-sizing: border-box;
+}
 
-    :root {
-      --hue: 200;
-      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      --bg: hsl(var(--hue), 10%, 80%);
-      --fg: hsl(var(--hue), 100%, 30%);
-    }
+:root {
+  color-scheme: light dark;
+  --hue: 300;
+  --font: system-ui;
+  --light: hsl(var(--hue), 10%, 80%);
+  --dark: hsl(var(--hue), 80%, 5%);
+  --accent: light-dark(hsl(var(--hue), 100%, 40%),hsl(var(--hue), 100%, 80%) )
+}
 
-    body {
-      background-color: var(--bg);
-      color: var(--fg);
-      font-family: var(--font);
-    }
+body {
+  background-color: light-dark(var(--light), var(--dark));
+  color: light-dark(var(--dark), var(--light));
+  font-family: var(--font);
+}
+
+a:link,a:visited {
+  color: light-dark(var(--dark), var(--light));
+  text-decoration-style: wavy;
+}
+a:hover {
+  color: var(--accent);
+}
   </style>
-  <section>
-    <h1>bare bones</h1>
-    <script type="module" src="script.js"></script>
-  </section>
+  <h1><a href="https://ixfx.fun">ixfx</a></h1>
+<div id="random"></div>
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>

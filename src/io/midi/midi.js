@@ -23,13 +23,13 @@ export const parse = (data) => {
 
   let channel = 0;
   if (first >= 144 && first <= 159) {
-    channel = first-143;
-    command = third === 0 ? `noteoff` : `noteon`;  
+    channel = first - 143;
+    command = third === 0 ? `noteoff` : `noteon`;
   } else if (first >= 128 && first <= 143) {
-    channel = first-127;
+    channel = first - 127;
     command = `noteoff`;
   } else if (first >= 160 && first <= 175) {
-    channel = first-159;
+    channel = first - 159;
     command = `poly-at`;
   } else if (first >= 176 && first <= 191) {
     channel = first - 175;

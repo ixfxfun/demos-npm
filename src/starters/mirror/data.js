@@ -34,7 +34,7 @@ function use(state) {
   } else if (fullMode) {
     document.body.style.backgroundColor = hsl;
   }
-};
+}
 
 function setup() {
   const { fullMode } = settings;
@@ -60,7 +60,7 @@ function setup() {
     if (spotElement) spotElement.style.display = `none`;
   }
   use(state);
-};
+}
 setup();
 
 /**

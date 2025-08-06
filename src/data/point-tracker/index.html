@@ -6,24 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>point-tracker</title>
   <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
-
+  <link rel="stylesheet" href="/base.css">
 </head>
 
 <body>
   <style>
-    *,
-    *:before,
-    *:after,
-    html,
-    body {
-      box-sizing: border-box;
-    }
-
     :root {
       --hue: 90;
-      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      --bg: hsl(var(--hue), 10%, 80%);
-      --fg: hsl(var(--hue), 100%, 10%);
     }
 
     html,
@@ -34,11 +23,7 @@
       touch-action: none;
     }
 
-
     body {
-      background-color: var(--bg);
-      color: var(--fg);
-      font-family: var(--font);
       pointer-events: none;
     }
   </style>

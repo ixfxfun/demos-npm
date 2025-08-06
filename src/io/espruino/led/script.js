@@ -1,5 +1,5 @@
-import { continuously } from '@ixfx/flow';
-import { Espruino } from '@ixfx/io'
+import { continuously } from '@ixfx/core';
+import { Espruino } from '@ixfx/io';
 import { setCssDisplay } from './util.js';
 
 const settings = Object.freeze({
@@ -37,7 +37,7 @@ function setLed(pinName, on) {
   const js = `digitalWrite(${pinName}, ${on ? `1` : `0`})\n`;
   console.log(js);
   puck.write(js);
-};
+}
 
 /**
  * Set LED pulse width modulation
@@ -68,7 +68,7 @@ function setLedPwm(pinName, rate) {
   }
   console.log(js);
   puck.write(js);
-};
+}
 
 /**
  * Demonstrates toggling an LED remotely.
@@ -113,7 +113,7 @@ function setup() {
     const pwm = Number.parseInt(element.value) / 100;
     setLedPwm(settings.pwmLed, pwm);
   });
-};
+}
 
 async function connect() {
   try {
@@ -135,7 +135,7 @@ async function connect() {
     console.error(error);
     onConnected(false);
   }
-};
+}
 
 /**
  * Set connected state
@@ -144,7 +144,7 @@ async function connect() {
 function onConnected(connected) {
   setCssDisplay(`preamble`, connected ? `none` : `block`);
   setCssDisplay(`controls`, connected ? `inline-block` : `none`);
-};
+}
 setup();
 
 /**

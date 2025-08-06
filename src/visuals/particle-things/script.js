@@ -31,7 +31,7 @@ let state = Object.freeze({
     x: 0.8,
     y: 0.5
   },
-  things: [...repeatSync(() => Things.create(), { count: 40 })],
+  things: [ ...repeatSync(() => Things.create(), { count: 40 }) ],
   distance: 0,
   distanceAvg: new NumberTracker({
     id: `distance`,
@@ -68,7 +68,6 @@ const update = () => {
     angleDegrees: ${angleDegrees.toFixed(2)}
   `);
 };
-
 
 
 function setText(id, text) {
@@ -168,7 +167,7 @@ function setup() {
   };
   updateLoop();
   document.addEventListener(`pointermove`, onPointerMove);
-};
+}
 setup();
 
 /**

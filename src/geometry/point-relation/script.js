@@ -46,7 +46,7 @@ const displayData = (result) => {
     `Angle deg: ${Math.round(angleDeg)}`,
     `Average: ${Points.toString(average, 2)}`,
     `Centroid: ${Points.toString(centroid, 2)}`,
-    `Speed: ${speed.toPrecision(2)}`];
+    `Speed: ${speed.toPrecision(2)}` ];
 
   // Wrap in DIVs
   const linesWithDivs = lines.map(line => `<div>${line}</div>`);
@@ -100,7 +100,7 @@ function setup() {
   document.addEventListener(`pointerdown`, onPointerDown);
   document.addEventListener(`pointermove`, onPointerMove);
   document.addEventListener(`pointerup`, onPointerUp);
-};
+}
 setup();
 
 /**

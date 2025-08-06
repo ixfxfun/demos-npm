@@ -12,17 +12,17 @@ import * as MpVision from '../lib/client/index.js';
  */
 
 export const FingerIndexes = Object.freeze({
-  thumb: [1, 2, 3, 4],
-  index: [5, 6, 7, 8],
-  middle: [9, 10, 11, 12],
-  ring: [13, 14, 15, 16],
-  pinky: [17, 18, 19, 20],
+  thumb: [ 1, 2, 3, 4 ],
+  index: [ 5, 6, 7, 8 ],
+  middle: [ 9, 10, 11, 12 ],
+  ring: [ 13, 14, 15, 16 ],
+  pinky: [ 17, 18, 19, 20 ],
 });
 
 /**
  * Three points that make up the palm
  */
-export const PalmTriangleIndexes = [0, 5, 17];
+export const PalmTriangleIndexes = [ 0, 5, 17 ];
 
 /**
  * Gets data for a given hand
@@ -43,7 +43,7 @@ export function getHand(index, hands) {
  * @returns {Array<keyof FingerIndexes>}
  */
 export function getFingerNames() {
-  return [`thumb`, `index`, `middle`, `ring`, `pinky`];
+  return [ `thumb`, `index`, `middle`, `ring`, `pinky` ];
 }
 
 /**
@@ -214,7 +214,7 @@ export function* filterIndexByHandedness(which, results, threshold = 0.8) {
       if (r.categoryName.toLowerCase() === which.toLowerCase() && r.score >= threshold) yield i;
     }
   }
-};
+}
 
 /**
  * Returns a landmark as as tring

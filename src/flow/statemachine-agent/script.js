@@ -1,12 +1,13 @@
 import { clamp } from '@ixfx/numbers';
-import { StateMachine, continuously } from '@ixfx/flow';
+import { StateMachine } from '@ixfx/flow';
+import { continuously } from '@ixfx/core';
 
 // Settings
 const settings = Object.freeze({
   updateSpeed: 2000,
   labelStateEmoji: /** @type HTMLElement */(document.querySelector(`#labelStateEmoji`)),
   labelState: /** @type HTMLElement */(document.querySelector(`#labelState`)),
-  labelEnergy:/** @type HTMLElement */(document.querySelector(`#labelEnergy`))
+  labelEnergy: /** @type HTMLElement */(document.querySelector(`#labelEnergy`))
 });
 
 /**
@@ -26,10 +27,10 @@ let state = {
 // State machine transitions
 const stateMachine = Object.freeze({
   sleeping: `waking`,
-  waking: [`resting`, `sleeping`],
-  resting: [`sleeping`, `walking`],
-  walking: [`running`, `resting`],
-  running: [`walking`],
+  waking: [ `resting`, `sleeping` ],
+  resting: [ `sleeping`, `walking` ],
+  walking: [ `running`, `resting` ],
+  running: [ `walking` ],
 });
 
 // State handlers
@@ -52,7 +53,7 @@ const stateHandlers = Object.freeze([
     // State is 'waking'
     if: `waking`,
     resultChoice: `random`,
-    then: [{ next: `resting` }, { next: `sleeping` }],
+    then: [ { next: `resting` }, { next: `sleeping` } ],
   }),
   {
     // State is 'resting'
@@ -78,8 +79,7 @@ const stateHandlers = Object.freeze([
         // If we're exhausted, rest
         if (state.energy < 0.2) return { next: `resting` };
         // Lots of energy + chance: run!
-        if (state.energy > 0.7 && Math.random() > 0.6)
-          return { next: `running` };
+        if (state.energy > 0.7 && Math.random() > 0.6) return { next: `running` };
       },
     ],
   },
@@ -121,14 +121,14 @@ async function setup() {
 
     updateUi();
   }, updateSpeed).start();
-};
+}
 await setup();
 
 
 function updateEnergy(amt) {
   saveState({
     energy: clamp(state.energy + amt)
-  })
+  });
 }
 
 function stateToEmoji(state) {

@@ -1,10 +1,11 @@
 import { CanvasHelper } from '@ixfx/visual';
 import { repeatSync } from '@ixfx/flow';
 import { Points, Circles, Polar } from '@ixfx/geometry';
+import * as Drawing from './drawing.js';
 
+const piPi = Math.PI * 2;
 const settings = Object.freeze({
   numberOfPoints: 500,
-  piPi: Math.PI * 2,
   // Try also using other random sources, such as
   // Random.weightedSource(`cubicIn`), or Random.gaussian()
   randomSource: Math.random,
@@ -16,8 +17,8 @@ const settings = Object.freeze({
     // Trigger use() if viewport resizes
     resizeLogic: `both`,
     clearOnResize: false,
-    onResized: use
-  })
+    onResized: use,
+  }),
 });
 
 /**
@@ -28,7 +29,7 @@ let state = Object.freeze({});
 
 /**
  * Given the random number source `r`, returns a distance for a point (0..1)
- * 
+ *
  * Try these functions:
  *  r()
  *  Math.sqrt(r())
@@ -39,19 +40,19 @@ let state = Object.freeze({});
  *  Math.sqrt(1- r()*r()*r()*r())
  *  1 - Math.sqrt(1- r())
  *  1 - Math.sqrt(1- r() * r())
- * @param {*} r 
+ * @param {*} r
  * @returns number
  */
-const randomDistance = (r) => r();
+const randomDistance = r => r();
 
 /**
- * 
+ *
  * @param {Circles.CirclePositioned} circle
- * @param {number} numberOfPoints 
- * @returns 
+ * @param {number} numberOfPoints
+ * @returns
  */
 const randomPoints = (circle, numberOfPoints) => {
-  const { piPi, randomSource } = settings;
+  const { randomSource } = settings;
   const { radius } = circle;
 
   // Generate a random point in circle
@@ -62,7 +63,6 @@ const randomPoints = (circle, numberOfPoints) => {
   return repeatSync(generate, { count: numberOfPoints });
 };
 
-
 /**
  * This is run at animation speed. It
  * should just draw based on whatever is in state
@@ -70,7 +70,6 @@ const randomPoints = (circle, numberOfPoints) => {
 function use() {
   const { numberOfPoints, pointColour, origin, radius, pointSize, canvas } = settings;
   const { ctx } = canvas;
-
   // Make background transparent
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -78,7 +77,7 @@ function use() {
   const absCircle = {
     x: origin.x * canvas.width,
     y: origin.y * canvas.height,
-    radius: radius * canvas.dimensionMin
+    radius: radius * canvas.dimensionMin,
   };
 
   // Compute points
@@ -86,32 +85,22 @@ function use() {
 
   const size = pointSize * canvas.dimensionMin;
   for (const pt of pts) {
-    drawPoint(ctx, pt, pointColour, size);
+    // Use the `point` function in drawing.js
+    Drawing.point(ctx, pt, pointColour, size);
   }
-};
+}
 
+let x = [ 1, 2, 3 ];
 use();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<state>} s
  */
 function saveState(s) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...s,
   });
   return state;
-}
-
-/**
- * Draws a point (in pixel coordinates)
- * @param {CanvasRenderingContext2D} context 
- * @param {Points.Point} position 
- */
-function drawPoint(context, position, fillStyle = `black`, size = 1) {
-  context.fillStyle = fillStyle;
-  context.beginPath();
-  context.arc(position.x, position.y, size, 0, settings.piPi);
-  context.fill();
 }

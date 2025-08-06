@@ -45,7 +45,7 @@ function use(state) {
 
 function setup() {
   update();
-};
+}
 setup();
 
 /**

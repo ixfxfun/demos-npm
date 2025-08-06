@@ -52,7 +52,7 @@ function setup() {
 
   // Call use() every half a second
   setInterval(use, 5);
-};
+}
 
 /**
  * Save state

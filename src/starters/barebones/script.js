@@ -1,38 +1,52 @@
-const settings = Object.freeze({});
+import { Random } from 'ixfx';
+
+const settings = {
+  el: /** @type HTMLElement */(document.querySelector(`#random`)),
+  updateInterval: 500
+};
 
 /**
+ * Define the type for 'State'
  * @typedef {Readonly<{
- *  someProp: number
+ * randomValue: number
  * }>} State
  */
 
 /** @type State */
 let state = Object.freeze({
-  someProp: 0
+  randomValue: 0
 });
 
-/**
- * Use state
- * @param {State} state 
- */
-function use(state) {};
+// Use state
+function use() {
+  const { el } = settings;
+  let { randomValue } = state;
+  el.innerText = randomValue.toFixed(2);
+}
 
+// Compute state
 function update() {
-  // Compute state
-  const state = saveState({});
+  // Compute
+  const randomValue = Random.float();
 
-  // Pass it on
-  use(state);
+  // At the end, save state
+  saveState({
+    randomValue
+  });
 }
 
 function setup() {
-  // Call every half a second
-  setInterval(update, 500);
-};
+  // Call update() and use() every half a second
+  setInterval(() => {
+    update();
+    use();
+  }, settings.updateInterval);
+}
 
 /**
- * Save state
+ * Saves the state
  * @param {Partial<State>} s 
+ * @returns 
  */
 function saveState(s) {
   state = Object.freeze({

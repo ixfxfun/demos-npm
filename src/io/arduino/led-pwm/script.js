@@ -1,7 +1,7 @@
 /**
  * Sends JSON to a microcontroller
  */
-import { Serial } from '@ixfx/io'
+import { Serial } from '@ixfx/io';
 
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true })
@@ -65,7 +65,7 @@ function setup() {
     // Trigger update
     use();
   });
-};
+}
 setup();
 
 /**

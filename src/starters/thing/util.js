@@ -36,7 +36,7 @@ export const relativePoint = (x, y) => {
  */
 export const addUpMovement = (pointerEvent) => {
   let movement = 0;
-  const events = `getCoalescedEvents` in pointerEvent ? pointerEvent.getCoalescedEvents() : [pointerEvent];
+  const events = `getCoalescedEvents` in pointerEvent ? pointerEvent.getCoalescedEvents() : [ pointerEvent ];
   for (const event of events) {
     let { x, y } = relativePoint(event.movementX, event.movementY);
 

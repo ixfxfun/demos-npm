@@ -1,5 +1,5 @@
-/** @typedef {"allpass" | "bandpass" | "highpass" | "highshelf" | "lowpass" | "lowshelf" | "notch" | "peaking"} 
- * FilterType 
+/** @typedef {"allpass" | "bandpass" | "highpass" | "highshelf" | "lowpass" | "lowshelf" | "notch" | "peaking"}
+ * FilterType
  * */
 
 export class Audio {
@@ -22,8 +22,8 @@ export class Audio {
 
   /**
    * Gets a BasicAudio instance by ke
-   * @param {string} key 
-   * @returns 
+   * @param {string} key
+   * @returns
    */
   get(key) {
     this.init();

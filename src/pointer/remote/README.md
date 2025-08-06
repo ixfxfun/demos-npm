@@ -4,7 +4,6 @@ This sketch demonstrates sending pointer events from one device/sketch to anothe
 
 To use, open the 'sender' sketch on the device to send pointer event, and 'receiver' on the device to receive data. Multiple senders and receivers can be used.
 
-
 It's also possible to test by opening the sketches in different tabs.
 
 To access across different devices, see [the guide](https://ixfx.fun/reference/websockets/) for more info.

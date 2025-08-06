@@ -17,7 +17,7 @@ export const relativePoint = (x, y) => {
  * @param {string} text
  * @returns void
  */
-export function setHtml(id, text)  {
+export function setHtml(id, text) {
   const element = document.querySelector(`#${id}`);
   if (!element) return;
   if (element.textContent === text) return;
@@ -32,11 +32,11 @@ export function setHtml(id, text)  {
 export const addUpSignedMovement = (pointerEvent) => {
   let xx = 0;
   let yy = 0;
-  const events = `getCoalescedEvents` in pointerEvent ? pointerEvent.getCoalescedEvents() : [pointerEvent];
+  const events = `getCoalescedEvents` in pointerEvent ? pointerEvent.getCoalescedEvents() : [ pointerEvent ];
   for (const event of events) {
     // Combine movement values, using 0.01 as the lower-bound 
     xx += event.movementX;
     yy += event.movementY;
   }
-  return {x: xx, y: yy };
+  return { x: xx, y: yy };
 };

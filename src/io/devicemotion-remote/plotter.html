@@ -4,10 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>plotter</title>
+  <title>devicemotion - plotter</title>
   <link rel="stylesheet" href="../../demos.css">
-  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
-
+  <script type="importmap">{ "imports": {
+    "ixfx":"/ixfx/index.js", 
+    "ixfx/":"/ixfx/", 
+    "@ixfx":"/ixfx/index.js", 
+    "@ixfx/": "/ixfx/"
+  } }</script>
 </head>
 
 <body>
@@ -37,24 +41,24 @@
   <section>
     <h1>plotter</h1>
     <h2>
-      accel
+      Acceleration
     </h2>
     <div class="plot">
-      <plot-element line-width="5" data-width="10" render="line" id="accelPlot"></plot-element>
+      <ixfx-plot-element line-width="5" data-width="10" render="line" id="accelPlot"></ixfx-plot-element>
     </div>
 
     <h2>
-      accelGrav
+      Acceleration including gravity
     </h2>
     <div class="plot">
-      <plot-element line-width="5" data-width="10" render="line" id="accelGravPlot"></plot-element>
+      <ixfx-plot-element line-width="5" data-width="10" render="line" id="accelGravPlot"></ixfx-plot-element>
     </div>
 
     <h2>
-      rotRate
+      Rotation rate
     </h2>
     <div class="plot">
-      <plot-element line-width="5" data-width="10" render="line" id="rotRatePlot"></plot-element>
+      <ixfx-plot-element line-width="5" data-width="10" render="line" id="rotRatePlot"></ixfx-plot-element>
     </div>
     <div id="remote-status"></div>
   </section>

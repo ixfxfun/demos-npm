@@ -1,5 +1,5 @@
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import { PlotElement } from "https://unpkg.com/@ixfx/components/bundle.js";
+import { PlotElement } from 'https://unpkg.com/@ixfx/components@0.1.3/bundle';
 
 const settings = Object.freeze({
   accelPlot: PlotElement.fromQuery(`#accelPlot`),
@@ -9,14 +9,14 @@ const settings = Object.freeze({
 
 const r = new Remote({
   websocket: `wss://${window.location.host}/ws`,
-  allowNetwork: true,
-  defaultLog: `verbose`
+  allowNetwork: false,
+  // defaultLog: `verbose`
 });
 
 r.onData = (message) => {
   const { accelPlot, accelGravPlot, rotRatePlot } = settings;
 
   accelPlot.plotObject(message.accel);
-  accelGravPlot.plot(message.accelGrav);
-  rotRatePlot.plot(message.rotRate);
+  accelGravPlot.plotObject(message.accelGrav);
+  rotRatePlot.plotObject(message.rotRate);
 };

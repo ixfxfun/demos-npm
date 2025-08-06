@@ -24,7 +24,7 @@ export class PosesConsumer {
 
   onReceivedPoses(packet) {
     const { _from, data } = packet;
-    const poseData =/** @type Poses.PoseData[] */(JSON.parse(data));
+    const poseData = /** @type Poses.PoseData[] */(JSON.parse(data));
 
     if (!Array.isArray(poseData)) {
       console.warn(`Not getting an array as expected. ${typeof poseData} Is sender set to 'pose'?`);
@@ -36,5 +36,5 @@ export class PosesConsumer {
     for (const pose of poseData) {
       this.poses.seen(_from, pose);
     }
-  };
+  }
 }

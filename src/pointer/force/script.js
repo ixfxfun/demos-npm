@@ -45,7 +45,7 @@ function setup() {
 
   // Start off with 100% blur
   setBlur(1);
-};
+}
 setup();
 
 /**
