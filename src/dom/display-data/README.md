@@ -1,6 +1,6 @@
 # display-data
 
-Demonstrates using [`Dom.DataDisplay`](https://api.ixfx.fun/classes/Dom.DataDisplay.html) to display state.
+Demonstrates using [`Dom.DataDisplay`](https://api.ixfx.fun/_ixfx/dom/DataDisplay/) to display state.
 
 In the settings, we create the object:
 ```js
@@ -28,5 +28,5 @@ function saveState (s) {
 ```
 
 Read more:
-* [Dom.DataDisplay](https://api.ixfx.fun/classes/Dom.DataDisplay.html)
+* [Dom.DataDisplay](https://api.ixfx.fun/_ixfx/dom/DataDisplay/)
 

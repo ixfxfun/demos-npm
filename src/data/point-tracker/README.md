@@ -2,7 +2,7 @@
 
 [Try demo online](https://demos.ixfx.fun/data/point-tracker/).
 
-Use [Trackers.points](https://api.ixfx.fun/funcs/Trackers.points.html) to monitor the speed of a single pointer. See the _points-tracker_ demo for tracking multi-touch.
+Use [PointTracker](https://api.ixfx.fun/_ixfx/geometry/PointTracker/) to monitor the speed of a single pointer. See the _points-tracker_ demo for tracking multi-touch.
 
 Whenever a `pointerdown` happens, we reset the tracker. When `pointermove` events happen, the data is fed to the tracker. The tracker returns some information - how does this new point compare to the initial point, the last point and so on. We save some of this information into the state (`relative`).
 
@@ -13,7 +13,7 @@ In `update()`, we interpolate to the new speed value (if available). The speed i
 `use()` shows `state.speed` in a DIV, nothing interesting.
 
 See also:
-* [Trackers.points](https://api.ixfx.fun/funcs/Trackers.points.html)
+* [Trackers.points](https://api.ixfx.fun/_ixfx/geometry/PointTracker/)
 
 ## Things to try
 

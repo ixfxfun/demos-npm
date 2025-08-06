@@ -7,4 +7,4 @@ Things to try:
 
 Read more:
 * [ixfx Oscillators guide](https://ixfx.fun/modulation/jitter/)
-* API Docs: [Oscillators](https://api.ixfx.fun/modules/Modulation.Jitter.html)
+* API Docs: [Modulation.jitter](https://api.ixfx.fun/_ixfx/modulation/jitter/), [Modulation.jitterAbsolute](https://api.ixfx.fun/_ixfx/modulation/jitterAbsolute/)

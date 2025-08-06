@@ -3,7 +3,7 @@
 Read temperature every one second.
 
 Read more:
-* [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
+* [ixfx Espruino module](https://api.ixfx.fun/_ixfx/io/Espruino/)
 * [Puck.js temperature sensor](https://www.espruino.com/Puck.js#temperature)
 
 The `scripts.poll` script is sent dynamically sent to the Puck when connected.

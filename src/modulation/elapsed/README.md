@@ -7,7 +7,7 @@ Things to try:
   
 See also:
 * [Elapsed time in the ixfx Guide](https://ixfx.fun/modulation/elapsed/)
-* [Sources.bpm](https://api.ixfx.fun/funcs/Modulation.Sources.bpm)
-* [Sources.elapsed](https://api.ixfx.fun/funcs/Modulation.Sources.elapsed)
-* [Sources.hertz](https://api.ixfx.fun/funcs/Modulation.Sources.hertz)
-* [Sources.ticks](https://api.ixfx.fun/funcs/Modulation.Sources.ticks)
+* [Sources.bpm](https://api.ixfx.fun/_ixfx/modulation/Sources/bpm/)
+* [Sources.elapsed](https://api.ixfx.fun/_ixfx/modulation/Sources/elapsed/)
+* [Sources.hertz](https://api.ixfx.fun/_ixfx/modulation/Sources/hertz/)
+* [Sources.ticks](https://api.ixfx.fun/_ixfx/modulation/Sources/ticks/)

@@ -12,6 +12,6 @@ See `forces-accel-particles` for a version of this sketch that works with any
 number of things.
 
 See also:
-* [`pointTracker`](https://api.ixfx.fun/funcs/Trackers.interval.html)
+* [`PointTracker`](https://api.ixfx.fun/_ixfx/geometry/PointTracker/)
 * [ixfx trackers](https://ixfx.fun/data/trackers/)
 * [ixfx forces](https://ixfx.fun/modulation/forces/)

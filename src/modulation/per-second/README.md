@@ -1,4 +1,4 @@
 # per-second
 
 Read more:
-* [perSecond](https://api.ixfx.fun/funcs/Modulation.perSecond.html)
+* [perSecond](https://api.ixfx.fun/_ixfx/modulation/Sources/perSecond/)

@@ -1,7 +1,7 @@
 /**
  * Demonstrates fetching JSON data from a URL at a fixed rate using 
  * continuously.
- * https://api.ixfx.fun/modules/Flow.html#continuously
+ * https://api.ixfx.fun/_ixfx/flow/continuously/
  * 
  * One problem with polling is that perhaps we're fetching more often
  * than we actually need to use the newer data. An alternative is 

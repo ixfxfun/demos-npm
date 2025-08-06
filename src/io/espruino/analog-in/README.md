@@ -4,12 +4,7 @@ Sends back a stream of analog input from a
 [Pico](http://www.espruino.com/Pico).
 
 - [Try demos online](https://demos.ixfx.fun/io/)
-- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
-
-Read more:
-
-- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
-
+- [ixfx Espruino module](https://api.ixfx.fun/_ixfx/io/Espruino/)
 
 `scripts.poll` & `scripts.stream` as given as two examples for either polling
 data on-demand, or streaming it back continuously. In `settings.script`, we can easily switch between which of those scripts is loaded when we first connect to the Pico.

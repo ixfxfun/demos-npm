@@ -41,7 +41,7 @@ Here are some comments from the Espruino documentation about the magnetic sensor
 ## The script
 
 Read more:
-- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
+- [ixfx Espruino module](https://api.ixfx.fun/_ixfx/io/Espruino/)
 - [Puck.js mag event](https://www.espruino.com/Puck.js#magnetometer)
 
 When the button is clicked, we try to connect to the Espruino, and if that works, a short snippet of Javascript is sent (these are stored in `espruino.js`). The snippet runs on the device, sending back data in JSON format:

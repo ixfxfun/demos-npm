@@ -3,7 +3,7 @@
 Demonstrates toggling LEDs, blinking LEDs and using pulse width modulation to fade LEDs on the [Puck.js](https://www.espruino.com/Puck.js).
 
 Read more:
-* [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
+* [ixfx Espruino module](https://api.ixfx.fun/_ixfx/io/Espruino/)
 * [Puck.js LED](https://www.espruino.com/Puck.js#leds)
 
 

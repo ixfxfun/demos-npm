@@ -1,7 +1,7 @@
 # espruino
 
 - [Try demos online](https://demos.ixfx.fun/io/)
-- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
+- [ixfx Espruino module](https://api.ixfx.fun/_ixfx/io/Espruino/)
 - [ixfx Espruino guide](https://ixfx.fun/io/espruino/)
 
 Espruino guides

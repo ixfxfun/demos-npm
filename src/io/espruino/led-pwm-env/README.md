@@ -5,7 +5,7 @@ Demonstrates using pulse width modulation to fade an LED on the [Puck.js](https:
 [Run this demo online](https://demos.ixfx.fun/io/espruino/led-pwm-env/)
 
 Read more:
-* [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
+* [ixfx Espruino module](https://api.ixfx.fun/_ixfx/io/Espruino/)
 * [Puck.js LED](https://www.espruino.com/Puck.js#leds)
 
 

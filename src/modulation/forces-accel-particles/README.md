@@ -10,7 +10,7 @@ Particles here are rendered as HTML elements rather than using the canvas.
 For a simpler version, see `forces-accel`.
 
 See also:
-* [`pointTracker`](https://api.ixfx.fun/funcs/Trackers.points.html)
+* [`PointTracker`](https://api.ixfx.fun/_ixfx/geometry/PointsTracker/)
 * [ixfx trackers](https://ixfx.fun/data/trackers/)
 * [ixfx forces](https://ixfx.fun/modulation/forces/)
 

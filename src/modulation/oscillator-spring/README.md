@@ -4,4 +4,4 @@
 
 Read more:
 * [ixfx Oscillators guide](https://ixfx.fun/modulation/oscillator/)
-* API Docs: [Oscillators](https://api.ixfx.fun/modules/Modulation.Oscillators.html)
+* API Docs: [Oscillators](https://api.ixfx.fun/_ixfx/modulation/Oscillators/)

@@ -14,5 +14,5 @@ Read more
 * [OscillatorNode](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode) (MDN)
 
 Things to try
-* Use ixfx's [Numbers.quantiseEvery](https://api.ixfx.fun/funcs/Numbers.quantiseEvery) to quantise frequency values to a scale
+* Use ixfx's [Numbers.quantiseEvery](https://api.ixfx.fun/_ixfx/numbers/quantiseEvery/) to quantise frequency values to a scale
 * Add an extra strip for a different oscillator that you could play with two fingers

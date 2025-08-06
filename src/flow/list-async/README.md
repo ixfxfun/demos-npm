@@ -1,6 +1,6 @@
 # list-async
 
-Demonstrates using the [TaskQueue](https://api.ixfx.fun/classes/Flow.TaskQueue.html) to process tasks
+Demonstrates using the [TaskQueueMutable](https://api.ixfx.fun/_ixfx/flow/TaskQueueMutable/) to process tasks
 
 Read more:
-* [TaskQueue](https://api.ixfx.fun/classes/Flow.TaskQueue.html)
+* [ixfx Guide TaskQueue](https://ixfx.fun/flow/task-queue/)

@@ -1,7 +1,7 @@
 # completion
 
 Demonstrates
-[completionMs](https://api.ixfx.fun/funcs/Flow.completionMs.html).
+[Flow.relative](https://api.ixfx.fun/_ixfx/flow/relative/).
 
 In this case, we start tracking elapsed time when there is a `pointerdown`
 event. The tracker is deleted on `pointerup`.
@@ -11,7 +11,7 @@ itself returns the percentage of time elapsed.
 
 ```
 // Track elapsed time over one second
-const t = completionMs(1000);
+const t = Flow.relative(1000);
 
 // t is a function that returns % elapsed, on a 0..1 scale
 t(); // 0...1

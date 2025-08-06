@@ -7,7 +7,7 @@ The [Espruino plotter](https://clinth.github.io/ixfx-play/io/espruino-plot/index
 useful for getting a feel for the sensor data.
 
 Read more:
-- [ixfx Espruino module](https://api.ixfx.fun/modules/Io.Espruino.html)
+- [ixfx Espruino module](https://api.ixfx.fun/_ixfx/io/Espruino/)
 - [Puck.js accel/gyro sensor](https://www.espruino.com/Puck.js#accelerometer-gyro)
 - [Puck.js accelOn event](https://www.espruino.com/Reference#l_Puck_accelOn)
 

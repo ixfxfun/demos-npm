@@ -21,6 +21,6 @@ Read more:
 * [ixfx Point guide](https://ixfx.fun/geometry/shapes/point/)
   
 APIs
-* [Points.dotProduct](https://api.ixfx.fun/funcs/Geometry.Points.dotProduct.html)
-* [Geometry.Points](https://api.ixfx.fun/modules/Geometry.Points)
+* [Points.dotProduct](https://api.ixfx.fun/_ixfx/geometry/Points/dotProduct/)
+* [Geometry.Points](https://api.ixfx.fun/_ixfx/geometry/Points/)
 * [MouseEvent (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent)
