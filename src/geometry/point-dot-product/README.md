@@ -18,7 +18,7 @@ The result is a single number:
 Read more:
 * [Dot Product (mathinsight.com)](https://mathinsight.org/dot_product)
 * [Wikipedia](https://en.wikipedia.org/wiki/Dot_product)
-* [ixfx Point guide](https://ixfx.fun/geometry/shapes/point/)
+* [ixfx Point guide](https://ixfx.fun/geometry/points/)
   
 APIs
 * [Points.dotProduct](https://api.ixfx.fun/_ixfx/geometry/Points/dotProduct/)

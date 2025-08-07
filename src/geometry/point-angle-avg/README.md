@@ -5,7 +5,7 @@ Demonstrates averaging a computed value over a time horizon. In this case, we ca
 Calculating the average angle can be a challenge because of the cross over between 360/0. This demo doesn't handle this case, so when moving to the right on the horizontal, it will fail wildly.
 
 Guides
-* [Points](https://ixfx.fun/geometry/shapes/point/)
+* [Points](https://ixfx.fun/geometry/points/)
 * [Trackers](https://ixfx.fun/geometry/tracking/)
 
 APIs

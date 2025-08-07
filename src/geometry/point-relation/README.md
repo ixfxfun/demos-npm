@@ -25,7 +25,7 @@ const results = relationFromPointerDown(pointerRelative);
 
 
 Read more:
-* [ixfx Point guide](https://ixfx.fun/geometry/shapes/point/)
+* [ixfx Point guide](https://ixfx.fun/geometry/points/)
 * [Points.relation](https://api.ixfx.fun/_ixfx/geometry/Points/relation/)
 * [PointRelationResult](https://api.ixfx.fun/_ixfx/geometry/PointRelationResult/) - describes the data returned by the relation function
 * [Points API](https://api.ixfx.fun/_ixfx/geometry/Points/)

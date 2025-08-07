@@ -8,5 +8,5 @@ Try the [playground version](https://clinth.github.io/ixfx-play/visuals/circle-f
 
 See also:
 * [ixfx Numbers](https://ixfx.fun/data/numbers/)
-* [ixfx Point](https://ixfx.fun/geometry/shapes/point/)
-* [ixfx Easing](https://ixfx.fun/modulation/easings/introduction/)
+* [ixfx Point](https://ixfx.fun/geometry/points/)
+* [ixfx Easing](https://ixfx.fun/modulation/easings/)
