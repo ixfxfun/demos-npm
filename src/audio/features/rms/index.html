@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rms - moving average</title>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
+<link rel="stylesheet" href="/base.css">
+</head>
+<style>
+  :root {
+    --hue: 338;
+  }
+
+  html,
+  body {
+    height: 100%;
+    font-size: 14px;
+  }
+
+  body {
+    overscroll-behavior: contain;
+    touch-action: none;
+    overflow: hidden;
+  }
+
+  button {
+    padding: 0.5em;
+  }
+
+  #levels>div {
+    position: absolute;
+    display: inline-block;
+    width: 5em;
+    height: 5em;
+    border-radius: 5em;
+  }
+
+  #rmsLevel {
+    background-color: var(--accent);
+  }
+
+  #rmsAverageLevel {
+    background-color: var(--accent-darker);
+  }
+
+  .rms {
+    color: var(--accent);
+  }
+
+  .rmsAverage {
+    color: var(--accent-darker);
+  }
+
+  section {
+    margin: 2em;
+  }
+</style>
+
+<body>
+  <section>
+    <p>Calculates loudness, and averages this using a 'moving average'</p>
+    <div class="rms">
+      RMS: <div id="lblRmsLevel"></div>
+    </div>
+    <div class="rmsAverage">
+      RMS Average: <div id="lblRmsAverageLevel"></div>
+    </div>
+    <div id="levels">
+      <div id="rmsLevel"></div>
+      <div id="rmsAverageLevel"></div>
+    </div>
+    <script type="module" src="script.js"></script>
+  </section>
+</body>
+
+</html>

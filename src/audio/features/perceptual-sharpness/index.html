@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>features/perceptualSharpness</title>
+</head>
+
+<body>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
+  <style>
+    *,
+    *:before,
+    *:after,
+    html,
+    body {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --hue: 300;
+      --font: system-ui;
+    }
+
+    body {
+      background-color: black;
+      color: white;
+      font-family: var(--font);
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <canvas id="canvas"></canvas>
+  <section>
+    <script type="module" src="script.js"></script>
+  </section>
+</body>
+
+</html>

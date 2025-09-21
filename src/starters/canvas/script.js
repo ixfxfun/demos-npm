@@ -37,7 +37,7 @@ const update = () => {
  * should just draw based on whatever is in state
  * @returns 
  */
-const draw = () => {
+const use = () => {
   const { randomValue } = state;
 
   // Get canvas
@@ -64,6 +64,7 @@ const draw = () => {
 function setup() {
   const { updateRateMs } = settings;
 
+  // State updating loop
   const updateLoop = () => {
     update();
     setTimeout(updateLoop, updateRateMs);
@@ -72,7 +73,7 @@ function setup() {
 
   // Animation loop
   const animationLoop = () => {
-    draw();
+    use();
     window.requestAnimationFrame(animationLoop);
   };
   animationLoop();

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>interpolate-basic</title>
+  <link rel="stylesheet" href="/base.css">
+</head>
+<style>
+  body {
+  margin:0;
+  padding: 0;
+}
+
+p {
+  margin: 1em;
+}
+
+#thing {
+  width: 15em;
+  height: 15em;
+}
+</style>
+
+<body>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
+  <p>Click to reset interpolation.</p>
+<p>Saturation: <span id="sat">1</span></p>
+<div id="thing"></div>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>meyda-sender</title>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
+</head>
+<style>
+*,
+*:before,
+*:after,
+html,
+body {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light dark;
+  --hue: 300;
+  --font: system-ui;
+  --light: hsl(var(--hue), 10%, 80%);
+  --dark: hsl(var(--hue), 80%, 5%);
+  --accent: light-dark(hsl(var(--hue), 100%, 40%),hsl(var(--hue), 100%, 80%) );
+  --padding: 1em;
+  --padding-s: 0.3em;
+}
+
+body {
+  background-color: light-dark(var(--light), var(--dark));
+  color: light-dark(var(--dark), var(--light));
+  font-family: var(--font);
+}
+
+a:link,a:visited {
+  color: light-dark(var(--dark), var(--light));
+  text-decoration-style: wavy;
+}
+a:hover {
+  color: var(--accent);
+}
+
+#lastData {
+  font-family: monospace;
+  max-width: 80vw;
+  white-space-collapse: preserve;
+}
+.button,button {
+  all: unset;
+  appearance: unset;
+  border: 1px solid var(--light);
+  padding: var(--padding-s);
+  margin: var(--padding-s);
+  background-color: var(--bg);
+  text-transform: uppercase;
+  font-size:x-small;
+  border-radius: 5%;
+}
+.button:hover,button:hover {
+  background-color: var(--light);
+  color: var(--dark);
+  cursor: default;
+}
+</style>
+
+<body>
+  <h1>meyda-sender</h1>
+  <div id="toolbar"><button id="btnPause">Pause</button><a class="button" target="_blank" href="receiver.html">Open receiver</a></div>
+  <p>
+    Extracts and broadcasts audio features.
+  </p>
+  <div id="lastData"></div>
+
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>

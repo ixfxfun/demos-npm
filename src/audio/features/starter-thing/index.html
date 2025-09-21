@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>features/starter-thing</title>
+</head>
+
+<body>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
+  <style>
+    *,
+    *:before,
+    *:after,
+    html,
+    body {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --hue: 200;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      --bg: hsl(var(--hue), 10%, 80%);
+      --fg: hsl(var(--hue), 100%, 30%);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      user-select: none;
+      -webkit-user-select: none;
+      overscroll-behavior: none;
+      touch-action: none;
+    }
+
+    .thing {
+      position: absolute;
+      border: 1em solid black;
+      background-color: black;
+      transform-origin: center;
+    }
+
+    #log {
+      position: absolute;
+    }
+    #things {
+      position: absolute;
+      width:100%;
+      height:100%;
+      top:0px;
+      left: 0px;
+    }
+  </style>
+  <h1>features/starter-thing</h1>
+  <section id="things"></section>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
