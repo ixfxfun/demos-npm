@@ -1,10 +1,11 @@
 // @ts-ignore
 import { LitElement } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-import { MlVision, parseUrlParams } from "../../lib/index.js";
+import { parseUrlParameters } from "@ixfx/core";
 import { shortGuid } from '@ixfx/random';
+import { MlVision } from "../../lib/index.js";
 
 // Parse query params
-const params = parseUrlParams();
+const params = parseUrlParameters();
 
 // Use 'peerId' specified as URL parameter or a random one
 const peerId = params.string(`peerId`, shortGuid());

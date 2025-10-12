@@ -12994,16 +12994,18 @@ var getPointParameter$1 = (aOrLine, b) => {
   guard$1(a, `b`);
   return [a, b];
 };
-function length(aOrLine, pointB) {
+function length(aOrLine, pointBOrForce2d, force2d) {
   if (isPolyLine(aOrLine)) {
-    const sum$4 = aOrLine.reduce((accumulator, v) => length(v) + accumulator, 0);
+    const _force2d$1 = typeof pointBOrForce2d === `boolean` ? pointBOrForce2d : false;
+    const sum$4 = aOrLine.reduce((accumulator, v) => length(v, _force2d$1) + accumulator, 0);
     return sum$4;
   }
   if (aOrLine === void 0) throw new TypeError(`Parameter 'aOrLine' is undefined`);
-  const [a, b] = getPointParameter$1(aOrLine, pointB);
+  const [a, b] = typeof pointBOrForce2d === `object` ? getPointParameter$1(aOrLine, pointBOrForce2d) : getPointParameter$1(aOrLine);
   const x = b.x - a.x;
   const y = b.y - a.y;
-  if (a.z !== void 0 && b.z !== void 0) {
+  const _force2d = typeof pointBOrForce2d === `boolean` ? pointBOrForce2d : typeof force2d === `boolean` ? force2d : false;
+  if (!_force2d && a.z !== void 0 && b.z !== void 0) {
     const z = b.z - a.z;
     return Math.hypot(x, y, z);
   } else return Math.hypot(x, y);
@@ -15190,7 +15192,7 @@ var PointTracker = class extends ObjectTracker {
     const lastRelation = previousLast === void 0 ? relation(currentLast) : relation(previousLast);
     const initialRel = this.initialRelation(currentLast);
     const markRel = this.markRelation !== void 0 ? this.markRelation(currentLast) : void 0;
-    const speed = previousLast === void 0 ? 0 : length(previousLast, currentLast) / (currentLast.at - previousLast.at);
+    const speed = previousLast === void 0 ? 0 : length(previousLast, currentLast, true) / (currentLast.at - previousLast.at);
     const lastRel = {
       ...lastRelation(currentLast),
       speed
@@ -15244,25 +15246,32 @@ var PointTracker = class extends ObjectTracker {
   * If there are less than two points, zero is returned.
   *
   * This is the direct distance from initial to last,
-  * not the accumulated length. Use {@link length} for that.
+  * not the accumulated length. Use {@link lengthTotal} for that.
+  * @param force2d If _true_ distance is calculated only in 2d
   * @returns Distance
   */
-  distanceFromStart() {
+  distanceFromStart(force2d = false) {
     const initial = this.initial;
-    return this.values.length >= 2 && initial !== void 0 ? distance2(initial, this.last) : 0;
+    return this.values.length >= 2 && initial !== void 0 ? force2d ? distance2d(initial, this.last) : distance2(initial, this.last) : 0;
   }
   /**
   * Returns the speed (over milliseconds) based on accumulated travel distance.
   * 
   * If there's no initial point, 0 is returned.
+  * @param force2d If _true_, speed is calculated with x,y only
   * @returns 
   */
-  speedFromStart() {
-    const d = this.length;
+  speedFromStart(force2d = false) {
+    const d = this.lengthTotal(force2d);
     const t2 = this.timespan;
     if (Number.isNaN(t2)) return 0;
     if (d === 0) return 0;
     return Math.abs(d) / t2;
+  }
+  speedFromLast(force2d = false) {
+    const l = this.lastResult;
+    if (!l) return 0;
+    return l.fromLast.speed;
   }
   /**
   * Difference between last point and the initial point, calculated
@@ -15285,12 +15294,24 @@ var PointTracker = class extends ObjectTracker {
   }
   /**
   * Returns the total distance from accumulated points.
-  * Returns 0 if points were not saved, or there's only one
+  * Returns 0 if points were not saved, or there's only one.
+  * 
+  * Use {@link lengthAverage} to get the average length for all segments
+  * @param force2d If _true_ length is calculated using x&y only
   */
-  get length() {
+  lengthTotal(force2d = false) {
     if (this.values.length === 1) return 0;
     const l = this.line;
-    return length(l);
+    return length(l, force2d);
+  }
+  /**
+  * Adds up the accumulated length of all points (using {@link lengthTotal})
+  * dividing by the total number of points.
+  * @param force2d 
+  * @returns 
+  */
+  lengthAverage(force2d = false) {
+    return this.lengthTotal(force2d) / this.values.length;
   }
   /**
   * Returns the last x coord

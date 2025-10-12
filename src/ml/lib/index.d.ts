@@ -597,12 +597,4 @@ declare class Client extends EventTarget {
     constructor(options?: Options$1);
 }
 
-declare const parseUrlParams: (url?: string) => {
-    params: URLSearchParams;
-    int: (name: string, defaultValue?: number) => number;
-    float: (name: string, defaultValue?: number) => number;
-    string: (name: string, defaultValue?: string) => string;
-    bool: (name: string) => boolean;
-};
-
-export { type BoundingBox, type CameraOptions, type Category, Client, type CommonModelOptions, type ComputeCallback, type Detection, type FaceDetectorOptions, type HandDetectorOptions, type HandLandmarkerResult, type IModel, type ISource, type Landmark, MlVision, ModelElement, type NormalizedKeypoint, type NormalizedLandmark, type ObjectDetectorOptions, type OnDispatcherData, type OnReceivedData, type Options, OverlayElement, type OverlayOptions, type PoseData, PoseDetector, type PoseDetectorOptions, PoseMatcher, type PoseMatcherOptions, Processing, type ProcessingStates, type ProcessorModes, RecPanel, type RecordingData, type SourceData, type SourceKinds, type Verbosity, VideoSourceElement, type VideoSourceStates, VisionElement, defaults, getLowest, getProcessorModes, parseUrlParams, validateProcessorMode };
+export { type BoundingBox, type CameraOptions, type Category, Client, type CommonModelOptions, type ComputeCallback, type Detection, type FaceDetectorOptions, type HandDetectorOptions, type HandLandmarkerResult, type IModel, type ISource, type Landmark, MlVision, ModelElement, type NormalizedKeypoint, type NormalizedLandmark, type ObjectDetectorOptions, type OnDispatcherData, type OnReceivedData, type Options, OverlayElement, type OverlayOptions, type PoseData, PoseDetector, type PoseDetectorOptions, PoseMatcher, type PoseMatcherOptions, Processing, type ProcessingStates, type ProcessorModes, RecPanel, type RecordingData, type SourceData, type SourceKinds, type Verbosity, VideoSourceElement, type VideoSourceStates, VisionElement, defaults, getLowest, getProcessorModes, validateProcessorMode };

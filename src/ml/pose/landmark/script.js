@@ -1,9 +1,9 @@
 import * as Dom from '@ixfx/dom';
 import { CanvasHelper } from '@ixfx/visual';
+import { Normalise } from '@ixfx/numbers';
 import { continuously } from '@ixfx/flow';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Util from './util.js';
-import { Normalise } from '@ixfx/numbers';
 
 const settings = Object.freeze({
   updateRateMs: 100,
@@ -12,7 +12,7 @@ const settings = Object.freeze({
     sampleLimit: 25,
     storeIntermediate: true
   }),
-  noseSpeedScaler: Normalise.stream(),
+  targetSpeedScaler: Normalise.stream(),
   // Debug display of data can be handy
   dataDisplay: new Dom.DataDisplay({ numbers: { leftPadding: 5, precision: 2 } }),
   // Automatically sizes canvas for us
@@ -20,19 +20,18 @@ const settings = Object.freeze({
 });
 
 /** 
- * @typedef {{
-
- * }} State
+ * @typedef {Readonly<{
+ * targetSpeed:number
+ * }>} State
  */
 
-/**
- * @type {State}
- */
+/** @type State */
 let state = Object.freeze({
+  targetSpeed: 0
 });
 
 function update() {
-  const { posesConsumer, dataDisplay, noseSpeedScaler } = settings;
+  const { posesConsumer, dataDisplay, targetSpeedScaler } = settings;
 
   // PosesTracker: tracks all poses
   const poses = posesConsumer.poses;
@@ -41,24 +40,25 @@ function update() {
   let count = 0;
   for (const pose of poses.get()) {
     // Eg. The nose
-    const nose = pose.landmark(`nose`);
-    if (!nose) continue; // Just in case there's no nose (!?)
+    const target = pose.landmark(`nose`);
+    if (!target) continue; // Just in case there's no nose (!?)
 
-    // Do something with speed of nose?
-    const speed = nose.speedFromStart();
-    total += speed;
+    // See how much landmark has moved over
+    // short number of points we record for it
+    const distance = target.lengthAverage(true);
+    total += distance;
     count++;
   }
   const average = total / count;
   if (Number.isNaN(average)) return;
 
-  const normalised = noseSpeedScaler(average);
+  const normalised = targetSpeedScaler(average);
+
   // Save state
-  saveState({ noseSpeed: normalised });
+  saveState({ targetSpeed: normalised });
 
   // Show state
   dataDisplay.update(state);
-
 }
 
 function use() {
@@ -66,11 +66,14 @@ function use() {
   const poses = posesConsumer.poses;
   const { ctx } = canvasHelper;
 
+  // Clear the canvas
   canvasHelper.clear();
 
+  // For all poses...
   for (const pose of poses.get()) {
-
+    // ...and all landmarks
     for (const landmark of pose.landmarks()) {
+      // Get stored history of points for this landmark
       const history = landmark.values;
 
       let age = 0.1;

@@ -22351,7 +22351,7 @@ var Bezier = class Bezier2 {
   }
 };
 
-// node_modules/ixfx/bundle/src-DyNQdaQ7.js
+// node_modules/ixfx/bundle/src-B2XPlXC0.js
 var isNull = (p3) => {
   if (isPoint3d(p3)) {
     if (p3.z !== null) return false;
@@ -23119,16 +23119,18 @@ var getPointParameter$1 = (aOrLine, b3) => {
   guard$1(a3, `b`);
   return [a3, b3];
 };
-function length(aOrLine, pointB) {
+function length(aOrLine, pointBOrForce2d, force2d) {
   if (isPolyLine(aOrLine)) {
-    const sum$4 = aOrLine.reduce((accumulator, v3) => length(v3) + accumulator, 0);
+    const _force2d$1 = typeof pointBOrForce2d === `boolean` ? pointBOrForce2d : false;
+    const sum$4 = aOrLine.reduce((accumulator, v3) => length(v3, _force2d$1) + accumulator, 0);
     return sum$4;
   }
   if (aOrLine === void 0) throw new TypeError(`Parameter 'aOrLine' is undefined`);
-  const [a3, b3] = getPointParameter$1(aOrLine, pointB);
+  const [a3, b3] = typeof pointBOrForce2d === `object` ? getPointParameter$1(aOrLine, pointBOrForce2d) : getPointParameter$1(aOrLine);
   const x3 = b3.x - a3.x;
   const y3 = b3.y - a3.y;
-  if (a3.z !== void 0 && b3.z !== void 0) {
+  const _force2d = typeof pointBOrForce2d === `boolean` ? pointBOrForce2d : typeof force2d === `boolean` ? force2d : false;
+  if (!_force2d && a3.z !== void 0 && b3.z !== void 0) {
     const z3 = b3.z - a3.z;
     return Math.hypot(x3, y3, z3);
   } else return Math.hypot(x3, y3);
@@ -24846,7 +24848,7 @@ var PointTracker = class extends ObjectTracker {
     const lastRelation = previousLast === void 0 ? relation(currentLast) : relation(previousLast);
     const initialRel = this.initialRelation(currentLast);
     const markRel = this.markRelation !== void 0 ? this.markRelation(currentLast) : void 0;
-    const speed = previousLast === void 0 ? 0 : length(previousLast, currentLast) / (currentLast.at - previousLast.at);
+    const speed = previousLast === void 0 ? 0 : length(previousLast, currentLast, true) / (currentLast.at - previousLast.at);
     const lastRel = {
       ...lastRelation(currentLast),
       speed
@@ -24900,25 +24902,32 @@ var PointTracker = class extends ObjectTracker {
   * If there are less than two points, zero is returned.
   *
   * This is the direct distance from initial to last,
-  * not the accumulated length. Use {@link length} for that.
+  * not the accumulated length. Use {@link lengthTotal} for that.
+  * @param force2d If _true_ distance is calculated only in 2d
   * @returns Distance
   */
-  distanceFromStart() {
+  distanceFromStart(force2d = false) {
     const initial = this.initial;
-    return this.values.length >= 2 && initial !== void 0 ? distance3(initial, this.last) : 0;
+    return this.values.length >= 2 && initial !== void 0 ? force2d ? distance2d(initial, this.last) : distance3(initial, this.last) : 0;
   }
   /**
   * Returns the speed (over milliseconds) based on accumulated travel distance.
   *
   * If there's no initial point, 0 is returned.
+  * @param force2d If _true_, speed is calculated with x,y only
   * @returns
   */
-  speedFromStart() {
-    const d3 = this.length;
+  speedFromStart(force2d = false) {
+    const d3 = this.lengthTotal(force2d);
     const t6 = this.timespan;
     if (Number.isNaN(t6)) return 0;
     if (d3 === 0) return 0;
     return Math.abs(d3) / t6;
+  }
+  speedFromLast(force2d = false) {
+    const l3 = this.lastResult;
+    if (!l3) return 0;
+    return l3.fromLast.speed;
   }
   /**
   * Difference between last point and the initial point, calculated
@@ -24941,12 +24950,24 @@ var PointTracker = class extends ObjectTracker {
   }
   /**
   * Returns the total distance from accumulated points.
-  * Returns 0 if points were not saved, or there's only one
+  * Returns 0 if points were not saved, or there's only one.
+  *
+  * Use {@link lengthAverage} to get the average length for all segments
+  * @param force2d If _true_ length is calculated using x&y only
   */
-  get length() {
+  lengthTotal(force2d = false) {
     if (this.values.length === 1) return 0;
     const l3 = this.line;
-    return length(l3);
+    return length(l3, force2d);
+  }
+  /**
+  * Adds up the accumulated length of all points (using {@link lengthTotal})
+  * dividing by the total number of points.
+  * @param force2d
+  * @returns
+  */
+  lengthAverage(force2d = false) {
+    return this.lengthTotal(force2d) / this.values.length;
   }
   /**
   * Returns the last x coord
@@ -28087,7 +28108,7 @@ __export(src_exports7, {
   turnToRadian: () => turnToRadian
 });
 
-// node_modules/ixfx/bundle/src-Cf3m_lM9.js
+// node_modules/ixfx/bundle/src-CbFSI981.js
 var resolveEl2 = (domQueryOrEl) => {
   const r5 = resolveElementTry(domQueryOrEl);
   if (r5.success) return r5.value;
@@ -29600,7 +29621,7 @@ __export(src_exports8, {
   viewportToSpace: () => viewportToSpace
 });
 
-// node_modules/ixfx/bundle/src-DY17tx6P.js
+// node_modules/ixfx/bundle/src-D7U7_bQi.js
 var drawing_exports = {};
 __export(drawing_exports, {
   arc: () => arc,
@@ -40704,16 +40725,18 @@ var getPointParameter$12 = (aOrLine, b3) => {
   guard$12(a3, `b`);
   return [a3, b3];
 };
-function length2(aOrLine, pointB) {
+function length2(aOrLine, pointBOrForce2d, force2d) {
   if (isPolyLine2(aOrLine)) {
-    const sum$4 = aOrLine.reduce((accumulator, v3) => length2(v3) + accumulator, 0);
+    const _force2d$1 = typeof pointBOrForce2d === `boolean` ? pointBOrForce2d : false;
+    const sum$4 = aOrLine.reduce((accumulator, v3) => length2(v3, _force2d$1) + accumulator, 0);
     return sum$4;
   }
   if (aOrLine === void 0) throw new TypeError(`Parameter 'aOrLine' is undefined`);
-  const [a3, b3] = getPointParameter$12(aOrLine, pointB);
+  const [a3, b3] = typeof pointBOrForce2d === `object` ? getPointParameter$12(aOrLine, pointBOrForce2d) : getPointParameter$12(aOrLine);
   const x3 = b3.x - a3.x;
   const y3 = b3.y - a3.y;
-  if (a3.z !== void 0 && b3.z !== void 0) {
+  const _force2d = typeof pointBOrForce2d === `boolean` ? pointBOrForce2d : typeof force2d === `boolean` ? force2d : false;
+  if (!_force2d && a3.z !== void 0 && b3.z !== void 0) {
     const z3 = b3.z - a3.z;
     return Math.hypot(x3, y3, z3);
   } else return Math.hypot(x3, y3);
@@ -42900,7 +42923,7 @@ var PointTracker2 = class extends ObjectTracker {
     const lastRelation = previousLast === void 0 ? relation2(currentLast) : relation2(previousLast);
     const initialRel = this.initialRelation(currentLast);
     const markRel = this.markRelation !== void 0 ? this.markRelation(currentLast) : void 0;
-    const speed = previousLast === void 0 ? 0 : length2(previousLast, currentLast) / (currentLast.at - previousLast.at);
+    const speed = previousLast === void 0 ? 0 : length2(previousLast, currentLast, true) / (currentLast.at - previousLast.at);
     const lastRel = {
       ...lastRelation(currentLast),
       speed
@@ -42954,25 +42977,32 @@ var PointTracker2 = class extends ObjectTracker {
   * If there are less than two points, zero is returned.
   *
   * This is the direct distance from initial to last,
-  * not the accumulated length. Use {@link length} for that.
+  * not the accumulated length. Use {@link lengthTotal} for that.
+  * @param force2d If _true_ distance is calculated only in 2d
   * @returns Distance
   */
-  distanceFromStart() {
+  distanceFromStart(force2d = false) {
     const initial = this.initial;
-    return this.values.length >= 2 && initial !== void 0 ? distance4(initial, this.last) : 0;
+    return this.values.length >= 2 && initial !== void 0 ? force2d ? distance2d2(initial, this.last) : distance4(initial, this.last) : 0;
   }
   /**
   * Returns the speed (over milliseconds) based on accumulated travel distance.
   * 
   * If there's no initial point, 0 is returned.
+  * @param force2d If _true_, speed is calculated with x,y only
   * @returns 
   */
-  speedFromStart() {
-    const d3 = this.length;
+  speedFromStart(force2d = false) {
+    const d3 = this.lengthTotal(force2d);
     const t6 = this.timespan;
     if (Number.isNaN(t6)) return 0;
     if (d3 === 0) return 0;
     return Math.abs(d3) / t6;
+  }
+  speedFromLast(force2d = false) {
+    const l3 = this.lastResult;
+    if (!l3) return 0;
+    return l3.fromLast.speed;
   }
   /**
   * Difference between last point and the initial point, calculated
@@ -42995,12 +43025,24 @@ var PointTracker2 = class extends ObjectTracker {
   }
   /**
   * Returns the total distance from accumulated points.
-  * Returns 0 if points were not saved, or there's only one
+  * Returns 0 if points were not saved, or there's only one.
+  * 
+  * Use {@link lengthAverage} to get the average length for all segments
+  * @param force2d If _true_ length is calculated using x&y only
   */
-  get length() {
+  lengthTotal(force2d = false) {
     if (this.values.length === 1) return 0;
     const l3 = this.line;
-    return length2(l3);
+    return length2(l3, force2d);
+  }
+  /**
+  * Adds up the accumulated length of all points (using {@link lengthTotal})
+  * dividing by the total number of points.
+  * @param force2d 
+  * @returns 
+  */
+  lengthAverage(force2d = false) {
+    return this.lengthTotal(force2d) / this.values.length;
   }
   /**
   * Returns the last x coord
@@ -47878,47 +47920,6 @@ var Client = class extends EventTarget {
     };
   }
 };
-
-// src/util/search-params.ts
-var parseUrlParams = (url) => {
-  const params = new URL(url ?? document.location.toString()).searchParams;
-  return {
-    params,
-    int: (name, defaultValue = Number.NaN) => intParamOrDefault(params, name, defaultValue),
-    float: (name, defaultValue = Number.NaN) => floatParamOrDefault(params, name, defaultValue),
-    string: (name, defaultValue = ``) => stringParamOrDefault(params, name, defaultValue),
-    bool: (name) => boolParamOrDefault(params, name)
-  };
-};
-function boolParamOrDefault(params, name) {
-  const p3 = params.get(name);
-  if (p3 === null) return false;
-  if (p3 === `true`) return true;
-  return false;
-}
-function intParamOrDefault(params, name, defaultValue) {
-  const p3 = params.get(name);
-  if (p3 !== null) {
-    const v3 = Number.parseInt(p3);
-    return v3;
-  }
-  return defaultValue;
-}
-function floatParamOrDefault(params, name, defaultValue) {
-  const p3 = params.get(name);
-  if (p3 !== null) {
-    const v3 = Number.parseFloat(p3);
-    return v3;
-  }
-  return defaultValue;
-}
-function stringParamOrDefault(params, name, defaultValue) {
-  const p3 = params.get(name);
-  if (p3 !== null) {
-    return p3;
-  }
-  return defaultValue;
-}
 export {
   Client,
   MlVision2 as MlVision,
@@ -47933,7 +47934,6 @@ export {
   defaults,
   getLowest,
   getProcessorModes,
-  parseUrlParams,
   validateProcessorMode
 };
 /*! Bundled license information:
