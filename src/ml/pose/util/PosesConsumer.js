@@ -14,12 +14,50 @@ export class PosesConsumer {
   constructor(options) {
     this.options = options;
     this.poses = new Poses.PosesTracker(options);
+
     setTimeout(() => this.init(), 100);
   }
 
   init() {
     this.remote = new Remote(this.options);
     this.remote.onData = this.onReceivedPoses.bind(this);
+  }
+
+  /**
+   * Returns _true_ if a pose with the guid exists
+   * @param {string} guid 
+   * @returns 
+   */
+  hasPoseGuid(guid) {
+    const f = this.poses.getByGuid(guid);
+    return f !== undefined;
+  }
+
+  /**
+   * Returns a pose by it's non-unique id
+   * @param {string} id 
+   * @returns 
+   */
+  getByPoseId(id) {
+    return this.poses.getByPoseId(id);
+  }
+
+  /**
+   * Returns a pose by it's unique id
+   * @param {string} guid
+   * @returns 
+   */
+  getByPoseGuid(guid) {
+    return this.poses.getByGuid(guid);
+  }
+
+  /**
+   * Returns raw pose data based on its unique id
+   * @param {string} guid 
+   * @returns 
+   */
+  getRawPoseByGuid(guid) {
+    return this.poses.getRawPoseByGuid(guid);
   }
 
   onReceivedPoses(packet) {

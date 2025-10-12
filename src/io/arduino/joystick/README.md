@@ -43,7 +43,7 @@ Once installed:
 - The VS Code Activity Bar (it's a alien-head sort of logo), or
 - CTRL/CMD + SHIFT + P and start typing 'platformio home'.
 
-2. Click 'Open Project', navigate to the where you have ixfx-demos downloaded,
+2. Click 'Open Project', navigate to the where you have these demos downloaded,
    and then open 'ixfx-joystick' from 'io/arduino/joystick'.
 
 3. The project will automatically fetch the necessary library, and should be

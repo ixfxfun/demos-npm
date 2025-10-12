@@ -15,17 +15,53 @@
       width: 100vw;
       overflow: hidden;
       background-color: black;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
     #is {
       height: 100vh;
       width: 100vw;
     }
+
+    #options {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0.5em;
+      background-color: hsl(0 50% 0% / 0.5);
+      color: silver;
+      font-size: 10px;
+      display: flex;
+    }
+    #options input {
+      scale: 50%;
+    }
+    #options>label {
+      display: block;
+      align-content: center;
+      display:flex;
+      flex-direction: column;
+      text-align: center;
+    }
   </style>
 </head>
 
 <body data-server-no-reload>
   <vision-element id="is"></vision-element>
+  <div id="options">
+    <label title="Number of poses">Num poses
+      <input type="range" id="numPoses" min="1" max="5">
+    </label>
+    <label title="minPoseDetectionConfidence">Pose Detection
+      <input type="range" id="minPoseDetectionConfidence" min="0" max="1"  step="0.1">
+    </label>
+    <label title="minPosePresenceConfidence">Pose Presence
+      <input type="range" id="minPosePresenceConfidence" min="0" max="1" step="0.1">
+    </label>
+    <label title="minTrackingConfidence">Tracking
+      <input type="range" id="minTrackingConfidence" min="0" max="1"  step="0.1">
+    </label>
+  </div>
   <script type="module" src="./script.js"></script>
 </body>
 

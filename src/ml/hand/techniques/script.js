@@ -115,7 +115,7 @@ const fist = (landmarks) => {
 const fingerExtension = (fingerName, landmarks) => {
   const tip = Hands.getFingertip(fingerName, landmarks);
   const knuckle = Hands.getKnuckle(fingerName, landmarks);
-  return Points.distance(tip, knuckle);
+  return Points.distance2d(tip, knuckle);
 };
 
 /**

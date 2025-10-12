@@ -11,14 +11,13 @@
 /**
  * Draw a dot at an absolute position
  * @param {CanvasRenderingContext2D} ctx 
- * @param {number} x 
- * @param {number} y 
+ * @param {{x:number,y:number}} point
  * @param {number} radius 
  * @param {string} fillStyle 
  */
-export function drawDot(ctx, x, y, radius, fillStyle = `black`) {
+export function drawDot(ctx, point, radius, fillStyle = `black`) {
   ctx.save();
-  ctx.translate(x, y);
+  ctx.translate(point.x, point.y);
   ctx.beginPath();
   ctx.arc(0, 0, radius, 0, Math.PI * 2);
   ctx.fillStyle = fillStyle;
@@ -26,13 +25,24 @@ export function drawDot(ctx, x, y, radius, fillStyle = `black`) {
   ctx.restore();
 }
 
+export const absolutePointFixed = (point, scaleBy = Number.NaN) => {
+  if (Number.isNaN(scaleBy)) {
+    scaleBy = Math.min(window.innerHeight, window.innerWidth);
+  }
+  return {
+    x: point.x * scaleBy,
+    y: point.y * scaleBy
+  };
+};
+
+
 /**
  * Make `x` and `y` relative with respect to window dimensions
  * @param {number} x
  * @param {number} y
  * @returns {{x:number,y:number}}  
  */
-export const relativePoint = (x, y) => {
+export const relativeXy = (x, y) => {
   return {
     x: x / window.innerWidth,
     y: y / window.innerHeight

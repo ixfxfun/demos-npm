@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>between-basic</title>
+  <script type="importmap">{ "imports": { "@ixfx/": "/ixfx/" } }</script>
+
+</head>
+
+<body>
+  <style>
+    *,
+    *:before,
+    *:after,
+    html,
+    body {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --hue: 240;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      --bg: hsl(var(--hue), 10%, 5%);
+      --fg: hsl(var(--hue), 60%, 80%);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      overscroll-behavior: none;
+      touch-action: none;
+    }
+
+
+    #things>div {
+      background-color: var(--fg);
+      width: 10vw;
+      position: absolute;
+      top: 0;
+      left: 50%;
+    }
+  </style>
+  <section>
+    <h1>between-basic</h1>
+    <a href="../sender/index.html?numPoses=2&minPoseDetectionConfidence=0.2&minPosePresenceConfidence=0.9" target="_blank">Sender</a>
+    <p id="intro">Reacts to the distance of hands between two people</p>
+    <div id="things"></div>
+    <script type="module" src="script.js"></script>
+  </section>
+</body>
+
+</html>

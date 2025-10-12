@@ -2,14 +2,13 @@ import * as Dom from '@ixfx/dom';
 import { CanvasHelper } from '@ixfx/visual';
 import { Points } from '@ixfx/geometry';
 import { Poses, PosesConsumer } from "../util/Poses.js";
-
-const pc = new PosesConsumer({ maxAgeMs: 500 });
+import * as Draw from './draw.js';
 
 const settings = Object.freeze({
   // How quickly to call update()
   updateRateMs: 100,
   // Tracked poses
-  poses: pc.poses,
+  poses: new PosesConsumer({ maxAgeMs: 500 }).poses,
   // Automatically sizes canvas for us
   canvasHelper: new CanvasHelper(`canvas`, { resizeLogic: `both` }),
   // Overlay to show data for debugging
@@ -22,6 +21,7 @@ const settings = Object.freeze({
  * y: number
  * radius: number
  * poseId: string
+ * hue: number
  * }} Head
  */
 
@@ -57,7 +57,7 @@ const update = () => {
 };
 
 /**
- * Returns a circle based on a few head landmarks
+ * Returns a 'Head' based on a few landmarks
  * @param {Poses.PoseTracker} pose
  * @return {Head|undefined} 
  */
@@ -66,17 +66,20 @@ const computeHead = (pose) => {
   const leftEar = pose.landmarkValue(`left_ear`);
   const rightEar = pose.landmarkValue(`right_ear`);
   if (!leftEar || !rightEar || !nose) return; // No ears or nose :/
-  const earDistance = Points.distance(leftEar, rightEar);
+  const earDistance = Points.distance2d(leftEar, rightEar);
   const radius = earDistance / 2;
+
   return {
+    // Nose determines center of circle
     x: nose.x,
     y: nose.y,
-    radius,
-    poseId: pose.guid
+    radius, // Computed from distance ear-to-ear
+    poseId: pose.guid,
+    hue: pose.hue
   };
 };
 
-const draw = () => {
+const use = () => {
   const { heads } = state;
   const { canvasHelper } = settings;
   const { ctx } = canvasHelper;
@@ -86,44 +89,9 @@ const draw = () => {
   ctx.fillRect(0, 0, canvasHelper.width, canvasHelper.height);
 
   // Draw each head
-  for (const head of heads) {
-    drawHead(ctx, head);
-  }
+  heads.forEach(head => Draw.head(canvasHelper, head));
 };
 
-/**
- * Draws a single head
- * @param {CanvasRenderingContext2D} context 
- * @param {Head} head 
- */
-const drawHead = (context, head) => {
-  const { poses } = settings;
-  const { canvasHelper } = settings;
-  const scaleBy = canvasHelper.dimensionMin;
-
-  const headAbs = Points.multiplyScalar(head, scaleBy);
-  const radius = head.radius * scaleBy;
-  const tracker = poses.getByGuid(head.poseId);
-  if (tracker === undefined) return;
-  const hue = tracker.hue;
-
-  // Translate canvas so 0,0 is the center of head
-  context.save();
-  context.translate(headAbs.x, headAbs.y);
-
-  // Draw a circle
-  context.beginPath();
-  context.fillStyle = `hsl(${hue},60%,70%)`;
-  context.arc(0, 0, radius, 0, Math.PI * 2);
-  context.fill();
-
-  // Draw id of head
-  context.fillStyle = `black`;
-  context.fillText(head.poseId.toString(), 0, 0);
-
-  // Undo translation
-  context.restore();
-};
 
 /**
  * Called when a new pose is detecteda
@@ -151,20 +119,10 @@ function setup() {
   poses.addEventListener(`added`, onPoseAdded);
   poses.addEventListener(`expired`, onPoseExpired);
 
-  // Update at updateRateMs
-  const updateLoop = () => {
+  setInterval(() => {
     update();
-    setTimeout(updateLoop, updateRateMs);
-  };
-  updateLoop();
-
-
-  // Draw as fast as possible
-  const animationLoop = () => {
-    draw();
-    window.requestAnimationFrame(animationLoop);
-  };
-  animationLoop();
+    use();
+  }, updateRateMs);
 
 }
 setup();

@@ -19,6 +19,20 @@ export const positionFromMiddle = (element, relativePos) => {
 };
 
 /**
+ * Set the inner text of an element
+ * @param {string} query 
+ * @param {string} text 
+ */
+export const setText = (query, text) => {
+  const el = document.querySelector(query);
+  if (!el) {
+    console.warn(`No element found for query: ${query}`);
+    return;
+  }
+  el.textContent = text;
+};
+
+/**
  * Make `x` and `y` relative with respect to window dimensions
  * @param {number} x
  * @param {number} y
@@ -31,24 +45,3 @@ export const relativePoint = (x, y) => {
   };
 };
 
-/**
- * Add up all pointer movement in provided `events`
- * @param {PointerEvent} pointerEvent
- * @returns {number}
- */
-export const addUpMovement = (pointerEvent) => {
-  let movement = 0;
-  const events = `getCoalescedEvents` in pointerEvent ? pointerEvent.getCoalescedEvents() : [ pointerEvent ];
-  for (const event of events) {
-    let { x, y } = relativePoint(event.movementX, event.movementY);
-
-    // Movement can be negative,
-    // we don't care about that
-    x = Math.abs(x);
-    y = Math.abs(y);
-
-    // Combine movement values, using 0.01 as the lower-bound 
-    movement += x + y;
-  }
-  return movement;
-};

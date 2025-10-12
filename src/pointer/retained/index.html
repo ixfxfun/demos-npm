@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>retained</title>
+</head>
+
+<body>
+  <script type="importmap">{ "imports": { "@ixfx":"/ixfx/index.js", "@ixfx/": "/ixfx/" } }</script>
+  <style>
+    *,
+    *:before,
+    *:after,
+    html,
+    body {
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: light dark;
+      --hue: 99;
+      --font: system-ui;
+      --light: hsl(var(--hue), 10%, 80%);
+      --dark: hsl(var(--hue), 80%, 5%);
+      --accent: light-dark(hsl(var(--hue), 100%, 40%),hsl(var(--hue), 100%, 80%) )
+    }
+
+    body {
+      background-color: light-dark(var(--light), var(--dark));
+      color: light-dark(var(--dark), var(--light));
+      font-family: var(--font);
+    }
+
+    a:link,a:visited {
+      color: light-dark(var(--dark), var(--light));
+      text-decoration-style: wavy;
+    }
+    a:hover {
+      color: var(--accent);
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <canvas id="canvas"></canvas>
+  <section>
+    <h1>retained</h1>
+    <script type="module" src="script.js"></script>
+  </section>
+</body>
+
+</html>

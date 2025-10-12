@@ -89,7 +89,7 @@ const updateFromHands = (hands) => {
   const pointer = lm[8];
 
   // Raw distance
-  let pinch = Points.distance(thumb, pointer);
+  let pinch = Points.distance2d(thumb, pointer);
 
   // Scale & invert
   pinch = 1 - Numbers.clamp(pinchScale(pinch));

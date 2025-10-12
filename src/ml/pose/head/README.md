@@ -1,6 +1,4 @@
-# pose/head
-
-Make sure your 'sender' is using the 'pose' model.
+# head
 
 This basic demo demonstrates:
 1. Receiving pose data of one or more bodies

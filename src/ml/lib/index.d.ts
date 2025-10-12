@@ -117,10 +117,19 @@ type CameraOptions = {
     height?: number;
     facingMode?: `user` | `environment`;
 };
+/**
+ * Object detector options.
+ *
+ * Preset model names:
+ * * EfficientDet-Lite0: lite0-8, lite0-16, lite0-32
+ * * EfficientDet-Lite2: lite2-8, lite2-16, lite2-32
+ * * SSDMObileNet-V2: mobilenet2-8, mobilenet2-32
+ */
 type ObjectDetectorOptions = {
     verbosity: Verbosity;
     scoreThreshold: number;
     modelPath: string;
+    presetModelPaths?: Record<string, string>;
 };
 type CommonModelOptions = {
     wasmBase: string;
@@ -150,6 +159,7 @@ type HandDetectorOptions = {
     minHandPresenceConfidence: number;
     minTrackingConfidence: number;
     modelPath: string;
+    presetModelPaths?: Record<string, string>;
 };
 type FaceDetectorOptions = {
     verbosity: Verbosity;
@@ -162,7 +172,11 @@ type FaceDetectorOptions = {
      * Default: 0.3
      */
     minSupressionThreshold: number;
+    presetModelPaths?: Record<string, string>;
 };
+/**
+ * Preset model names: lite, full, heavy.
+ */
 type PoseDetectorOptions = {
     numPoses: number;
     minPoseDetectionConfidence: number;
@@ -172,6 +186,7 @@ type PoseDetectorOptions = {
     modelPath: string;
     matcher: PoseMatcherOptions;
     verbosity: Verbosity;
+    presetModelPaths?: Record<string, string>;
 };
 type OverlayOptions = {
     show: boolean;
@@ -223,7 +238,81 @@ declare class Log {
     debug(msg: any): void;
 }
 
+declare class TrackedPose {
+    centroid: Point;
+    firstSeen: number;
+    lastSeen: number;
+    id: string;
+    constructor();
+}
+declare const getLowest: <T>(data: Array<T>, fn: (d: T) => number) => {
+    data: T;
+    score: number;
+} | undefined;
+declare class PoseMatcher {
+    tracked: TrackedPose[];
+    distanceThreshold: number;
+    ageThreshold: number;
+    lastPrune: number;
+    log: Log;
+    constructor(opts: PoseMatcherOptions);
+    toPoses(poses: Mp.PoseLandmarkerResult): Generator<PoseData, void, unknown>;
+    toPose(n: Mp.NormalizedLandmark[], l: Mp.Landmark[]): PoseData;
+}
+
+declare class PoseDetector implements IModel {
+    readonly p: CommonModelOptions;
+    lp: Mp.PoseLandmarker | undefined;
+    opts: PoseDetectorOptions;
+    matcher: PoseMatcher;
+    log: Log;
+    constructor(p: CommonModelOptions, opts?: Partial<PoseDetectorOptions>);
+    static defaults(): PoseDetectorOptions;
+    compute(v: Mp.ImageSource, callback: ComputeCallback, timestamp: number): void;
+    init(): Promise<boolean>;
+    set minPoseDetectionConfidence(value: number);
+    get minPoseDetectionConfidence(): number;
+    set minPosePresenceConfidence(value: number);
+    get minPosePresenceConfidence(): number;
+    set minTrackingConfidence(value: number);
+    get minTrackingConfidence(): number;
+    set numPoses(value: number);
+    get numPoses(): number;
+    dispose(): void;
+}
+
+type ProcessingStates = `queued-start` | `starting` | `started` | `stopping` | `stopped`;
+declare class Processing extends EventTarget {
+    #private;
+    readonly mlv: MlVision;
+    log: Log;
+    dispatcher: Dispatcher;
+    poseOptions: PoseDetectorOptions;
+    objectDetectorOptions: ObjectDetectorOptions;
+    faceDetectorOptions: FaceDetectorOptions;
+    handDetectorOptions: HandDetectorOptions;
+    computeFreqMs: number;
+    dispatcherBound: (mode: ProcessorModes, data: any) => void;
+    wasmBase: string;
+    modelsBase: string;
+    constructor(mlv: MlVision, opts: Options);
+    stop(): void;
+    setMode(mode: ProcessorModes): void;
+    getModelOptions(): CommonModelOptions;
+    start(video: HTMLVideoElement): Promise<void>;
+    setState(state: ProcessingStates): void;
+    get isStarted(): boolean;
+    get state(): ProcessingStates;
+    get currentMode(): ProcessorModes;
+    get currentModel(): IModel | undefined;
+    get currentModelPoseDetector(): PoseDetector;
+}
+
 declare const defaults: (mode: ProcessorModes) => Options;
+/**
+ * Events:
+ * * processorstate: processor has changed state
+ */
 declare class MlVision extends EventTarget {
     #private;
     el: VisionElement;
@@ -231,6 +320,7 @@ declare class MlVision extends EventTarget {
     dispatcher: Dispatcher;
     log: Log;
     constructor(elQuery: string, options?: Partial<Options>);
+    get processing(): Processing;
     init(): void;
 }
 
@@ -500,41 +590,6 @@ declare global {
     }
 }
 
-declare class TrackedPose {
-    centroid: Point;
-    firstSeen: number;
-    lastSeen: number;
-    id: string;
-    constructor();
-}
-declare const getLowest: <T>(data: Array<T>, fn: (d: T) => number) => {
-    data: T;
-    score: number;
-} | undefined;
-declare class PoseMatcher {
-    tracked: TrackedPose[];
-    distanceThreshold: number;
-    ageThreshold: number;
-    lastPrune: number;
-    log: Log;
-    constructor(opts: PoseMatcherOptions);
-    toPoses(poses: Mp.PoseLandmarkerResult): Generator<PoseData, void, unknown>;
-    toPose(n: Mp.NormalizedLandmark[], l: Mp.Landmark[]): PoseData;
-}
-
-declare class PoseDetector implements IModel {
-    readonly p: CommonModelOptions;
-    lp: Mp.PoseLandmarker | undefined;
-    opts: PoseDetectorOptions;
-    matcher: PoseMatcher;
-    log: Log;
-    constructor(p: CommonModelOptions, opts?: Partial<PoseDetectorOptions>);
-    static defaults(): PoseDetectorOptions;
-    compute(v: Mp.ImageSource, callback: ComputeCallback, timestamp: number): void;
-    init(): Promise<boolean>;
-    dispose(): void;
-}
-
 type OnReceivedData = (msg: unknown) => void;
 declare class Client extends EventTarget {
     #private;
@@ -542,28 +597,12 @@ declare class Client extends EventTarget {
     constructor(options?: Options$1);
 }
 
-type ProcessingStates = `queued-start` | `starting` | `started` | `stopping` | `stopped`;
-declare class Processing extends EventTarget {
-    #private;
-    readonly mlv: MlVision;
-    log: Log;
-    dispatcher: Dispatcher;
-    poseOptions: PoseDetectorOptions;
-    objectDetectorOptions: ObjectDetectorOptions;
-    faceDetectorOptions: FaceDetectorOptions;
-    handDetectorOptions: HandDetectorOptions;
-    computeFreqMs: number;
-    dispatcherBound: (mode: ProcessorModes, data: any) => void;
-    wasmBase: string;
-    modelsBase: string;
-    constructor(mlv: MlVision, opts: Options);
-    stop(): void;
-    setMode(mode: ProcessorModes): void;
-    getModelOptions(): CommonModelOptions;
-    start(video: HTMLVideoElement): Promise<void>;
-    setState(state: ProcessingStates): void;
-    get isStarted(): boolean;
-    get currentMode(): ProcessorModes;
-}
+declare const parseUrlParams: (url?: string) => {
+    params: URLSearchParams;
+    int: (name: string, defaultValue?: number) => number;
+    float: (name: string, defaultValue?: number) => number;
+    string: (name: string, defaultValue?: string) => string;
+    bool: (name: string) => boolean;
+};
 
-export { type BoundingBox, type CameraOptions, type Category, Client, type CommonModelOptions, type ComputeCallback, type Detection, type FaceDetectorOptions, type HandDetectorOptions, type HandLandmarkerResult, type IModel, type ISource, type Landmark, MlVision, ModelElement, type NormalizedKeypoint, type NormalizedLandmark, type ObjectDetectorOptions, type OnDispatcherData, type OnReceivedData, type Options, OverlayElement, type OverlayOptions, type PoseData, PoseDetector, type PoseDetectorOptions, PoseMatcher, type PoseMatcherOptions, Processing, type ProcessingStates, type ProcessorModes, RecPanel, type RecordingData, type SourceData, type SourceKinds, type Verbosity, VideoSourceElement, type VideoSourceStates, VisionElement, defaults, getLowest, getProcessorModes, validateProcessorMode };
+export { type BoundingBox, type CameraOptions, type Category, Client, type CommonModelOptions, type ComputeCallback, type Detection, type FaceDetectorOptions, type HandDetectorOptions, type HandLandmarkerResult, type IModel, type ISource, type Landmark, MlVision, ModelElement, type NormalizedKeypoint, type NormalizedLandmark, type ObjectDetectorOptions, type OnDispatcherData, type OnReceivedData, type Options, OverlayElement, type OverlayOptions, type PoseData, PoseDetector, type PoseDetectorOptions, PoseMatcher, type PoseMatcherOptions, Processing, type ProcessingStates, type ProcessorModes, RecPanel, type RecordingData, type SourceData, type SourceKinds, type Verbosity, VideoSourceElement, type VideoSourceStates, VisionElement, defaults, getLowest, getProcessorModes, parseUrlParams, validateProcessorMode };

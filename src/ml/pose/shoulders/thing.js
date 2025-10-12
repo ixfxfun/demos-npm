@@ -4,12 +4,10 @@ import * as Util from './util.js';
 import { CanvasHelper } from '@ixfx/visual';
 
 const settings = Object.freeze({
-  hueInterpolateAmount: 0.01,
-  surpriseDropAmount: 0.001,
-  // Bounce off sides, loosing some velocity
+  // Bounce off sides, losing some velocity
   constrainForce: Forces.constrainBounce({ width: 0.9, height: 0.9 }, 0.5),
   // Slow down velocity
-  frictionForce: Forces.velocityForce(0.01, `multiply`)
+  frictionForce: Forces.velocityForce(0.015, `dampen`)
 });
 
 /**
@@ -18,7 +16,7 @@ const settings = Object.freeze({
 *  position: Points.Point
 *  velocity: Points.Point
 *  acceleration: Points.Point
-*  size: number
+*  visualSize: number
 *  mass:number
 * }} Thing
 */
@@ -30,7 +28,7 @@ const settings = Object.freeze({
  * @param {CanvasHelper} canvasHelper
  */
 export const use = (thing, context, canvasHelper) => {
-  const { position, size } = thing;
+  const { position, visualSize } = thing;
 
   const absolutePosition = Points.multiply(position, canvasHelper.width, canvasHelper.height);
 
@@ -39,7 +37,7 @@ export const use = (thing, context, canvasHelper) => {
   context.translate(absolutePosition.x, absolutePosition.y);
 
   // Radius is size of thing proportional to half the smallest screen dimension
-  const radius = size * canvasHelper.dimensionMin / 2;
+  const radius = visualSize * canvasHelper.dimensionMin / 2;
 
   // Opacity is based on 'surprise'
   const opacity = 1;
@@ -87,7 +85,7 @@ export const update = (thing, ambientState) => {
 export const create = () => {
   return {
     position: { x: 0.5, y: 0.5 },
-    size: 0.2,
+    visualSize: 0.2,
     mass: 100,
     velocity: { x: 0, y: 0 },
     acceleration: { x: 0, y: 0 }
