@@ -1,4 +1,4 @@
-import { continuously } from 'ixfx';
+import { continuously } from '@ixfx/core';
 import { clamp, flip, movingAverage, Normalise } from '@ixfx/numbers';
 import { defaultErrorHandler } from '@ixfx/dom';
 import * as Meyda from '../lib/index.js';

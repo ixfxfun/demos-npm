@@ -1,4 +1,4 @@
-import { Numbers } from 'ixfx';
+import * as Numbers from '@ixfx/numbers';
 import { Envelopes } from '@ixfx/modulation';
 import * as Things from './thing.js';
 

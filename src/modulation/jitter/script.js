@@ -1,4 +1,3 @@
-import * as Flow from '@ixfx/flow';
 import * as Mod from '@ixfx/modulation';
 import * as Util from './util.js';
 import { continuously } from '@ixfx/core';

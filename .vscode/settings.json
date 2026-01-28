@@ -4,7 +4,7 @@
   },
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.formatOnSaveMode": "file",
   "eslint.format.enable": true,
   "js/ts.implicitProjectConfig.checkJs": true,
@@ -60,7 +60,6 @@
   "typescript.format.indentSwitchCase": true,
   "chat.agent.enabled": false,
   "chat.commandCenter.enabled": false,
-  "chat.mcp.enabled": false,
   "chat.extensionTools.enabled": false,
   "chat.sendElementsToChat.enabled": false,
   "livePreview.showServerStatusNotifications": false,
@@ -80,5 +79,6 @@
     "importmap",
     "ixfx",
     "WLED"
-  ]
+  ],
+  "chat.mcp.access": "none"
 }

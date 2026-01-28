@@ -2,7 +2,7 @@
  * Generates a stacked set of gradients based on a given
  * angle interval. Gradient hues are rotated over time.
  */
-import { continuously } from 'ixfx';
+import { continuously } from '@ixfx/core';
 import * as Numbers from '@ixfx/numbers';
 
 const settings = Object.freeze({

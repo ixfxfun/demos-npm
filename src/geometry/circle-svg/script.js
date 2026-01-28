@@ -1,5 +1,7 @@
 import { Svg } from '@ixfx/visual';
-import { Numbers, Modulation, Dom } from 'ixfx';
+import * as Numbers from '@ixfx/numbers';
+import * as Modulation from '@ixfx/modulation';
+import * as Dom from '@ixfx/dom';
 
 // Define settings
 const settings = Object.freeze({

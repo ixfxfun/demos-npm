@@ -1,5 +1,6 @@
-import { Modulation, Iterables } from 'ixfx';
+import * as Modulation from '@ixfx/modulation';
 import * as Numbers from '@ixfx/numbers';
+import * as Iterables from '@ixfx/iterables';
 import { CanvasHelper } from '@ixfx/visual';
 
 const settings = Object.freeze({

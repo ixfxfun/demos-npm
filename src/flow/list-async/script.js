@@ -1,4 +1,4 @@
-import { continuously } from 'ixfx';
+import { continuously } from '@ixfx/core';
 import { log } from '@ixfx/dom';
 import { Stacks } from '@ixfx/collections';
 

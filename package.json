@@ -34,23 +34,22 @@
     "@ixfx/ui": "latest",
     "@ixfx/visual": "latest",
     "bezier-js": "6.1.4",
-    "ixfx": "latest",
     "json5": "2.2.3"
   },
   "devDependencies": {
-    "@html-eslint/eslint-plugin": "0.44.0",
-    "@html-eslint/parser": "0.44.0",
-    "@stylistic/eslint-plugin": "5.2.2",
-    "body-parser": "^2.2.0",
-    "eslint": "9.32.0",
-    "express": "^5.1.0",
+    "@html-eslint/eslint-plugin": "0.54.0",
+    "@html-eslint/parser": "0.54.0",
+    "@stylistic/eslint-plugin": "5.7.1",
+    "body-parser": "^2.2.2",
+    "eslint": "9.39.2",
+    "express": "^5.2.1",
     "express-ws": "^5.0.2",
-    "globals": "16.3.0",
-    "rimraf": "latest",
+    "globals": "17.2.0",
+    "rimraf": "6.1.2",
     "typescript": "latest",
-    "typescript-eslint": "8.39.0",
-    "vite": "7.0.6",
-    "ws": "^8.18.3"
+    "typescript-eslint": "8.54.0",
+    "vite": "7.3.1",
+    "ws": "^8.19.0"
   },
   "stackblitz": {
     "startCommand": "npm run start"

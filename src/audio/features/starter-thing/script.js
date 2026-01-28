@@ -1,7 +1,7 @@
 import * as Things from './thing.js';
 import * as Util from './util.js';
 import * as Meyda from '../lib/index.js';
-import { continuously } from 'ixfx';
+import { continuously } from '@ixfx/core';
 import { Normalise, scalePercent } from '@ixfx/numbers';
 
 const settings = Object.freeze({

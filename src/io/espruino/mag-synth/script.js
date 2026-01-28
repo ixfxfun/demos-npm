@@ -1,5 +1,6 @@
 import { Points, radianToDegree } from '@ixfx/geometry';
-import { Dom, Numbers } from 'ixfx';
+import * as Dom from '@ixfx/dom';
+import * as Numbers from '@ixfx/numbers';
 import { Audio } from '@ixfx/io';
 
 import * as Util from './util.js';

@@ -1,6 +1,7 @@
 import { Circles } from '@ixfx/geometry';
 import { Svg } from '@ixfx/visual';
-import { Dom, Modulation } from 'ixfx';
+import * as Modulation from '@ixfx/modulation';
+import * as Dom from '@ixfx/dom';
 
 const settings = Object.freeze({
   // Colour for text

@@ -1,4 +1,5 @@
-import { Dom, Modulation } from 'ixfx';
+import * as Dom from '@ixfx/dom';
+import * as Modulation from '@ixfx/modulation';
 import { Svg, Colour } from '@ixfx/visual';
 import { Points, Rects } from '@ixfx/geometry';
 
