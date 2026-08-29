@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "motform.ixfx-highlight",
     "ms-vscode.live-server"
   ]
 }
