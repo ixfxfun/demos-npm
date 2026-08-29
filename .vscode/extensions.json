@@ -1,6 +1,8 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "ms-vscode.live-server"
+    "ms-vscode.live-server",
+    "aaron-bond.better-comments",
+    "samundrak.esdoc-mdn"
   ]
 }
