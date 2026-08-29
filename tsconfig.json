@@ -2,8 +2,8 @@
   "compilerOptions": {
     "module": "ESNext",
     "sourceMap": true,
-    "moduleResolution": "classic",
-    "target": "ES2022",
+    "moduleResolution": "bundler",
+    "target": "ES2023",
     "allowImportingTsExtensions": false,
     "isolatedModules": true,
     "allowJs": true,
@@ -11,21 +11,14 @@
     "outDir": "./docs",
     "skipLibCheck": true,
     "rootDirs": [
-      "docs",
       "src"
     ],
     "paths": {
-      "@ixfx/trackers.js": [
-        "../node_modules/@ixfx/trackers/dist/src/index"
-      ],
-      "@ixfx/numbers.js": [
-        "../node_modules/@ixfx/numbers/dist/src/index"
-      ],
+      "@ixfx/*": [
+        "./node_modules/ixfx/dist/*"
+      ]
     }
   },
-  // "include": [
-  //   "**/*.ts"
-  // ],
   "exclude": [
     "node_modules",
     "**/node_modules/*",

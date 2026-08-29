@@ -1,6 +1,9 @@
 import * as path from "node:path";
 import * as fs from "node:fs";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function getHtmlEntryFiles(srcDir) {
   const entry = {};
@@ -31,6 +34,14 @@ function getHtmlEntryFiles(srcDir) {
 
 export default defineConfig({
   root: `./src`,
+  resolve: {
+    alias: [
+      {
+        find: /^@ixfx\/(.*)$/,
+        replacement: path.resolve(__dirname, `node_modules/ixfx/dist/$1`),
+      },
+    ],
+  },
   build: {
     rollupOptions: {
       input: getHtmlEntryFiles(`src`)
