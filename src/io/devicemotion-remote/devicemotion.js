@@ -1,4 +1,4 @@
-import { wave, jitter } from '@ixfx/modulation';
+import { wave, jitter } from '@ixfx/modulation.js';
 
 /** @typedef {{
  * accel: {x:number,y:number,z:number}

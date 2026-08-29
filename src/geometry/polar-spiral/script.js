@@ -1,7 +1,7 @@
-import * as Modulation from '@ixfx/modulation';
-import * as Numbers from '@ixfx/numbers';
-import { CanvasHelper } from '@ixfx/visual';
-import { Polar } from '@ixfx/geometry';
+import * as Modulation from '@ixfx/modulation.js';
+import * as Numbers from '@ixfx/numbers.js';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Polar } from '@ixfx/geometry.js';
 
 const settings = Object.freeze({
   colour: `gray`,
@@ -88,11 +88,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

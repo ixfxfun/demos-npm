@@ -1,5 +1,5 @@
-import { shortGuid } from '@ixfx/random';
-import { clamp } from '@ixfx/numbers';
+import { shortGuid } from '@ixfx/random.js';
+import { clamp } from '@ixfx/numbers.js';
 import { Poses } from "../util/Poses.js";
 
 const settings = Object.freeze({

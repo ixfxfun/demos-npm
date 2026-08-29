@@ -1,9 +1,10 @@
-import { clamp } from '@ixfx/numbers';
-import { getCssVariable } from '@ixfx/dom';
-import { CanvasHelper } from '@ixfx/visual';
-import { StateMachine } from '@ixfx/flow';
-import { Circles } from '@ixfx/geometry';
-import { elapsedInfinity, elapsedSince } from '@ixfx/core';
+import { clamp } from '@ixfx/numbers.js';
+import { getCssVariable } from '@ixfx/dom.js';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { StateMachine } from '@ixfx/flow.js';
+import { Circles } from '@ixfx/geometry.js';
+import { elapsedInfinity, elapsedSince } from '@ixfx/core.js';
+import * as Util from './util.js';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
@@ -97,7 +98,7 @@ const use = () => {
   const { canvas, hue, circles } = settings;
   const { ctx, width, height } = canvas;
 
-  setText(`state`, current);
+  Util.setText(`#state`, current);
   ctx.clearRect(0, 0, width, height);
   const stateLabel = current;
 
@@ -117,39 +118,15 @@ const use = () => {
     let strokeStyle = `hsl(${hue}, 50%, ${lightness * 100}%)`;
 
     // Draw
-    drawCircle(c, fillStyle, strokeStyle);
+    Util.drawCircle(canvas, c, fillStyle, strokeStyle);
   }
 };
 
+
 /**
- * Draw a circle
- * @param {Circles.CirclePositioned} circle
+ * Pointer moved
+ * @param {PointerEvent} event 
  */
-const drawCircle = (circle, fillStyle, strokeStyle) => {
-  const { canvas } = settings;
-  const { ctx } = canvas;
-
-  // Get absolute point
-  const circlePos = canvas.toAbsolute(circle);
-
-  // Translate to middle of circle
-  ctx.save();
-  ctx.translate(circlePos.x, circlePos.y);
-
-  // Fill a circle
-  ctx.beginPath();
-  ctx.arc(0, 0, circle.radius * window.innerWidth, 0, Math.PI * 2);
-  ctx.fillStyle = fillStyle;
-  ctx.fill();
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = strokeStyle;
-  ctx.stroke();
-  ctx.closePath();
-
-  // Unwind translation
-  ctx.restore();
-};
-
 const onPointerMove = (event) => {
   const { circles } = settings;
 
@@ -165,6 +142,12 @@ const onPointerMove = (event) => {
   saveState({ distances });
 };
 
+/**
+ * Create a circle
+ * @param {number} x 
+ * @param {number} y 
+ * @returns 
+ */
 const createCircle = (x, y) => {
   return {
     radius: 0.1,
@@ -179,7 +162,6 @@ function setup() {
     createCircle(0.8, 0.5)
   );
 
-  document.addEventListener(`pointermove`, onPointerMove);
 
   const loop = () => {
     use();
@@ -192,31 +174,20 @@ function setup() {
     window.setTimeout(processStateLoop, 1000);
   };
   processStateLoop();
+
+  document.addEventListener(`pointermove`, onPointerMove);
+
 }
 setup();
 
-//#region helpers
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }
 
-/**
- * Sets the innerText of an element with `id`
- * @param {string} id
- * @param {string} text
- * @returns void
- */
-function setText(id, text) {
-  const element = document.querySelector(`#${id}`);
-  if (!element) return;
-  if (element.textContent === text) return;
-  element.textContent = text;
-}
-//#endregion

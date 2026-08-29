@@ -1,5 +1,5 @@
-import { Points } from "@ixfx/geometry";
-import { CanvasHelper } from "@ixfx/visual";
+import { Points } from "@ixfx/geometry.js";
+import { CanvasHelper } from "@ixfx/visual.js";
 
 /**
  * Draws a single head

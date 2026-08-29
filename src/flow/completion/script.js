@@ -1,4 +1,4 @@
-import * as Flow from '@ixfx/flow';
+import * as Flow from '@ixfx/flow.js';
 
 const settings = Object.freeze({
   // How much time is considered 100%
@@ -56,15 +56,20 @@ function setup() {
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }
 
+/**
+ * Sets a debug message
+ * @param {string} message 
+ * @returns 
+ */
 function setDebug(message) {
   const element = document.querySelector(`#debug`);
   if (!element) return;

@@ -1,6 +1,6 @@
-import { Polar, Lines, radiansSum } from '@ixfx/geometry';
-import { CanvasHelper, Colour } from '@ixfx/visual';
-import * as Random from '@ixfx/random';
+import { Polar, Lines, radiansSum } from '@ixfx/geometry.js';
+import { CanvasHelper, Colour } from '@ixfx/visual.js';
+import * as Random from '@ixfx/random.js';
 const piPi = Math.PI * 2;
 
 /**

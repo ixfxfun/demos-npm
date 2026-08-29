@@ -1,7 +1,7 @@
-import * as Modulation from '@ixfx/modulation';
-import { Points } from '@ixfx/geometry';
+import * as Modulation from '@ixfx/modulation.js';
+import { Points } from '@ixfx/geometry.js';
 import * as Util from './util.js';
-import { resolveFields } from '@ixfx/core';
+import { resolveFields } from '@ixfx/core.js';
 
 const settings = Object.freeze({
   spring: /** @type Modulation.SpringOptions */({

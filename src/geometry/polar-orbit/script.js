@@ -1,5 +1,5 @@
-import { Polar } from '@ixfx/geometry';
-import * as Modulation from '@ixfx/modulation';
+import { Polar } from '@ixfx/geometry.js';
+import * as Modulation from '@ixfx/modulation.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

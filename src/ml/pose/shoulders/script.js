@@ -1,7 +1,7 @@
-import { Points } from '@ixfx/geometry';
-import { CanvasHelper } from '@ixfx/visual';
-import { Bipolar, interpolate } from '@ixfx/numbers';
-import * as Dom from '@ixfx/dom';
+import { Points } from '@ixfx/geometry.js';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Bipolar, interpolate } from '@ixfx/numbers.js';
+import * as Dom from '@ixfx/dom.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 import * as Util from './util.js';

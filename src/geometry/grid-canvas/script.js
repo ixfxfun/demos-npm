@@ -6,11 +6,12 @@
  *  - dampening modulation value
  *  - calculating distance from a cell to pointer
  */
-import { Grids, Points } from '@ixfx/geometry';
-import * as Modulation from '@ixfx/modulation';
-import * as Flow from '@ixfx/flow';
-import { CanvasHelper } from '@ixfx/visual';
-import { scalePercent } from '@ixfx/numbers';
+import { Grids, Points } from '@ixfx/geometry.js';
+import * as Modulation from '@ixfx/modulation.js';
+import * as Flow from '@ixfx/flow.js';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { scalePercent } from '@ixfx/numbers.js';
+import * as Util from './util.js';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
@@ -28,12 +29,12 @@ let state = Object.freeze({
   pointer: { x: -1, y: -1 }
 });
 
-const keyForCell = (cell) => cell.x + `-` + cell.y;
 
 // Update state of world
 const update = () => {
   const { pointer, grid } = state;
-  const moduleValues = new Map();
+
+  const moduleValues = /** @type Map<string,number>*/(new Map());
 
   // Get larger of either row or col count
   const gridMax = Math.max(grid.cols, grid.rows);
@@ -63,7 +64,7 @@ const use = () => {
   for (const cell of Grids.By.cells(grid)) {
     // Get bounds for cell, as well as current mod value
     const rect = Grids.rectangleForCell(grid, cell);
-    const cellKey = keyForCell(cell);
+    const cellKey = Util.keyForCell(cell);
     const moduleValue = modValues.get(cellKey);
 
     // ...pass on over to drawCell
@@ -71,11 +72,18 @@ const use = () => {
   }
 };
 
+/**
+ * 
+ * @param {import('@ixfx/geometry.js').GridCell} cell 
+ * @param {import('@ixfx/geometry.js').GridCell|undefined} pointerCell 
+ * @param {number} gridMax 
+ * @param {Map<string,number>} moduleValues 
+ */
 const updateCell = (cell, pointerCell, gridMax, moduleValues) => {
   const { modulators } = settings;
 
   // Get the string key for this cell `x-y`
-  const key = keyForCell(cell);
+  const key = Util.keyForCell(cell);
 
   // Calc distance from cell to cell where pointer is.
   // If pointer is outside grid, distance will be set to -1
@@ -122,6 +130,7 @@ const initCellModulator = () => {
  * Draws a cell
  * @param {{x:number, y:number, width:number, height:number}} rect 
  * @param {CanvasRenderingContext2D} context
+ * @param {number} moduleValue
  */
 const drawCell = (moduleValue, rect, context) => {
   const { piPi, colour } = settings;
@@ -204,11 +213,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

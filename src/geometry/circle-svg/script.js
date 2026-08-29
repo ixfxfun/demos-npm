@@ -1,7 +1,7 @@
-import { Svg } from '@ixfx/visual';
-import * as Numbers from '@ixfx/numbers';
-import * as Modulation from '@ixfx/modulation';
-import * as Dom from '@ixfx/dom';
+import { Svg } from '@ixfx/visual.js';
+import * as Numbers from '@ixfx/numbers.js';
+import * as Modulation from '@ixfx/modulation.js';
+import * as Dom from '@ixfx/dom.js';
 
 // Define settings
 const settings = Object.freeze({
@@ -127,11 +127,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

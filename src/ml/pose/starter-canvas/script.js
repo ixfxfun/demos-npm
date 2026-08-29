@@ -1,6 +1,6 @@
-import * as Dom from '@ixfx/dom';
-import { CanvasHelper } from '@ixfx/visual';
-import { continuously } from '@ixfx/flow';
+import * as Dom from '@ixfx/dom.js';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { continuously } from '@ixfx/flow.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Util from './util.js';
 

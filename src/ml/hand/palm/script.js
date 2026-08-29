@@ -1,9 +1,9 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import * as Dom from '@ixfx/dom';
-import * as Numbers from "@ixfx/numbers";
-import { Triangles } from "@ixfx/geometry";
-import * as Flow from "@ixfx/flow";
+import * as Dom from '@ixfx/dom.js';
+import * as Numbers from "@ixfx/numbers.js";
+import { Triangles } from "@ixfx/geometry.js";
+import * as Flow from "@ixfx/flow.js";
 import * as MpVision from '../../lib/client/index.js';
 import * as Hands from '../hands.js';
 import * as Things from './thing.js';

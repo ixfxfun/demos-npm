@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import { DataDisplay } from '@ixfx/dom';
-import { average, Bipolar, scaleClamped } from "@ixfx/numbers";
+import { DataDisplay } from '@ixfx/dom.js';
+import { average, Bipolar, scaleClamped } from "@ixfx/numbers.js";
 import * as MpVision from "../../pose/util/Poses.js";
 
 const settings = Object.freeze({

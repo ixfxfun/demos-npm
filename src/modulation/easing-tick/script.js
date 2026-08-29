@@ -1,5 +1,5 @@
-import { Easings } from '@ixfx/modulation';
-import * as Core from '@ixfx/core';
+import { Easings } from '@ixfx/modulation.js';
+import * as Core from '@ixfx/core.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -80,12 +80,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
   return state;
 }

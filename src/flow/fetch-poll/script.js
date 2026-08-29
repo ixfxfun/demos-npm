@@ -8,7 +8,7 @@
  * demonstrated in `fetch-outdated` where data is only fetched if we 
  * haven't gotten it yet, or if it's older than some age. 
  */
-import { continuously } from '@ixfx/core';
+import { continuously } from 'ixfx/core.js';
 
 // Define settings
 const settings = Object.freeze({
@@ -47,24 +47,24 @@ continuously(async () => {
       response: {}
     });
 
-    status(error.message);
+    status(/** @type Error */(error).message);
     console.error(error);
   }
 }, settings.fetchIntervalMs).start();
 
 // Puts a timestamped message in the #status element
-const status = (m) => {
+const status = (/** @type string */m) => {
   const { statusEl } = settings;
   if (statusEl) statusEl.textContent = new Date().toLocaleTimeString() + ` ` + m;
 };
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

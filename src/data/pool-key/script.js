@@ -1,5 +1,5 @@
-import * as Arrays from '@ixfx/arrays';
-import { Pool } from '@ixfx/flow';
+import * as Arrays from '@ixfx/arrays.js';
+import { Pool } from '@ixfx/flow.js';
 
 const settings = Object.freeze({
   pool: new Pool({

@@ -2,10 +2,10 @@
  * An extention of `velocity` with arbitrary number of things
  * being moved.
  */
-import { Points, Rects } from '@ixfx/geometry';
-import { Forces } from '@ixfx/modulation';
-import { continuously } from '@ixfx/core';
-import { PointTracker } from '@ixfx/geometry';
+import { Points, Rects } from '@ixfx/geometry.js';
+import { Forces } from '@ixfx/modulation.js';
+import { continuously } from '@ixfx/core.js';
+import { PointTracker } from '@ixfx/geometry.js';
 import * as Util from './util.js';
 import * as Thing from './thing.js';
 

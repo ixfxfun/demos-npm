@@ -1,4 +1,4 @@
-import { CanvasHelper } from '@ixfx/visual';
+import { CanvasHelper } from '@ixfx/visual.js';
 import * as Draw from './drawing.js';
 
 // Define settings - properties that don't change

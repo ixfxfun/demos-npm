@@ -1,10 +1,5 @@
-/**
- * Demonstrates creates DOM elements by row for each grid cell.
- * 
- * This makes it easy to use CSS styling and DOM elements for further interaction.
- */
-
-import { Grids } from '@ixfx/geometry';
+import { Grids } from '@ixfx/geometry.js';
+import * as Util from './util.js';
 
 // Define settings
 const settings = Object.freeze({
@@ -16,20 +11,13 @@ let state = Object.freeze({
   lastClicked: { x: 0, y: 0 }
 });
 
-/**
- * Returns a cell based on an HTML element that has data-x and data-y attributes set.
- * 
- * Returns -1 for x/y if attribute is not found.
- * @param {HTMLElement} element
- * @returns 
- */
-const getCellFromElement = (element) => ({
-  x: Number.parseInt(element.getAttribute(`data-x`) ?? `-1`),
-  y: Number.parseInt(element.getAttribute(`data-y`) ?? `-1`)
-});
 
+/**
+ * Cell has been clicked
+ * @param {PointerEvent} event 
+ */
 const onCellClick = (event) => {
-  const cell = getCellFromElement(event.target);
+  const cell = Util.getCellFromElement(/** @type HTMLElement */(event.target));
   saveState({
     lastClicked: cell
   });
@@ -45,7 +33,7 @@ const use = () => {
 function setup() {
   const { grid } = settings;
 
-  const gridElement = document.querySelector(`#grid`);
+  const gridElement = /** @type HTMLElement */(document.querySelector(`#grid`));
 
   if (gridElement === null) return;
 
@@ -61,18 +49,18 @@ function setup() {
     gridElement.insertAdjacentHTML(`beforeend`, rowHtml);
   }
 
-  gridElement.addEventListener(`click`, onCellClick);
+  gridElement.addEventListener(`pointerup`, onCellClick);
 }
 
 setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

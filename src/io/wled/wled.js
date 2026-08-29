@@ -4,11 +4,11 @@
  * and should not need to be modified
  * #####################################
  */
-import { Colour } from '@ixfx/visual';
-import * as Arrays from '@ixfx/arrays';
-import { wrapRange } from '@ixfx/numbers';
-import { StateMachine } from '@ixfx/flow';
-import { SimpleEventEmitter } from '@ixfx/events';
+import { Colour } from '@ixfx/visual.js';
+import * as Arrays from '@ixfx/arrays.js';
+import { wrapRange } from '@ixfx/numbers.js';
+import { StateMachine } from '@ixfx/flow.js';
+import { SimpleEventEmitter } from '@ixfx/events.js';
 
 /**
  * Parses an array of strings or [index,colour].

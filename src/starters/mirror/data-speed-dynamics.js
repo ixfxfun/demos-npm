@@ -1,4 +1,4 @@
-import { clamp, interpolate } from '@ixfx/numbers';
+import { clamp, interpolate } from '@ixfx/numbers.js';
 
 const settings = Object.freeze({
   fullMode: window.location.hash.includes(`full`),

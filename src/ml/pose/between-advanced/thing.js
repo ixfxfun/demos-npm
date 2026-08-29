@@ -1,8 +1,8 @@
-import { Points } from '@ixfx/geometry';
-import { interpolate } from '@ixfx/numbers';
+import { Points } from '@ixfx/geometry.js';
+import { interpolate } from '@ixfx/numbers.js';
 import { Poses } from "../util/Poses.js";
 import * as Util from './util.js';
-import { shortGuid } from '@ixfx/random';
+import { shortGuid } from '@ixfx/random.js';
 
 const settings = Object.freeze({
   positionInterpolate: 0.01,

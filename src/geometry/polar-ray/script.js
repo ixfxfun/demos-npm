@@ -1,8 +1,8 @@
-import { continuously } from '@ixfx/core';
-import { Points } from '@ixfx/geometry';
-import { wave } from '@ixfx/modulation';
+import { continuously } from '@ixfx/core.js';
+import { Points } from '@ixfx/geometry.js';
+import { wave } from '@ixfx/modulation.js';
 import * as Things from './thing.js';
-import { CanvasHelper } from '@ixfx/visual';
+import { CanvasHelper } from '@ixfx/visual.js';
 
 const settings = Object.freeze({
   // How many things to distribute around the circumference
@@ -102,12 +102,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }
 

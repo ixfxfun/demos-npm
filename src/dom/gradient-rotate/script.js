@@ -2,8 +2,8 @@
  * Generates a stacked set of gradients based on a given
  * angle interval. Gradient hues are rotated over time.
  */
-import { continuously } from '@ixfx/core';
-import * as Numbers from '@ixfx/numbers';
+import { continuously } from 'ixfx/core.js';
+import * as Numbers from '@ixfx/numbers.js';
 
 const settings = Object.freeze({
   // Opacity of gradient stop
@@ -65,11 +65,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

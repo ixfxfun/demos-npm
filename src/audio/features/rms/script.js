@@ -1,6 +1,6 @@
-import { continuously } from '@ixfx/core';
-import { clamp, flip, movingAverage, Normalise } from '@ixfx/numbers';
-import { defaultErrorHandler } from '@ixfx/dom';
+import { continuously } from 'ixfx/core.js';
+import { clamp, flip, movingAverage, Normalise } from '@ixfx/numbers.js';
+import { defaultErrorHandler } from '@ixfx/dom.js';
 import * as Meyda from '../lib/index.js';
 import * as Util from './util.js';
 

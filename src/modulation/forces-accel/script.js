@@ -1,7 +1,7 @@
-import { Points, Rects } from '@ixfx/geometry';
-import { Forces } from '@ixfx/modulation';
-import { continuously } from '@ixfx/core';
-import { PointsTracker, PointTracker } from '@ixfx/geometry';
+import { Points, Rects } from '@ixfx/geometry.js';
+import { Forces } from '@ixfx/modulation.js';
+import { continuously } from '@ixfx/core.js';
+import { PointsTracker, PointTracker } from '@ixfx/geometry.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

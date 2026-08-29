@@ -1,7 +1,7 @@
-import { Points } from '@ixfx/geometry';
-import { Forces } from '@ixfx/modulation';
+import { Points } from '@ixfx/geometry.js';
+import { Forces } from '@ixfx/modulation.js';
 import * as Util from './util.js';
-import { CanvasHelper } from '@ixfx/visual';
+import { CanvasHelper } from '@ixfx/visual.js';
 
 const settings = Object.freeze({
   // Bounce off sides, losing some velocity

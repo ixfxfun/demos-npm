@@ -1,5 +1,5 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { Circles } from '@ixfx/geometry';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Circles } from '@ixfx/geometry.js';
 import * as Util from './util.js';
 
 // Define settings

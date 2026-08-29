@@ -1,4 +1,4 @@
-import { defaultErrorHandler } from '@ixfx/dom';
+import { defaultErrorHandler } from '@ixfx/dom.js';
 
 let state = Object.freeze({});
 
@@ -33,11 +33,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

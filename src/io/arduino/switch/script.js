@@ -1,4 +1,5 @@
-import { Serial } from '@ixfx/io';
+import { Serial } from '@ixfx/io.js';
+import * as Util from './util.js';
 
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true, eol: `\n` }),
@@ -25,22 +26,13 @@ const connect = async () => {
   }
 };
 
-const setCssDisplay = (id, value) => {
-  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
-  if (!element) return;
-  element.style.display = value;
-};
-
-const setHtml = (id, value) => {
-  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
-  if (!element) return;
-  element.innerHTML = value;
-};
-
-// Called when port is disconnected/connected
+/**
+ * Called when port is disconnected/connected
+ * @param {boolean} connected 
+ */
 const onConnected = (connected) => {
-  setCssDisplay(`preamble`, connected ? `none` : `block`);
-  setCssDisplay(`connected`, connected ? `block` : `none`);
+  Util.setCssDisplay(`#preamble`, connected ? `none` : `block`);
+  Util.setCssDisplay(`#connected`, connected ? `block` : `none`);
 };
 
 /**
@@ -49,7 +41,7 @@ const onConnected = (connected) => {
 const use = () => {
   const { sw } = state;
 
-  setHtml(`lblSwitch`, sw ? `Pressed` : `Not pressed`);
+  Util.setHtml(`#lblSwitch`, sw ? `Pressed` : `Not pressed`);
 };
 
 function setup() {
@@ -73,11 +65,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

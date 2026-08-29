@@ -1,8 +1,8 @@
 /**
  * Sends JSON to a microcontroller
  */
-import { Serial } from '@ixfx/io';
-
+import { Serial } from '@ixfx/io.js';
+import * as Util from './util.js';
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true })
 });
@@ -28,16 +28,13 @@ const connect = async () => {
   }
 };
 
-const setCssDisplay = (id, value) => {
-  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
-  if (!element) return;
-  element.style.display = value;
-};
-
-// Called when port is disconnected/connected
+/**
+ * Called when port is disconnected/connected
+ * @param {boolean} connected 
+ */
 const onConnected = (connected) => {
-  setCssDisplay(`preamble`, connected ? `none` : `block`);
-  setCssDisplay(`connected`, connected ? `block` : `none`);
+  Util.setCssDisplay(`#preamble`, connected ? `none` : `block`);
+  Util.setCssDisplay(`#connected`, connected ? `block` : `none`);
 };
 
 /**
@@ -70,11 +67,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

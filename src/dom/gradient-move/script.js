@@ -6,7 +6,7 @@
  *  CSS linear gradients, 
  *  CSS background clipping
  */
-import { Points } from '@ixfx/geometry';
+import { Points } from '@ixfx/geometry.js';
 
 /**
  * Define our 'thing' (this is optional) which consists of 
@@ -96,11 +96,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

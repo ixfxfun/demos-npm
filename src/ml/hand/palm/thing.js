@@ -1,6 +1,6 @@
-import * as Random from "@ixfx/random";
-import { clamp, scalePercent } from "@ixfx/numbers";
-import * as Mod from '@ixfx/modulation';
+import * as Random from "@ixfx/random.js";
+import { clamp, scalePercent } from "@ixfx/numbers.js";
+import * as Mod from '@ixfx/modulation.js';
 
 
 /**

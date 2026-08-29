@@ -1,4 +1,4 @@
-import { Espruino } from '@ixfx/io';
+import { Espruino } from '@ixfx/io.js';
 import { setClassAll } from './util.js';
 
 // No settings needed for this sketch
@@ -35,6 +35,7 @@ const trigger = (triggerWhat) => {
 
 /**
  * Received data from Espruino.
+ * @param {import('@ixfx/io.js').JsonDataEvent} event
  */
 const onEspruinoData = (event) => {
   const { data } = event;
@@ -109,12 +110,12 @@ function onEspruinoConnected(connected) {
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }
 

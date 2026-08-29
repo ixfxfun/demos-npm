@@ -1,5 +1,5 @@
-import * as Numbers from '@ixfx/numbers';
-import { UserPointerTracker } from '@ixfx/geometry';
+import * as Numbers from '@ixfx/numbers.js';
+import { UserPointerTracker } from '@ixfx/geometry.js';
 import * as Util from "./util.js";
 
 const settings = Object.freeze({

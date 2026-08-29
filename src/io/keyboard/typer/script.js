@@ -1,5 +1,5 @@
-import { flip, clamp, scale } from '@ixfx/numbers';
-import * as Trackers from '@ixfx/trackers';
+import { flip, clamp, scale } from '@ixfx/numbers.js';
+import * as Trackers from '@ixfx/trackers.js';
 
 const settings = Object.freeze({
   // Element to hold created letters
@@ -15,7 +15,6 @@ let state = Object.freeze({
   speed: 0
 });
 
-const logKeyEvent = (event, prefix = `key`) => console.log(`${prefix} code: ${event.code} key: ${event.key} alt: ${event.altKey} ctrl: ${event.ctrlKey} meta: ${event.metaKey} shift: ${event.shiftKey}`);
 
 /**
  * Key is bring pressed
@@ -180,12 +179,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }
 

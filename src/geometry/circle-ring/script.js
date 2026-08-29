@@ -1,6 +1,6 @@
-import { continuously } from '@ixfx/core';
-import { Points } from '@ixfx/geometry';
-import { wave } from '@ixfx/modulation';
+import { continuously } from '@ixfx/core.js';
+import { Points } from '@ixfx/geometry.js';
+import { wave } from '@ixfx/modulation.js';
 import * as Things from './thing.js';
 
 const settings = Object.freeze({
@@ -94,12 +94,12 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }
 

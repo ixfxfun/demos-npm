@@ -1,4 +1,4 @@
-import { clamp } from "@ixfx/numbers";
+import { clamp } from "@ixfx/numbers.js";
 import * as M from "https://unpkg.com/meyda@6.0.0-beta.2/dist/web/meyda.min.js";
 
 // @ts-check

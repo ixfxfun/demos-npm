@@ -1,8 +1,8 @@
-import { Points } from '@ixfx/geometry';
-import { DataDisplay } from '@ixfx/dom';
+import { Points } from '@ixfx/geometry.js';
+import { DataDisplay } from '@ixfx/dom.js';
 import { PosesConsumer, Poses } from "../util/Poses.js";
 import * as Things from './thing.js';
-import { Normalise } from '@ixfx/numbers';
+import { Normalise } from '@ixfx/numbers.js';
 
 const settings = Object.freeze({
   distanceNormalise: Normalise.stream(),

@@ -1,9 +1,9 @@
 /**
  * Receives JSON from a microcontroller
  */
-import { Serial } from '@ixfx/io';
-import { scale } from '@ixfx/numbers';
-
+import { Serial } from '@ixfx/io.js';
+import { scale } from '@ixfx/numbers.js';
+import * as Util from './util.js';
 const settings = Object.freeze({
   serial: new Serial.Device({ name: `Arduino`, debug: true, eol: `\n` }),
   rangeMax: { x: 1023, y: 1023 },
@@ -36,28 +36,14 @@ const connect = async () => {
   }
 };
 
+
 /**
- * Sets style.display for element
- * @param {*} id Id of element
- * @param {*} value Value of style.display to set
- * @returns 
+ * Called when port is disconnected/connected
+ * @param {boolean} connected 
  */
-const setCssDisplay = (id, value) => {
-  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
-  if (!element) return;
-  element.style.display = value;
-};
-
-const setHtml = (id, value) => {
-  const element = document.querySelector(`#${id}`);
-  if (!element) return;
-  element.innerHTML = value;
-};
-
-// Called when port is disconnected/connected
 const onConnected = (connected) => {
-  setCssDisplay(`preamble`, connected ? `none` : `block`);
-  setCssDisplay(`connected`, connected ? `block` : `none`);
+  Util.setCssDisplay(`#preamble`, connected ? `none` : `block`);
+  Util.setCssDisplay(`#connected`, connected ? `block` : `none`);
 };
 
 /**
@@ -66,12 +52,10 @@ const onConnected = (connected) => {
 const use = () => {
   const { x, y, sw } = state;
 
-  // X,y are relative values
-  const pc = (v) => Math.round(v * 100) + `%`;
 
-  setHtml(`lblX`, pc(x));
-  setHtml(`lblY`, pc(y));
-  setHtml(`lblSwitch`, sw ? `Pressed` : `Not pressed`);
+  Util.setHtml(`#lblX`, Util.percentage(x));
+  Util.setHtml(`#lblY`, Util.percentage(y));
+  Util.setHtml(`#lblSwitch`, sw ? `Pressed` : `Not pressed`);
 };
 
 function setup() {
@@ -99,11 +83,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

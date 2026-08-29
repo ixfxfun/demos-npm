@@ -1,6 +1,6 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { Lines } from '@ixfx/geometry';
-import { getCssVariable } from '@ixfx/dom';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Lines } from '@ixfx/geometry.js';
+import { getCssVariable } from '@ixfx/dom.js';
 
 const piPi = Math.PI * 2;
 
@@ -121,11 +121,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

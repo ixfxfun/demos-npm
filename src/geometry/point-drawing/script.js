@@ -1,7 +1,7 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { repeatSync } from '@ixfx/flow';
-import { getCssVariable } from '@ixfx/dom';
-import { Colour } from '@ixfx/visual';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { repeatSync } from '@ixfx/flow.js';
+import { getCssVariable } from '@ixfx/dom.js';
+import { Colour } from '@ixfx/visual.js';
 
 /**
  * Returns a new random point with radius
@@ -123,11 +123,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

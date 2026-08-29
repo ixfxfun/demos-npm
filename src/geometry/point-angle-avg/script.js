@@ -1,6 +1,6 @@
-import { PointTracker, radianToDegree } from '@ixfx/geometry';
-import { scale } from '@ixfx/numbers';
-import { NumberTracker } from '@ixfx/trackers';
+import { PointTracker, radianToDegree } from '@ixfx/geometry.js';
+import { scale } from '@ixfx/numbers.js';
+import { NumberTracker } from '@ixfx/trackers.js';
 import * as Util from './util.js';
 
 const settings = {
@@ -52,7 +52,10 @@ const use = () => {
   Util.rotateElementById(`thingRaw`, rawDegreesCircle);
 };
 
-
+/**
+ * 
+ * @param {PointerEvent} event 
+ */
 const onPointerMove = (event) => {
   const { moveTracker, angleAvg } = settings;
   event.preventDefault();
@@ -79,12 +82,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }
 

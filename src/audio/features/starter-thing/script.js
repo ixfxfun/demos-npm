@@ -1,8 +1,8 @@
 import * as Things from './thing.js';
 import * as Util from './util.js';
 import * as Meyda from '../lib/index.js';
-import { continuously } from '@ixfx/core';
-import { Normalise, scalePercent } from '@ixfx/numbers';
+import { continuously } from 'ixfx/core.js';
+import { Normalise, scalePercent } from '@ixfx/numbers.js';
 
 const settings = Object.freeze({
   // Meyda helper. In this case just one the feature extractor

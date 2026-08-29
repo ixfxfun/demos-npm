@@ -1,5 +1,5 @@
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import * as Dom from '@ixfx/dom';
+import * as Dom from '@ixfx/dom.js';
 import * as DeviceMotion from './devicemotion.js';
 
 const settings = Object.freeze({

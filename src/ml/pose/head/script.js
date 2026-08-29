@@ -1,6 +1,6 @@
-import * as Dom from '@ixfx/dom';
-import { CanvasHelper } from '@ixfx/visual';
-import { Points } from '@ixfx/geometry';
+import * as Dom from '@ixfx/dom.js';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Points } from '@ixfx/geometry.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Draw from './draw.js';
 
@@ -129,12 +129,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 
 }

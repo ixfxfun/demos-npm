@@ -1,5 +1,5 @@
-import * as Arrays from '@ixfx/arrays';
-import { Pool } from '@ixfx/flow';
+import * as Arrays from '@ixfx/arrays.js';
+import { Pool } from '@ixfx/flow.js';
 import * as Audio from './audio.js';
 
 const settings = Object.freeze({

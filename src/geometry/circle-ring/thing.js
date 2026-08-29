@@ -1,4 +1,4 @@
-import { Points, Polar } from '@ixfx/geometry';
+import { Points, Polar } from '@ixfx/geometry.js';
 import * as Util from './util.js';
 
 /**

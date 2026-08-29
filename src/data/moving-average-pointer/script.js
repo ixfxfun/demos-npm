@@ -2,9 +2,9 @@
  * Demonstrates using two movingAverage instances to smooth
  * pointer x,y positions in order to position an element.
  */
-import { movingAverage } from '@ixfx/numbers';
-import { Points } from '@ixfx/geometry';
-import { Records } from '@ixfx/core';
+import { movingAverage } from '@ixfx/numbers.js';
+import { Points } from '@ixfx/geometry.js';
+import { Records } from '@ixfx/core.js';
 
 const settings = Object.freeze({
   // Create an averager for x and y
@@ -22,6 +22,11 @@ const update = () => {
   addAverage(pointer.x, pointer.y);
 };
 
+/**
+ * Adds absolute values
+ * @param {number} absX 
+ * @param {number} absY 
+ */
 const addAverage = (absX, absY) => {
   const { x, y } = settings.average;
 
@@ -92,13 +97,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
-
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
   return state;
 }

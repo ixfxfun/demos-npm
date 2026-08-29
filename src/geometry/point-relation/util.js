@@ -1,4 +1,4 @@
-import { Points } from '@ixfx/geometry';
+import { Points } from '@ixfx/geometry.js';
 
 /**
  * Returns the relative position from an absolute one

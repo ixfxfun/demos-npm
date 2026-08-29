@@ -1,6 +1,6 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { Forces } from '@ixfx/modulation';
-import { Points } from '@ixfx/geometry';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Forces } from '@ixfx/modulation.js';
+import { Points } from '@ixfx/geometry.js';
 const settings = Object.freeze({
   pinnedAt: { x: 0.5, y: 0.2 },
   mass: 0.1,
@@ -128,11 +128,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

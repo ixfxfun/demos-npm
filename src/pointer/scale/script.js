@@ -1,7 +1,7 @@
-import { pointerVisualise } from '@ixfx/visual';
-import { Points, PointsTracker } from '@ixfx/geometry';
-import * as Trackers from '@ixfx/trackers';
-import * as Numbers from '@ixfx/numbers';
+import { pointerVisualise } from '@ixfx/visual.js';
+import { Points, PointsTracker } from '@ixfx/geometry.js';
+import * as Trackers from '@ixfx/trackers.js';
+import * as Numbers from '@ixfx/numbers.js';
 
 // Pointer visualiser. Useful for debugging. It's what adds the red border
 pointerVisualise(document.body);

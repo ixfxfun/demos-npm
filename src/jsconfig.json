@@ -10,21 +10,14 @@
     "strictNullChecks": true,
     "allowJs": true,
     "strictFunctionTypes": true,
-    "baseUrl": "./",
     "lib": [
       "DOM",
       "ESNext"
     ],
     "paths": {
-      "@ixfx/lorp": [
-        "../node_modules/@ixfx/trackers/dist/src/index.js"
-      ],
-      "@ixfx/trackers.js": [
-        "../node_modules/@ixfx/trackers/dist/src/index"
-      ],
-      "@ixfx/numbers.js": [
-        "../node_modules/@ixfx/numbers/dist/src/index"
-      ],
+      "@ixfx/*": [
+        "./node_modules/ixfx/dist/*"
+      ]
     }
   },
   "include": [

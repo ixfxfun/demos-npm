@@ -1,5 +1,5 @@
-import { Espruino } from '@ixfx/io';
-import { Envelopes } from '@ixfx/modulation';
+import { Espruino } from '@ixfx/io.js';
+import { Envelopes } from '@ixfx/modulation.js';
 import { setCssDisplay } from './util.js';
 
 const settings = Object.freeze({
@@ -154,11 +154,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

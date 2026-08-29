@@ -1,5 +1,5 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { Points, PointTracker } from '@ixfx/geometry';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Points, PointTracker } from '@ixfx/geometry.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

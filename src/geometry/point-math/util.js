@@ -1,4 +1,4 @@
-import { Points, radianToDegree } from '@ixfx/geometry';
+import { Points, radianToDegree } from '@ixfx/geometry.js';
 
 /**
  * Make `x` and `y` relative with respect to window dimensions

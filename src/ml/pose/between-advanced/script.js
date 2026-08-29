@@ -1,5 +1,5 @@
-import { DataDisplay } from '@ixfx/dom';
-import * as Arrays from '@ixfx/arrays';
+import { DataDisplay } from '@ixfx/dom.js';
+import * as Arrays from '@ixfx/arrays.js';
 import { PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 

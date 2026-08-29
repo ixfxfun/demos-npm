@@ -1,5 +1,5 @@
-import * as Numbers from '@ixfx/numbers';
-import { Envelopes } from '@ixfx/modulation';
+import * as Numbers from '@ixfx/numbers.js';
+import { Envelopes } from '@ixfx/modulation.js';
 import * as Things from './thing.js';
 
 const settings = Object.freeze({

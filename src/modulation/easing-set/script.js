@@ -1,5 +1,5 @@
-import * as Core from '@ixfx/core';
-import * as Mod from '@ixfx/modulation';
+import * as Core from '@ixfx/core.js';
+import * as Mod from '@ixfx/modulation.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

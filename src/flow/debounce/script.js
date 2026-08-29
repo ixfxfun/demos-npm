@@ -1,4 +1,4 @@
-import { debounce } from '@ixfx/flow';
+import { debounce } from '@ixfx/flow.js';
 
 const settings = Object.freeze({
   /** @type {HTMLElement|null} */

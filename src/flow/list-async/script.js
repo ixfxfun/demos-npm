@@ -1,6 +1,6 @@
-import { continuously } from '@ixfx/core';
-import { log } from '@ixfx/dom';
-import { Stacks } from '@ixfx/collections';
+import { continuously } from 'ixfx/core.js';
+import { log } from '@ixfx/dom.js';
+import { Stacks } from '@ixfx/collections.js';
 
 let state = {
   toProcess: Stacks.immutable()
@@ -58,11 +58,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

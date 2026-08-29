@@ -1,7 +1,7 @@
-import { Circles } from '@ixfx/geometry';
-import { Svg } from '@ixfx/visual';
-import * as Modulation from '@ixfx/modulation';
-import * as Dom from '@ixfx/dom';
+import { Circles } from '@ixfx/geometry.js';
+import { Svg } from '@ixfx/visual.js';
+import * as Modulation from '@ixfx/modulation.js';
+import * as Dom from '@ixfx/dom.js';
 
 const settings = Object.freeze({
   // Colour for text
@@ -111,11 +111,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

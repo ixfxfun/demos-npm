@@ -2,8 +2,8 @@
  * Simple demo of moving an element by cursor keys.
  * See README.md
  */
-import { getTranslation } from '@ixfx/dom';
-import { Points } from '@ixfx/geometry';
+import { getTranslation } from '@ixfx/dom.js';
+import { Points } from '@ixfx/geometry.js';
 
 const settings = Object.freeze({
   // How many pixels to move with each key press
@@ -132,11 +132,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

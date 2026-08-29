@@ -1,4 +1,5 @@
-import { StateMachine } from '@ixfx/flow';
+import { StateMachine } from '@ixfx/flow.js';
+import { getErrorMessage } from '@ixfx/debug.js';
 
 // Init settings
 const settings = Object.freeze({
@@ -23,7 +24,10 @@ const use = () => {
   possibleStatesEl.textContent = StateMachine.possible(sm).join(`, `);
 };
 
-// Updates machine based on button presses
+/**
+ * Updates machine based on button presses
+ * @param {string} s 
+ */
 const updateMachine = (s) => {
   const { stateEl } = settings;
   let { sm } = state;
@@ -36,7 +40,7 @@ const updateMachine = (s) => {
     use();
   } catch (error) {
     console.error(error);
-    if (stateEl) stateEl.innerHTML = sm.value + `<br />` + error.message;
+    if (stateEl) stateEl.innerHTML = sm.value + `<br />` + getErrorMessage(error);
   }
 };
 
@@ -58,11 +62,11 @@ setup();
 
 /**
  * Saves state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

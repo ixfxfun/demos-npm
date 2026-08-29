@@ -1,11 +1,13 @@
+import { resolveEl } from "@ixfx/dom.js";
+
 /**
- * Sets style.display for element
- * @param {*} id Id of element
- * @param {*} value Value of style.display to set
+ * Set CSS display property
+ * @param {string|HTMLElement} domQueryOrEl 
+ * @param {string} value 
  * @returns 
  */
-export const setCssDisplay = (id, value) => {
-  const element = /** @type HTMLElement */(document.querySelector(`#${id}`));
+export const setCssDisplay = (domQueryOrEl, value) => {
+  const element = resolveEl(domQueryOrEl);
   if (!element) return;
   element.style.display = value;
 };

@@ -1,5 +1,5 @@
-import { Points, Rects } from '@ixfx/geometry';
-import { interpolate, clamp } from '@ixfx/numbers';
+import { Points, Rects } from '@ixfx/geometry.js';
+import { interpolate, clamp } from '@ixfx/numbers.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

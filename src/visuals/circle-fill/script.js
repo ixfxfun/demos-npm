@@ -1,6 +1,6 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { repeatSync } from '@ixfx/flow';
-import { Points, Circles, Polar } from '@ixfx/geometry';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { repeatSync } from '@ixfx/flow.js';
+import { Circles, Polar } from '@ixfx/geometry.js';
 import * as Drawing from './drawing.js';
 
 const piPi = Math.PI * 2;
@@ -95,12 +95,12 @@ use();
 
 /**
  * Save state
- * @param {Partial<state>} s
+ * @param {Partial<typeof state>} partialNewState
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s,
+    ...partialNewState,
   });
   return state;
 }

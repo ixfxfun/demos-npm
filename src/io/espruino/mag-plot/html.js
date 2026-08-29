@@ -1,4 +1,4 @@
-import * as Numbers from '@ixfx/numbers';
+import * as Numbers from '@ixfx/numbers.js';
 // ---- General CSS/HTML helper functions ----
 export const setCssDisplay = (id, value) => {
   const element = /** @type HTMLElement */(document.querySelector(`#${id}`));

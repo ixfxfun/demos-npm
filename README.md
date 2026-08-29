@@ -21,6 +21,8 @@ And start a dev server with:
 npm start
 ```
 
+This should start up a server so your sketches are available at http://localhost:5175/
+
 ## Demo repositories
 
 In short, if you have Node.js installed, use the `demos-npm` version. Otherwise use the plain `demos` version.

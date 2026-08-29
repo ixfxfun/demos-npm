@@ -1,8 +1,8 @@
-import * as Modulation from '@ixfx/modulation';
-import * as Random from '@ixfx/random';
-import { Bipolar } from '@ixfx/numbers';
+import * as Modulation from '@ixfx/modulation.js';
+import * as Random from '@ixfx/random.js';
+import { Bipolar } from '@ixfx/numbers.js';
 import * as Util from './util.js';
-import { resolveFields } from '@ixfx/core';
+import { resolveFields } from '@ixfx/core.js';
 
 const settings = Object.freeze({
   minimumDistance: 0.1

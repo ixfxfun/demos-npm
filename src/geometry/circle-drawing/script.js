@@ -1,7 +1,7 @@
-import * as Modulation from '@ixfx/modulation';
-import * as Numbers from '@ixfx/numbers';
-import * as Iterables from '@ixfx/iterables';
-import { CanvasHelper } from '@ixfx/visual';
+import * as Modulation from '@ixfx/modulation.js';
+import * as Numbers from '@ixfx/numbers.js';
+import * as Iterables from '@ixfx/iterables.js';
+import { CanvasHelper } from '@ixfx/visual.js';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both`, clearOnResize: false, coordinateScale: `min` }),
@@ -125,12 +125,12 @@ function getGradient(context, inner, center, width) {
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }
 

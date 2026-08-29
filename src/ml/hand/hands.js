@@ -1,5 +1,5 @@
-import * as Iterables from '@ixfx/iterables';
-import { Points, Triangles } from '@ixfx/geometry';
+import * as Iterables from '@ixfx/iterables.js';
+import { Points, Triangles } from '@ixfx/geometry.js';
 import * as MpVision from '../lib/client/index.js';
 
 

@@ -1,6 +1,6 @@
-import { CanvasHelper } from '@ixfx/visual';
+import { CanvasHelper } from '@ixfx/visual.js';
 import * as Draw from './drawing.js';
-import { PointTracker } from '@ixfx/geometry';
+import { PointTracker } from '@ixfx/geometry.js';
 
 // Define settings - properties that don't change
 const settings = Object.freeze({

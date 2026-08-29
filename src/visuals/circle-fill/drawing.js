@@ -1,4 +1,4 @@
-import { Points, Circles, Polar } from '@ixfx/geometry';
+import { Points, Circles, Polar } from '@ixfx/geometry.js';
 
 const piPi = Math.PI * 2;
 

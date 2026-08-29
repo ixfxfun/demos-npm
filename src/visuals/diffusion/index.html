@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>particle-things</title>
+  <title>particle-agents</title>
 </head>
 
 <body>
@@ -16,10 +16,12 @@
     html,
     body {
       box-sizing: border-box;
+      height:100%;
+      width:100%;
     }
 
     :root {
-      --hue: 200;
+      --hue: 10;
       --mono-font: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -27,15 +29,21 @@
       --fg: hsl(var(--hue), 100%, 30%);
     }
 
+
     body {
       background-color: var(--bg);
       color: var(--fg);
       font-family: var(--font);
+     
+      overflow:hidden;
+      touch-action: none;
     }
 
     #debug {
       font-family: var(--mono-font);
       font-size: 2em;
+      pointer-events: none;
+      user-select: none;
     }
 
     canvas {
@@ -43,11 +51,13 @@
       top: 0;
       left: 0;
       z-index: 0;
+      touch-action: none;
+      pointer-events: none;
+
     }
   </style>
   <canvas id="canvas"></canvas>
   <section>
-    <h1>particle-things</h1>
     <div id="debug">
     </div>
     <script type="module" src="script.js"></script>

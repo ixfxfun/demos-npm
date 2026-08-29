@@ -1,6 +1,6 @@
-import { Points, Rects } from '@ixfx/geometry';
-import { Forces } from '@ixfx/modulation';
-import { continuously } from '@ixfx/core';
+import { Points, Rects } from '@ixfx/geometry.js';
+import { Forces } from '@ixfx/modulation.js';
+import { continuously } from '@ixfx/core.js';
 import * as Util from './util.js';
 
 // Define settings

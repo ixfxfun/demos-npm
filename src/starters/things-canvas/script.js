@@ -1,4 +1,4 @@
-import { CanvasHelper } from '@ixfx/visual';
+import { CanvasHelper } from '@ixfx/visual.js';
 import * as Things from './thing.js';
 
 // Settings for sketch

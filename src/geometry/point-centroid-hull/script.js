@@ -1,5 +1,5 @@
-import { Lines, Points } from '@ixfx/geometry';
-import { Svg } from '@ixfx/visual';
+import { Lines, Points } from '@ixfx/geometry.js';
+import { Svg } from '@ixfx/visual.js';
 
 // Define settings
 const settings = Object.freeze({
@@ -95,11 +95,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

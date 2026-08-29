@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Remote } from "https://unpkg.com/@clinth/remote@latest/dist/index.mjs";
-import * as Dom from '@ixfx/dom';
-import { CanvasHelper } from "@ixfx/visual";
+import * as Dom from '@ixfx/dom.js';
+import { CanvasHelper } from "@ixfx/visual.js";
 import * as MpVision from '../../lib/client/index.js';
 import * as Hands from '../hands.js';
 

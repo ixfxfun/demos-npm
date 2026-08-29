@@ -1,4 +1,4 @@
-import { clamp } from '@ixfx/numbers';
+import { clamp } from '@ixfx/numbers.js';
 /**
  * Returns a position relative to size of element
  * @param {PointerEvent} event 

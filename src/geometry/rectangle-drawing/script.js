@@ -1,6 +1,6 @@
 
-import { CanvasHelper } from '@ixfx/visual';
-import { Rects, Lines } from '@ixfx/geometry';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Rects, Lines } from '@ixfx/geometry.js';
 
 // Define settings
 const settings = Object.freeze({
@@ -146,11 +146,11 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

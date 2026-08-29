@@ -1,6 +1,6 @@
-import * as Mod from '@ixfx/modulation';
+import * as Mod from '@ixfx/modulation.js';
 import * as Util from './util.js';
-import { continuously } from '@ixfx/core';
+import { continuously } from '@ixfx/core.js';
 
 const settings = Object.freeze({
   // Define our jitterer

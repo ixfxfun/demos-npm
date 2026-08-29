@@ -1,4 +1,4 @@
-import { CanvasHelper } from "@ixfx/visual";
+import { CanvasHelper } from "@ixfx/visual.js";
 
 /**
  * @typedef {{

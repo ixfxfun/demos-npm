@@ -1,4 +1,4 @@
-import { Points, radianToDegree } from '@ixfx/geometry';
+import { Points, radianToDegree } from '@ixfx/geometry.js';
 import * as Util from './util.js';
 
 /**

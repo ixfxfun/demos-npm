@@ -1,4 +1,4 @@
-import { Points, radianToDegree } from '@ixfx/geometry';
+import { Points, radianToDegree } from '@ixfx/geometry.js';
 
 /**
  * Sets the innerText of an element with `id`

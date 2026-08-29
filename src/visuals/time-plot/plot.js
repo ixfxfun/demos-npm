@@ -1,5 +1,5 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { scale, clamp } from '@ixfx/numbers';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { scale, clamp } from '@ixfx/numbers.js';
 
 const settings = Object.freeze({
   // Default width for plot

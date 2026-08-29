@@ -1,4 +1,4 @@
-import { Points } from '@ixfx/geometry';
+import { Points } from '@ixfx/geometry.js';
 
 /**
  * Move an element by its middle to an relative point

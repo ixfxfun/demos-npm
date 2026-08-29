@@ -1,7 +1,7 @@
-import * as Dom from '@ixfx/dom';
-import * as Modulation from '@ixfx/modulation';
-import { Svg, Colour } from '@ixfx/visual';
-import { Points, Rects } from '@ixfx/geometry';
+import * as Dom from '@ixfx/dom.js';
+import * as Modulation from '@ixfx/modulation.js';
+import { Svg, Colour } from '@ixfx/visual.js';
+import { Points, Rects } from '@ixfx/geometry.js';
 
 const settings = Object.freeze({
   // Relative middle
@@ -18,7 +18,7 @@ const settings = Object.freeze({
  * wave: number
  * viewportSize: Rects.Rect
  * viewportCenter: Points.Point
- * pointers: {}
+ * pointers: Record<string,Points.Point>
  * }>} State
  */
 
@@ -139,12 +139,12 @@ setup();
 
 /**
  * Update state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }
 

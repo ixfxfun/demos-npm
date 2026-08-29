@@ -1,4 +1,4 @@
-import { interpolatorInterval } from '@ixfx/modulation';
+import { interpolatorInterval } from '@ixfx/modulation.js';
 
 const settings = Object.freeze({
   // How long to interpolate

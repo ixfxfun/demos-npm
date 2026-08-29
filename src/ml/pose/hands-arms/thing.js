@@ -1,5 +1,5 @@
 
-import { Points, radianToDegree } from "@ixfx/geometry";
+import { Points, radianToDegree } from "@ixfx/geometry.js";
 import { Poses } from "../util/Poses.js";
 
 const settings = Object.freeze({

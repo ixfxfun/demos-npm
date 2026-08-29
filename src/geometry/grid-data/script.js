@@ -1,7 +1,8 @@
-import { Grids } from '@ixfx/geometry';
-import { Maps } from '@ixfx/collections';
-import { CanvasHelper } from '@ixfx/visual';
-import * as Arrays from '@ixfx/arrays';
+import { Grids } from '@ixfx/geometry.js';
+import { Maps } from '@ixfx/collections.js';
+import { CanvasHelper } from '@ixfx/visual.js';
+import * as Arrays from '@ixfx/arrays.js';
+import * as Util from './util.js';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),
@@ -32,7 +33,6 @@ let state = Object.freeze({
   highlightedCell: { x: 0, y: 0 }
 });
 
-const keyForCell = (cell) => cell.x + `-` + cell.y;
 
 function use() {
   const { tooltipEl, canvas } = settings;
@@ -43,7 +43,7 @@ function use() {
   for (const cell of Grids.By.cells(grid)) drawCell(cell, canvas.ctx);
 
   if (highlightedCell) {
-    const cellData = gridData.get(keyForCell(highlightedCell));
+    const cellData = gridData.get(Util.keyForCell(highlightedCell));
     tooltipEl.textContent = cellData ? `Karma: ${cellData.karma.toString()}` : `?`;
   }
 }
@@ -59,7 +59,7 @@ function drawCell(cell, context) {
   const isHiglighted = Grids.cellEquals(highlightedCell, cell);
 
   // Get data for cell
-  const data = state.gridData.get(keyForCell(cell));
+  const data = state.gridData.get(Util.keyForCell(cell));
   if (!data) return; // No data for cell
 
   // Bounds for cell
@@ -132,7 +132,7 @@ function setup() {
       karma: Math.random().toFixed(2),
       colour: Arrays.randomElement(colours)
     };
-    gridData = gridData.set(keyForCell(cell), data);
+    gridData = gridData.set(Util.keyForCell(cell), data);
   }
 
   saveState({ gridData });
@@ -143,11 +143,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

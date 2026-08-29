@@ -1,6 +1,6 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { Points, SurfacePoints } from '@ixfx/geometry';
-import { numericRange, clamp } from '@ixfx/numbers';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Points, SurfacePoints } from '@ixfx/geometry.js';
+import { numericRange, clamp } from '@ixfx/numbers.js';
 const piPi = Math.PI * 2;
 
 const settings = Object.freeze({
@@ -140,11 +140,11 @@ function drawPoint(ctx, pt, radius = 5, hue = 200) {
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} newPartialState 
  */
-function saveState(s) {
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
 }

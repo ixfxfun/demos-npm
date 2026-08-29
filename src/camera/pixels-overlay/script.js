@@ -1,8 +1,8 @@
-import { Camera } from '@ixfx/io';
-import { Video } from '@ixfx/visual';
-import * as Trackers from '@ixfx/trackers';
-import { defaultErrorHandler } from '@ixfx/dom';
-import { movingAverage } from '@ixfx/numbers';
+import { Camera } from '@ixfx/io.js';
+import { Video } from '@ixfx/visual.js';
+import * as Trackers from '@ixfx/trackers.js';
+import { defaultErrorHandler } from '@ixfx/dom.js';
+import { movingAverage } from '@ixfx/numbers.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({

@@ -1,8 +1,15 @@
-import { frequency } from '@ixfx/trackers';
+import { frequency } from '@ixfx/trackers.js';
 
+/**
+ * @typedef {[
+ * name:string,
+ * value:string
+ * ]} KeyValue
+ */
 let state = Object.freeze({
   freq: frequency()
 });
+
 
 const use = () => {
   const { freq } = state;
@@ -18,15 +25,12 @@ const use = () => {
 
   // Calculate the min, max and avg over all frequencies
   const mma = freq.computeValues();
-
-  // Calculate percentage for a given letter
-  const percent = (kv) => Math.round(kv[1] / mma.total * 100);
-
+  const total = mma.total;
   const top = topFive[0];
 
-  let txt = `<p>The top letter is <code>${top[0]}</code>, appearing ${percent(top)}% of the time.</p>`;
+  let txt = `<p>The top letter is <code>${top[0]}</code>, appearing ${roundToPercentage(top[1], total)}% of the time.</p>`;
 
-  const asList = topFive.map(t => `<li><code>${t[0]}</code> ${percent(t)}%`);
+  const asList = topFive.map(t => `<li><code>${t[0]}</code> ${roundToPercentage(t[1], total)}%`);
 
   txt += `<p>Top five ranking: <ol>${asList.join(`,`)}</ol></p>`;
   outputElement.innerHTML = txt;
@@ -65,13 +69,26 @@ function setup() {
 setup();
 
 /**
- * Save state
- * @param {Partial<state>} s 
+ * Convert a decimal value to a rounded percentage
+ * ```js
+ * roundToPercentage(0.123, 1); // 12
+ * ```
+ * @param {number|string|bigint} valueOrString 
+ * @param {number} total
+ * @returns 
  */
-function saveState(s) {
+function roundToPercentage(valueOrString, total) {
+  const value = typeof valueOrString === `number` ? valueOrString : Number.parseFloat(valueOrString.toString());
+  return Math.round(value / total * 100);
+}
+/**
+ * Save state
+ * @param {Partial<typeof state>} newPartialState 
+ */
+function saveState(newPartialState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...newPartialState
   });
   return state;
 }

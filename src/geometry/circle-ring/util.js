@@ -1,4 +1,4 @@
-import { Points } from "@ixfx/geometry";
+import { Points } from "@ixfx/geometry.js";
 
 /**
  * Positions an element using absolute coordinates

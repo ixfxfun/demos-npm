@@ -1,5 +1,5 @@
-import { DataDisplay } from '@ixfx/dom';
-import { continuously } from '@ixfx/flow';
+import { DataDisplay } from '@ixfx/dom.js';
+import { continuously } from '@ixfx/flow.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 
 const settings = Object.freeze({

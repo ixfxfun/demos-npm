@@ -1,4 +1,4 @@
-import { Points } from '@ixfx/geometry';
+import { Points } from '@ixfx/geometry.js';
 import * as Util from './util.js';
 
 const settings = Object.freeze({
@@ -61,11 +61,11 @@ setup();
 
 /**
  * Save state
- * @param {Partial<state>} s 
+ * @param {Partial<typeof state>} partialNewState 
  */
-function saveState(s) {
+function saveState(partialNewState) {
   state = Object.freeze({
     ...state,
-    ...s
+    ...partialNewState
   });
 }

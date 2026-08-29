@@ -16,7 +16,7 @@
     ],
     "paths": {
       "@ixfx/*": [
-        "./node_modules/ixfx/dist/*"
+        "../node_modules/ixfx/dist/*"
       ]
     }
   },

@@ -1,5 +1,5 @@
-import { CanvasHelper } from '@ixfx/visual';
-import { Points } from '@ixfx/geometry';
+import { CanvasHelper } from '@ixfx/visual.js';
+import { Points } from '@ixfx/geometry.js';
 
 const settings = Object.freeze({
   canvas: new CanvasHelper(`#canvas`, { resizeLogic: `both` }),

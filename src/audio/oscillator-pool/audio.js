@@ -1,6 +1,6 @@
-import { randomIndex, bipolar as randomBipolar } from '@ixfx/random';
-import { jitterAbsolute } from '@ixfx/modulation';
-import { Bipolar } from '@ixfx/numbers';
+import { randomIndex, bipolar as randomBipolar } from '@ixfx/random.js';
+import { jitterAbsolute } from '@ixfx/modulation.js';
+import { Bipolar } from '@ixfx/numbers.js';
 
 // Settings for the audio things
 const settings = Object.freeze({

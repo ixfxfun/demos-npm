@@ -1,6 +1,6 @@
-import * as Dom from '@ixfx/dom';
-import { continuously } from '@ixfx/flow';
-import { Maps } from '@ixfx/collections';
+import * as Dom from '@ixfx/dom.js';
+import { continuously } from '@ixfx/flow.js';
+import { Maps } from '@ixfx/collections.js';
 import { Poses, PosesConsumer } from "../util/Poses.js";
 import * as Things from './thing.js';
 

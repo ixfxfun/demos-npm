@@ -1,4 +1,4 @@
-import { updateOutdated } from '@ixfx/flow';
+import { updateOutdated } from '@ixfx/flow.js';
 
 // Define settings
 const settings = Object.freeze({
