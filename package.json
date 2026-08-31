@@ -15,7 +15,7 @@
   "dependencies": {
     "@clinth/remote": "^2.2.0",
     "bezier-js": "6.1.4",
-    "ixfx": "1.38.1",
+    "ixfx": "1.38.2",
     "json5": "2.2.3"
   },
   "devDependencies": {
